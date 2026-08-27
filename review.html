@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 1 綜合總複習課程 - 國中英語智慧學習基地</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                        fun: ['Fredoka', 'cursive', 'sans-serif']
+                    },
+                    colors: {
+                        review: {
+                            dark: '#0b1120',
+                            card: '#1e293b',
+                            gold: '#f59e0b',
+                            cyan: '#06b6d4',
+                            purple: '#8b5cf6',
+                            rose: '#f43f5e',
+                            emerald: '#10b981'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 3.5s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2.5s infinite'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-8px)' }
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { filter: 'drop-shadow(0 0 10px rgba(245, 158, 11, 0.4))' },
+                            '50%': { filter: 'drop-shadow(0 0 20px rgba(245, 158, 11, 0.8))' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.82);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .btn-3d {
+            box-shadow: 0 5px 0 0 rgba(0, 0, 0, 0.35);
+            transition: all 0.15s ease;
+        }
+        .btn-3d:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 0 0 rgba(0, 0, 0, 0.35);
+        }
+        .btn-3d:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.35);
+        }
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+        .bg-grid-pattern {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans bg-grid-pattern selection:bg-amber-400 selection:text-slate-950 relative overflow-x-hidden">
+
+    <!-- Ambient Glow Backgrounds -->
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+    <div class="absolute top-1/2 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+    <div class="absolute bottom-10 left-1/3 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+
+    <!-- TOP NAV BAR -->
+    <header class="bg-slate-900/90 border-b-2 border-slate-800 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+            <!-- Left Navigation & Title -->
+            <div class="flex items-center gap-3">
+                <a href="index.html" title="返回學習基地首頁" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-amber-400 px-3.5 py-2 rounded-2xl border border-slate-700 font-bold text-xs md:text-sm transition flex items-center gap-2 shadow">
+                    <i class="fa-solid fa-house"></i>
+                    <span>學習基地</span>
+                </a>
+                <div class="relative bg-gradient-to-tr from-amber-400 via-orange-500 to-rose-500 p-2.5 rounded-2xl shadow-lg animate-float text-slate-950">
+                    <i class="fa-solid fa-award text-2xl"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-[11px] bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-black px-2 py-0.5 rounded-md uppercase font-fun">Master Review</span>
+                        <span class="text-xs text-slate-400 font-medium">Unit 1 綜合總複習</span>
+                    </div>
+                    <h1 class="text-lg md:text-xl font-black font-fun tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-orange-300 to-yellow-200">
+                        全單元核心實力總複習
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Gamification & Module Shortcuts -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <div class="flex items-center gap-2 bg-slate-900 px-3 py-1.5 rounded-2xl border border-slate-800 shadow-inner">
+                    <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+                    <span class="text-xs font-bold text-slate-300">複習積分: <strong id="reviewScore" class="text-amber-300 text-sm">0</strong></span>
+                </div>
+                <div class="hidden lg:flex items-center gap-1.5 text-xs">
+                    <a href="dialogue.html" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 transition">💬 對話篇</a>
+                    <a href="pattern.html" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-sky-400 border border-slate-700 transition">⚡ 句型篇</a>
+                    <a href="reading.html" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-rose-400 border border-slate-700 transition">📖 閱讀篇</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full space-y-8">
+
+        <!-- HERO SECTION -->
+        <section class="glass-panel rounded-3xl p-6 sm:p-8 border border-amber-500/30 relative overflow-hidden shadow-2xl">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+                <div class="space-y-3 max-w-2xl text-center md:text-left">
+                    <div class="inline-flex items-center gap-2 bg-amber-500/20 text-amber-300 px-3 py-1 rounded-full text-xs font-bold font-fun border border-amber-500/30">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>全面打通任督二脈・跨單元統整學習</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black font-fun text-white leading-tight">
+                        歡迎進入 <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400">Unit 1 綜合總複習館</span> 🎯
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        本單元結合了<strong>情境對話（健康習慣）</strong>、<strong>句型文法（現在完成式 have/has + p.p.）</strong>以及<strong>閱讀理解（青少年健康成長信函）</strong>的精華重點。透過抽認卡記憶、長句組裝與模擬會考，全面鞏固你的英語實力！
+                    </p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="text-center bg-slate-900/90 p-4 rounded-2xl border border-slate-700 shadow-lg min-w-[110px]">
+                        <i class="fa-solid fa-bolt text-amber-400 text-2xl mb-1"></i>
+                        <div class="text-xs text-slate-400 font-bold">三合一精華</div>
+                        <div class="text-sm font-black text-amber-300 font-fun">對話+文法+閱讀</div>
+                    </div>
+                    <div class="text-center bg-slate-900/90 p-4 rounded-2xl border border-slate-700 shadow-lg min-w-[110px]">
+                        <i class="fa-solid fa-trophy text-rose-400 text-2xl mb-1"></i>
+                        <div class="text-xs text-slate-400 font-bold">通關認證</div>
+                        <div class="text-sm font-black text-rose-300 font-fun">全單元大會考</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODE NAVIGATION TABS -->
+        <nav class="flex flex-wrap gap-2 sm:gap-3 border-b border-slate-800 pb-2">
+            <button onclick="switchTab('map')" id="tabBtn-map" class="tab-btn px-4 py-2.5 rounded-2xl font-black text-xs sm:text-sm flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 shadow-lg transition">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <span>1. 精華重點地圖</span>
+            </button>
+            <button onclick="switchTab('cards')" id="tabBtn-cards" class="tab-btn px-4 py-2.5 rounded-2xl font-black text-xs sm:text-sm flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition">
+                <i class="fa-solid fa-layer-group text-sky-400"></i>
+                <span>2. 單字三態抽認卡</span>
+            </button>
+            <button onclick="switchTab('scramble')" id="tabBtn-scramble" class="tab-btn px-4 py-2.5 rounded-2xl font-black text-xs sm:text-sm flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition">
+                <i class="fa-solid fa-puzzle-piece text-purple-400"></i>
+                <span>3. 經典長句重組</span>
+            </button>
+            <button onclick="switchTab('quiz')" id="tabBtn-quiz" class="tab-btn px-4 py-2.5 rounded-2xl font-black text-xs sm:text-sm flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition">
+                <i class="fa-solid fa-clipboard-check text-rose-400"></i>
+                <span>4. 終極模擬大會考 🏆</span>
+            </button>
+        </nav>
+
+        <!-- ======================================================== -->
+        <!-- TAB 1: KNOWLEDGE MAP (精華重點地圖) -->
+        <!-- ======================================================== -->
+        <section id="view-map" class="tab-content space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!-- Map Card 1: Dialogue Summary -->
+                <div class="glass-panel rounded-3xl p-6 border-2 border-amber-500/30 flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="bg-amber-500/20 text-amber-300 px-3 py-1 rounded-full text-xs font-bold">
+                                <i class="fa-solid fa-comments mr-1"></i> 對話篇精華
+                            </span>
+                            <a href="dialogue.html" class="text-xs text-amber-400 hover:underline flex items-center gap-1 font-bold">
+                                查看課文 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </a>
+                        </div>
+                        <h3 class="text-lg font-black font-fun text-white mb-2">Healthy Habits & Dieting</h3>
+                        <p class="text-xs text-slate-300 mb-4">掌握生活作息、均衡飲食與健康建議之對話溝通。</p>
+                        
+                        <div class="space-y-2.5 text-xs text-slate-200">
+                            <div class="bg-slate-900/80 p-2.5 rounded-xl border border-slate-800">
+                                <strong class="text-amber-400 block mb-0.5">🌟 核心情境重點：</strong>
+                                討論熬夜（stay up late）、吃垃圾食物（junk food）、跳過正餐（skip meals）的不良影響。
+                            </div>
+                            <div class="bg-slate-900/80 p-2.5 rounded-xl border border-slate-800">
+                                <strong class="text-amber-400 block mb-0.5">💡 實用建議句型：</strong>
+                                <ul class="list-disc list-inside space-y-1 text-slate-300">
+                                    <li>You should <em>cut down on</em> snacks.</li>
+                                    <li>Why not <em>exercise regularly</em>?</li>
+                                    <li>It's important to <em>eat three meals</em>.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="speakText('You should cut down on junk food and exercise regularly to stay healthy.')" class="w-full py-2 bg-slate-900 hover:bg-slate-800 text-amber-400 rounded-xl border border-amber-500/30 text-xs font-bold flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-volume-high"></i>
+                        <span>聽對話金句發音</span>
+                    </button>
+                </div>
+
+                <!-- Map Card 2: Pattern Summary -->
+                <div class="glass-panel rounded-3xl p-6 border-2 border-sky-500/30 flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="bg-sky-500/20 text-sky-300 px-3 py-1 rounded-full text-xs font-bold">
+                                <i class="fa-solid fa-bolt mr-1"></i> 文法句型精華
+                            </span>
+                            <a href="pattern.html" class="text-xs text-sky-400 hover:underline flex items-center gap-1 font-bold">
+                                進入修煉 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </a>
+                        </div>
+                        <h3 class="text-lg font-black font-fun text-white mb-2">現在完成式 Present Perfect</h3>
+                        <p class="text-xs text-slate-300 mb-4">結構公式：<code class="bg-sky-950 text-sky-300 px-2 py-0.5 rounded font-mono font-bold">have / has + p.p.</code></p>
+                        
+                        <div class="space-y-2.5 text-xs text-slate-200">
+                            <div class="bg-slate-900/80 p-2.5 rounded-xl border border-slate-800">
+                                <strong class="text-sky-400 block mb-0.5">⚡ 四大常見時間副詞搭配：</strong>
+                                <ul class="space-y-1 text-slate-300">
+                                    <li>• <strong>經驗</strong>：ever（曾）、never（從未）、times（次數）</li>
+                                    <li>• <strong>持續時間</strong>：for + 一段時間（for 3 years）</li>
+                                    <li>• <strong>起點</strong>：since + 過去時間點 / 過去式子句</li>
+                                    <li>• <strong>狀態</strong>：already（已）、yet（否定句/疑問句：尚/已經）</li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-900/80 p-2.5 rounded-xl border border-slate-800">
+                                <strong class="text-sky-400 block mb-0.5">⚠️ 易混淆考點：</strong>
+                                <span class="text-slate-300">have been to（去過已回）vs have gone to（去了尚未回）</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="speakText('I have lived in Taiwan for ten years since I was born.')" class="w-full py-2 bg-slate-900 hover:bg-slate-800 text-sky-400 rounded-xl border border-sky-500/30 text-xs font-bold flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-volume-high"></i>
+                        <span>聽文法例句發音</span>
+                    </button>
+                </div>
+
+                <!-- Map Card 3: Reading Summary -->
+                <div class="glass-panel rounded-3xl p-6 border-2 border-rose-500/30 flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="bg-rose-500/20 text-rose-300 px-3 py-1 rounded-full text-xs font-bold">
+                                <i class="fa-solid fa-book-open mr-1"></i> 閱讀理解精華
+                            </span>
+                            <a href="reading.html" class="text-xs text-rose-400 hover:underline flex items-center gap-1 font-bold">
+                                閱讀全文 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </a>
+                        </div>
+                        <h3 class="text-lg font-black font-fun text-white mb-2">A Letter from a Teenager</h3>
+                        <p class="text-xs text-slate-300 mb-4">探討青少年的體態焦慮、不當節食與身心健康正向建立。</p>
+                        
+                        <div class="space-y-2.5 text-xs text-slate-200">
+                            <div class="bg-slate-900/80 p-2.5 rounded-xl border border-slate-800">
+                                <strong class="text-rose-400 block mb-0.5">📖 文章核心主旨：</strong>
+                                健康並非盲目節食變瘦，而是攝取足夠營養、維持體力與建立正向自信心。
+                            </div>
+                            <div class="bg-slate-900/80 p-2.5 rounded-xl border border-slate-800">
+                                <strong class="text-rose-400 block mb-0.5">🔑 閱讀關鍵字彙：</strong>
+                                <span class="text-slate-300">teenager（青少年）、balanced diet（均衡飲食）、energy（活力）、advice（建議）、healthily（健康地）。</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="speakText('A balanced diet and regular exercise are the best keys to real health.')" class="w-full py-2 bg-slate-900 hover:bg-slate-800 text-rose-400 rounded-xl border border-rose-500/30 text-xs font-bold flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-volume-high"></i>
+                        <span>聽閱讀名句發音</span>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ======================================================== -->
+        <!-- TAB 2: FLASHCARDS (單字與三態動詞抽認卡) -->
+        <!-- ======================================================== -->
+        <section id="view-cards" class="tab-content hidden space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <h3 class="text-xl font-black font-fun text-white flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group text-sky-400"></i>
+                        <span>全單元核心記憶卡牌</span>
+                    </h3>
+                    <p class="text-xs text-slate-400">點擊卡片翻面看中文解析，點擊喇叭聆聽真人發音！</p>
+                </div>
+                <!-- Filter category -->
+                <div class="flex items-center gap-2 text-xs">
+                    <button onclick="filterFlashcards('all')" id="btn-fc-all" class="fc-filter px-3 py-1.5 rounded-xl bg-sky-500 text-slate-950 font-bold">全部</button>
+                    <button onclick="filterFlashcards('vocab')" id="btn-fc-vocab" class="fc-filter px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold">核心單字</button>
+                    <button onclick="filterFlashcards('verbs')" id="btn-fc-verbs" class="fc-filter px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold">三態動詞</button>
+                </div>
+            </div>
+
+            <!-- Flashcard Grid -->
+            <div id="flashcardContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Dynamically populated via JS -->
+            </div>
+        </section>
+
+        <!-- ======================================================== -->
+        <!-- TAB 3: SENTENCE SCRAMBLE (經典長句重組挑戰) -->
+        <!-- ======================================================== -->
+        <section id="view-scramble" class="tab-content hidden space-y-6">
+            <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-purple-500/30 space-y-6">
+                <div class="flex flex-wrap justify-between items-center gap-4">
+                    <div>
+                        <span class="text-xs bg-purple-500/20 text-purple-300 font-bold px-3 py-1 rounded-full font-fun">
+                            <i class="fa-solid fa-puzzle-piece mr-1"></i> 語感強化特訓
+                        </span>
+                        <h3 class="text-xl sm:text-2xl font-black font-fun text-white mt-1">
+                            經典文法與對話長句重組 🧩
+                        </h3>
+                        <p class="text-xs text-slate-300 mt-1">點擊下方的單字積木，將句子組裝成正確的順序！</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs text-slate-400">進度：<strong id="scrambleProgress" class="text-amber-300 text-sm font-bold">1 / 5</strong></span>
+                    </div>
+                </div>
+
+                <!-- Current Chinese Prompt -->
+                <div class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-700 space-y-2">
+                    <div class="text-xs text-purple-400 font-bold flex items-center gap-1.5">
+                        <i class="fa-solid fa-language"></i>
+                        <span>目標中文句意：</span>
+                    </div>
+                    <p id="scrambleTargetZh" class="text-base sm:text-lg font-black text-amber-300 leading-relaxed"></p>
+                </div>
+
+                <!-- Answer Drop Zone -->
+                <div class="space-y-2">
+                    <div class="text-xs text-slate-400 font-bold flex items-center justify-between">
+                        <span>你的組句區域：</span>
+                        <button onclick="resetScrambleWords()" class="text-xs text-rose-400 hover:text-rose-300 flex items-center gap-1">
+                            <i class="fa-solid fa-rotate-left"></i> 重置積木
+                        </button>
+                    </div>
+                    <div id="scrambleAnswerZone" class="min-h-[70px] bg-slate-950/80 p-3 sm:p-4 rounded-2xl border-2 border-dashed border-slate-700 flex flex-wrap gap-2 items-center">
+                        <span id="scramblePlaceholder" class="text-xs text-slate-500 italic">點擊下方積木加入句子...</span>
+                    </div>
+                </div>
+
+                <!-- Available Word Pool -->
+                <div class="space-y-2">
+                    <div class="text-xs text-slate-400 font-bold">可選單字積木：</div>
+                    <div id="scramblePoolZone" class="flex flex-wrap gap-2.5 p-3 bg-slate-900/50 rounded-2xl border border-slate-800 min-h-[60px] items-center">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Feedback & Action buttons -->
+                <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-slate-800">
+                    <div id="scrambleFeedback" class="text-xs sm:text-sm font-bold min-h-[24px]"></div>
+                    <div class="flex items-center gap-3">
+                        <button onclick="checkScrambleAnswer()" class="btn-3d bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-400 hover:to-indigo-500 text-white font-black px-6 py-2.5 rounded-xl text-xs sm:text-sm">
+                            <i class="fa-solid fa-check mr-1"></i> 檢查答案
+                        </button>
+                        <button onclick="nextScrambleQuestion()" id="btn-scramble-next" class="hidden btn-3d bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-black px-5 py-2.5 rounded-xl text-xs sm:text-sm">
+                            下一題 <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================== -->
+        <!-- TAB 4: GRAND COMPREHENSIVE QUIZ (終極模擬大會考) -->
+        <!-- ======================================================== -->
+        <section id="view-quiz" class="tab-content hidden space-y-6">
+            <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-rose-500/30 space-y-6">
+                <!-- Quiz Header -->
+                <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-slate-800">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs bg-rose-500/20 text-rose-300 font-black px-3 py-1 rounded-full font-fun uppercase">
+                                Grand Master Test
+                            </span>
+                            <span class="text-xs text-slate-400">共 10 題精選題目</span>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-black font-fun text-white mt-1">
+                            Unit 1 全方位綜合通關模擬會考 🏆
+                        </h3>
+                    </div>
+                    <div class="flex items-center gap-3 bg-slate-900 px-4 py-2 rounded-2xl border border-slate-700">
+                        <i class="fa-solid fa-medal text-amber-400 text-lg"></i>
+                        <span class="text-xs font-bold text-slate-300">總分：<strong class="text-amber-300 text-base">100</strong> 分（每題 10 分）</span>
+                    </div>
+                </div>
+
+                <!-- Quiz Questions List -->
+                <div id="quizQuestionsContainer" class="space-y-6">
+                    <!-- Populated dynamically via JS -->
+                </div>
+
+                <!-- Quiz Submit Area -->
+                <div class="pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div id="quizStatusMsg" class="text-xs sm:text-sm font-bold text-amber-400">
+                        請作答完所有題目後點擊下方按鈕結算成績！
+                    </div>
+                    <button onclick="submitQuiz()" id="btnSubmitQuiz" class="w-full sm:w-auto btn-3d bg-gradient-to-r from-rose-500 via-pink-500 to-amber-500 hover:from-rose-400 hover:to-amber-400 text-slate-950 font-black px-8 py-3.5 rounded-2xl text-sm sm:text-base shadow-xl flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-flag-checkered text-lg"></i>
+                        <span>送出考卷並結算成績</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- CERTIFICATE MODAL -->
+    <div id="certModal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 border-2 border-amber-400/80 rounded-3xl p-6 sm:p-10 max-w-lg w-full shadow-2xl relative space-y-6 text-center animate-bounce-short">
+            <button onclick="closeCertModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-tr from-amber-400 to-yellow-300 flex items-center justify-center text-slate-950 text-4xl shadow-xl animate-float">
+                <i class="fa-solid fa-award"></i>
+            </div>
+
+            <div>
+                <span class="text-xs bg-amber-500/20 text-amber-300 font-black px-3 py-1 rounded-full uppercase tracking-wider font-fun">
+                    Certificate of Mastery
+                </span>
+                <h3 class="text-2xl font-black font-fun text-white mt-2">
+                    Unit 1 英語通關大師榮譽證書
+                </h3>
+                <p class="text-xs text-slate-300 mt-1">恭喜你順利通過全單元綜合大會考！</p>
+            </div>
+
+            <!-- Score Display -->
+            <div class="bg-slate-950/80 p-4 rounded-2xl border border-amber-500/30 flex justify-around items-center">
+                <div>
+                    <div class="text-xs text-slate-400">總得分</div>
+                    <div id="certScore" class="text-3xl font-black text-amber-400 font-fun">100</div>
+                </div>
+                <div class="w-px h-10 bg-slate-800"></div>
+                <div>
+                    <div class="text-xs text-slate-400">評級</div>
+                    <div id="certGrade" class="text-xl font-black text-emerald-400 font-fun">EXCELLENT</div>
+                </div>
+            </div>
+
+            <p id="certFeedback" class="text-xs text-slate-300 leading-relaxed"></p>
+
+            <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                <a href="index.html" class="flex-1 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-house"></i>
+                    <span>返回學習基地</span>
+                </a>
+                <button onclick="retryQuiz()" class="flex-1 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-black rounded-xl text-xs transition flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <span>再次測驗挑戰</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900/90 border-t border-slate-800 text-slate-500 py-6 text-center text-xs mt-12">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-graduation-cap text-amber-400 text-sm"></i>
+                <span class="font-bold text-slate-400 font-fun">Junior High English Learning Hub</span>
+            </div>
+            <div>
+                © 2026 國中英語智慧學習基地・Unit 1 綜合總複習課程
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT DATA & LOGIC -->
+    <script>
+        // ==========================================
+        // 1. Text-To-Speech (Web Speech API)
+        // ==========================================
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("您的瀏覽器不支援語音合成朗讀功能。");
+            }
+        }
+
+        // ==========================================
+        // 2. Score Management
+        // ==========================================
+        let totalScore = 0;
+        function addScore(points) {
+            totalScore += points;
+            document.getElementById('reviewScore').innerText = totalScore;
+            try {
+                confetti({
+                    particleCount: 25,
+                    spread: 60,
+                    origin: { y: 0.8 }
+                });
+            } catch(e) {}
+        }
+
+        // ==========================================
+        // 3. Tab Switching
+        // ==========================================
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = "tab-btn px-4 py-2.5 rounded-2xl font-black text-xs sm:text-sm flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition";
+            });
+
+            const activeView = document.getElementById('view-' + tabId);
+            const activeBtn = document.getElementById('tabBtn-' + tabId);
+            if (activeView) activeView.classList.remove('hidden');
+            if (activeBtn) {
+                activeBtn.className = "tab-btn px-4 py-2.5 rounded-2xl font-black text-xs sm:text-sm flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 shadow-lg transition";
+            }
+        }
+
+        // ==========================================
+        // 4. Flashcards Data & Flip Logic
+        // ==========================================
+        const flashcardData = [
+            { type: 'vocab', en: 'habit', zh: '習慣', pos: 'n.', eg: 'Eating breakfast is a healthy habit.' },
+            { type: 'vocab', en: 'diet', zh: '日常飲食 / 節食', pos: 'n.', eg: 'A balanced diet gives you energy.' },
+            { type: 'vocab', en: 'energy', zh: '活力 / 精力', pos: 'n.', eg: 'I feel full of energy after sleeping well.' },
+            { type: 'vocab', en: 'skip', zh: '略過 / 跳過', pos: 'v.', eg: 'Never skip breakfast before school.' },
+            { type: 'vocab', en: 'teenager', zh: '青少年 (13-19歲)', pos: 'n.', eg: 'Many teenagers care about their appearance.' },
+            { type: 'vocab', en: 'advice', zh: '建議 / 忠告 (不可數)', pos: 'n.', eg: 'Listen to the doctor\'s advice.' },
+            { type: 'verbs', en: 'eat - ate - eaten', zh: '吃 (原形 - 過去式 - 過去分詞)', pos: 'Irregular Verb', eg: 'I have eaten two apples today.' },
+            { type: 'verbs', en: 'see - saw - seen', zh: '看見 (原形 - 過去式 - 過去分詞)', pos: 'Irregular Verb', eg: 'Have you seen my English workbook?' },
+            { type: 'verbs', en: 'go - went - gone', zh: '去 (原形 - 過去式 - 過去分詞)', pos: 'Irregular Verb', eg: 'He has gone to the library.' },
+            { type: 'verbs', en: 'write - wrote - written', zh: '寫 (原形 - 過去式 - 過去分詞)', pos: 'Irregular Verb', eg: 'She has written a letter to her friend.' },
+            { type: 'verbs', en: 'do - did - done', zh: '做 (原形 - 過去式 - 過去分詞)', pos: 'Irregular Verb', eg: 'We have already done our homework.' },
+            { type: 'vocab', en: 'cut down on', zh: '減少...的攝取/量', pos: 'phr.', eg: 'You should cut down on sweet drinks.' }
+        ];
+
+        function renderFlashcards(filter = 'all') {
+            const container = document.getElementById('flashcardContainer');
+            container.innerHTML = '';
+
+            const filtered = flashcardData.filter(item => filter === 'all' || item.type === filter);
+
+            filtered.forEach((card, index) => {
+                const cardEl = document.createElement('div');
+                cardEl.className = 'perspective-1000 h-52 cursor-pointer group';
+                cardEl.innerHTML = `
+                    <div id="fc-${index}" onclick="flipCard(${index})" class="transform-style-3d relative w-full h-full duration-500 rounded-3xl shadow-xl transition-all">
+                        <!-- FRONT -->
+                        <div class="backface-hidden absolute inset-0 bg-gradient-to-b from-slate-800 to-slate-900 border-2 border-slate-700 hover:border-sky-400 p-6 rounded-3xl flex flex-col justify-between">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] bg-slate-950 text-sky-300 px-2.5 py-0.5 rounded-full font-fun font-bold uppercase">${card.pos}</span>
+                                <button onclick="event.stopPropagation(); speakText('${card.en.replace(/'/g, "\\'")}')" class="w-8 h-8 rounded-full bg-slate-700 hover:bg-sky-500 hover:text-slate-950 text-sky-400 flex items-center justify-center text-xs transition">
+                                    <i class="fa-solid fa-volume-high"></i>
+                                </button>
+                            </div>
+                            <div class="text-center my-auto">
+                                <div class="text-xl sm:text-2xl font-black font-fun text-white tracking-wide">${card.en}</div>
+                            </div>
+                            <div class="text-[11px] text-slate-400 text-center font-bold">
+                                點擊卡片翻面看中文 🔄
+                            </div>
+                        </div>
+
+                        <!-- BACK -->
+                        <div class="rotate-y-180 backface-hidden absolute inset-0 bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-amber-500/60 p-6 rounded-3xl flex flex-col justify-between">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full font-bold">中文解析</span>
+                                <button onclick="event.stopPropagation(); speakText('${card.eg.replace(/'/g, "\\'")}')" class="text-xs text-amber-400 hover:text-amber-300 flex items-center gap-1 font-bold">
+                                    <i class="fa-solid fa-volume-high"></i> 例句發音
+                                </button>
+                            </div>
+                            <div class="text-center my-auto space-y-1.5">
+                                <div class="text-lg font-black text-amber-300">${card.zh}</div>
+                                <div class="text-xs text-slate-300 italic px-2">${card.eg}</div>
+                            </div>
+                            <div class="text-[11px] text-slate-500 text-center font-bold">
+                                點擊卡片翻回正面
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(cardEl);
+            });
+        }
+
+        function flipCard(index) {
+            const cardInner = document.getElementById(`fc-${index}`);
+            cardInner.classList.toggle('rotate-y-180');
+        }
+
+        function filterFlashcards(type) {
+            document.querySelectorAll('.fc-filter').forEach(btn => {
+                btn.className = "fc-filter px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold";
+            });
+            const activeBtn = document.getElementById(`btn-fc-${type}`);
+            if (activeBtn) {
+                activeBtn.className = "fc-filter px-3 py-1.5 rounded-xl bg-sky-500 text-slate-950 font-bold";
+            }
+            renderFlashcards(type);
+        }
+
+        // ==========================================
+        // 5. Sentence Scramble Game
+        // ==========================================
+        const scrambleQuestions = [
+            {
+                zh: "我已經連續吃了三天的垃圾食物。",
+                words: ["I", "have", "eaten", "junk", "food", "for", "three", "days."],
+                correct: "I have eaten junk food for three days."
+            },
+            {
+                zh: "你曾經嘗試過改變你的飲食習慣嗎？",
+                words: ["Have", "you", "ever", "tried", "to", "change", "your", "eating", "habits?"],
+                correct: "Have you ever tried to change your eating habits?"
+            },
+            {
+                zh: "Patty 已經完成她的自然科學作業了。",
+                words: ["Patty", "has", "already", "finished", "her", "science", "homework."],
+                correct: "Patty has already finished her science homework."
+            },
+            {
+                zh: "均衡的飲食能幫助你保持精力充沛。",
+                words: ["Eating", "a", "balanced", "diet", "helps", "you", "stay", "energetic."],
+                correct: "Eating a balanced diet helps you stay energetic."
+            },
+            {
+                zh: "自從他十歲起，他就一直住在台北。",
+                words: ["He", "has", "lived", "in", "Taipei", "since", "he", "was", "ten."],
+                correct: "He has lived in Taipei since he was ten."
+            }
+        ];
+
+        let currentScrambleIndex = 0;
+        let selectedWords = [];
+        let availableWords = [];
+
+        function loadScrambleQuestion(index) {
+            currentScrambleIndex = index;
+            const q = scrambleQuestions[index];
+            document.getElementById('scrambleProgress').innerText = `${index + 1} / ${scrambleQuestions.length}`;
+            document.getElementById('scrambleTargetZh').innerText = q.zh;
+            document.getElementById('scrambleFeedback').innerText = '';
+            document.getElementById('btn-scramble-next').classList.add('hidden');
+
+            selectedWords = [];
+            // Shuffle words
+            availableWords = [...q.words].sort(() => Math.random() - 0.5);
+
+            renderScrambleZones();
+        }
+
+        function renderScrambleZones() {
+            const answerZone = document.getElementById('scrambleAnswerZone');
+            const poolZone = document.getElementById('scramblePoolZone');
+
+            answerZone.innerHTML = '';
+            poolZone.innerHTML = '';
+
+            if (selectedWords.length === 0) {
+                answerZone.innerHTML = '<span id="scramblePlaceholder" class="text-xs text-slate-500 italic">點擊下方積木加入句子...</span>';
+            } else {
+                selectedWords.forEach((word, idx) => {
+                    const chip = document.createElement('button');
+                    chip.className = 'bg-purple-600 hover:bg-purple-500 text-white font-bold px-3 py-1.5 rounded-xl text-sm transition animate-bounce-short shadow';
+                    chip.innerText = word;
+                    chip.onclick = () => removeWordFromAnswer(idx);
+                    answerZone.appendChild(chip);
+                });
+            }
+
+            availableWords.forEach((word, idx) => {
+                const chip = document.createElement('button');
+                chip.className = 'bg-slate-800 hover:bg-slate-700 text-purple-300 border border-purple-500/40 font-bold px-3 py-1.5 rounded-xl text-sm transition hover:scale-105';
+                chip.innerText = word;
+                chip.onclick = () => addWordToAnswer(idx);
+                poolZone.appendChild(chip);
+            });
+        }
+
+        function addWordToAnswer(index) {
+            const word = availableWords.splice(index, 1)[0];
+            selectedWords.push(word);
+            renderScrambleZones();
+        }
+
+        function removeWordFromAnswer(index) {
+            const word = selectedWords.splice(index, 1)[0];
+            availableWords.push(word);
+            renderScrambleZones();
+        }
+
+        function resetScrambleWords() {
+            const q = scrambleQuestions[currentScrambleIndex];
+            selectedWords = [];
+            availableWords = [...q.words].sort(() => Math.random() - 0.5);
+            document.getElementById('scrambleFeedback').innerText = '';
+            renderScrambleZones();
+        }
+
+        function checkScrambleAnswer() {
+            const userAnswer = selectedWords.join(' ');
+            const q = scrambleQuestions[currentScrambleIndex];
+            const feedback = document.getElementById('scrambleFeedback');
+
+            if (userAnswer === q.correct) {
+                feedback.className = 'text-xs sm:text-sm font-bold text-emerald-400 flex items-center gap-1.5';
+                feedback.innerHTML = '<i class="fa-solid fa-circle-check"></i> 太棒了！句子重組完全正確！🎉';
+                speakText(q.correct);
+                addScore(20);
+                document.getElementById('btn-scramble-next').classList.remove('hidden');
+            } else {
+                feedback.className = 'text-xs sm:text-sm font-bold text-rose-400 flex items-center gap-1.5';
+                feedback.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> 順序尚未正確，請再檢查一次詞序或點擊積木調整！';
+            }
+        }
+
+        function nextScrambleQuestion() {
+            if (currentScrambleIndex < scrambleQuestions.length - 1) {
+                loadScrambleQuestion(currentScrambleIndex + 1);
+            } else {
+                alert("恭喜完成所有長句重組挑戰！已掌握全單元核心句型！");
+                switchTab('quiz');
+            }
+        }
+
+        // ==========================================
+        // 6. Grand Comprehensive Quiz
+        // ==========================================
+        const quizQuestions = [
+            {
+                q: "1. Leo has eaten junk food _______ three days. He really needs to cut down on snacks.",
+                opts: ["for", "since", "ever", "already"],
+                ans: 0,
+                exp: "three days 是「一段時間長度」，現在完成式中表持續多久應搭配介系詞 for。"
+            },
+            {
+                q: "2. Have you _______ tried rock climbing before?",
+                opts: ["never", "ever", "since", "yet"],
+                ans: 1,
+                exp: "在現在完成式的疑問句中，詢問「曾經」使用 ever。"
+            },
+            {
+                q: "3. Patty hasn't finished her math homework _______.",
+                opts: ["already", "yet", "for", "since"],
+                ans: 1,
+                exp: "否定句句尾表示「尚未」時，應使用 yet。"
+            },
+            {
+                q: "4. Zac has lived in this city _______ he was born in 2010.",
+                opts: ["for", "since", "already", "never"],
+                ans: 1,
+                exp: "he was born in 2010 是「過去時間點/過去式子句」，表示動作從何時開始持續至今，應使用 since。"
+            },
+            {
+                q: "5. 動詞 write 的「原形 - 過去式 - 過去分詞」正確變化為？",
+                opts: ["write - wrote - wrote", "write - writed - writed", "write - wrote - written", "write - written - wrote"],
+                ans: 2,
+                exp: "write 為不規則動詞，三態變化為 write - wrote - written。"
+            },
+            {
+                q: "6. (對話篇情境) Why does Patty advise Leo not to skip meals?",
+                opts: [
+                    "Because it helps him lose weight faster.",
+                    "Because skipping meals causes low energy and unhealthy cravings later.",
+                    "Because breakfast is too expensive.",
+                    "Because he needs to sleep more."
+                ],
+                ans: 1,
+                exp: "對話篇中提到，跳過正餐會導致精力不足，且後續容易暴飲暴食，是不健康的習慣。"
+            },
+            {
+                q: "7. Tom isn't here right now. He has _______ to the supermarket.",
+                opts: ["been", "gone", "went", "going"],
+                ans: 1,
+                exp: "人不在現場（去了還沒回來）應使用 have/has gone to。"
+            },
+            {
+                q: "8. (閱讀篇情境) What is the main idea of \"A Letter from a Teenager\"?",
+                opts: [
+                    "Starving yourself is the only way to be handsome.",
+                    "Real health comes from a balanced diet and regular exercise, not extreme dieting.",
+                    "Teenagers don't need any vitamins.",
+                    "Fast food is good for memory."
+                ],
+                ans: 1,
+                exp: "閱讀篇主旨強調：真正的健康來自均衡飲食與規律運動，而非極端節食。"
+            },
+            {
+                q: "9. Eating vegetables and fruits can give you enough _______ to study well.",
+                opts: ["energy", "snack", "junk", "habit"],
+                ans: 0,
+                exp: "句意：吃蔬菜與水果能提供充足的「活力 (energy)」讓你專注學習。"
+            },
+            {
+                q: "10. We have _______ seen that popular movie twice! It's so exciting.",
+                opts: ["yet", "already", "since", "for"],
+                ans: 1,
+                exp: "肯定句中表示「已經」完成或看過某事，應使用 already。"
+            }
+        ];
+
+        function renderQuiz() {
+            const container = document.getElementById('quizQuestionsContainer');
+            container.innerHTML = '';
+
+            quizQuestions.forEach((item, qIdx) => {
+                const qCard = document.createElement('div');
+                qCard.className = 'bg-slate-900/90 p-5 sm:p-6 rounded-2xl border border-slate-800 space-y-4';
+                qCard.id = `quiz-card-${qIdx}`;
+
+                let optionsHtml = '';
+                item.opts.forEach((opt, oIdx) => {
+                    optionsHtml += `
+                        <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-950/70 hover:bg-slate-800 border border-slate-800 cursor-pointer transition">
+                            <input type="radio" name="q_${qIdx}" value="${oIdx}" class="accent-rose-500 w-4 h-4 cursor-pointer">
+                            <span class="text-xs sm:text-sm text-slate-200">${opt}</span>
+                        </label>
+                    `;
+                });
+
+                qCard.innerHTML = `
+                    <div class="flex items-start justify-between gap-3">
+                        <h4 class="text-sm sm:text-base font-black text-white leading-relaxed">${item.q}</h4>
+                        <span id="badge-q-${qIdx}" class="text-[11px] font-bold px-2 py-0.5 rounded-md bg-slate-800 text-slate-400 shrink-0">10 分</span>
+                    </div>
+                    <div class="space-y-2">
+                        ${optionsHtml}
+                    </div>
+                    <div id="exp-q-${qIdx}" class="hidden p-3 rounded-xl bg-slate-950 border text-xs leading-relaxed"></div>
+                `;
+                container.appendChild(qCard);
+            });
+        }
+
+        function submitQuiz() {
+            let correctCount = 0;
+            let answeredCount = 0;
+
+            quizQuestions.forEach((item, qIdx) => {
+                const selected = document.querySelector(`input[name="q_${qIdx}"]:checked`);
+                const expEl = document.getElementById(`exp-q-${qIdx}`);
+                const badgeEl = document.getElementById(`badge-q-${qIdx}`);
+
+                if (selected) {
+                    answeredCount++;
+                    const userVal = parseInt(selected.value);
+                    if (userVal === item.ans) {
+                        correctCount++;
+                        badgeEl.className = "text-[11px] font-bold px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/40";
+                        badgeEl.innerText = "✓ 正確 (+10分)";
+                        expEl.className = "p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-emerald-200 text-xs leading-relaxed block";
+                        expEl.innerHTML = `<strong>💡 解析：</strong> ${item.exp}`;
+                    } else {
+                        badgeEl.className = "text-[11px] font-bold px-2 py-0.5 rounded-md bg-rose-500/20 text-rose-300 border border-rose-500/40";
+                        badgeEl.innerText = "✗ 錯誤 (0分)";
+                        expEl.className = "p-3 rounded-xl bg-rose-950/40 border border-rose-500/30 text-rose-200 text-xs leading-relaxed block";
+                        expEl.innerHTML = `<strong>💡 正確答案為：[${item.opts[item.ans]}]</strong><br>解析：${item.exp}`;
+                    }
+                } else {
+                    badgeEl.className = "text-[11px] font-bold px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300";
+                    badgeEl.innerText = "未作答";
+                    expEl.className = "p-3 rounded-xl bg-slate-950 border border-slate-700 text-amber-300 text-xs leading-relaxed block";
+                    expEl.innerHTML = `<strong>💡 正確答案為：[${item.opts[item.ans]}]</strong><br>解析：${item.exp}`;
+                }
+            });
+
+            const score = correctCount * 10;
+            addScore(score);
+
+            // Open Certificate Modal
+            document.getElementById('certScore').innerText = score;
+            let grade = "GOOD";
+            let feedback = "複習完成！繼續保持對英語的熱情，多加練習文法與單字喔！";
+
+            if (score >= 90) {
+                grade = "MASTER 大師級";
+                feedback = "太震撼了！你已經完全融會貫通 Unit 1 所有對話、文法句型與閱讀重點！";
+            } else if (score >= 70) {
+                grade = "EXCELLENT 優秀";
+                feedback = "表現非常棒！掌握了絕大部分核心概念，錯題可參考下方詳細解析再加強喔！";
+            } else {
+                grade = "KEEP GOING 潛力無限";
+                feedback = "別灰心！點擊下方解析重新複習對話與句型，再次挑戰一定能拿到高分！";
+            }
+
+            document.getElementById('certGrade').innerText = grade;
+            document.getElementById('certFeedback').innerText = feedback;
+            document.getElementById('certModal').classList.remove('hidden');
+
+            try {
+                confetti({
+                    particleCount: 100,
+                    spread: 80,
+                    origin: { y: 0.6 }
+                });
+            } catch(e) {}
+        }
+
+        function closeCertModal() {
+            document.getElementById('certModal').classList.add('hidden');
+        }
+
+        function retryQuiz() {
+            closeCertModal();
+            renderQuiz();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderFlashcards('all');
+            loadScrambleQuestion(0);
+            renderQuiz();
+        });
+    </script>
+</body>
+</html>

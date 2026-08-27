@@ -189,12 +189,12 @@
                     <p class="text-xs md:text-sm text-slate-400 mt-0.5">點擊卡片或下方按鈕直接進入學習單元</p>
                 </div>
                 <span class="text-xs bg-slate-800 text-amber-400 px-3 py-1.5 rounded-xl border border-slate-700 font-bold">
-                    共 3 個主題開放中 ✨
+                    共 4 個主題開放中 ✨
                 </span>
             </div>
 
             <!-- CARDS GRID -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6">
 
                 <!-- CARD 1: 對話學習篇 (Dialogue) -->
                 <div class="hub-card relative rounded-3xl overflow-hidden glass-panel border-2 border-amber-500/40 hover:border-amber-400 flex flex-col justify-between p-6 sm:p-7 bg-gradient-to-b from-slate-800/90 via-slate-900/90 to-slate-950/90 group">
@@ -358,6 +358,63 @@
                     <div class="pt-4 border-t border-slate-800">
                         <a href="reading.html" onclick="triggerLaunchEffect(event, 'reading.html')" class="w-full btn-3d bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-400 hover:to-pink-500 text-white font-black py-3 px-4 rounded-2xl flex items-center justify-center gap-2 text-sm sm:text-base shadow-lg">
                             <span>進入閱讀冒險 📚</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CARD 4: 綜合總複習篇 (Review) -->
+                <div class="hub-card relative rounded-3xl overflow-hidden glass-panel border-2 border-emerald-500/50 hover:border-emerald-400 flex flex-col justify-between p-6 sm:p-7 bg-gradient-to-b from-slate-800/90 via-slate-900/90 to-slate-950/90 group ring-1 ring-emerald-500/30">
+                    <!-- Top Ribbon -->
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider font-fun shadow-sm">
+                            <i class="fa-solid fa-award mr-1"></i> 總複習・Unit 1
+                        </span>
+                        <div class="flex items-center gap-1 text-emerald-400 text-xs font-bold">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star text-amber-400 animate-pulse"></i>
+                        </div>
+                    </div>
+
+                    <!-- Main Card Body -->
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-start gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-500 flex items-center justify-center text-slate-950 text-xl shadow-lg shrink-0 group-hover:scale-110 transition duration-300">
+                                <i class="fa-solid fa-trophy"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg sm:text-xl font-black font-fun text-white group-hover:text-emerald-300 transition leading-tight">
+                                    全單元核心 綜合總複習
+                                </h4>
+                                <p class="text-xs font-bold text-emerald-400 mt-0.5">跨單元統整・實戰大會考</p>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-300 text-xs leading-relaxed">
+                            統整對話、文法與閱讀三大單元！含核心單字抽認卡、經典長句組裝積木與 10 題綜合通關模擬考！
+                        </p>
+
+                        <!-- Feature Chips -->
+                        <div class="flex flex-wrap gap-1.5 pt-1">
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-lg border border-slate-700">
+                                🗺️ 重點地圖
+                            </span>
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-lg border border-slate-700">
+                                🎴 語音卡牌
+                            </span>
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-lg border border-slate-700">
+                                🏆 通關證書
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Call To Action Button -->
+                    <div class="pt-4 border-t border-slate-800">
+                        <a href="review.html" onclick="triggerLaunchEffect(event, 'review.html')" class="w-full btn-3d bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-300 hover:to-teal-400 text-slate-950 font-black py-3 px-4 rounded-2xl flex items-center justify-center gap-2 text-sm sm:text-base shadow-lg">
+                            <span>進入綜合複習 🏆</span>
                             <i class="fa-solid fa-arrow-right text-xs"></i>
                         </a>
                     </div>

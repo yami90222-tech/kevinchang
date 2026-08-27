@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>國中英語 互動學習基地 - English Learning Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                        fun: ['Fredoka', 'cursive', 'sans-serif']
+                    },
+                    colors: {
+                        hub: {
+                            dark: '#0b1120',
+                            card: '#1e293b',
+                            gold: '#f59e0b',
+                            cyan: '#06b6d4',
+                            purple: '#8b5cf6',
+                            pink: '#ec4899',
+                            emerald: '#10b981'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 3.5s ease-in-out infinite',
+                        'float-delayed': 'float 3.5s ease-in-out 1.75s infinite',
+                        'pulse-glow': 'pulseGlow 2.5s infinite',
+                        'spin-slow': 'spin 12s linear infinite'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { filter: 'drop-shadow(0 0 12px rgba(245, 158, 11, 0.4))' },
+                            '50%': { filter: 'drop-shadow(0 0 24px rgba(245, 158, 11, 0.8))' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .hub-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hub-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.5);
+        }
+        .btn-3d {
+            box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.35);
+            transition: all 0.15s ease;
+        }
+        .btn-3d:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0 0 rgba(0, 0, 0, 0.35);
+        }
+        .btn-3d:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.35);
+        }
+        .bg-grid-pattern {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans bg-grid-pattern selection:bg-amber-400 selection:text-slate-950 relative overflow-x-hidden">
+
+    <!-- Ambient Glow Backgrounds -->
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+    <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+    <div class="absolute bottom-10 left-1/3 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+
+    <!-- TOP NAV / STATUS BAR -->
+    <header class="bg-slate-900/90 border-b-2 border-slate-800 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+            
+            <!-- Logo & Brand -->
+            <div class="flex items-center gap-3">
+                <div class="relative bg-gradient-to-tr from-amber-400 via-orange-500 to-pink-500 p-2.5 rounded-2xl shadow-lg animate-float text-slate-950">
+                    <i class="fa-solid fa-graduation-cap text-2xl"></i>
+                    <span class="absolute -top-1 -right-1 flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-300 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-yellow-400"></span>
+                    </span>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-[11px] bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-black px-2 py-0.5 rounded-md uppercase font-fun">Quest Hub</span>
+                        <span class="text-xs text-slate-400 font-medium">國中英語智慧學習基地</span>
+                    </div>
+                    <h1 class="text-lg md:text-xl font-black font-fun tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-orange-400">
+                        Junior High English Learning Portal
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Student Profile & Gamification Widget -->
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:flex items-center gap-3 bg-slate-900 px-3.5 py-1.5 rounded-2xl border border-slate-800 shadow-inner">
+                    <!-- Streak -->
+                    <div class="flex items-center gap-1.5 text-orange-400 font-bold text-xs" title="連續學習打卡">
+                        <i class="fa-solid fa-fire text-orange-500 text-sm animate-pulse"></i>
+                        <span>連續 <strong id="hubStreak" class="text-white">3</strong> 天</span>
+                    </div>
+                    <div class="w-px h-4 bg-slate-800"></div>
+                    <!-- Stars -->
+                    <div class="flex items-center gap-1.5 text-amber-300 font-bold text-xs" title="累積學習星星">
+                        <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+                        <span><strong id="hubStars" class="text-white">120</strong> 點</span>
+                    </div>
+                </div>
+
+                <!-- Sound Effects Toggle -->
+                <button onclick="toggleAudioFx()" id="audioFxBtn" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded-xl text-xs font-bold border border-slate-700 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-volume-high text-amber-400" id="audioIcon"></i>
+                    <span class="hidden md:inline">音效開</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN PORTAL CONTENT -->
+    <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full flex flex-col justify-between space-y-10">
+
+        <!-- HERO BANNER -->
+        <section class="relative rounded-3xl overflow-hidden glass-panel p-6 md:p-10 border border-slate-700/80 shadow-2xl">
+            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="space-y-3 text-center md:text-left max-w-2xl">
+                    <div class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500/20 to-purple-500/20 border border-amber-500/30 text-amber-300 px-3 py-1 rounded-full text-xs font-bold font-fun">
+                        <i class="fa-solid fa-sparkles text-amber-400"></i>
+                        <span>歡迎來到英語冒險大廳！隨選單元自主學習</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-black font-fun tracking-tight text-white leading-tight">
+                        選擇你的學習主題 🚀<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-300 to-pink-400">
+                            開啟今日的英語闖關冒險！
+                        </span>
+                    </h2>
+                    <p class="text-sm md:text-base text-slate-300 leading-relaxed">
+                        點擊下方學習卡片即可進入主題單元。無論是想練習生活情境口說對話，或是強化關鍵文法與句型拆解，都能輕鬆掌握！
+                    </p>
+                </div>
+
+                <!-- Hero Mascot Badge -->
+                <div class="flex flex-col items-center shrink-0">
+                    <div class="relative">
+                        <div class="w-28 h-28 md:w-32 md:h-32 rounded-3xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 p-1 shadow-2xl animate-float">
+                            <div class="w-full h-full bg-slate-900 rounded-[22px] flex flex-col items-center justify-center text-center p-2">
+                                <i class="fa-solid fa-gamepad text-3xl md:text-4xl text-amber-400 mb-1"></i>
+                                <span class="font-black text-[11px] text-purple-300 font-fun uppercase tracking-wider">Ready to Learn</span>
+                                <span class="text-[10px] text-slate-400 font-bold">點選卡片出發</span>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-2 -right-2 bg-emerald-500 text-slate-950 font-black text-[11px] px-2 py-0.5 rounded-full shadow-lg border-2 border-slate-900 animate-bounce">
+                            ONLINE
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: LEARNING MODULE CARDS (對話 vs 句型) -->
+        <section class="space-y-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-xl md:text-2xl font-black font-fun flex items-center gap-2 text-white">
+                        <i class="fa-solid fa-compass text-amber-400"></i>
+                        <span>核心學習模組</span>
+                    </h3>
+                    <p class="text-xs md:text-sm text-slate-400 mt-0.5">點擊卡片或下方按鈕直接進入學習單元</p>
+                </div>
+                <span class="text-xs bg-slate-800 text-slate-400 px-3 py-1.5 rounded-xl border border-slate-700 font-bold">
+                    共 2 個主題開放中
+                </span>
+            </div>
+
+            <!-- CARDS GRID -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+
+                <!-- CARD 1: 對話學習篇 (Dialogue) -->
+                <div class="hub-card relative rounded-3xl overflow-hidden glass-panel border-2 border-amber-500/40 hover:border-amber-400 flex flex-col justify-between p-6 sm:p-8 bg-gradient-to-b from-slate-800/90 via-slate-900/90 to-slate-950/90 group">
+                    <!-- Top Ribbon -->
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider font-fun shadow-sm">
+                            <i class="fa-solid fa-comments mr-1"></i> 對話篇・Unit 1
+                        </span>
+                        <div class="flex items-center gap-1 text-amber-400 text-xs font-bold">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <span class="text-slate-400 ml-1">基礎必備</span>
+                        </div>
+                    </div>
+
+                    <!-- Main Card Body -->
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-slate-950 text-2xl shadow-lg shrink-0 group-hover:scale-110 transition duration-300">
+                                <i class="fa-solid fa-microphone-lines"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl sm:text-2xl font-black font-fun text-white group-hover:text-amber-300 transition">
+                                    Healthy Habits & Dieting
+                                </h4>
+                                <p class="text-sm font-bold text-amber-400">健康習慣與飲食・情境對話大冒險</p>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                            生動的漫畫式分段課文對話，結合真人發音朗讀、角色配音評分、小遊戲大亂鬥與動詞三態卡片，讓課文朗朗上口！
+                        </p>
+
+                        <!-- Feature Chips -->
+                        <div class="flex flex-wrap gap-2 pt-1">
+                            <span class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-lg border border-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-book-open text-amber-400"></i> 課文冒險朗讀
+                            </span>
+                            <span class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-lg border border-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-microphone text-pink-400"></i> 角色配音大挑戰
+                            </span>
+                            <span class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-lg border border-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-gamepad text-purple-400"></i> 遊戲大亂鬥
+                            </span>
+                            <span class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-lg border border-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-spell-check text-sky-400"></i> 單字與三態寶典
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Call To Action Button -->
+                    <div class="pt-4 border-t border-slate-800">
+                        <a href="dialogue.html" onclick="triggerLaunchEffect(event, 'dialogue.html')" class="w-full btn-3d bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black py-3.5 px-6 rounded-2xl flex items-center justify-center gap-2 text-base md:text-lg shadow-lg">
+                            <span>進入對話學習 🚀</span>
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CARD 2: 句型文法篇 (Pattern) -->
+                <div class="hub-card relative rounded-3xl overflow-hidden glass-panel border-2 border-indigo-500/40 hover:border-indigo-400 flex flex-col justify-between p-6 sm:p-8 bg-gradient-to-b from-slate-800/90 via-slate-900/90 to-slate-950/90 group">
+                    <!-- Top Ribbon -->
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider font-fun shadow-sm">
+                            <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> 句型篇・文法專區
+                        </span>
+                        <div class="flex items-center gap-1 text-purple-400 text-xs font-bold">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <span class="text-slate-400 ml-1">進階通關</span>
+                        </div>
+                    </div>
+
+                    <!-- Main Card Body -->
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-400 via-indigo-500 to-purple-600 flex items-center justify-center text-white text-2xl shadow-lg shrink-0 group-hover:scale-110 transition duration-300">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl sm:text-2xl font-black font-fun text-white group-hover:text-purple-300 transition">
+                                    現在完成式 魔法通關寶典
+                                </h4>
+                                <p class="text-sm font-bold text-sky-400">Grammar Focus: have / has + p.p.</p>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                            解鎖三態動詞變幻卡牌、掌握 ever/never 經驗次數、for/since 時間起點、already/yet 完成狀態，並有 AI 英語助教在線答疑！
+                        </p>
+
+                        <!-- Feature Chips -->
+                        <div class="flex flex-wrap gap-2 pt-1">
+                            <span class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-lg border border-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-bolt text-amber-400"></i> 三態動詞大師
+                            </span>
+                            <span class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-lg border border-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-compass text-sky-400"></i> ever / never 經驗
+                            </span>
+                            <span class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-lg border border-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-clock text-orange-400"></i> for / since 時間
+                            </span>
+                            <span class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-lg border border-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-trophy text-purple-400"></i> 實戰魔法大考驗
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Call To Action Button -->
+                    <div class="pt-4 border-t border-slate-800">
+                        <a href="pattern.html" onclick="triggerLaunchEffect(event, 'pattern.html')" class="w-full btn-3d bg-gradient-to-r from-sky-500 via-indigo-600 to-purple-600 hover:from-sky-400 hover:to-indigo-500 text-white font-black py-3.5 px-6 rounded-2xl flex items-center justify-center gap-2 text-base md:text-lg shadow-lg">
+                            <span>進入句型修煉 ⚡</span>
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION: DAILY WARM-UP & QUICK CHALLENGE (每日趣味暖身區) -->
+        <section class="glass-panel rounded-3xl p-6 md:p-8 border border-slate-800 space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-yellow-400 to-amber-500 flex items-center justify-center text-slate-950 font-bold text-lg shadow">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg md:text-xl font-black font-fun text-white">今日英語快閃挑戰 (Daily Warm-up)</h3>
+                        <p class="text-xs text-slate-400">出發前先來個 10 秒腦力熱身吧！</p>
+                    </div>
+                </div>
+                <button onclick="refreshDailyWarmup()" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold px-3 py-1.5 rounded-xl border border-slate-700 transition flex items-center gap-1">
+                    <i class="fa-solid fa-arrows-rotate"></i> 換一題
+                </button>
+            </div>
+
+            <!-- Warm-up Interactive Box -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                <!-- Quote of the Day -->
+                <div class="lg:col-span-2 bg-slate-900/80 p-4 sm:p-5 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-3">
+                    <div>
+                        <div class="flex items-center justify-between text-xs text-amber-400 font-bold mb-2">
+                            <span>🌟 今日激勵金句 (Quote of the Day)</span>
+                            <button onclick="speakQuote()" class="text-xs text-slate-300 hover:text-white bg-slate-800 px-2 py-0.5 rounded-md flex items-center gap-1">
+                                <i class="fa-solid fa-volume-high text-amber-400"></i> 朗讀
+                            </button>
+                        </div>
+                        <p id="quoteEn" class="text-base sm:text-lg font-bold text-white font-fun">
+                            "Practice makes perfect. Small steps lead to big achievements!"
+                        </p>
+                        <p id="quoteZh" class="text-xs sm:text-sm text-slate-400 mt-1">
+                            熟能生巧。每一小步都能累積巨大的成就！
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Verb Quick Flash Card -->
+                <div class="bg-slate-900/80 p-4 sm:p-5 rounded-2xl border border-slate-800 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between text-xs text-purple-400 font-bold mb-2">
+                            <span>⚡ 動詞三態快問快答</span>
+                            <span class="text-[10px] bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded">點擊翻牌</span>
+                        </div>
+                        <div onclick="flipVerbCard()" id="verbFlashCard" class="cursor-pointer bg-slate-800 hover:bg-slate-750 p-3.5 rounded-xl border border-slate-700 text-center transition group">
+                            <div class="text-xs text-slate-400">動詞原形 (Base)</div>
+                            <div id="verbBase" class="text-xl font-black text-amber-400 font-fun my-0.5">eat</div>
+                            <div id="verbPastContainer" class="text-xs text-slate-400 border-t border-slate-700/80 pt-1.5 mt-1.5">
+                                過去式 / 過去分詞：<span id="verbPast" class="text-emerald-400 font-bold">點我揭曉 ✨</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 border-t border-slate-900 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-graduation-cap text-amber-400"></i>
+                <span class="font-bold text-slate-400">國中英語智慧學習基地・自主學習樂園</span>
+            </div>
+            <p>Designed for Interactive ESL / Junior High School English Learning</p>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPTS -->
+    <script>
+        // State
+        let audioEnabled = true;
+        const quotes = [
+            { en: "Practice makes perfect. Small steps lead to big achievements!", zh: "熟能生巧。每一小步都能累積巨大的成就！" },
+            { en: "A journey of a thousand miles begins with a single step.", zh: "千里之行，始於足下。" },
+            { en: "You have already done a great job! Keep learning every day.", zh: "你已經做得很棒了！每天堅持進步一點點。" },
+            { en: "Mistakes are the stairs to success in language learning.", zh: "犯錯是語言學習通往成功的階梯。" },
+            { en: "Believe in yourself and all that you are capable of.", zh: "相信你自己，以及你所能達成的一切。" }
+        ];
+
+        const irregularVerbs = [
+            { base: "eat", past: "ate", pp: "eaten", zh: "吃" },
+            { base: "see", past: "saw", pp: "seen", zh: "看見" },
+            { base: "go", past: "went", pp: "gone", zh: "去" },
+            { base: "write", past: "wrote", pp: "written", zh: "寫" },
+            { base: "break", past: "broke", pp: "broken", zh: "打破" },
+            { base: "take", past: "took", pp: "taken", zh: "拿取 / 搭乘" },
+            { base: "give", past: "gave", pp: "given", zh: "給予" },
+            { base: "drink", past: "drank", pp: "drunk", zh: "喝" },
+            { base: "sing", past: "sang", pp: "sung", zh: "唱歌" },
+            { base: "swim", past: "swam", pp: "swum", zh: "游泳" }
+        ];
+
+        let currentQuoteIdx = 0;
+        let currentVerbIdx = 0;
+        let verbRevealed = false;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load saved stars or score from localStorage if present
+            const savedStars = localStorage.getItem('english_user_stars') || '120';
+            const savedStreak = localStorage.getItem('english_user_streak') || '3';
+            document.getElementById('hubStars').innerText = savedStars;
+            document.getElementById('hubStreak').innerText = savedStreak;
+
+            refreshDailyWarmup();
+        });
+
+        // Speech synthesis for Quote
+        function speakQuote() {
+            const quoteText = quotes[currentQuoteIdx].en;
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(quoteText);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Toggle Audio Effects
+        function toggleAudioFx() {
+            audioEnabled = !audioEnabled;
+            const icon = document.getElementById('audioIcon');
+            const btnText = document.querySelector('#audioFxBtn span');
+            if (audioEnabled) {
+                icon.className = 'fa-solid fa-volume-high text-amber-400';
+                if (btnText) btnText.innerText = '音效開';
+                playBeep(600, 0.1);
+            } else {
+                icon.className = 'fa-solid fa-volume-xmark text-slate-500';
+                if (btnText) btnText.innerText = '音效關';
+            }
+        }
+
+        // Simple Web Audio API Beep
+        function playBeep(freq = 520, duration = 0.15) {
+            if (!audioEnabled) return;
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, ctx.currentTime);
+                gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + duration);
+            } catch(e) {}
+        }
+
+        // Refresh Daily Warmup
+        function refreshDailyWarmup() {
+            currentQuoteIdx = Math.floor(Math.random() * quotes.length);
+            document.getElementById('quoteEn').innerText = `"${quotes[currentQuoteIdx].en}"`;
+            document.getElementById('quoteZh').innerText = quotes[currentQuoteIdx].zh;
+
+            currentVerbIdx = Math.floor(Math.random() * irregularVerbs.length);
+            verbRevealed = false;
+            const verb = irregularVerbs[currentVerbIdx];
+            document.getElementById('verbBase').innerText = `${verb.base} (${verb.zh})`;
+            document.getElementById('verbPast').innerHTML = '點我揭曉 ✨';
+            document.getElementById('verbPast').className = 'text-emerald-400 font-bold';
+        }
+
+        // Flip Verb Card
+        function flipVerbCard() {
+            const verb = irregularVerbs[currentVerbIdx];
+            const verbPastEl = document.getElementById('verbPast');
+            if (!verbRevealed) {
+                verbRevealed = true;
+                verbPastEl.innerHTML = `<span class="text-amber-300 font-fun text-sm">${verb.past}</span> / <span class="text-purple-300 font-fun text-sm">${verb.pp}</span>`;
+                verbPastEl.className = 'font-bold';
+                playBeep(700, 0.12);
+
+                // Confetti mini burst
+                try {
+                    confetti({
+                        particleCount: 20,
+                        spread: 40,
+                        origin: { y: 0.8 }
+                    });
+                } catch(e) {}
+
+                // Pronounce PP
+                if ('speechSynthesis' in window && audioEnabled) {
+                    const utterance = new SpeechSynthesisUtterance(`${verb.base}, ${verb.past}, ${verb.pp}`);
+                    utterance.lang = 'en-US';
+                    utterance.rate = 0.9;
+                    window.speechSynthesis.speak(utterance);
+                }
+            } else {
+                refreshDailyWarmup();
+            }
+        }
+
+        // Trigger Launch Animation when clicking cards
+        function triggerLaunchEffect(event, url) {
+            event.preventDefault();
+            playBeep(880, 0.2);
+            try {
+                confetti({
+                    particleCount: 45,
+                    spread: 60,
+                    origin: { y: 0.6 }
+                });
+            } catch(e) {}
+            setTimeout(() => {
+                window.location.href = url;
+            }, 250);
+        }
+    </script>
+</body>
+</html>

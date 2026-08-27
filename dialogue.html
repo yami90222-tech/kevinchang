@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 1 English RPG: Healthy Habits & Dieting 英語大闖關</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti for Celebration effects -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                        fun: ['Fredoka', 'cursive', 'sans-serif']
+                    },
+                    colors: {
+                        game: {
+                            purple: '#8b5cf6',
+                            yellow: '#f59e0b',
+                            pink: '#ec4899',
+                            green: '#10b981',
+                            blue: '#06b6d4',
+                            dark: '#0f172a'
+                        }
+                    },
+                    animation: {
+                        'bounce-short': 'bounce 0.6s ease-in-out 1',
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                        'float': 'float 3s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 15px rgba(245, 158, 11, 0.6)' },
+                            '50%': { boxShadow: '0 0 30px rgba(245, 158, 11, 0.9)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-8px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { height: 6px; width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #1e293b; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .game-btn-shadow {
+            box-shadow: 0 6px 0 0 rgba(0,0,0,0.25);
+            transition: all 0.1s ease;
+        }
+        .game-btn-shadow:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 rgba(0,0,0,0.25);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col font-sans pb-12 selection:bg-yellow-400 selection:text-slate-900">
+
+    <!-- TOP GAMIFICATION STATUS BAR -->
+    <header class="bg-slate-800/90 border-b-4 border-slate-700 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 py-2.5 flex flex-wrap justify-between items-center gap-3">
+            
+            <!-- Logo & Level Title -->
+            <div class="flex items-center gap-3">
+                <a href="index.html" title="返回學習首頁" class="bg-slate-700/80 hover:bg-amber-500 hover:text-slate-950 text-amber-300 p-2.5 rounded-2xl border border-slate-600 shadow-md transition-all duration-200 flex items-center gap-1.5 font-bold text-xs md:text-sm">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="hidden sm:inline">學習首頁</span>
+                </a>
+                <div class="relative bg-gradient-to-tr from-amber-500 to-yellow-400 p-2.5 rounded-2xl shadow-lg animate-float text-slate-900">
+                    <i class="fa-solid fa-gamepad text-2xl"></i>
+                    <span id="badgeIcon" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full border-2 border-slate-800">LV1</span>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs bg-yellow-400/20 text-yellow-300 font-bold px-2 py-0.5 rounded-md uppercase tracking-wider font-fun">Unit 1 Dialogue</span>
+                        <span id="userRank" class="text-xs bg-purple-500/30 text-purple-300 font-bold px-2 py-0.5 rounded-md font-fun">英勇初學者</span>
+                    </div>
+                    <h1 class="text-lg md:text-xl font-black font-fun tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-orange-400 to-pink-400">
+                        Healthy Habits & Dieting 英語大冒險
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Player XP & Coins Dashboard -->
+            <div class="flex items-center gap-3 bg-slate-950/70 px-4 py-2 rounded-2xl border border-slate-800">
+                <!-- XP Bar -->
+                <div class="flex flex-col w-28 md:w-36">
+                    <div class="flex justify-between text-[11px] font-bold text-slate-300 mb-1">
+                        <span>XP 經驗值</span>
+                        <span id="xpText" class="text-yellow-400">0 / 100</span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden border border-slate-700">
+                        <div id="xpBar" class="bg-gradient-to-r from-yellow-400 to-orange-500 h-full transition-all duration-300 w-0"></div>
+                    </div>
+                </div>
+
+                <!-- Streak / Coins -->
+                <div class="flex items-center gap-2 border-l border-slate-800 pl-3">
+                    <div class="flex items-center gap-1 text-amber-400 font-bold text-sm">
+                        <i class="fa-solid fa-fire text-orange-500 animate-pulse"></i>
+                        <span id="streakCount">0</span>
+                    </div>
+                    <div class="flex items-center gap-1 text-yellow-300 font-bold text-sm">
+                        <i class="fa-solid fa-coins text-yellow-400"></i>
+                        <span id="coinCount">50</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="bg-slate-900/80 px-4 border-t border-slate-800">
+            <div class="max-w-6xl mx-auto flex overflow-x-auto custom-scrollbar no-scrollbar gap-2 py-2 text-xs md:text-sm font-bold">
+                <button onclick="switchTab('dialogue')" id="tab-dialogue" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-600 text-slate-950 font-black shadow-lg whitespace-nowrap transition">
+                    <i class="fa-solid fa-book-open text-base"></i> 課文冒險 (Dialogue)
+                </button>
+                <button onclick="switchTab('roleplay')" id="tab-roleplay" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
+                    <i class="fa-solid fa-microphone text-base text-pink-400"></i> 角色配對大挑戰 (Dubbing)
+                </button>
+                <button onclick="switchTab('games')" id="tab-games" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
+                    <i class="fa-solid fa-gamepad text-base text-purple-400"></i> 遊戲大亂鬥 (Mini Games)
+                </button>
+                <button onclick="switchTab('vocab')" id="tab-vocab" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
+                    <i class="fa-solid fa-spell-check text-base text-sky-400"></i> 單字寶典 (Vocab)
+                </button>
+                <button onclick="switchTab('verbs')" id="tab-verbs" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
+                    <i class="fa-solid fa-wand-magic-sparkles text-base text-emerald-400"></i> 動詞三態變幻 (Verbs)
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 mt-6 flex-grow w-full">
+
+        <!-- TAB 1: INTERACTIVE COMIC DIALOGUE -->
+        <section id="sec-dialogue" class="space-y-6">
+            
+            <!-- Dialogue Toolbar -->
+            <div class="bg-slate-800/80 p-4 rounded-3xl border border-slate-700 flex flex-wrap items-center justify-between gap-4 shadow-xl">
+                <div class="flex items-center gap-3">
+                    <button id="playAllBtn" onclick="togglePlayAll()" class="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-extrabold px-5 py-2.5 rounded-2xl shadow-lg game-btn-shadow flex items-center gap-2">
+                        <i id="playAllIcon" class="fa-solid fa-play"></i>
+                        <span id="playAllText">播放全課對話 (+20 XP)</span>
+                    </button>
+                    <button onclick="stopSpeech()" class="bg-slate-700 text-slate-300 hover:bg-slate-600 font-bold px-4 py-2.5 rounded-2xl transition flex items-center gap-1.5 text-xs">
+                        <i class="fa-solid fa-square"></i> 停止
+                    </button>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3 text-xs md:text-sm font-semibold">
+                    <!-- Speed toggle -->
+                    <div class="flex items-center bg-slate-900/80 p-1 rounded-xl border border-slate-700">
+                        <button onclick="setTTSRate(0.8, this)" class="rate-btn text-slate-400 px-2.5 py-1 rounded-lg transition font-medium">0.8x 慢速</button>
+                        <button onclick="setTTSRate(1.0, this)" class="rate-btn bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-lg transition shadow">1.0x 標準</button>
+                    </div>
+
+                    <label class="flex items-center gap-2 cursor-pointer bg-slate-900/60 hover:bg-slate-900 px-3 py-2 rounded-xl border border-slate-700 transition">
+                        <input type="checkbox" id="toggleChinese" checked onchange="toggleTranslation()" class="accent-amber-400 w-4 h-4 rounded">
+                        <span class="text-slate-300">中文對照</span>
+                    </label>
+
+                    <label class="flex items-center gap-2 cursor-pointer bg-slate-900/60 hover:bg-slate-900 px-3 py-2 rounded-xl border border-slate-700 transition">
+                        <input type="checkbox" id="toggleGrammar" checked onchange="toggleGrammarHighlights()" class="accent-amber-400 w-4 h-4 rounded">
+                        <span class="text-slate-300">句型文法解析</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Dialogue Visual Cards Feed -->
+            <div class="space-y-4" id="dialogueContainer">
+                <!-- Javascript dynamically renders animated comic cards here -->
+            </div>
+        </section>
+
+        <!-- TAB 2: ROLEPLAY & DUBBING STUDIO -->
+        <section id="sec-roleplay" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-pink-600 via-rose-600 to-purple-600 rounded-3xl p-6 text-white shadow-xl relative overflow-hidden">
+                <div class="relative z-10">
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider">Karaoke & Voice Challenge</span>
+                    <h2 class="text-2xl md:text-3xl font-black font-fun mt-2">🎙️ 課文角色配對大挑戰</h2>
+                    <p class="text-pink-100 text-sm mt-1">選擇你要擔綱的角色，隨著英文提示朗讀句子，贏取雙倍 XP 與星等評分！</p>
+                </div>
+                <div class="absolute -right-4 -bottom-6 text-8xl opacity-20 pointer-events-none">🎭</div>
+            </div>
+
+            <!-- Character Chooser -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <button onclick="selectRoleplayCharacter('Ela')" id="roleBtn-Ela" class="p-5 rounded-3xl border-2 border-pink-500 bg-slate-800/80 hover:bg-pink-950/30 transition flex items-center gap-4 text-left group relative overflow-hidden">
+                    <div class="w-16 h-16 rounded-2xl bg-pink-500/20 text-4xl flex items-center justify-center shrink-0 border border-pink-400/30 group-hover:scale-110 transition">
+                        👩
+                    </div>
+                    <div>
+                        <div class="text-xs text-pink-400 font-bold uppercase font-fun">Character 1</div>
+                        <h3 class="text-xl font-bold text-white font-fun">Ela (愛拉)</h3>
+                        <p class="text-xs text-slate-400 mt-1">正在減重，只吃一根香蕉卻肚子餓的不舒服國中生。</p>
+                    </div>
+                </button>
+
+                <button onclick="selectRoleplayCharacter('Cody')" id="roleBtn-Cody" class="p-5 rounded-3xl border-2 border-slate-700 bg-slate-800/80 hover:bg-sky-950/30 transition flex items-center gap-4 text-left group relative overflow-hidden">
+                    <div class="w-16 h-16 rounded-2xl bg-sky-500/20 text-4xl flex items-center justify-center shrink-0 border border-sky-400/30 group-hover:scale-110 transition">
+                        👦
+                    </div>
+                    <div>
+                        <div class="text-xs text-sky-400 font-bold uppercase font-fun">Character 2</div>
+                        <h3 class="text-xl font-bold text-white font-fun">Cody (科迪)</h3>
+                        <p class="text-xs text-slate-400 mt-1">給予健康飲食與運動建議的热心同學。</p>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Roleplay Stage Display -->
+            <div class="bg-slate-800/90 rounded-3xl p-6 border border-slate-700 shadow-2xl space-y-6">
+                <div class="flex justify-between items-center border-b border-slate-700 pb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs bg-slate-700 text-slate-300 font-bold px-3 py-1 rounded-full">你飾演的角色：</span>
+                        <span id="activeRoleName" class="text-lg font-black text-pink-400 font-fun">Ela 👩</span>
+                    </div>
+                    <div class="text-xs text-yellow-400 font-bold flex items-center gap-1">
+                        <i class="fa-solid fa-star"></i> 進度：<span id="roleplayProgress">0 / 10 句</span>
+                    </div>
+                </div>
+
+                <!-- Current Roleplay Cue Card -->
+                <div id="roleplayCard" class="bg-slate-900 rounded-2xl p-6 border-2 border-slate-700 space-y-4 text-center">
+                    <div id="roleSpeakerBadge" class="inline-block bg-pink-500/20 text-pink-300 font-bold px-3 py-1 rounded-full text-xs">
+                        換你開口唸這一句囉！
+                    </div>
+                    <div id="roleEnglishCue" class="text-xl md:text-2xl font-bold text-yellow-300 font-fun leading-relaxed">
+                        "I don't feel well. I'm so hungry."
+                    </div>
+                    <p id="roleChineseCue" class="text-sm text-slate-400">
+                        「我覺得不太舒服。我好餓。」
+                    </p>
+
+                    <div class="pt-4 flex flex-wrap justify-center items-center gap-3">
+                        <button onclick="playRoleplayPartnerAudio()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2">
+                            <i class="fa-solid fa-volume-high text-yellow-400"></i> 聽示範發音
+                        </button>
+                        <button onclick="recordAndValidateRoleplayLine()" class="bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-400 hover:to-rose-500 text-white px-6 py-3 rounded-xl font-black text-sm shadow-lg game-btn-shadow flex items-center gap-2">
+                            <i class="fa-solid fa-check-circle"></i> 我唸完了！大聲挑戰 (+10 XP)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: MINI GAMES ARCADE -->
+        <section id="sec-games" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 rounded-3xl p-6 text-white shadow-xl flex justify-between items-center">
+                <div>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black uppercase">Mini-Games Hub</span>
+                    <h2 class="text-2xl md:text-3xl font-black font-fun mt-2">🎮 課文語文大亂鬥</h2>
+                    <p class="text-purple-100 text-sm mt-1">邊玩遊戲邊複習英文句型、單字與健康飲食概念！</p>
+                </div>
+                <div class="text-6xl hidden sm:block">👾</div>
+            </div>
+
+            <!-- Game Mode Selector -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <button onclick="startMiniGame('scramble')" class="bg-slate-800/90 border-2 border-purple-500/50 hover:border-purple-400 p-5 rounded-3xl text-left space-y-3 hover:bg-purple-950/20 transition group">
+                    <div class="w-12 h-12 bg-purple-500/20 rounded-2xl flex items-center justify-center text-purple-300 text-2xl group-hover:scale-110 transition">🧩</div>
+                    <div>
+                        <h3 class="font-bold text-white text-lg font-fun">1. 句型重組打怪</h3>
+                        <p class="text-xs text-slate-400 mt-1">把散落的單字拼湊成正確課文句型！</p>
+                    </div>
+                    <span class="inline-block text-xs text-purple-400 font-bold">點擊開始 →</span>
+                </button>
+
+                <button onclick="startMiniGame('memory')" class="bg-slate-800/90 border-2 border-amber-500/50 hover:border-amber-400 p-5 rounded-3xl text-left space-y-3 hover:bg-amber-950/20 transition group">
+                    <div class="w-12 h-12 bg-amber-500/20 rounded-2xl flex items-center justify-center text-amber-300 text-2xl group-hover:scale-110 transition">🃏</div>
+                    <div>
+                        <h3 class="font-bold text-white text-lg font-fun">2. 單字翻牌配對</h3>
+                        <p class="text-xs text-slate-400 mt-1">考驗記憶力！將英文單字與中文翻譯對應成功。</p>
+                    </div>
+                    <span class="inline-block text-xs text-amber-400 font-bold">點擊開始 →</span>
+                </button>
+
+                <button onclick="startMiniGame('dietSim')" class="bg-slate-800/90 border-2 border-emerald-500/50 hover:border-emerald-400 p-5 rounded-3xl text-left space-y-3 hover:bg-emerald-950/20 transition group">
+                    <div class="w-12 h-12 bg-emerald-500/20 rounded-2xl flex items-center justify-center text-emerald-300 text-2xl group-hover:scale-110 transition">🥗</div>
+                    <div>
+                        <h3 class="font-bold text-white text-lg font-fun">3. Ela 的健康生活大作戰</h3>
+                        <p class="text-xs text-slate-400 mt-1">幫 Ela 安排均衡飲食與運動，不要讓她餓昏倒！</p>
+                    </div>
+                    <span class="inline-block text-xs text-emerald-400 font-bold">點擊開始 →</span>
+                </button>
+            </div>
+
+            <!-- Game Play Screen Canvas/Box -->
+            <div id="gamePlayArea" class="bg-slate-800 rounded-3xl p-6 border-2 border-slate-700 shadow-2xl min-h-[350px] flex flex-col justify-center items-center text-center">
+                <div class="text-slate-400 text-sm space-y-2">
+                    <p class="text-4xl animate-bounce">👇</p>
+                    <p class="font-bold text-lg text-slate-200">請點擊上方任意遊戲模式開始關卡挑戰！</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: VOCABULARY SECTION -->
+        <section id="sec-vocab" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-sky-600 to-blue-700 text-white rounded-3xl p-6 shadow-xl flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-bold font-fun">🔤 Unit 1 重點字彙庫</h2>
+                    <p class="text-sky-100 text-xs md:text-sm mt-1">點擊發音按鈕聽標準美式發音，點擊卡片查看詳細例句。</p>
+                </div>
+                <div class="text-4xl">📚</div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="vocabGrid">
+                <!-- Javascript will populate vocabulary cards -->
+            </div>
+        </section>
+
+        <!-- TAB 5: IRREGULAR VERBS SECTION -->
+        <section id="sec-verbs" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white rounded-3xl p-6 shadow-xl">
+                <h2 class="text-2xl font-bold font-fun">✨ 動詞三態魔法進化庫</h2>
+                <p class="text-emerald-100 text-xs md:text-sm mt-1">課文中涉及的重要不規則動詞三態變化（原形 → 過去式 → 過去分詞 p.p.）</p>
+            </div>
+
+            <div class="bg-slate-800 rounded-3xl border border-slate-700 overflow-hidden shadow-xl">
+                <div class="p-4 bg-slate-900 border-b border-slate-700 flex justify-between items-center flex-wrap gap-2">
+                    <span class="font-bold text-slate-300 text-sm">課文核心動詞對照</span>
+                    <button id="toggleVerbQuizBtn" onclick="toggleVerbQuizMode()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs px-3.5 py-2 rounded-xl transition shadow">
+                        <i class="fa-solid fa-gamepad"></i> 開啟填空特訓挑戰
+                    </button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-900/60 text-slate-400 text-xs uppercase tracking-wider border-b border-slate-700">
+                                <th class="p-3 md:p-4">原形 (Base)</th>
+                                <th class="p-3 md:p-4">過去式 (Past)</th>
+                                <th class="p-3 md:p-4">過去分詞 (p.p.)</th>
+                                <th class="p-3 md:p-4">中文釋義</th>
+                                <th class="p-3 md:p-4 text-center">發音</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-700/50 text-sm font-medium" id="verbsTableBody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // --- DATA STRUCTURES (TEXTBOOK ACCURATE) ---
+        const dialogueLines = [
+            { id: 0, speaker: 'Ela', avatar: '👩', bg: 'border-l-pink-500', text: "I don't feel well. I'm so hungry.", zh: "我覺得不太舒服。我好餓。", tip: null },
+            { id: 1, speaker: 'Cody', avatar: '👦', bg: 'border-l-sky-500', text: "Are you all right? Have you had breakfast yet?", zh: "妳還好嗎？妳吃早餐了嗎？", tip: "💡 現在完成式：Have + 主詞 + p.p. ... yet? (用於詢問是否已經完成)" },
+            { id: 2, speaker: 'Ela', avatar: '👩', bg: 'border-l-pink-500', text: "Yes, I have already had breakfast, but I only ate a banana. I'm on a diet.", zh: "有啊，我已經吃過早餐了，但我只吃了一根香蕉。我正在節食。", tip: "💡 片語：be on a diet (正在節食)" },
+            { id: 3, speaker: 'Cody', avatar: '👦', bg: 'border-l-sky-500', text: "Here. You need to eat something to raise your blood sugar. How long have you been on a diet?", zh: "給妳。妳需要吃點東西來提高血糖。妳節食多久了？", tip: "💡 句型：How long have you been...? (詢問持續了多久)" },
+            { id: 4, speaker: 'Ela', avatar: '👩', bg: 'border-l-pink-500', text: "Since I last saw the photo of us in the Line group. I look fat in the photo. Now I eat very little for each meal, and sometimes, I just skip meals.", zh: "自從我上次在 Line 群組看到我們的照片。我在照片裡看起來好胖。現在我每餐都吃很少，有時候甚至直接不吃。", tip: "💡 用法：Since + 過去時間點/過去式子句 (表示自從...以來)" },
+            { id: 5, speaker: 'Cody', avatar: '👦', bg: 'border-l-sky-500', text: "You haven't eaten enough food for over a week. That's crazy!", zh: "妳已經一星期多沒有吃夠食物了。這太荒唐了！", tip: null },
+            { id: 6, speaker: 'Ela', avatar: '👩', bg: 'border-l-pink-500', text: "I know, but I really want to be as slim as possible.", zh: "我知道，但我真的很希望能儘可能苗條。", tip: "💡 句型：as + 形容詞/副詞 + as possible (盡可能的...)" },
+            { id: 7, speaker: 'Cody', avatar: '👦', bg: 'border-l-sky-500', text: "Appearance is not everything, and I think you look great.", zh: "外表並非一切，而且我覺得妳看起來很棒。", tip: null },
+            { id: 8, speaker: 'Cody', avatar: '👦', bg: 'border-l-sky-500', text: "If you really want to lose weight, I have some tips for you.", zh: "如果妳真的想減重，我有一些小建議給妳。", tip: null },
+            { id: 9, speaker: 'Ela', avatar: '👩', bg: 'border-l-pink-500', text: "I'm all ears!", zh: "我洗耳恭聽！", tip: "💡 實用成語：I'm all ears! (我全神貫注聽你說)" },
+            { id: 10, speaker: 'Cody', avatar: '👦', bg: 'border-l-sky-500', text: "A balanced diet is important. Eating so little or eating only one type of food is bad for your health.", zh: "均衡的飲食很重要。吃得太少或只吃單一種類的食物對健康有害。", tip: "💡 動名詞主詞：Eating so little... is bad for health." },
+            { id: 11, speaker: 'Ela', avatar: '👩', bg: 'border-l-pink-500', text: "I didn't know that. What else?", zh: "我以前不知道耶。還有別的建議嗎？", tip: null },
+            { id: 12, speaker: 'Cody', avatar: '👦', bg: 'border-l-sky-500', text: "Have you ever tried exercising?", zh: "妳曾經試過運動嗎？", tip: "💡 完成式詢問經驗：Have you ever + p.p.?" },
+            { id: 13, speaker: 'Ela', avatar: '👩', bg: 'border-l-pink-500', text: "No, I never have. I don't like to exercise.", zh: "沒有，我從來沒有過。我不喜歡運動。", tip: null },
+            { id: 14, speaker: 'Cody', avatar: '👦', bg: 'border-l-sky-500', text: "You haven't seen my sister for a long time, have you? She has lost five kilograms since she started exercising.", zh: "妳很久沒看到我姊姊了吧，對不對？她自從開始運動後已經瘦了五公斤了。", tip: "💡 附加問句：..., have you?" },
+            { id: 15, speaker: 'Ela', avatar: '👩', bg: 'border-l-pink-500', text: "Five kilos? How does she do it?", zh: "五公斤？她是怎麼做到的？", tip: null },
+            { id: 16, speaker: 'Cody', avatar: '👦', bg: 'border-l-sky-500', text: "She exercises at least three times a week.", zh: "她一星期至少運動三次。", tip: "💡 片語：at least (至少)" },
+            { id: 17, speaker: 'Ela', avatar: '👩', bg: 'border-l-pink-500', text: "So building a habit of exercising is also important?", zh: "所以養成運動的習慣也很重要囉？", tip: null },
+            { id: 18, speaker: 'Cody', avatar: '👦', bg: 'border-l-sky-500', text: "You got it.", zh: "沒錯，妳答對了。", tip: "💡 口語俚語：You got it! (你懂了/答對了)" },
+            { id: 19, speaker: 'Ela', avatar: '👩', bg: 'border-l-pink-500', text: "I see. I need to take action now.", zh: "我知道了。我現在需要採取行動。", tip: "💡 片語：take action (採取行動)" }
+        ];
+
+        const vocabularyList = [
+            { word: "yet", pos: "adv.", zh: "還（沒）", ex: "Have you had breakfast yet?" },
+            { word: "already", pos: "adv.", zh: "已經", ex: "I have already had breakfast." },
+            { word: "diet", pos: "n. / v.", zh: "節食；飲食", ex: "I'm on a diet." },
+            { word: "raise", pos: "v.", zh: "提高；舉起", ex: "Eat something to raise your blood sugar." },
+            { word: "since", pos: "prep. / conj.", zh: "自從", ex: "Since I last saw the photo..." },
+            { word: "photo", pos: "n.", zh: "照片", ex: "I look fat in the photo." },
+            { word: "crazy", pos: "adj.", zh: "荒唐的；瘋狂的", ex: "That's crazy!" },
+            { word: "as... as possible", pos: "phr.", zh: "盡可能的...", ex: "I want to be as slim as possible." },
+            { word: "slim", pos: "adj.", zh: "苗條的；微小的", ex: "She wants to stay slim." },
+            { word: "skip", pos: "v.", zh: "省略；略過", ex: "Sometimes, I just skip meals." },
+            { word: "appearance", pos: "n.", zh: "外表；外觀", ex: "Appearance is not everything." },
+            { word: "type", pos: "n.", zh: "類型；種類", ex: "Eating only one type of food is bad." },
+            { word: "ever", pos: "adv.", zh: "曾經", ex: "Have you ever tried exercising?" },
+            { word: "habit", pos: "n.", zh: "習慣", ex: "Building a habit of exercising is important." },
+            { word: "take action", pos: "phr.", zh: "採取行動", ex: "I need to take action now." },
+            { word: "be all ears", pos: "phr.", zh: "洗耳恭聽", ex: "I'm all ears!" },
+            { word: "at least", pos: "phr.", zh: "至少", ex: "Exercises at least three times a week." },
+            { word: "You got it.", pos: "phr.", zh: "沒錯；妳答對了。", ex: "You got it." },
+            { word: "weight", pos: "n.", zh: "體重", ex: "If you really want to lose weight..." },
+            { word: "balanced", pos: "adj.", zh: "均衡的", ex: "A balanced diet is important." }
+        ];
+
+        const irregularVerbsList = [
+            { base: "have", past: "had", pp: "had", zh: "有；吃" },
+            { base: "be", past: "was / were", pp: "been", zh: "是；存在" },
+            { base: "eat", past: "ate", pp: "eaten", zh: "吃" },
+            { base: "try", past: "tried", pp: "tried", zh: "嘗試" },
+            { base: "see", past: "saw", pp: "seen", zh: "看見" },
+            { base: "lose", past: "lost", pp: "lost", zh: "失去；減去" }
+        ];
+
+        // --- GAMIFICATION & AUDIO FX ---
+        let playerState = {
+            xp: 0,
+            level: 1,
+            streak: 0,
+            coins: 50,
+            unlockedBadges: []
+        };
+
+        const AudioFX = {
+            ctx: null,
+            init() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); },
+            playCorrect() {
+                try {
+                    this.init();
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, now);
+                    osc.frequency.setValueAtTime(659.25, now + 0.1);
+                    osc.frequency.setValueAtTime(783.99, now + 0.2);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+                    osc.connect(gain); gain.connect(this.ctx.destination);
+                    osc.start(now); osc.stop(now + 0.35);
+                } catch(e){}
+            },
+            playWrong() {
+                try {
+                    this.init();
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(220, now);
+                    osc.frequency.setValueAtTime(164.81, now + 0.15);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                    osc.connect(gain); gain.connect(this.ctx.destination);
+                    osc.start(now); osc.stop(now + 0.3);
+                } catch(e){}
+            },
+            playLevelUp() {
+                try {
+                    this.init();
+                    const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99];
+                    notes.forEach((freq, idx) => {
+                        const osc = this.ctx.createOscillator();
+                        const gain = this.ctx.createGain();
+                        osc.frequency.value = freq;
+                        gain.gain.setValueAtTime(0.15, this.ctx.currentTime + idx * 0.08);
+                        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + idx * 0.08 + 0.25);
+                        osc.connect(gain); gain.connect(this.ctx.destination);
+                        osc.start(this.ctx.currentTime + idx * 0.08);
+                        osc.stop(this.ctx.currentTime + idx * 0.08 + 0.25);
+                    });
+                } catch(e){}
+            }
+        };
+
+        function addXP(amount) {
+            playerState.xp += amount;
+            playerState.coins += Math.floor(amount / 2);
+            AudioFX.playCorrect();
+
+            if (playerState.xp >= 100) {
+                playerState.level++;
+                playerState.xp -= 100;
+                AudioFX.playLevelUp();
+                if (typeof confetti === 'function') {
+                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                }
+            }
+            updateGamificationUI();
+        }
+
+        function updateGamificationUI() {
+            document.getElementById('xpText').innerText = `${playerState.xp} / 100`;
+            document.getElementById('xpBar').style.width = `${playerState.xp}%`;
+            document.getElementById('badgeIcon').innerText = `LV${playerState.level}`;
+            document.getElementById('coinCount').innerText = playerState.coins;
+            document.getElementById('streakCount').innerText = playerState.streak;
+
+            const ranks = ['英勇初學者', '語言探險家', '單字收割者', '語法小達人', '健康英語大師'];
+            const rankIdx = Math.min(playerState.level - 1, ranks.length - 1);
+            document.getElementById('userRank').innerText = ranks[rankIdx];
+        }
+
+        // --- TTS SPEECH CONTROLLER ---
+        let ttsRate = 1.0;
+        let speechSynth = window.speechSynthesis;
+        let isPlayingAll = false;
+        let currentSeqIdx = 0;
+
+        function speakText(text, callback = null) {
+            if (!speechSynth) return;
+            speechSynth.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = ttsRate;
+            if (callback) {
+                utterance.onend = callback;
+                utterance.onerror = callback;
+            }
+            speechSynth.speak(utterance);
+        }
+
+        function setTTSRate(rate, btn) {
+            ttsRate = rate;
+            document.querySelectorAll('.rate-btn').forEach(b => {
+                b.className = "rate-btn text-slate-400 px-2.5 py-1 rounded-lg transition font-medium";
+            });
+            btn.className = "rate-btn bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-lg transition shadow";
+        }
+
+        function stopSpeech() {
+            isPlayingAll = false;
+            if (speechSynth) speechSynth.cancel();
+            document.getElementById('playAllIcon').className = 'fa-solid fa-play';
+            document.getElementById('playAllText').innerText = '播放全課對話 (+20 XP)';
+            unhighlightAllDialogue();
+        }
+
+        function togglePlayAll() {
+            if (isPlayingAll) {
+                stopSpeech();
+            } else {
+                isPlayingAll = true;
+                currentSeqIdx = 0;
+                document.getElementById('playAllIcon').className = 'fa-solid fa-pause';
+                document.getElementById('playAllText').innerText = '暫停播放';
+                playNextDialogueInSequence();
+            }
+        }
+
+        function playNextDialogueInSequence() {
+            if (!isPlayingAll) return;
+            if (currentSeqIdx >= dialogueLines.length) {
+                stopSpeech();
+                addXP(20);
+                return;
+            }
+            const line = dialogueLines[currentSeqIdx];
+            highlightDialogueCard(line.id);
+            speakText(line.text, () => {
+                if (isPlayingAll) {
+                    currentSeqIdx++;
+                    setTimeout(playNextDialogueInSequence, 400);
+                }
+            });
+        }
+
+        function highlightDialogueCard(id) {
+            unhighlightAllDialogue();
+            const el = document.getElementById(`dialogueCard-${id}`);
+            if (el) {
+                el.classList.add('ring-4', 'ring-yellow-400', 'bg-slate-800');
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        function unhighlightAllDialogue() {
+            document.querySelectorAll('.dialogue-card').forEach(c => {
+                c.classList.remove('ring-4', 'ring-yellow-400', 'bg-slate-800');
+            });
+        }
+
+        // --- RENDER FUNCTIONS ---
+        function renderDialogueFeed() {
+            const container = document.getElementById('dialogueContainer');
+            container.innerHTML = dialogueLines.map((line, idx) => `
+                <div id="dialogueCard-${line.id}" class="dialogue-card bg-slate-800/80 rounded-2xl p-4 border border-slate-700 hover:border-yellow-400/50 transition duration-200 flex gap-3 md:gap-4 border-l-4 ${line.bg}">
+                    <div class="flex flex-col items-center shrink-0">
+                        <div class="w-12 h-12 rounded-2xl bg-slate-900 flex items-center justify-center text-2xl border border-slate-700 shadow-inner">
+                            ${line.avatar}
+                        </div>
+                        <span class="text-xs font-bold font-fun ${line.speaker === 'Ela' ? 'text-pink-400' : 'text-sky-400'} mt-1">${line.speaker}</span>
+                    </div>
+                    <div class="flex-grow space-y-1.5">
+                        <div class="flex items-start justify-between gap-2">
+                            <p class="text-base md:text-lg font-bold text-slate-100 leading-snug font-fun">
+                                "${line.text}"
+                            </p>
+                            <button onclick="speakText('${line.text.replace(/'/g, "\\'")}'); addXP(2)" class="text-yellow-400 hover:text-yellow-300 bg-slate-900 p-2 rounded-xl border border-slate-700 shrink-0 transition">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
+                        </div>
+                        <p class="zh-text text-xs md:text-sm text-slate-400 border-t border-slate-700/60 pt-1">
+                            ${line.zh}
+                        </p>
+                        ${line.tip ? `<div class="grammar-tip text-xs text-yellow-300 bg-yellow-500/10 border border-yellow-500/20 p-2 rounded-xl mt-1 font-sans">${line.tip}</div>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleTranslation() {
+            const show = document.getElementById('toggleChinese').checked;
+            document.querySelectorAll('.zh-text').forEach(el => el.style.display = show ? 'block' : 'none');
+        }
+
+        function toggleGrammarHighlights() {
+            const show = document.getElementById('toggleGrammar').checked;
+            document.querySelectorAll('.grammar-tip').forEach(el => el.style.display = show ? 'block' : 'none');
+        }
+
+        function renderVocabularyList() {
+            const grid = document.getElementById('vocabGrid');
+            grid.innerHTML = vocabularyList.map(v => `
+                <div class="bg-slate-800 rounded-2xl p-4 border border-slate-700 hover:border-sky-400 transition flex flex-col justify-between space-y-3 group">
+                    <div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs bg-sky-500/20 text-sky-300 font-bold px-2 py-0.5 rounded-md">${v.pos}</span>
+                            <button onclick="speakText('${v.word}'); addXP(1)" class="text-sky-400 hover:text-sky-300 bg-slate-900 p-1.5 rounded-lg border border-slate-700">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
+                        </div>
+                        <h3 class="text-lg font-bold font-fun text-yellow-300 mt-2">${v.word}</h3>
+                        <p class="text-slate-300 font-bold text-sm">${v.zh}</p>
+                    </div>
+                    <p class="text-xs text-slate-400 italic bg-slate-900/60 p-2.5 rounded-xl border border-slate-700">"${v.ex}"</p>
+                </div>
+            `).join('');
+        }
+
+        let isVerbQuizMode = false;
+        function renderVerbsTable() {
+            const tbody = document.getElementById('verbsTableBody');
+            tbody.innerHTML = irregularVerbsList.map(v => `
+                <tr class="hover:bg-slate-700/30 transition">
+                    <td class="p-3 md:p-4 font-bold text-emerald-400 font-fun">${v.base}</td>
+                    <td class="p-3 md:p-4 font-mono">
+                        ${isVerbQuizMode ? `<input type="text" data-ans="${v.past}" class="verb-input bg-slate-900 border border-slate-600 rounded px-2 py-1 text-xs text-yellow-300 w-24" placeholder="過去式">` : `<span class="text-slate-200">${v.past}</span>`}
+                    </td>
+                    <td class="p-3 md:p-4 font-mono">
+                        ${isVerbQuizMode ? `<input type="text" data-ans="${v.pp}" class="verb-input bg-slate-900 border border-slate-600 rounded px-2 py-1 text-xs text-yellow-300 w-24" placeholder="p.p.">` : `<span class="text-slate-200">${v.pp}</span>`}
+                    </td>
+                    <td class="p-3 md:p-4 text-slate-400 text-xs">${v.zh}</td>
+                    <td class="p-3 md:p-4 text-center">
+                        <button onclick="speakText('${v.base}, ${v.past}, ${v.pp}')" class="text-emerald-400 hover:text-emerald-300 bg-slate-900 p-1.5 rounded-lg border border-slate-700 text-xs">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function toggleVerbQuizMode() {
+            isVerbQuizMode = !isVerbQuizMode;
+            const btn = document.getElementById('toggleVerbQuizBtn');
+            btn.innerHTML = isVerbQuizMode ? `<i class="fa-solid fa-eye"></i> 顯示正確解答` : `<i class="fa-solid fa-gamepad"></i> 開啟填空特訓挑戰`;
+            renderVerbsTable();
+        }
+
+        // --- ROLEPLAY STUDIO LOGIC ---
+        let currentRole = 'Ela';
+        let roleLines = [];
+        let currentRoleIdx = 0;
+
+        function selectRoleplayCharacter(role) {
+            currentRole = role;
+            document.getElementById('roleBtn-Ela').className = role === 'Ela' ? "p-5 rounded-3xl border-2 border-pink-500 bg-pink-950/20 transition flex items-center gap-4 text-left group" : "p-5 rounded-3xl border-2 border-slate-700 bg-slate-800/80 transition flex items-center gap-4 text-left group";
+            document.getElementById('roleBtn-Cody').className = role === 'Cody' ? "p-5 rounded-3xl border-2 border-sky-500 bg-sky-950/20 transition flex items-center gap-4 text-left group" : "p-5 rounded-3xl border-2 border-slate-700 bg-slate-800/80 transition flex items-center gap-4 text-left group";
+            
+            document.getElementById('activeRoleName').innerText = role === 'Ela' ? 'Ela 👩' : 'Cody 👦';
+            document.getElementById('activeRoleName').className = role === 'Ela' ? 'text-lg font-black text-pink-400 font-fun' : 'text-lg font-black text-sky-400 font-fun';
+
+            roleLines = dialogueLines.filter(l => l.speaker === role);
+            currentRoleIdx = 0;
+            updateRoleplayUI();
+        }
+
+        function updateRoleplayUI() {
+            if (currentRoleIdx >= roleLines.length) {
+                document.getElementById('roleplayCard').innerHTML = `
+                    <div class="py-8 space-y-4">
+                        <div class="text-5xl">🎉</div>
+                        <h3 class="text-2xl font-black text-yellow-300 font-fun">太棒了！你完成了 ${currentRole} 的全部配音挑戰！</h3>
+                        <p class="text-sm text-slate-300">獲得獎勵 +50 XP 經驗值！</p>
+                        <button onclick="selectRoleplayCharacter('${currentRole}')" class="bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-950 font-black px-6 py-3 rounded-2xl shadow-lg">再挑戰一次</button>
+                    </div>
+                `;
+                addXP(50);
+                return;
+            }
+
+            const line = roleLines[currentRoleIdx];
+            document.getElementById('roleplayProgress').innerText = `${currentRoleIdx + 1} / ${roleLines.length} 句`;
+            document.getElementById('roleEnglishCue').innerText = `"${line.text}"`;
+            document.getElementById('roleChineseCue').innerText = line.zh;
+        }
+
+        function playRoleplayPartnerAudio() {
+            const line = roleLines[currentRoleIdx];
+            speakText(line.text);
+        }
+
+        function recordAndValidateRoleplayLine() {
+            addXP(10);
+            playerState.streak++;
+            currentRoleIdx++;
+            updateRoleplayUI();
+        }
+
+        // --- MINI GAMES ARCADE SYSTEM ---
+        function startMiniGame(type) {
+            const stage = document.getElementById('gamePlayArea');
+            if (type === 'scramble') {
+                renderScrambleGame(stage);
+            } else if (type === 'memory') {
+                renderMemoryGame(stage);
+            } else if (type === 'dietSim') {
+                renderDietSimulator(stage);
+            }
+        }
+
+        // Mini Game 1: Sentence Scramble
+        let scrambleQuestions = [
+            { line: "I only ate a banana", words: ["I", "only", "ate", "a", "banana"] },
+            { line: "A balanced diet is important", words: ["A", "balanced", "diet", "is", "important"] },
+            { line: "I want to lose weight", words: ["I", "want", "to", "lose", "weight"] }
+        ];
+        let currentScrambleIdx = 0;
+        let selectedWords = [];
+
+        function renderScrambleGame(container) {
+            const q = scrambleQuestions[currentScrambleIdx];
+            // Shuffle words
+            const shuffled = [...q.words].sort(() => Math.random() - 0.5);
+            selectedWords = [];
+
+            container.innerHTML = `
+                <div class="w-full max-w-xl space-y-6">
+                    <div class="flex justify-between items-center text-xs text-yellow-300 font-bold">
+                        <span>🧩 句型重組關卡</span>
+                        <span>關卡 ${currentScrambleIdx + 1} / ${scrambleQuestions.length}</span>
+                    </div>
+
+                    <div id="wordTargetBox" class="min-h-[60px] bg-slate-900 border-2 border-dashed border-purple-500 rounded-2xl p-3 flex flex-wrap gap-2 items-center justify-center">
+                        <span class="text-slate-500 text-xs">點擊下方的單字，重組正確句子...</span>
+                    </div>
+
+                    <div id="wordBank" class="flex flex-wrap gap-2 justify-center">
+                        ${shuffled.map(w => `
+                            <button onclick="pickScrambleWord('${w}', this)" class="bg-purple-600 hover:bg-purple-500 text-white font-bold font-fun px-4 py-2 rounded-xl text-sm shadow game-btn-shadow transition">
+                                ${w}
+                            </button>
+                        `).join('')}
+                    </div>
+
+                    <div class="flex gap-3 justify-center">
+                        <button onclick="resetScrambleGame()" class="bg-slate-700 text-slate-300 px-4 py-2 rounded-xl text-xs font-bold">重置</button>
+                        <button onclick="checkScrambleAnswer()" class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black px-6 py-2 rounded-xl text-sm shadow game-btn-shadow">檢查答案</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function pickScrambleWord(word, btn) {
+            selectedWords.push(word);
+            btn.style.visibility = 'hidden';
+            const target = document.getElementById('wordTargetBox');
+            if (selectedWords.length === 1) target.innerHTML = '';
+            
+            const wordBadge = document.createElement('span');
+            wordBadge.className = 'bg-yellow-400 text-slate-950 font-black font-fun px-3 py-1.5 rounded-lg text-sm shadow animate-bounce-short';
+            wordBadge.innerText = word;
+            target.appendChild(wordBadge);
+        }
+
+        function resetScrambleGame() {
+            const stage = document.getElementById('gamePlayArea');
+            renderScrambleGame(stage);
+        }
+
+        function checkScrambleAnswer() {
+            const q = scrambleQuestions[currentScrambleIdx];
+            if (selectedWords.join(' ') === q.line) {
+                AudioFX.playCorrect();
+                addXP(15);
+                currentScrambleIdx = (currentScrambleIdx + 1) % scrambleQuestions.length;
+                setTimeout(() => renderScrambleGame(document.getElementById('gamePlayArea')), 800);
+            } else {
+                AudioFX.playWrong();
+                resetScrambleGame();
+            }
+        }
+
+        // Mini Game 2: Speed Memory Match Card Matrix
+        let memoryCards = [
+            { text: "diet", pairId: 1 }, { text: "節食；飲食", pairId: 1 },
+            { text: "since", pairId: 2 }, { text: "自從", pairId: 2 },
+            { text: "raise", pairId: 3 }, { text: "提高；舉起", pairId: 3 },
+            { text: "skip", pairId: 4 }, { text: "省略；略過", pairId: 4 }
+        ];
+        let flippedMemoryCards = [];
+
+        function renderMemoryGame(container) {
+            const shuffled = [...memoryCards].sort(() => Math.random() - 0.5);
+            flippedMemoryCards = [];
+
+            container.innerHTML = `
+                <div class="w-full max-w-md space-y-4">
+                    <div class="text-xs text-amber-300 font-bold">🃏 單字極速翻牌配對 (將對應的英文與中文翻開)</div>
+                    <div class="grid grid-cols-4 gap-3">
+                        ${shuffled.map((card, idx) => `
+                            <button onclick="flipMemoryCard(${idx}, ${card.pairId}, '${card.text}', this)" class="mem-card-btn h-20 bg-slate-900 border-2 border-amber-500/40 rounded-2xl font-bold text-xs text-transparent hover:border-amber-400 transition flex items-center justify-center p-2 text-center">
+                                ${card.text}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function flipMemoryCard(idx, pairId, text, btn) {
+            if (flippedMemoryCards.length >= 2 || btn.classList.contains('matched')) return;
+            
+            btn.classList.remove('text-transparent');
+            btn.classList.add('text-yellow-300', 'bg-amber-950/40', 'border-amber-400');
+            flippedMemoryCards.push({ pairId, btn });
+
+            if (flippedMemoryCards.length === 2) {
+                if (flippedMemoryCards[0].pairId === flippedMemoryCards[1].pairId) {
+                    AudioFX.playCorrect();
+                    addXP(10);
+                    flippedMemoryCards.forEach(item => {
+                        item.btn.classList.add('matched', 'bg-emerald-950/50', 'border-emerald-400', 'text-emerald-300');
+                    });
+                    flippedMemoryCards = [];
+                } else {
+                    AudioFX.playWrong();
+                    setTimeout(() => {
+                        flippedMemoryCards.forEach(item => {
+                            item.btn.classList.add('text-transparent');
+                            item.btn.classList.remove('text-yellow-300', 'bg-amber-950/40', 'border-amber-400');
+                        });
+                        flippedMemoryCards = [];
+                    }, 800);
+                }
+            }
+        }
+
+        // Mini Game 3: Ela Healthy Diet & Exercise Simulator
+        let elaHealth = { hunger: 30, energy: 40, exerciseCount: 0 };
+
+        function renderDietSimulator(container) {
+            container.innerHTML = `
+                <div class="w-full max-w-md space-y-5 bg-slate-900 p-6 rounded-3xl border border-emerald-500/40">
+                    <div class="flex items-center gap-3 justify-center">
+                        <div class="text-4xl animate-bounce">👩</div>
+                        <div class="text-left">
+                            <h4 class="font-bold text-white font-fun">Ela 的健康養成計畫</h4>
+                            <p class="text-xs text-slate-400">幫助 Ela 達成健康減重與運動習慣！</p>
+                        </div>
+                    </div>
+
+                    <!-- Health Gauges -->
+                    <div class="space-y-2 text-xs font-bold text-slate-300">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span>體力與血糖 (Energy)</span>
+                                <span id="energyVal" class="text-emerald-400">${elaHealth.energy}%</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
+                                <div id="energyBar" class="bg-emerald-400 h-full transition-all duration-300" style="width: ${elaHealth.energy}%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span>每週運動次數 (At least 3 times/week)</span>
+                                <span id="exerciseVal" class="text-sky-400">${elaHealth.exerciseCount} 次</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
+                                <div id="exerciseBar" class="bg-sky-400 h-full transition-all duration-300" style="width: ${(elaHealth.exerciseCount/3)*100}%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action buttons -->
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="feedEla('banana')" class="bg-slate-800 hover:bg-slate-700 p-3 rounded-2xl border border-slate-700 text-xs font-bold text-amber-300">
+                            🍌 只吃一根香蕉<br><span class="text-[10px] text-slate-400">(血糖太低!)</span>
+                        </button>
+                        <button onclick="feedEla('balanced')" class="bg-slate-800 hover:bg-slate-700 p-3 rounded-2xl border border-slate-700 text-xs font-bold text-emerald-300">
+                            🥗 均衡飲食<br><span class="text-[10px] text-slate-400">(Balanced Diet)</span>
+                        </button>
+                        <button onclick="feedEla('exercise')" class="bg-slate-800 hover:bg-slate-700 p-3 rounded-2xl border border-slate-700 text-xs font-bold text-sky-300">
+                            🏃‍♀️ 開始運動<br><span class="text-[10px] text-slate-400">(Exercise)</span>
+                        </button>
+                    </div>
+
+                    <div id="simFeedback" class="text-xs text-yellow-300 font-bold bg-slate-950 p-3 rounded-xl min-h-[40px] flex items-center justify-center">
+                        請為 Ela 選擇健康行動！
+                    </div>
+                </div>
+            `;
+        }
+
+        function feedEla(action) {
+            const feedback = document.getElementById('simFeedback');
+            if (action === 'banana') {
+                elaHealth.energy = Math.max(10, elaHealth.energy - 10);
+                feedback.innerText = "⚠️ 警告：只吃香蕉無法提供足夠熱量！Ela 覺得很餓又頭暈。";
+                AudioFX.playWrong();
+            } else if (action === 'balanced') {
+                elaHealth.energy = Math.min(100, elaHealth.energy + 30);
+                feedback.innerText = "✨ 太棒了！均衡飲食為 Ela 提升了血糖與健康指數！ (+15 XP)";
+                AudioFX.playCorrect();
+                addXP(15);
+            } else if (action === 'exercise') {
+                if (elaHealth.energy < 20) {
+                    feedback.innerText = "❌ 體力過低！Ela 沒吃飽無法運動，請先補充均衡飲食！";
+                    AudioFX.playWrong();
+                    return;
+                }
+                elaHealth.exerciseCount++;
+                elaHealth.energy = Math.max(10, elaHealth.energy - 15);
+                if (elaHealth.exerciseCount >= 3) {
+                    feedback.innerText = "🎉 恭喜！達成每週至少運動 3 次的習慣！Ela 成功健康減重 5 公斤！";
+                    AudioFX.playLevelUp();
+                    addXP(30);
+                } else {
+                    feedback.innerText = "🏃‍♀️ Ela 完成了一次體能訓練！繼續保持！";
+                    AudioFX.playCorrect();
+                }
+            }
+            // Update UI
+            document.getElementById('energyVal').innerText = `${elaHealth.energy}%`;
+            document.getElementById('energyBar').style.width = `${elaHealth.energy}%`;
+            document.getElementById('exerciseVal').innerText = `${elaHealth.exerciseCount} 次`;
+            document.getElementById('exerciseBar').style.width = `${Math.min(100, (elaHealth.exerciseCount/3)*100)}%`;
+        }
+
+        // --- TAB NAVIGATION SWITCHER ---
+        function switchTab(tabId) {
+            stopSpeech();
+            ['dialogue', 'roleplay', 'games', 'vocab', 'verbs'].forEach(t => {
+                const sec = document.getElementById(`sec-${t}`);
+                const btn = document.getElementById(`tab-${t}`);
+                if (t === tabId) {
+                    sec.classList.remove('hidden');
+                    btn.className = "tab-btn flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-600 text-slate-950 font-black shadow-lg whitespace-nowrap transition";
+                } else {
+                    sec.classList.add('hidden');
+                    btn.className = "tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition";
+                }
+            });
+
+            if (tabId === 'roleplay') {
+                selectRoleplayCharacter('Ela');
+            }
+        }
+
+        // --- INITIALIZATION ---
+        window.onload = function() {
+            renderDialogueFeed();
+            renderVocabularyList();
+            renderVerbsTable();
+            updateGamificationUI();
+        };
+    </script>
+</body>
+</html>

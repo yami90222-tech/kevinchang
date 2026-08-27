@@ -188,16 +188,16 @@
                     </h3>
                     <p class="text-xs md:text-sm text-slate-400 mt-0.5">點擊卡片或下方按鈕直接進入學習單元</p>
                 </div>
-                <span class="text-xs bg-slate-800 text-slate-400 px-3 py-1.5 rounded-xl border border-slate-700 font-bold">
-                    共 2 個主題開放中
+                <span class="text-xs bg-slate-800 text-amber-400 px-3 py-1.5 rounded-xl border border-slate-700 font-bold">
+                    共 3 個主題開放中 ✨
                 </span>
             </div>
 
             <!-- CARDS GRID -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
                 <!-- CARD 1: 對話學習篇 (Dialogue) -->
-                <div class="hub-card relative rounded-3xl overflow-hidden glass-panel border-2 border-amber-500/40 hover:border-amber-400 flex flex-col justify-between p-6 sm:p-8 bg-gradient-to-b from-slate-800/90 via-slate-900/90 to-slate-950/90 group">
+                <div class="hub-card relative rounded-3xl overflow-hidden glass-panel border-2 border-amber-500/40 hover:border-amber-400 flex flex-col justify-between p-6 sm:p-7 bg-gradient-to-b from-slate-800/90 via-slate-900/90 to-slate-950/90 group">
                     <!-- Top Ribbon -->
                     <div class="flex items-center justify-between mb-4">
                         <span class="bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider font-fun shadow-sm">
@@ -207,56 +207,52 @@
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
-                            <span class="text-slate-400 ml-1">基礎必備</span>
                         </div>
                     </div>
 
                     <!-- Main Card Body -->
-                    <div class="space-y-4 mb-6">
-                        <div class="flex items-start gap-4">
-                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-slate-950 text-2xl shadow-lg shrink-0 group-hover:scale-110 transition duration-300">
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-start gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-slate-950 text-xl shadow-lg shrink-0 group-hover:scale-110 transition duration-300">
                                 <i class="fa-solid fa-microphone-lines"></i>
                             </div>
                             <div>
-                                <h4 class="text-xl sm:text-2xl font-black font-fun text-white group-hover:text-amber-300 transition">
+                                <h4 class="text-lg sm:text-xl font-black font-fun text-white group-hover:text-amber-300 transition leading-tight">
                                     Healthy Habits & Dieting
                                 </h4>
-                                <p class="text-sm font-bold text-amber-400">健康習慣與飲食・情境對話大冒險</p>
+                                <p class="text-xs font-bold text-amber-400 mt-0.5">健康習慣與飲食・情境對話大冒險</p>
                             </div>
                         </div>
 
-                        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
-                            生動的漫畫式分段課文對話，結合真人發音朗讀、角色配音評分、小遊戲大亂鬥與動詞三態卡片，讓課文朗朗上口！
+                        <p class="text-slate-300 text-xs leading-relaxed">
+                            生動的漫畫式分段對話，真人發音朗讀、角色配音評分、小遊戲大亂鬥與動詞三態卡片！
                         </p>
 
                         <!-- Feature Chips -->
-                        <div class="flex flex-wrap gap-2 pt-1">
-                            <span class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-lg border border-slate-700 flex items-center gap-1">
-                                <i class="fa-solid fa-book-open text-amber-400"></i> 課文冒險朗讀
+                        <div class="flex flex-wrap gap-1.5 pt-1">
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-lg border border-slate-700">
+                                📖 課文冒險
                             </span>
-                            <span class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-lg border border-slate-700 flex items-center gap-1">
-                                <i class="fa-solid fa-microphone text-pink-400"></i> 角色配音大挑戰
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-lg border border-slate-700">
+                                🎙️ 角色配音
                             </span>
-                            <span class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-lg border border-slate-700 flex items-center gap-1">
-                                <i class="fa-solid fa-gamepad text-purple-400"></i> 遊戲大亂鬥
-                            </span>
-                            <span class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-lg border border-slate-700 flex items-center gap-1">
-                                <i class="fa-solid fa-spell-check text-sky-400"></i> 單字與三態寶典
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-lg border border-slate-700">
+                                🎮 遊戲大亂鬥
                             </span>
                         </div>
                     </div>
 
                     <!-- Call To Action Button -->
                     <div class="pt-4 border-t border-slate-800">
-                        <a href="dialogue.html" onclick="triggerLaunchEffect(event, 'dialogue.html')" class="w-full btn-3d bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black py-3.5 px-6 rounded-2xl flex items-center justify-center gap-2 text-base md:text-lg shadow-lg">
+                        <a href="dialogue.html" onclick="triggerLaunchEffect(event, 'dialogue.html')" class="w-full btn-3d bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black py-3 px-4 rounded-2xl flex items-center justify-center gap-2 text-sm sm:text-base shadow-lg">
                             <span>進入對話學習 🚀</span>
-                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- CARD 2: 句型文法篇 (Pattern) -->
-                <div class="hub-card relative rounded-3xl overflow-hidden glass-panel border-2 border-indigo-500/40 hover:border-indigo-400 flex flex-col justify-between p-6 sm:p-8 bg-gradient-to-b from-slate-800/90 via-slate-900/90 to-slate-950/90 group">
+                <div class="hub-card relative rounded-3xl overflow-hidden glass-panel border-2 border-indigo-500/40 hover:border-indigo-400 flex flex-col justify-between p-6 sm:p-7 bg-gradient-to-b from-slate-800/90 via-slate-900/90 to-slate-950/90 group">
                     <!-- Top Ribbon -->
                     <div class="flex items-center justify-between mb-4">
                         <span class="bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider font-fun shadow-sm">
@@ -267,50 +263,102 @@
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
-                            <span class="text-slate-400 ml-1">進階通關</span>
                         </div>
                     </div>
 
                     <!-- Main Card Body -->
-                    <div class="space-y-4 mb-6">
-                        <div class="flex items-start gap-4">
-                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-400 via-indigo-500 to-purple-600 flex items-center justify-center text-white text-2xl shadow-lg shrink-0 group-hover:scale-110 transition duration-300">
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-start gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-400 via-indigo-500 to-purple-600 flex items-center justify-center text-white text-xl shadow-lg shrink-0 group-hover:scale-110 transition duration-300">
                                 <i class="fa-solid fa-bolt"></i>
                             </div>
                             <div>
-                                <h4 class="text-xl sm:text-2xl font-black font-fun text-white group-hover:text-purple-300 transition">
-                                    現在完成式 魔法通關寶典
+                                <h4 class="text-lg sm:text-xl font-black font-fun text-white group-hover:text-purple-300 transition leading-tight">
+                                    現在完成式 魔法通關
                                 </h4>
-                                <p class="text-sm font-bold text-sky-400">Grammar Focus: have / has + p.p.</p>
+                                <p class="text-xs font-bold text-sky-400 mt-0.5">have / has + p.p. 核心句型</p>
                             </div>
                         </div>
 
-                        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
-                            解鎖三態動詞變幻卡牌、掌握 ever/never 經驗次數、for/since 時間起點、already/yet 完成狀態，並有 AI 英語助教在線答疑！
+                        <p class="text-slate-300 text-xs leading-relaxed">
+                            解鎖三態動詞卡牌、掌握 ever/never、for/since、already/yet 與 AI 英語助教在線答疑！
                         </p>
 
                         <!-- Feature Chips -->
-                        <div class="flex flex-wrap gap-2 pt-1">
-                            <span class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-lg border border-slate-700 flex items-center gap-1">
-                                <i class="fa-solid fa-bolt text-amber-400"></i> 三態動詞大師
+                        <div class="flex flex-wrap gap-1.5 pt-1">
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-lg border border-slate-700">
+                                ⚡ 三態動詞
                             </span>
-                            <span class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-lg border border-slate-700 flex items-center gap-1">
-                                <i class="fa-solid fa-compass text-sky-400"></i> ever / never 經驗
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-lg border border-slate-700">
+                                🧭 句型拆解
                             </span>
-                            <span class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-lg border border-slate-700 flex items-center gap-1">
-                                <i class="fa-solid fa-clock text-orange-400"></i> for / since 時間
-                            </span>
-                            <span class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-lg border border-slate-700 flex items-center gap-1">
-                                <i class="fa-solid fa-trophy text-purple-400"></i> 實戰魔法大考驗
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-lg border border-slate-700">
+                                🏆 實戰考驗
                             </span>
                         </div>
                     </div>
 
                     <!-- Call To Action Button -->
                     <div class="pt-4 border-t border-slate-800">
-                        <a href="pattern.html" onclick="triggerLaunchEffect(event, 'pattern.html')" class="w-full btn-3d bg-gradient-to-r from-sky-500 via-indigo-600 to-purple-600 hover:from-sky-400 hover:to-indigo-500 text-white font-black py-3.5 px-6 rounded-2xl flex items-center justify-center gap-2 text-base md:text-lg shadow-lg">
+                        <a href="pattern.html" onclick="triggerLaunchEffect(event, 'pattern.html')" class="w-full btn-3d bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white font-black py-3 px-4 rounded-2xl flex items-center justify-center gap-2 text-sm sm:text-base shadow-lg">
                             <span>進入句型修煉 ⚡</span>
-                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CARD 3: 課文閱讀篇 (Reading) -->
+                <div class="hub-card relative rounded-3xl overflow-hidden glass-panel border-2 border-rose-500/40 hover:border-rose-400 flex flex-col justify-between p-6 sm:p-7 bg-gradient-to-b from-slate-800/90 via-slate-900/90 to-slate-950/90 group">
+                    <!-- Top Ribbon -->
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-gradient-to-r from-rose-500 to-pink-500 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider font-fun shadow-sm">
+                            <i class="fa-solid fa-book-open mr-1"></i> 閱讀篇・Unit 1
+                        </span>
+                        <div class="flex items-center gap-1 text-rose-400 text-xs font-bold">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+
+                    <!-- Main Card Body -->
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-start gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-rose-400 via-pink-500 to-amber-500 flex items-center justify-center text-white text-xl shadow-lg shrink-0 group-hover:scale-110 transition duration-300">
+                                <i class="fa-solid fa-envelope-open-text"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg sm:text-xl font-black font-fun text-white group-hover:text-rose-300 transition leading-tight">
+                                    A Letter from a Teenager
+                                </h4>
+                                <p class="text-xs font-bold text-rose-400 mt-0.5">青少年之聲・互動書信閱讀</p>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-300 text-xs leading-relaxed">
+                            30秒略讀挑戰、信件單句點讀、現在完成式雷達、英文信封格式大解密與 Debbie 回信專區！
+                        </p>
+
+                        <!-- Feature Chips -->
+                        <div class="flex flex-wrap gap-1.5 pt-1">
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-lg border border-slate-700">
+                                ⏱️ 30s 略讀
+                            </span>
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-lg border border-slate-700">
+                                ✉️ 信封探索
+                            </span>
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-lg border border-slate-700">
+                                📜 文法雷達
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Call To Action Button -->
+                    <div class="pt-4 border-t border-slate-800">
+                        <a href="reading.html" onclick="triggerLaunchEffect(event, 'reading.html')" class="w-full btn-3d bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-400 hover:to-pink-500 text-white font-black py-3 px-4 rounded-2xl flex items-center justify-center gap-2 text-sm sm:text-base shadow-lg">
+                            <span>進入閱讀冒險 📚</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
                         </a>
                     </div>
                 </div>

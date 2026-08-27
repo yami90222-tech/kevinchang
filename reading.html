@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 1 Reading: A Letter from a Teenager - 國中英語互動閱讀冒險</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                        fun: ['Fredoka', 'cursive', 'sans-serif'],
+                        hand: ['Caveat', 'cursive'],
+                        serif: ['Playfair Display', 'serif']
+                    },
+                    colors: {
+                        read: {
+                            bg: '#f8fafc',
+                            paper: '#fffdfa',
+                            ink: '#1e293b',
+                            coral: '#f43f5e',
+                            amber: '#d97706',
+                            teal: '#0d9488',
+                            indigo: '#4f46e5',
+                            grammar: '#8b5cf6'
+                        }
+                    },
+                    boxShadow: {
+                        'paper': '0 10px 30px -5px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0,0,0,0.05)',
+                        'envelope': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .letter-paper {
+            background-color: #fffefb;
+            background-image: 
+                linear-gradient(#f1f5f9 1px, transparent 1px),
+                radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 100% 2.2rem, 16px 16px;
+            background-position: 0 1.2rem, 0 0;
+            line-height: 2.2rem;
+        }
+        .vocab-hl {
+            background-color: #fef08a;
+            color: #854d0e;
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-block;
+            line-height: 1.3;
+        }
+        .vocab-hl:hover {
+            background-color: #fde047;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+        .grammar-hl {
+            background-color: #ede9fe;
+            color: #6d28d9;
+            border-bottom: 2.5px dashed #8b5cf6;
+            padding: 1px 4px;
+            border-radius: 4px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .grammar-hl:hover {
+            background-color: #ddd6fe;
+        }
+        .reading-sentence {
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            border-radius: 6px;
+            padding: 0 2px;
+        }
+        .reading-sentence:hover {
+            background-color: rgba(254, 240, 138, 0.35);
+        }
+        .reading-sentence.active-sentence {
+            background-color: #fef08a !important;
+            box-shadow: 0 0 0 2px #eab308;
+        }
+        .card-flip {
+            perspective: 1000px;
+        }
+        .card-flip-inner {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .card-flip.flipped .card-flip-inner {
+            transform: rotateY(180deg);
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+        .btn-press {
+            transition: all 0.1s ease;
+            box-shadow: 0 4px 0 0 rgba(0,0,0,0.15);
+        }
+        .btn-press:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 0 rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col font-sans pb-16 selection:bg-rose-200 selection:text-rose-900">
+
+    <!-- TOP NAV HEADER -->
+    <header class="bg-gradient-to-r from-rose-500 via-amber-500 to-indigo-600 text-white sticky top-0 z-50 shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+            
+            <!-- Left: Back to Home + Title -->
+            <div class="flex items-center space-x-3">
+                <a href="index.html" title="返回學習首頁" class="bg-white/20 hover:bg-white text-white hover:text-slate-900 px-3.5 py-2 rounded-2xl flex items-center space-x-1.5 font-bold text-xs md:text-sm transition shadow border border-white/30">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="hidden sm:inline">學習首頁</span>
+                </a>
+                <div class="bg-white text-rose-500 rounded-2xl p-2 w-10 h-10 flex items-center justify-center font-bold text-xl shadow">
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] bg-white/20 text-white font-black px-2 py-0.5 rounded uppercase font-fun tracking-wider">Unit 1 Reading</span>
+                        <span class="text-xs text-rose-100 hidden md:inline">青少年之聲・互動書信閱讀</span>
+                    </div>
+                    <h1 class="text-lg md:text-xl font-black font-fun tracking-wide">A Letter from a Teenager</h1>
+                </div>
+            </div>
+
+            <!-- Right: Score & Audio Tools -->
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <!-- Stars XP -->
+                <div class="bg-black/20 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center space-x-1.5 border border-white/20 text-xs sm:text-sm font-bold">
+                    <i class="fa-solid fa-star text-amber-300"></i>
+                    <span>閱讀積分: <strong id="readingScore" class="text-amber-300 text-base">0</strong></span>
+                </div>
+
+                <!-- Speech Voice Speed -->
+                <select id="ttsSpeedSelect" class="bg-white/20 text-white text-xs font-bold rounded-xl px-2 py-1.5 border border-white/30 outline-none cursor-pointer">
+                    <option value="0.8" class="text-slate-900">0.8x 慢速</option>
+                    <option value="1.0" class="text-slate-900" selected>1.0x 正常</option>
+                    <option value="1.2" class="text-slate-900">1.2x 挑戰</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVIGATION TABS -->
+    <nav class="max-w-6xl mx-auto px-4 mt-6 w-full">
+        <div class="flex space-x-2 overflow-x-auto pb-2 scrollbar-none">
+            <button onclick="switchTab('tab-before')" id="nav-tab-before" class="tab-btn bg-white text-rose-600 font-bold px-4 py-2.5 rounded-2xl shadow border-2 border-rose-400 flex items-center space-x-2 whitespace-nowrap transition">
+                <i class="fa-solid fa-compass"></i>
+                <span>1. 讀前導引與略讀 (Before Read)</span>
+            </button>
+            <button onclick="switchTab('tab-letter')" id="nav-tab-letter" class="tab-btn bg-white/80 text-slate-600 hover:text-rose-600 font-bold px-4 py-2.5 rounded-2xl border-2 border-transparent flex items-center space-x-2 whitespace-nowrap transition">
+                <i class="fa-solid fa-scroll text-amber-500"></i>
+                <span>2. 互動信件點讀 (Interactive Letter)</span>
+            </button>
+            <button onclick="switchTab('tab-envelope')" id="nav-tab-envelope" class="tab-btn bg-white/80 text-slate-600 hover:text-rose-600 font-bold px-4 py-2.5 rounded-2xl border-2 border-transparent flex items-center space-x-2 whitespace-nowrap transition">
+                <i class="fa-solid fa-envelope text-indigo-500"></i>
+                <span>3. 英文信封探索 (Envelope)</span>
+            </button>
+            <button onclick="switchTab('tab-vocab')" id="nav-tab-vocab" class="tab-btn bg-white/80 text-slate-600 hover:text-rose-600 font-bold px-4 py-2.5 rounded-2xl border-2 border-transparent flex items-center space-x-2 whitespace-nowrap transition">
+                <i class="fa-solid fa-spell-check text-teal-500"></i>
+                <span>4. 單字與片語庫 (Vocabulary)</span>
+            </button>
+            <button onclick="switchTab('tab-quiz')" id="nav-tab-quiz" class="tab-btn bg-white/80 text-slate-600 hover:text-rose-600 font-bold px-4 py-2.5 rounded-2xl border-2 border-transparent flex items-center space-x-2 whitespace-nowrap transition">
+                <i class="fa-solid fa-trophy text-amber-500"></i>
+                <span>5. 閱讀理解素養挑戰 (Quiz)</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-6xl mx-auto px-4 mt-6 flex-grow w-full">
+
+        <!-- ============================================================ -->
+        <!-- TAB 1: BEFORE YOU READ & SKIMMING -->
+        <!-- ============================================================ -->
+        <section id="tab-before" class="space-y-6">
+            
+            <!-- Hero Introduction -->
+            <div class="bg-gradient-to-r from-rose-500 to-orange-500 rounded-3xl p-6 md:p-8 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="space-y-2 max-w-xl">
+                    <span class="bg-white/20 text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider font-fun">Step 1: Warm-up</span>
+                    <h2 class="text-2xl md:text-3xl font-black font-fun">在閱讀信件前，先暖身探索！</h2>
+                    <p class="text-sm text-rose-100 leading-relaxed">
+                        當熱愛的夢想與家人的期望產生衝突時，該如何表達？透過自身經驗反思與 30 秒快速略讀，啟動閱讀超能力！
+                    </p>
+                </div>
+                <div class="shrink-0 text-center">
+                    <div class="w-24 h-24 rounded-2xl bg-white/10 backdrop-blur-md border border-white/30 flex items-center justify-center text-5xl animate-bounce">
+                        💭
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                <!-- 1. Making Connections -->
+                <div class="bg-white rounded-3xl p-6 sm:p-7 shadow-paper border border-slate-200 flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex items-center space-x-2.5 text-rose-600 font-black text-lg mb-3">
+                            <span class="bg-rose-100 p-2 rounded-xl text-rose-600"><i class="fa-solid fa-comments"></i></span>
+                            <h3>Making Connections 經驗連結</h3>
+                        </div>
+                        <p class="text-xs text-slate-500 mb-4">利用自身生活經驗，思考並選擇最符合你的感受：</p>
+
+                        <!-- Question 1 -->
+                        <div class="space-y-2 mb-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-slate-500">問題 1</span>
+                                <button onclick="speakText('When was your last fight with a family member?')" class="text-xs text-rose-500 hover:text-rose-700"><i class="fa-solid fa-volume-high"></i> 朗讀</button>
+                            </div>
+                            <p class="text-sm font-bold text-slate-800">1. When was your last fight with a family member?</p>
+                            <p class="text-xs text-slate-400">（上次與家人發生爭執是什麼時候？）</p>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-2">
+                                <button onclick="selectChoice(this, 'q1')" class="choice-btn text-xs bg-white hover:bg-rose-50 border border-slate-200 hover:border-rose-300 font-bold py-2 px-3 rounded-xl transition text-slate-700">Last week (上週)</button>
+                                <button onclick="selectChoice(this, 'q1')" class="choice-btn text-xs bg-white hover:bg-rose-50 border border-slate-200 hover:border-rose-300 font-bold py-2 px-3 rounded-xl transition text-slate-700">Last month (上個月)</button>
+                                <button onclick="selectChoice(this, 'q1')" class="choice-btn text-xs bg-white hover:bg-rose-50 border border-slate-200 hover:border-rose-300 font-bold py-2 px-3 rounded-xl transition text-slate-700">A long time ago (很久以前)</button>
+                            </div>
+                        </div>
+
+                        <!-- Question 2 -->
+                        <div class="space-y-2 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-slate-500">問題 2</span>
+                                <button onclick="speakText('How did you two feel after the fight?')" class="text-xs text-rose-500 hover:text-rose-700"><i class="fa-solid fa-volume-high"></i> 朗讀</button>
+                            </div>
+                            <p class="text-sm font-bold text-slate-800">2. How did you two feel after the fight?</p>
+                            <p class="text-xs text-slate-400">（爭吵之後，你們彼此的心情如何？）</p>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-2">
+                                <button onclick="selectChoice(this, 'q2')" class="choice-btn text-xs bg-white hover:bg-rose-50 border border-slate-200 hover:border-rose-300 font-bold py-2 px-3 rounded-xl transition text-slate-700">😡 Angry (生氣憤怒)</button>
+                                <button onclick="selectChoice(this, 'q2')" class="choice-btn text-xs bg-white hover:bg-rose-50 border border-slate-200 hover:border-rose-300 font-bold py-2 px-3 rounded-xl transition text-slate-700">😢 Unhappy (難過沮喪)</button>
+                                <button onclick="selectChoice(this, 'q2')" class="choice-btn text-xs bg-white hover:bg-rose-50 border border-slate-200 hover:border-rose-300 font-bold py-2 px-3 rounded-xl transition text-slate-700">😟 Worried (擔心憂慮)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="connectionFeedback" class="hidden bg-emerald-50 text-emerald-800 p-3 rounded-xl text-xs font-bold border border-emerald-200 flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check text-emerald-500 text-base"></i>
+                        <span>很棒的自我覺察！家人間的爭執往往源自缺乏雙向理解，接下來看看 Ted 遇到了什麼難題吧！</span>
+                    </div>
+                </div>
+
+                <!-- 2. Skimming Challenge (30s Timer) -->
+                <div class="bg-white rounded-3xl p-6 sm:p-7 shadow-paper border border-slate-200 flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center space-x-2.5 text-amber-600 font-black text-lg">
+                                <span class="bg-amber-100 p-2 rounded-xl text-amber-600"><i class="fa-solid fa-stopwatch"></i></span>
+                                <h3>Skimming 30秒略讀挑戰</h3>
+                            </div>
+                            <div class="flex items-center space-x-2 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">
+                                <span id="skimmingTimer" class="font-black font-fun text-lg text-amber-600">30s</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-amber-50/70 border border-amber-200 p-3.5 rounded-2xl mb-4 text-xs text-amber-900 leading-relaxed">
+                            <p class="font-bold mb-1"><i class="fa-solid fa-lightbulb text-amber-500 mr-1"></i> 略讀心法（Skimming Skill）：</p>
+                            用 30 秒快速瀏覽信件的<strong>「第一段」</strong>與<strong>「最後一段」</strong>，找出寫信的最主要目的！
+                        </div>
+
+                        <!-- Skimming Preview Box -->
+                        <div class="bg-slate-900 text-slate-100 p-4 rounded-2xl font-serif text-xs leading-relaxed space-y-2 mb-4">
+                            <p><strong class="text-amber-400">第一段節錄：</strong> "...I'm a senior high school student, and <mark class="bg-rose-500 text-white px-1 rounded">I'm writing to ask for your help</mark>. My parents want me to stop playing music..."</p>
+                            <p><strong class="text-amber-400">最後一段節錄：</strong> "...<mark class="bg-rose-500 text-white px-1 rounded">How can I talk them into letting me follow my dream?</mark> Thank you for reading my letter..."</p>
+                        </div>
+
+                        <!-- Question -->
+                        <div class="space-y-2">
+                            <p class="text-sm font-bold text-slate-800">Q: Why did Ted write the letter? (為什麼 Ted 要寫這封信？)</p>
+                            
+                            <div class="space-y-2 pt-1" id="skimmingOptions">
+                                <button onclick="checkSkimming(1, false)" class="w-full text-left p-3 rounded-xl border-2 border-slate-200 hover:border-amber-400 text-xs font-bold transition flex items-center justify-between group">
+                                    <span>A. To talk to his parents. (為了跟他的父母談話)</span>
+                                    <i class="fa-regular fa-circle text-slate-300 group-hover:text-amber-500"></i>
+                                </button>
+                                <button onclick="checkSkimming(2, true)" class="w-full text-left p-3 rounded-xl border-2 border-slate-200 hover:border-amber-400 text-xs font-bold transition flex items-center justify-between group">
+                                    <span>B. To ask Debbie for help. (為了向 Debbie 尋求協助)</span>
+                                    <i class="fa-regular fa-circle text-slate-300 group-hover:text-amber-500"></i>
+                                </button>
+                                <button onclick="checkSkimming(3, false)" class="w-full text-left p-3 rounded-xl border-2 border-slate-200 hover:border-amber-400 text-xs font-bold transition flex items-center justify-between group">
+                                    <span>C. To show his interest in music. (為了展現他對音樂的興趣)</span>
+                                    <i class="fa-regular fa-circle text-slate-300 group-hover:text-amber-500"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="skimmingResult" class="hidden p-3.5 rounded-xl text-xs font-bold"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- TAB 2: INTERACTIVE LETTER (信件點讀全文) -->
+        <!-- ============================================================ -->
+        <section id="tab-letter" class="hidden space-y-6">
+            
+            <!-- Toolbar -->
+            <div class="bg-white rounded-3xl p-4 sm:p-5 shadow-paper border border-slate-200 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center flex-wrap gap-2">
+                    <button id="playAllBtn" onclick="togglePlayFullLetter()" class="btn-press bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white font-extrabold px-5 py-2.5 rounded-2xl flex items-center gap-2 text-sm shadow">
+                        <i class="fa-solid fa-play" id="playAllIcon"></i>
+                        <span id="playAllText">播放整篇信件</span>
+                    </button>
+                    <button onclick="stopAudio()" class="btn-press bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-4 py-2.5 rounded-2xl text-xs sm:text-sm">
+                        <i class="fa-solid fa-stop text-rose-500 mr-1"></i> 停止朗讀
+                    </button>
+                </div>
+
+                <!-- Toggles -->
+                <div class="flex items-center gap-3">
+                    <!-- Grammar Radar Toggle -->
+                    <button onclick="toggleGrammarRadar()" id="grammarRadarBtn" class="btn-press bg-purple-100 hover:bg-purple-200 text-purple-700 font-bold px-3.5 py-2 rounded-2xl text-xs sm:text-sm border border-purple-300 flex items-center gap-1.5">
+                        <i class="fa-solid fa-wand-magic-sparkles text-purple-600"></i>
+                        <span>現在完成式文法雷達</span>
+                    </button>
+                    <!-- Translation Toggle -->
+                    <button onclick="toggleChineseTranslation()" id="transBtn" class="btn-press bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3.5 py-2 rounded-2xl text-xs sm:text-sm flex items-center gap-1.5">
+                        <i class="fa-solid fa-language text-indigo-600"></i>
+                        <span id="transBtnText">中英對照</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Letter Paper Container -->
+            <div class="bg-white rounded-3xl p-6 sm:p-10 md:p-12 shadow-2xl border border-slate-200 relative overflow-hidden">
+                
+                <!-- Stamp on Top Right -->
+                <div class="absolute top-6 right-6 hidden sm:block">
+                    <div class="border-2 border-dashed border-rose-300 p-2 bg-rose-50/50 rounded-xl text-center rotate-3 shadow-sm">
+                        <div class="w-16 h-20 bg-gradient-to-tr from-sky-400 to-indigo-600 rounded-lg flex flex-col items-center justify-center text-white text-[10px] font-bold p-1 shadow-inner">
+                            <i class="fa-solid fa-plane text-xl mb-1"></i>
+                            <span>AIRMAIL</span>
+                            <span>$9.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Letter Header Title -->
+                <div class="border-b-2 border-rose-100 pb-4 mb-6">
+                    <div class="flex items-center space-x-2 text-rose-500 font-bold text-xs uppercase tracking-wider mb-1 font-fun">
+                        <i class="fa-solid fa-pencil"></i>
+                        <span>Teenagers' Advice Column / Unit 1 Reading</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-slate-900">
+                        A Letter from a Teenager
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">💡 點擊任何一句話可單句朗讀；點擊黃色標記單字可查看中文解析！</p>
+                </div>
+
+                <!-- Letter Content -->
+                <div class="letter-paper font-sans text-base sm:text-lg text-slate-800 space-y-6">
+                    
+                    <!-- Salutation -->
+                    <div class="font-bold text-xl sm:text-2xl font-serif text-slate-900">
+                        Dear Debbie,
+                    </div>
+
+                    <!-- Paragraph 1 -->
+                    <p class="space-y-1">
+                        <span class="reading-sentence cursor-pointer" onclick="speakSentence(this, 'Im a senior high school student, and Im writing to ask for your help.')" data-zh="我是一名高中生，我寫這封信是想向您求助。">
+                            I'm a <span class="vocab-hl" onclick="showVocabModal('senior high school', '高中', 'n.', 'senior_high_school')">senior high school</span> student, and I'm writing to ask for your help.
+                        </span>
+                        <span class="reading-sentence cursor-pointer" onclick="speakSentence(this, 'My parents want me to stop playing music, but I dont want to.')" data-zh="我的父母要我停止玩音樂，但我不想放棄。">
+                            My parents want me to stop playing music, but I don't want to.
+                        </span>
+                        <span class="reading-sentence cursor-pointer" onclick="speakSentence(this, 'How can I make them understand that music is important to me?')" data-zh="我該如何讓他們瞭解音樂對我而言有多麼重要？">
+                            How can I make them <span class="vocab-hl" onclick="showVocabModal('understand', '瞭解', 'v. (understand-understood-understood)', 'understand')">understand</span> that music is important to me?
+                        </span>
+                    </p>
+
+                    <!-- Paragraph 2 -->
+                    <p class="space-y-1">
+                        <span class="reading-sentence cursor-pointer" onclick="speakSentence(this, 'I am good at playing the drums, and playing music gives me so much joy.')" data-zh="我很擅長打鼓，而玩音樂帶給我滿滿的快樂。">
+                            I am good at playing the <span class="vocab-hl" onclick="showVocabModal('drums', '鼓', 'n.', 'drum')">drums</span>, and playing music gives me so much <span class="vocab-hl" onclick="showVocabModal('joy', '樂趣；喜悅', 'n.', 'joy')">joy</span>.
+                        </span>
+                        <span class="reading-sentence cursor-pointer" onclick="speakSentence(this, 'My dream is to become a pop star one day, and I have just started a band with my friends.')" data-zh="我的夢想是有朝一日成為流行巨星，而且我剛剛和朋友們組了一個樂團。">
+                            My dream is to become a <span class="vocab-hl" onclick="showVocabModal('pop', '流行音樂', 'n./adj.', 'pop')">pop</span> star one day, and <span class="grammar-node" data-rule="現在完成式 (have + p.p.)：表示剛剛完成的動作">I <span class="grammar-target">have just started</span> a band</span> with my friends.
+                        </span>
+                        <span class="reading-sentence cursor-pointer" onclick="speakSentence(this, 'Weve spent a lot of time practicing lately, so I havent had much time for studying.')" data-zh="我們最近花了很多時間練習，所以我一直沒有太多時間讀書。">
+                            <span class="grammar-node" data-rule="現在完成式 (have + spent) + lately (最近)：表示近期持續的狀態"><span class="grammar-target">We've spent</span> a lot of time practicing <span class="vocab-hl" onclick="showVocabModal('lately', '最近', 'adv.', 'lately')">lately</span></span>, so <span class="grammar-node" data-rule="現在完成式否定句 (haven't had)：表示從過去到現在都沒有..."><span class="grammar-target">I haven't had</span> much time for studying</span>.
+                        </span>
+                        <span class="reading-sentence cursor-pointer" onclick="speakSentence(this, 'I did terribly on my exams, and my parents were angry.')" data-zh="我考試考得一塌糊塗，而我的父母非常生氣。">
+                            I did terribly on my exams, and my parents were <span class="vocab-hl" onclick="showVocabModal('angry', '生氣的', 'adj.', 'angry')">angry</span>.
+                        </span>
+                        <span class="reading-sentence cursor-pointer" onclick="speakSentence(this, 'Last week, we had a serious fight about my interest in playing music.')" data-zh="上週，我們針對我玩音樂的這項興趣大吵了一架。">
+                            Last week, we had a <span class="vocab-hl" onclick="showVocabModal('serious', '嚴重的', 'adj.', 'serious')">serious</span> fight about my <span class="vocab-hl" onclick="showVocabModal('interest', '興趣', 'n.', 'interest')">interest</span> in playing music.
+                        </span>
+                        <span class="reading-sentence cursor-pointer" onclick="speakSentence(this, 'My parents told me to give up my band and even called our music garbage.')" data-zh="我的父母要我放棄樂團，甚至把我們的音樂稱作垃圾。">
+                            My parents told me to give up my band and even called our music <span class="vocab-hl" onclick="showVocabModal('garbage', '垃圾', 'n.', 'garbage')">garbage</span>.
+                        </span>
+                        <span class="reading-sentence cursor-pointer" onclick="speakSentence(this, 'I have been so unhappy and havent talked to them since then.')" data-zh="從那時候開始，我一直很不快樂，而且從此就沒再跟他們說過話了。">
+                            <span class="grammar-node" data-rule="現在完成式 (have been / haven't talked) + since then (從那時起)：表示持續至今的狀態"><span class="grammar-target">I have been</span> so <span class="vocab-hl" onclick="showVocabModal('unhappy', '不快樂的', 'adj.', 'unhappy')">unhappy</span> and <span class="grammar-target">haven't talked</span> to them since then</span>.
+                        </span>
+                    </p>
+
+                    <!-- Paragraph 3 -->
+                    <p class="space-y-1">
+                        <span class="reading-sentence cursor-pointer" onclick="speakSentence(this, 'I know that my parents are worried about my future, but they have hurt my feelings.')" data-zh="我知道父母很擔心我的未來，但他們深深傷害了我的感受。">
+                            I know that my parents are <span class="vocab-hl" onclick="showVocabModal('worried', '擔心的', 'adj.', 'worried')">worried</span> about my future, but <span class="grammar-node" data-rule="現在完成式 (have hurt)：表示過去造成的傷害影響至今"><span class="grammar-target">they have hurt</span> my feelings</span>.
+                        </span>
+                        <span class="reading-sentence cursor-pointer" onclick="speakSentence(this, 'Music is everything to me. How can I talk them into letting me follow my dream?')" data-zh="音樂對我而言就是一切。我該如何說服他們讓我追尋夢想呢？">
+                            Music is everything to me. How can I <span class="vocab-hl" onclick="showVocabModal('talk into', '說服（某人）做...', 'phr.', 'talk_into')">talk them into</span> letting me follow my dream?
+                        </span>
+                        <span class="reading-sentence cursor-pointer" onclick="speakSentence(this, 'Thank you for reading my letter. I hope to hear from you soon.')" data-zh="謝謝您閱讀我的信。希望能儘快收到您的回信。">
+                            Thank you for reading my letter. I hope to hear from you soon.
+                        </span>
+                    </p>
+
+                    <!-- Sign-off -->
+                    <div class="pt-6 font-hand text-2xl sm:text-3xl text-slate-800 space-y-1">
+                        <div>Best <span class="vocab-hl" onclick="showVocabModal('wishes', '祝福；願望', 'n.', 'wish')">wishes</span>,</div>
+                        <div class="font-black text-rose-600 text-3xl sm:text-4xl">Ted</div>
+                    </div>
+
+                </div>
+
+                <!-- Sentence Translation Sub-bar (shows when clicked) -->
+                <div id="sentenceTranslationBox" class="hidden mt-6 bg-rose-50 border-2 border-rose-200 p-4 rounded-2xl text-xs sm:text-sm text-rose-900 font-bold flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-language text-rose-500 text-base"></i>
+                        <span id="sentenceTranslationText">點擊上方任何句子，即可在此查看即時中文翻譯與朗讀！</span>
+                    </div>
+                    <button onclick="document.getElementById('sentenceTranslationBox').classList.add('hidden')" class="text-rose-400 hover:text-rose-600"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- TAB 3: ENVELOPE & POSTAL FORMAT (信封格式探索) -->
+        <!-- ============================================================ -->
+        <section id="tab-envelope" class="hidden space-y-6">
+            
+            <div class="bg-gradient-to-r from-indigo-600 to-sky-500 rounded-3xl p-6 md:p-8 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="space-y-2 max-w-xl">
+                    <span class="bg-white/20 text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider font-fun">Envelope Exploration</span>
+                    <h2 class="text-2xl md:text-3xl font-black font-fun">英文信封書寫格式大解密 ✉️</h2>
+                    <p class="text-sm text-indigo-100 leading-relaxed">
+                        英文信封的書寫習慣與中文不同！點擊信封上的各個區域，探索「寄件人（From）」、「收件人（To）」與「航空郵票（Stamp）」的標準書寫位置。
+                    </p>
+                </div>
+                <div class="shrink-0 text-center">
+                    <div class="w-20 h-20 rounded-2xl bg-white/10 backdrop-blur-md border border-white/30 flex items-center justify-center text-4xl">
+                        📬
+                    </div>
+                </div>
+            </div>
+
+            <!-- Realistic Envelope Visual Box -->
+            <div class="bg-amber-100/60 p-4 sm:p-8 md:p-12 rounded-3xl border border-amber-200 flex justify-center">
+                <div class="w-full max-w-2xl bg-white rounded-2xl shadow-envelope border-2 border-slate-300 p-6 sm:p-8 md:p-10 relative space-y-8 overflow-hidden font-hand text-slate-800">
+                    
+                    <!-- Envelope Fold Line Decoration -->
+                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-400 via-sky-400 to-amber-400"></div>
+
+                    <!-- Top Row: Sender (Left) & Stamp (Right) -->
+                    <div class="flex flex-col sm:flex-row justify-between items-start gap-4">
+                        
+                        <!-- Sender Area (From) -->
+                        <div onclick="highlightEnvelopePart('sender')" class="cursor-pointer bg-slate-50 hover:bg-amber-50 p-3.5 rounded-xl border-2 border-dashed border-slate-300 hover:border-amber-400 transition group max-w-xs">
+                            <div class="flex items-center justify-between text-xs font-sans text-slate-500 font-bold mb-1">
+                                <span class="text-amber-600 font-black"><i class="fa-solid fa-user text-xs mr-1"></i> 寄件人 (From / Sender)</span>
+                                <button onclick="event.stopPropagation(); speakText('From: Ted Chin, Number 360, Nanmen Road, Taichung City, Taiwan')" class="text-slate-400 hover:text-amber-600"><i class="fa-solid fa-volume-high"></i></button>
+                            </div>
+                            <div class="text-lg sm:text-xl font-bold leading-tight text-slate-900">
+                                From: Ted Chin<br>
+                                No. 360, Nanmen Rd.,<br>
+                                Taichung City 402006<br>
+                                Taiwan (ROC)
+                            </div>
+                        </div>
+
+                        <!-- Stamp Area -->
+                        <div onclick="highlightEnvelopePart('stamp')" class="cursor-pointer bg-slate-50 hover:bg-rose-50 p-2.5 rounded-xl border-2 border-dashed border-slate-300 hover:border-rose-400 transition group self-end sm:self-start">
+                            <div class="text-center font-sans text-[10px] text-slate-400 font-bold mb-1">郵票 (Stamp)</div>
+                            <div class="w-24 h-28 bg-gradient-to-tr from-sky-400 via-indigo-500 to-purple-600 rounded-lg p-2 flex flex-col items-center justify-between text-white shadow">
+                                <span class="text-[9px] font-sans font-black tracking-widest uppercase">AIRMAIL</span>
+                                <i class="fa-solid fa-plane-departure text-2xl text-amber-300 animate-pulse"></i>
+                                <div class="text-center">
+                                    <div class="text-xs font-sans font-black">NT$ 9</div>
+                                    <div class="text-[8px] font-sans text-sky-100">郵政航空</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Row: Recipient Area (To) -->
+                    <div class="flex justify-end pt-4">
+                        <div onclick="highlightEnvelopePart('recipient')" class="cursor-pointer bg-slate-50 hover:bg-sky-50 p-4 sm:p-5 rounded-2xl border-2 border-dashed border-slate-300 hover:border-sky-400 transition group w-full max-w-sm">
+                            <div class="flex items-center justify-between text-xs font-sans text-slate-500 font-bold mb-1.5">
+                                <span class="text-sky-600 font-black"><i class="fa-solid fa-location-dot text-xs mr-1"></i> 收件人 (To / Recipient)</span>
+                                <button onclick="event.stopPropagation(); speakText('To: Ms. Debbie Bauer, Teenagers Corner, Number 111, Spring Street, New York, USA')" class="text-slate-400 hover:text-sky-600"><i class="fa-solid fa-volume-high"></i></button>
+                            </div>
+                            <div class="text-lg sm:text-2xl font-bold leading-tight text-slate-900">
+                                To: Ms. Debbie Bauer<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;Teenagers' Corner<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;No. 111, Spring Street,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;New York, NY 10012<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;USA
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Envelope Rules Guide Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+                    <div class="text-amber-600 font-bold text-sm flex items-center gap-1.5">
+                        <i class="fa-solid fa-arrow-up-left text-base"></i>
+                        <span>1. 寄件人寫在「左上方」</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        包含姓名、門牌地址、城市、郵遞區號與國名（由小單位寫到大單位，如 No. 360, Nanmen Rd., Taichung City...）。
+                    </p>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+                    <div class="text-rose-600 font-bold text-sm flex items-center gap-1.5">
+                        <i class="fa-solid fa-stamp text-base"></i>
+                        <span>2. 郵票貼在「右上方」</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        國際航空郵件（Airmail）需貼妥足額航空郵票，讓郵局系統快速辨識國際分信。
+                    </p>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+                    <div class="text-sky-600 font-bold text-sm flex items-center gap-1.5">
+                        <i class="fa-solid fa-arrow-down-right text-base"></i>
+                        <span>3. 收件人寫在「右下方或正中央」</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        字體需清晰放大，尊稱（如 Ms., Mr.）明確，最後一行需為大寫國名（如 USA）。
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- TAB 4: VOCABULARY & PHRASES (單字與片語卡牌庫) -->
+        <!-- ============================================================ -->
+        <section id="tab-vocab" class="hidden space-y-6">
+            
+            <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-5 rounded-3xl border border-slate-200 shadow-sm">
+                <div>
+                    <h3 class="text-xl font-black font-fun text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-spell-check text-teal-600"></i>
+                        <span>應用字彙與關鍵片語寶典</span>
+                    </h3>
+                    <p class="text-xs text-slate-500 mt-0.5">點擊卡片可朗讀單字與例句，點擊「翻牌」可切換中英文！</p>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <button onclick="filterVocab('all')" class="vocab-filter-btn bg-teal-600 text-white font-bold px-3 py-1.5 rounded-xl text-xs">全部 (All)</button>
+                    <button onclick="filterVocab('verb')" class="vocab-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3 py-1.5 rounded-xl text-xs">動詞 (Verbs)</button>
+                    <button onclick="filterVocab('adj')" class="vocab-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3 py-1.5 rounded-xl text-xs">形容詞 (Adjectives)</button>
+                    <button onclick="filterVocab('noun')" class="vocab-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3 py-1.5 rounded-xl text-xs">名詞 (Nouns)</button>
+                </div>
+            </div>
+
+            <!-- Vocab Cards Grid -->
+            <div id="vocabGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Javascript will populate cards -->
+            </div>
+
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- TAB 5: COMPREHENSION & LITERACY QUIZ (閱讀素養挑戰) -->
+        <!-- ============================================================ -->
+        <section id="tab-quiz" class="hidden space-y-6">
+            
+            <div class="bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 rounded-3xl p-6 md:p-8 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="space-y-2 max-w-xl">
+                    <span class="bg-white/20 text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider font-fun">Mastery Challenge</span>
+                    <h2 class="text-2xl md:text-3xl font-black font-fun">閱讀理解與素養大挑戰 🏆</h2>
+                    <p class="text-sm text-amber-100 leading-relaxed">
+                        檢驗你對信件主旨、情節細節、現在完成式文法以及建議回饋的掌握程度！全部答對可獲得 100 點閱讀積分！
+                    </p>
+                </div>
+                <div class="shrink-0 text-center">
+                    <div class="w-20 h-20 rounded-2xl bg-white/10 backdrop-blur-md border border-white/30 flex items-center justify-center text-4xl">
+                        🎯
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Questions List -->
+            <div class="space-y-6" id="quizContainer">
+                <!-- Quiz Items populated in JS -->
+            </div>
+
+            <!-- Debbie's AI Advice Corner (Bonus Module) -->
+            <div class="bg-indigo-50 border-2 border-indigo-200 rounded-3xl p-6 sm:p-8 space-y-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-600 text-white flex items-center justify-center text-2xl shadow">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-black font-fun text-indigo-950">Debbie 顧問的回信專區 (Dear Debbie's Advice)</h4>
+                        <p class="text-xs text-indigo-700">如果你是 Debbie，你會給 Ted 什麼建議？點擊展開看專家建議：</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-5 border border-indigo-100 font-sans text-sm text-slate-700 space-y-3 leading-relaxed">
+                    <p class="font-bold text-indigo-900">Dear Ted,</p>
+                    <p>
+                        Thank you for sharing your story. It's wonderful that you have found your passion for music! However, your parents are worried because balance is key in high school.
+                    </p>
+                    <p class="bg-indigo-50/70 p-3 rounded-xl border border-indigo-200 text-xs text-indigo-900 font-medium">
+                        💡 <strong>Debbie 顧問的三大溝通心法：</strong><br>
+                        1. <strong>Set a Study & Practice Schedule</strong>: 制定明確的時間表，證明你能兼顧學業與練鼓。<br>
+                        2. <strong>Listen to Their Concerns</strong>: 耐心聆聽父母的擔憂，理解他們的出發點是愛與關心。<br>
+                        3. <strong>Invite Them to Listen</strong>: 邀請父母聽你們用心練習的成果，讓他們看見音樂帶給你的熱情與成長！
+                    </p>
+                    <div class="flex justify-end">
+                        <button onclick="speakText('Dear Ted, Balance is key. Make a study schedule and talk with your parents with love and patience.')" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-2 rounded-xl transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-volume-high"></i>
+                            <span>朗讀 Debbie 的回信摘要</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- VOCAB MODAL -->
+    <div id="vocabModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-100 transform transition-all space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <span class="text-xs bg-rose-100 text-rose-600 font-bold px-2.5 py-1 rounded-lg" id="modalPos">n. 名詞</span>
+                <button onclick="closeVocabModal()" class="text-slate-400 hover:text-slate-600 text-lg p-1"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div>
+                <div class="flex items-center justify-between">
+                    <h3 id="modalWord" class="text-2xl font-black font-fun text-slate-900">senior high school</h3>
+                    <button onclick="speakModalWord()" class="w-10 h-10 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 flex items-center justify-center transition">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </button>
+                </div>
+                <p id="modalZh" class="text-lg font-bold text-rose-600 mt-1">高中</p>
+            </div>
+            <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-100 text-xs text-slate-600 leading-relaxed" id="modalExample">
+                例句載入中...
+            </div>
+            <button onclick="closeVocabModal()" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-bold py-2.5 rounded-xl transition text-sm">
+                記住了！關閉
+            </button>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script>
+        // Data Definitions
+        const vocabList = [
+            { en: "letter", zh: "信", pos: "n.", type: "noun", eg: "Ted is writing a letter to ask for help." },
+            { en: "teenager", zh: "青少年", pos: "n.", type: "noun", eg: "Many teenagers have dreams of playing music." },
+            { en: "senior high school", zh: "高中", pos: "n.", type: "noun", eg: "I am a senior high school student now." },
+            { en: "understand", zh: "瞭解", pos: "v. (understand-understood-understood)", type: "verb", eg: "How can I make them understand my feelings?" },
+            { en: "drums", zh: "鼓", pos: "n.", type: "noun", eg: "He is really good at playing the drums." },
+            { en: "joy", zh: "樂趣；喜悅", pos: "n.", type: "noun", eg: "Playing music brings me so much joy." },
+            { en: "pop", zh: "流行音樂；流行的", pos: "n./adj.", type: "noun", eg: "His dream is to become a pop star." },
+            { en: "lately", zh: "最近", pos: "adv.", type: "adj", eg: "We have spent a lot of time practicing lately." },
+            { en: "angry", zh: "生氣的", pos: "adj.", type: "adj", eg: "My parents were angry because of my bad grades." },
+            { en: "serious", zh: "嚴重的；認真的", pos: "adj.", type: "adj", eg: "They had a serious fight last week." },
+            { en: "interest", zh: "興趣；使感興趣", pos: "n./v.", type: "noun", eg: "She has a great interest in playing the guitar." },
+            { en: "garbage", zh: "垃圾", pos: "n.", type: "noun", eg: "Don't call other people's dreams garbage." },
+            { en: "unhappy", zh: "不快樂的", pos: "adj.", type: "adj", eg: "Ted has been so unhappy since the big fight." },
+            { en: "worried", zh: "擔心的", pos: "adj.", type: "adj", eg: "Parents are often worried about their children's future." },
+            { en: "wishes", zh: "祝福；願望", pos: "n./v.", type: "noun", eg: "Best wishes to you in your new school year." },
+            { en: "envelope", zh: "信封", pos: "n.", type: "noun", eg: "Put the letter inside the envelope and seal it." },
+            { en: "stamp", zh: "郵票", pos: "n.", type: "noun", eg: "Stick a stamp on the top right corner of the envelope." },
+            { en: "talk... into", zh: "說服（某人）做...", pos: "phr.", type: "verb", eg: "How can I talk my parents into letting me join the band?" }
+        ];
+
+        const quizQuestions = [
+            {
+                q: "1. Why did Ted write this letter to Debbie?",
+                zh: "（Ted 為什麼要寫這封信給 Debbie？）",
+                options: [
+                    "A. To invite Debbie to his band concert.",
+                    "B. To ask Debbie for advice on solving family conflict.",
+                    "C. To complain about his school teachers.",
+                    "D. To show off his drum-playing skills."
+                ],
+                ans: 1,
+                exp: "信件第一段明確指出：'I'm writing to ask for your help.'，Ted 希望 Debbie 協助他解決與父母的衝突並追尋夢想。"
+            },
+            {
+                q: "2. Why were Ted's parents angry with him?",
+                zh: "（為什麼 Ted 的父母對他感到非常生氣？）",
+                options: [
+                    "A. He broke the drums in his room.",
+                    "B. He spent too much time practicing and did terribly on his exams.",
+                    "C. He refused to go to senior high school.",
+                    "D. He lost his letter on the way to school."
+                ],
+                ans: 1,
+                exp: "第二段指出：'We've spent a lot of time practicing lately, so I haven't had much time for studying. I did terribly on my exams, and my parents were angry.'"
+            },
+            {
+                q: "3. What did Ted's parents call his music in anger?",
+                zh: "（Ted 的父母在爭吵中將他們的音樂稱作什麼？）",
+                options: [
+                    "A. Pop star music",
+                    "B. Joyful sound",
+                    "C. Garbage",
+                    "D. Serious noise"
+                ],
+                ans: 2,
+                exp: "第二段提到：'My parents told me to give up my band and even called our music garbage.'"
+            },
+            {
+                q: "4. In the envelope format, where should the sender (寄件人) information be placed?",
+                zh: "（在英文信封格式中，寄件人資訊應該寫在哪個位置？）",
+                options: [
+                    "A. Top right corner (右上角)",
+                    "B. Top left corner (左上角)",
+                    "C. Bottom right corner (右下角)",
+                    "D. In the center (正中央)"
+                ],
+                ans: 1,
+                exp: "英文信封中，寄件人（From）位於左上角，郵票位於右上角，收件人（To）位於右下方或中央。"
+            }
+        ];
+
+        let currentActiveSentence = null;
+        let isPlayingAll = false;
+        let isGrammarRadarOn = false;
+        let isChineseOn = false;
+        let timerInterval = null;
+        let timerSeconds = 30;
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            renderVocabCards(vocabList);
+            renderQuiz();
+            startSkimmingTimer();
+        });
+
+        // Tab Switching
+        function switchTab(tabId) {
+            stopAudio();
+            const tabs = ['tab-before', 'tab-letter', 'tab-envelope', 'tab-vocab', 'tab-quiz'];
+            tabs.forEach(t => {
+                const el = document.getElementById(t);
+                const btn = document.getElementById('nav-' + t);
+                if (t === tabId) {
+                    el.classList.remove('hidden');
+                    btn.className = "tab-btn bg-white text-rose-600 font-bold px-4 py-2.5 rounded-2xl shadow border-2 border-rose-400 flex items-center space-x-2 whitespace-nowrap transition";
+                } else {
+                    el.classList.add('hidden');
+                    btn.className = "tab-btn bg-white/80 text-slate-600 hover:text-rose-600 font-bold px-4 py-2.5 rounded-2xl border-2 border-transparent flex items-center space-x-2 whitespace-nowrap transition";
+                }
+            });
+        }
+
+        // Timer for Skimming
+        function startSkimmingTimer() {
+            clearInterval(timerInterval);
+            timerSeconds = 30;
+            const timerEl = document.getElementById('skimmingTimer');
+            timerInterval = setInterval(() => {
+                timerSeconds--;
+                if (timerSeconds >= 0) {
+                    timerEl.innerText = timerSeconds + 's';
+                } else {
+                    clearInterval(timerInterval);
+                    timerEl.innerText = '時間到!';
+                }
+            }, 1000);
+        }
+
+        function checkSkimming(idx, isCorrect) {
+            const resultEl = document.getElementById('skimmingResult');
+            resultEl.classList.remove('hidden');
+            if (isCorrect) {
+                resultEl.className = "p-3.5 rounded-2xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-300 flex items-center gap-2";
+                resultEl.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-500 text-lg"></i> 答對了！Ted 寫這封信是為了向青少年輔導顧問 Debbie 求助 (To ask Debbie for help)！+20 積分！`;
+                addScore(20);
+                confetti({ particleCount: 30, spread: 50, origin: { y: 0.6 } });
+            } else {
+                resultEl.className = "p-3.5 rounded-2xl text-xs font-bold bg-rose-50 text-rose-800 border border-rose-300 flex items-center gap-2";
+                resultEl.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-500 text-lg"></i> 差一點點！請留意第一段中的 "I'm writing to ask for your help." 喔！`;
+            }
+        }
+
+        function selectChoice(btn, group) {
+            btn.parentElement.querySelectorAll('button').forEach(b => {
+                b.className = "choice-btn text-xs bg-white border border-slate-200 font-bold py-2 px-3 rounded-xl text-slate-700";
+            });
+            btn.className = "choice-btn text-xs bg-rose-500 text-white font-bold py-2 px-3 rounded-xl shadow border border-rose-600";
+            document.getElementById('connectionFeedback').classList.remove('hidden');
+        }
+
+        // Web Speech API
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const rate = parseFloat(document.getElementById('ttsSpeedSelect').value) || 1.0;
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = 'en-US';
+                u.rate = rate;
+                window.speechSynthesis.speak(u);
+            }
+        }
+
+        function speakSentence(el, text) {
+            if (currentActiveSentence) currentActiveSentence.classList.remove('active-sentence');
+            currentActiveSentence = el;
+            el.classList.add('active-sentence');
+
+            speakText(text);
+
+            const zh = el.getAttribute('data-zh');
+            if (zh) {
+                const box = document.getElementById('sentenceTranslationBox');
+                box.classList.remove('hidden');
+                document.getElementById('sentenceTranslationText').innerText = zh;
+            }
+        }
+
+        function stopAudio() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+            isPlayingAll = false;
+            const btnText = document.getElementById('playAllText');
+            const btnIcon = document.getElementById('playAllIcon');
+            if (btnText) btnText.innerText = "播放整篇信件";
+            if (btnIcon) btnIcon.className = "fa-solid fa-play";
+            if (currentActiveSentence) currentActiveSentence.classList.remove('active-sentence');
+        }
+
+        function togglePlayFullLetter() {
+            if (isPlayingAll) {
+                stopAudio();
+                return;
+            }
+            const sentences = Array.from(document.querySelectorAll('.reading-sentence'));
+            if (!sentences.length) return;
+
+            isPlayingAll = true;
+            document.getElementById('playAllText').innerText = "暫停播放";
+            document.getElementById('playAllIcon').className = "fa-solid fa-pause";
+
+            let idx = 0;
+            function playNext() {
+                if (!isPlayingAll || idx >= sentences.length) {
+                    stopAudio();
+                    return;
+                }
+                const sEl = sentences[idx];
+                const text = sEl.innerText;
+                if (currentActiveSentence) currentActiveSentence.classList.remove('active-sentence');
+                currentActiveSentence = sEl;
+                sEl.classList.add('active-sentence');
+
+                const rate = parseFloat(document.getElementById('ttsSpeedSelect').value) || 1.0;
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = 'en-US';
+                u.rate = rate;
+                u.onend = () => {
+                    idx++;
+                    setTimeout(playNext, 300);
+                };
+                u.onerror = () => stopAudio();
+                window.speechSynthesis.speak(u);
+            }
+            playNext();
+        }
+
+        // Grammar Radar
+        function toggleGrammarRadar() {
+            isGrammarRadarOn = !isGrammarRadarOn;
+            const btn = document.getElementById('grammarRadarBtn');
+            const nodes = document.querySelectorAll('.grammar-node');
+            if (isGrammarRadarOn) {
+                btn.className = "btn-press bg-purple-600 text-white font-bold px-3.5 py-2 rounded-2xl text-xs sm:text-sm border border-purple-700 shadow";
+                nodes.forEach(n => {
+                    n.classList.add('grammar-hl');
+                    n.title = n.getAttribute('data-rule') || '現在完成式 (have/has + p.p.)';
+                });
+            } else {
+                btn.className = "btn-press bg-purple-100 hover:bg-purple-200 text-purple-700 font-bold px-3.5 py-2 rounded-2xl text-xs sm:text-sm border border-purple-300";
+                nodes.forEach(n => n.classList.remove('grammar-hl'));
+            }
+        }
+
+        // Chinese Translation Toggle
+        function toggleChineseTranslation() {
+            isChineseOn = !isChineseOn;
+            const btn = document.getElementById('transBtn');
+            const box = document.getElementById('sentenceTranslationBox');
+            if (isChineseOn) {
+                btn.className = "btn-press bg-indigo-600 text-white font-bold px-3.5 py-2 rounded-2xl text-xs sm:text-sm shadow";
+                box.classList.remove('hidden');
+                document.getElementById('sentenceTranslationText').innerText = "已開啟翻譯模式：點選上方任何一句話即可同步查看中文！";
+            } else {
+                btn.className = "btn-press bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3.5 py-2 rounded-2xl text-xs sm:text-sm";
+                box.classList.add('hidden');
+            }
+        }
+
+        // Envelope Exploration Highlight
+        function highlightEnvelopePart(type) {
+            if (type === 'sender') {
+                speakText("Sender information: Ted Chin in Taichung City, Taiwan.");
+            } else if (type === 'recipient') {
+                speakText("Recipient information: Ms. Debbie Bauer in New York, USA.");
+            } else if (type === 'stamp') {
+                speakText("Airmail stamp: Nine dollars Republic of China.");
+            }
+        }
+
+        // Vocab Modal
+        let curModalWord = "";
+        function showVocabModal(word, zh, pos, key) {
+            curModalWord = word;
+            document.getElementById('modalWord').innerText = word;
+            document.getElementById('modalZh').innerText = zh;
+            document.getElementById('modalPos').innerText = pos;
+            const item = vocabList.find(v => v.en.toLowerCase() === word.toLowerCase()) || { eg: "Click to listen to pronunciation and usage." };
+            document.getElementById('modalExample').innerHTML = `<strong>例句：</strong> ${item.eg}`;
+            document.getElementById('vocabModal').classList.remove('hidden');
+            speakText(word);
+        }
+
+        function closeVocabModal() {
+            document.getElementById('vocabModal').classList.add('hidden');
+        }
+
+        function speakModalWord() {
+            speakText(curModalWord);
+        }
+
+        // Vocab Grid Render
+        function renderVocabCards(items) {
+            const grid = document.getElementById('vocabGrid');
+            grid.innerHTML = items.map(v => `
+                <div class="card-flip bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between space-y-3 group">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] bg-teal-100 text-teal-700 font-bold px-2 py-0.5 rounded">${v.pos}</span>
+                        <button onclick="speakText('${v.en}')" class="text-teal-600 hover:text-teal-800 p-1"><i class="fa-solid fa-volume-high"></i></button>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-black font-fun text-slate-900">${v.en}</h4>
+                        <p class="text-sm font-bold text-teal-600 mt-0.5">${v.zh}</p>
+                    </div>
+                    <p class="text-xs text-slate-500 border-t border-slate-100 pt-2 leading-relaxed">
+                        ${v.eg}
+                    </p>
+                </div>
+            `).join('');
+        }
+
+        function filterVocab(type) {
+            document.querySelectorAll('.vocab-filter-btn').forEach(b => {
+                b.className = "vocab-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3 py-1.5 rounded-xl text-xs";
+            });
+            event.target.className = "vocab-filter-btn bg-teal-600 text-white font-bold px-3 py-1.5 rounded-xl text-xs";
+            if (type === 'all') {
+                renderVocabCards(vocabList);
+            } else {
+                renderVocabCards(vocabList.filter(v => v.type === type));
+            }
+        }
+
+        // Quiz Render
+        function renderQuiz() {
+            const container = document.getElementById('quizContainer');
+            container.innerHTML = quizQuestions.map((q, idx) => `
+                <div class="bg-white rounded-3xl p-6 shadow-paper border border-slate-200 space-y-4">
+                    <div class="flex items-start justify-between gap-2">
+                        <div>
+                            <h4 class="font-bold text-base text-slate-900">${q.q}</h4>
+                            <p class="text-xs text-slate-400 mt-0.5">${q.zh}</p>
+                        </div>
+                        <button onclick="speakText('${q.q.replace(/['"]/g, '')}')" class="text-amber-500 hover:text-amber-700 text-sm"><i class="fa-solid fa-volume-high"></i></button>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        ${q.options.map((opt, oIdx) => `
+                            <button onclick="handleQuizAnswer(${idx}, ${oIdx}, this)" class="quiz-opt-${idx} text-left p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-400 text-xs font-bold transition flex items-center justify-between text-slate-700">
+                                <span>${opt}</span>
+                                <i class="fa-regular fa-circle text-slate-300"></i>
+                            </button>
+                        `).join('')}
+                    </div>
+
+                    <div id="quizExp-${idx}" class="hidden p-3.5 rounded-2xl text-xs font-bold"></div>
+                </div>
+            `).join('');
+        }
+
+        function handleQuizAnswer(qIdx, oIdx, btn) {
+            const q = quizQuestions[qIdx];
+            const expEl = document.getElementById(`quizExp-${qIdx}`);
+            const allBtns = document.querySelectorAll(`.quiz-opt-${qIdx}`);
+
+            allBtns.forEach(b => {
+                b.disabled = true;
+                b.className = "text-left p-3.5 rounded-2xl border-2 border-slate-200 text-xs font-bold text-slate-400 flex items-center justify-between";
+            });
+
+            expEl.classList.remove('hidden');
+            if (oIdx === q.ans) {
+                btn.className = "text-left p-3.5 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-xs font-bold text-emerald-800 flex items-center justify-between";
+                btn.querySelector('i').className = "fa-solid fa-circle-check text-emerald-500";
+                expEl.className = "p-3.5 rounded-2xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200";
+                expEl.innerHTML = `🎉 <strong>答對了！</strong> ${q.exp}`;
+                addScore(25);
+                confetti({ particleCount: 25, spread: 45, origin: { y: 0.7 } });
+            } else {
+                btn.className = "text-left p-3.5 rounded-2xl border-2 border-rose-500 bg-rose-50 text-xs font-bold text-rose-800 flex items-center justify-between";
+                btn.querySelector('i').className = "fa-solid fa-circle-xmark text-rose-500";
+                expEl.className = "p-3.5 rounded-2xl text-xs font-bold bg-rose-50 text-rose-800 border border-rose-200";
+                expEl.innerHTML = `❌ <strong>答錯囉！</strong> 正確答案是 ${q.options[q.ans]}。<br>${q.exp}`;
+            }
+        }
+
+        // Score Manager
+        let currentScore = 0;
+        function addScore(pts) {
+            currentScore += pts;
+            document.getElementById('readingScore').innerText = currentScore;
+            const prevTotal = parseInt(localStorage.getItem('english_user_stars') || '120');
+            localStorage.setItem('english_user_stars', (prevTotal + pts).toString());
+        }
+    </script>
+</body>
+</html>

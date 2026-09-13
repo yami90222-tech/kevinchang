@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 2 Reading: Are You Sharing Lies? 數位素養與事實查核大冒險</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                        fun: ['Fredoka', 'cursive', 'sans-serif']
+                    },
+                    colors: {
+                        cyber: {
+                            cyan: '#06b6d4',
+                            blue: '#3b82f6',
+                            emerald: '#10b981',
+                            amber: '#f59e0b',
+                            rose: '#f43f5e',
+                            purple: '#8b5cf6',
+                            dark: '#080d1a',
+                            card: '#0f172a'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 3.5s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2.5s infinite'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-6px)' }
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' },
+                            '50%': { boxShadow: '0 0 28px rgba(6, 182, 212, 0.7)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { height: 6px; width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        .game-btn-shadow {
+            box-shadow: 0 5px 0 0 rgba(0,0,0,0.35);
+            transition: all 0.12s ease;
+        }
+        .game-btn-shadow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 0 0 rgba(0,0,0,0.35);
+        }
+        .game-btn-shadow:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 0 rgba(0,0,0,0.35);
+        }
+        .browser-bar-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 9999px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans pb-16 selection:bg-cyan-400 selection:text-slate-950">
+
+    <!-- TOP STATUS BAR -->
+    <header class="bg-slate-900/95 border-b-2 border-slate-800 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 py-2.5 flex flex-wrap justify-between items-center gap-3">
+            
+            <!-- Brand & Unit Title -->
+            <div class="flex items-center gap-3">
+                <a href="index.html" title="返回學習首頁" class="bg-slate-800 hover:bg-cyan-500 hover:text-slate-950 text-cyan-300 p-2.5 rounded-2xl border border-slate-700 shadow-md transition flex items-center gap-1.5 font-bold text-xs md:text-sm">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="hidden sm:inline">學習首頁</span>
+                </a>
+                <a href="u2_dialogue.html" title="前往第二課對話篇" class="bg-slate-800 hover:bg-rose-500 hover:text-white text-rose-300 p-2.5 rounded-2xl border border-slate-700 shadow-md transition flex items-center gap-1.5 font-bold text-xs md:text-sm">
+                    <i class="fa-solid fa-clapperboard"></i>
+                    <span class="hidden sm:inline">對話篇</span>
+                </a>
+                <a href="u2_pattern.html" title="前往第二課句型篇" class="bg-slate-800 hover:bg-purple-500 hover:text-white text-purple-300 p-2.5 rounded-2xl border border-slate-700 shadow-md transition flex items-center gap-1.5 font-bold text-xs md:text-sm">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span class="hidden sm:inline">句型篇</span>
+                </a>
+                <div class="relative bg-gradient-to-tr from-cyan-500 via-teal-500 to-blue-600 p-2.5 rounded-2xl shadow-lg animate-float text-slate-950">
+                    <i class="fa-solid fa-shield-halved text-2xl"></i>
+                    <span class="absolute -top-1 -right-1 bg-amber-400 text-slate-950 text-[10px] font-black px-1.5 py-0.5 rounded-full border-2 border-slate-900">U2</span>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-bold px-2 py-0.5 rounded-md uppercase tracking-wider font-fun">Unit 2 Reading</span>
+                        <span id="userRank" class="text-xs bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold px-2 py-0.5 rounded-md font-fun">事實查核首席偵探</span>
+                    </div>
+                    <h1 class="text-lg md:text-xl font-black font-fun tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-teal-300 to-amber-300">
+                        Are You Sharing Lies? 課文閱讀與事實查核
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Gamification Status -->
+            <div class="flex items-center gap-3 bg-slate-900/90 px-3.5 py-1.5 rounded-2xl border border-slate-800 shadow-inner">
+                <div class="flex items-center gap-1.5 font-black font-fun text-sm text-amber-400">
+                    <span class="text-xs text-slate-400">LV.</span><span id="levelDisplay">1</span>
+                </div>
+                <div class="w-px h-5 bg-slate-800"></div>
+                <div class="flex flex-col w-24 sm:w-32">
+                    <div class="flex justify-between text-[10px] font-bold text-slate-300 mb-0.5">
+                        <span>XP</span>
+                        <span id="xpText" class="text-amber-400">0 / 100</span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden border border-slate-700">
+                        <div id="xpBar" class="bg-gradient-to-r from-cyan-400 via-teal-500 to-amber-400 h-full transition-all duration-300 w-0"></div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 border-l border-slate-800 pl-2.5">
+                    <div class="flex items-center gap-1 text-amber-300 font-bold text-xs" title="金幣">
+                        <i class="fa-solid fa-coins text-amber-400"></i>
+                        <span id="coinCount">50</span>
+                    </div>
+                    <button onclick="AudioFX.toggleMute()" id="muteBtn" title="開關音效" class="text-slate-400 hover:text-cyan-300 p-1 text-xs">
+                        <i class="fa-solid fa-volume-high" id="soundIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="bg-slate-950/90 px-4 border-t border-slate-800/80">
+            <div class="max-w-6xl mx-auto flex overflow-x-auto custom-scrollbar gap-2 py-2 text-xs md:text-sm font-bold">
+                <button onclick="switchTab('before')" id="tab-before" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-600 text-slate-950 font-black shadow-lg whitespace-nowrap transition">
+                    <i class="fa-solid fa-compass text-base"></i> 1. 讀前啟發 (P.40)
+                </button>
+                <button onclick="switchTab('article')" id="tab-article" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
+                    <i class="fa-solid fa-book-open text-base text-cyan-400"></i> 2. 課文點讀 (P.41-42)
+                </button>
+                <button onclick="switchTab('after')" id="tab-after" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
+                    <i class="fa-solid fa-diagram-project text-base text-teal-400"></i> 3. 閱讀組織圖 (P.43)
+                </button>
+                <button onclick="switchTab('detective')" id="tab-detective" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
+                    <i class="fa-solid fa-user-secret text-base text-rose-400"></i> 4. 查核大偵探 (P.44)
+                </button>
+                <button onclick="switchTab('vocab')" id="tab-vocab" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
+                    <i class="fa-solid fa-spell-check text-base text-amber-400"></i> 5. 單字與片語
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 mt-6 flex-grow w-full">
+
+        <!-- ========================================== -->
+        <!-- TAB 1: BEFORE & WHILE YOU READ (P.40) -->
+        <!-- ========================================== -->
+        <section id="sec-before" class="space-y-6">
+            <div class="rounded-3xl bg-gradient-to-r from-slate-900 via-cyan-950/40 to-slate-900 border border-cyan-500/30 p-6 md:p-8 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="space-y-3 max-w-2xl text-center md:text-left">
+                    <div class="inline-flex items-center gap-2 bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 px-3 py-1 rounded-full text-xs font-bold font-fun">
+                        <i class="fa-solid fa-shield-virus"></i> 數位素養閱讀策略
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-black font-fun text-white">
+                        Are You Sharing Lies? 📲
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        在網路上滑到驚人貼文，你會馬上轉傳嗎？小心！你可能正在不知不覺中成為散播假訊息的推手！一起學會成為聰明的事實查核者！
+                    </p>
+                </div>
+                <div class="flex items-center gap-3 shrink-0">
+                    <div class="text-center bg-slate-900/90 px-4 py-3 rounded-2xl border border-slate-700">
+                        <span class="text-3xl">📱</span>
+                        <div class="text-[11px] text-cyan-400 font-bold mt-1">社群貼文</div>
+                    </div>
+                    <div class="text-center bg-slate-900/90 px-4 py-3 rounded-2xl border border-slate-700">
+                        <span class="text-3xl">🕵️‍♂️</span>
+                        <div class="text-[11px] text-amber-400 font-bold mt-1">事實查核</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Before You Read: Making Connections (P.40) -->
+            <div class="bg-slate-900/90 rounded-3xl p-6 border-2 border-cyan-500/40 shadow-xl space-y-5">
+                <div class="flex items-center gap-3 border-b border-slate-800 pb-3">
+                    <span class="w-8 h-8 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-base">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <div>
+                        <h3 class="text-lg font-black font-fun text-white">Before You Read: Making Connections</h3>
+                        <p class="text-xs text-slate-400">利用自身經驗回答問題，探索你的網路分享習慣！</p>
+                    </div>
+                </div>
+
+                <!-- Question 1 -->
+                <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-3">
+                    <p class="font-bold text-sm text-slate-200">1. Do you like sharing online information with your family and friends?</p>
+                    <div class="flex gap-3">
+                        <button onclick="selectShareHabit(true)" id="btn-share-yes" class="px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-cyan-400 text-xs font-bold transition flex items-center gap-2">
+                            <i class="fa-solid fa-thumbs-up text-cyan-400"></i> 是的，我很常分享
+                        </button>
+                        <button onclick="selectShareHabit(false)" id="btn-share-no" class="px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-rose-400 text-xs font-bold transition flex items-center gap-2">
+                            <i class="fa-solid fa-thumbs-down text-rose-400"></i> 不常，我多半只看不轉傳
+                        </button>
+                    </div>
+                    <div id="shareHabitFeedback" class="text-xs text-cyan-300 font-bold hidden"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <p class="font-bold text-sm text-slate-200">2. Which of the following do you usually share online?</p>
+                        <span class="text-[11px] text-slate-400 font-mono bg-slate-900 px-2 py-0.5 rounded">the following 接下來的事物</span>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                        <label class="flex items-center gap-2 bg-slate-900 p-3 rounded-xl border border-slate-800 cursor-pointer hover:border-cyan-400 transition">
+                            <input type="checkbox" class="accent-cyan-400 rounded" onchange="AudioFX.playCoin()">
+                            <span>🎵 music (音樂)</span>
+                        </label>
+                        <label class="flex items-center gap-2 bg-slate-900 p-3 rounded-xl border border-slate-800 cursor-pointer hover:border-cyan-400 transition">
+                            <input type="checkbox" class="accent-cyan-400 rounded" onchange="AudioFX.playCoin()">
+                            <span>🎬 videos (影片)</span>
+                        </label>
+                        <label class="flex items-center gap-2 bg-slate-900 p-3 rounded-xl border border-slate-800 cursor-pointer hover:border-cyan-400 transition">
+                            <input type="checkbox" class="accent-cyan-400 rounded" onchange="AudioFX.playCoin()">
+                            <span>📷 pictures (照片)</span>
+                        </label>
+                        <label class="flex items-center gap-2 bg-slate-900 p-3 rounded-xl border border-slate-800 cursor-pointer hover:border-cyan-400 transition">
+                            <input type="checkbox" class="accent-cyan-400 rounded" onchange="AudioFX.playCoin()">
+                            <span>📰 news & stories (新聞故事)</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- While You Read: Identifying the Topic (P.40) -->
+            <div class="bg-slate-900/90 rounded-3xl p-6 border-2 border-teal-500/40 shadow-xl space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <div class="flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-2xl bg-teal-500/20 text-teal-400 flex items-center justify-center font-bold text-base">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </span>
+                        <div>
+                            <h3 class="text-lg font-black font-fun text-white">While You Read: Identifying the Topic</h3>
+                            <p class="text-xs text-slate-400">快速掃描文章標題與首段，勾選本篇文章的核心主題！</p>
+                        </div>
+                    </div>
+                    <button onclick="switchTab('article')" class="text-xs bg-teal-600 hover:bg-teal-500 text-slate-950 font-black px-3.5 py-1.5 rounded-xl transition">
+                        前往閱讀課文 →
+                    </button>
+                </div>
+
+                <p class="font-bold text-sm text-slate-200">What is the reading about?</p>
+                <div class="space-y-2.5 text-xs sm:text-sm">
+                    <button onclick="checkTopic(0)" id="topicOpt-0" class="w-full text-left p-3.5 rounded-2xl bg-slate-950 border-2 border-slate-800 hover:border-teal-400 text-slate-200 transition flex items-center justify-between">
+                        <span>Fake information online. (網路上的虛假訊息)</span>
+                        <i class="fa-solid fa-check text-emerald-400 hidden" id="topicIcon-0"></i>
+                    </button>
+                    <button onclick="checkTopic(1)" id="topicOpt-1" class="w-full text-left p-3.5 rounded-2xl bg-slate-950 border-2 border-slate-800 hover:border-rose-400 text-slate-200 transition flex items-center justify-between">
+                        <span>Ways of getting information. (獲取資訊的方式)</span>
+                        <i class="fa-solid fa-xmark text-rose-400 hidden" id="topicIcon-1"></i>
+                    </button>
+                    <button onclick="checkTopic(2)" id="topicOpt-2" class="w-full text-left p-3.5 rounded-2xl bg-slate-950 border-2 border-slate-800 hover:border-rose-400 text-slate-200 transition flex items-center justify-between">
+                        <span>TV and newspaper companies. (電視與報社公司)</span>
+                        <i class="fa-solid fa-xmark text-rose-400 hidden" id="topicIcon-2"></i>
+                    </button>
+                </div>
+                <div id="topicFeedback" class="text-xs font-bold pt-1 hidden"></div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 2: ARTICLE AUDIO & BILINGUAL READ (P.41-42) -->
+        <!-- ========================================== -->
+        <section id="sec-article" class="hidden space-y-6">
+            <!-- Article Controls Toolbar -->
+            <div class="bg-slate-900/90 p-4 rounded-3xl border border-slate-800 flex flex-wrap items-center justify-between gap-4 shadow-xl">
+                <div class="flex items-center gap-3">
+                    <button id="playArticleBtn" onclick="togglePlayArticle()" class="bg-gradient-to-r from-cyan-500 to-teal-600 hover:from-cyan-400 hover:to-teal-500 text-slate-950 font-black px-5 py-2.5 rounded-2xl shadow-lg game-btn-shadow flex items-center gap-2 text-sm">
+                        <i id="playArticleIcon" class="fa-solid fa-play"></i>
+                        <span id="playArticleText">播放全篇文章朗讀 (+25 XP)</span>
+                    </button>
+                    <button onclick="stopArticleSpeech()" class="bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold px-4 py-2.5 rounded-2xl transition flex items-center gap-1.5 text-xs border border-slate-700">
+                        <i class="fa-solid fa-stop"></i> 停止
+                    </button>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3 text-xs md:text-sm font-semibold">
+                    <!-- Chinese Toggle -->
+                    <label class="flex items-center gap-2 cursor-pointer bg-slate-950 px-3 py-2 rounded-xl border border-slate-800 transition hover:bg-slate-800">
+                        <input type="checkbox" id="toggleArticleZh" checked onchange="toggleArticleTranslation()" class="accent-cyan-400 w-4 h-4 rounded">
+                        <span class="text-slate-300">中文對照</span>
+                    </label>
+
+                    <!-- Grammar callouts toggle -->
+                    <label class="flex items-center gap-2 cursor-pointer bg-slate-950 px-3 py-2 rounded-xl border border-slate-800 transition hover:bg-slate-800">
+                        <input type="checkbox" id="toggleArticleTips" checked onchange="toggleArticleCallouts()" class="accent-cyan-400 w-4 h-4 rounded">
+                        <span class="text-slate-300">重點筆記解析</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Main Reading Article Feed -->
+            <div class="bg-slate-900/95 rounded-3xl p-6 sm:p-8 border-2 border-cyan-500/40 shadow-2xl space-y-8">
+                
+                <!-- Article Header Title -->
+                <div class="text-center border-b border-slate-800 pb-6 space-y-2">
+                    <span class="text-xs text-cyan-400 font-bold uppercase tracking-wider font-fun">Textbook P.41 ~ P.42</span>
+                    <h2 class="text-3xl sm:text-4xl font-black font-fun text-white tracking-wide">
+                        Are You Sharing Lies?
+                    </h2>
+                    <p class="text-sm text-slate-400 font-medium">你正在分享謊言嗎？・網路資訊判讀全攻略</p>
+                </div>
+
+                <!-- Part 1: Paragraph 1 & 2 (P.41) -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2 text-xs font-bold text-cyan-400 uppercase tracking-wider font-fun">
+                        <i class="fa-solid fa-newspaper"></i> 第一部分：網路貼文與假新聞的由來 (P.41)
+                    </div>
+
+                    <div class="space-y-3" id="articlePart1Container">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Part 2: 3 Fact-checking Steps & Warning (P.42) -->
+                <div class="space-y-4 pt-4 border-t border-slate-800">
+                    <div class="flex items-center gap-2 text-xs font-bold text-teal-400 uppercase tracking-wider font-fun">
+                        <i class="fa-solid fa-list-check"></i> 第二部分：查證三大步驟與三思而行 (P.42)
+                    </div>
+
+                    <div class="space-y-3" id="articlePart2Container">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 3: GRAPHIC ORGANIZER & COMPREHENSION (P.43) -->
+        <!-- ========================================== -->
+        <section id="sec-after" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-teal-600 via-cyan-600 to-blue-700 rounded-3xl p-6 text-white shadow-xl flex justify-between items-center">
+                <div>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black uppercase font-fun">Textbook P.43</span>
+                    <h2 class="text-2xl md:text-3xl font-black font-fun mt-2">After You Read: 閱讀架構圖與理解</h2>
+                    <p class="text-teal-100 text-sm mt-1">根據課文內容完成 Problem & Solutions 組織圖，並掌握閱讀主旨！</p>
+                </div>
+                <div class="text-5xl hidden sm:block">📊</div>
+            </div>
+
+            <!-- Graphic Organizer Box -->
+            <div class="bg-slate-900/90 rounded-3xl p-6 border-2 border-teal-500/40 shadow-2xl space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl">🧩</span>
+                        <h3 class="text-lg font-black font-fun text-white">Using Graphic Organizers (完成課本組織圖)</h3>
+                    </div>
+                    <span class="text-xs text-amber-400 font-bold">請填入缺空單字</span>
+                </div>
+
+                <!-- Problem Box -->
+                <div class="bg-slate-950 p-5 rounded-2xl border-2 border-rose-500/40 space-y-3">
+                    <span class="bg-rose-500/20 text-rose-300 font-black font-fun text-xs px-3 py-1 rounded-full border border-rose-500/30">
+                        Problem (面臨的問題)
+                    </span>
+                    <div class="text-sm leading-relaxed text-slate-200 space-y-2">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span>There's a lot of fake information online because</span>
+                            <input type="text" id="go_p1" placeholder="anybody" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1 text-xs text-amber-300 font-bold w-24 focus:border-cyan-400">
+                            <span>can post anything on the Internet.</span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span>People may spread fake information</span>
+                            <input type="text" id="go_p2" placeholder="without" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1 text-xs text-amber-300 font-bold w-24 focus:border-cyan-400">
+                            <span>knowing it.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Solutions Box -->
+                <div class="bg-slate-950 p-5 rounded-2xl border-2 border-teal-500/40 space-y-4">
+                    <span class="bg-teal-500/20 text-teal-300 font-black font-fun text-xs px-3 py-1 rounded-full border border-teal-500/30">
+                        Solutions (三大解決妙招)
+                    </span>
+                    <div class="space-y-3 text-sm text-slate-200">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="font-bold text-teal-400">1.</span>
+                            <span>Make sure the writer and the source are</span>
+                            <input type="text" id="go_s1" placeholder="real" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1 text-xs text-amber-300 font-bold w-20 focus:border-cyan-400">
+                            <span>.</span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="font-bold text-teal-400">2.</span>
+                            <span>If there are</span>
+                            <input type="text" id="go_s2_1" placeholder="spelling" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1 text-xs text-amber-300 font-bold w-24 focus:border-cyan-400">
+                            <input type="text" id="go_s2_2" placeholder="mistakes" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1 text-xs text-amber-300 font-bold w-24 focus:border-cyan-400">
+                            <span>in the post, then it might be fake.</span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="font-bold text-teal-400">3.</span>
+                            <span>Visit a fact-checking</span>
+                            <input type="text" id="go_s3_1" placeholder="web" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1 text-xs text-amber-300 font-bold w-16 focus:border-cyan-400">
+                            <input type="text" id="go_s3_2" placeholder="page" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1 text-xs text-amber-300 font-bold w-16 focus:border-cyan-400">
+                            <span>.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between pt-2">
+                    <button onclick="checkGraphicOrganizer()" class="bg-teal-600 hover:bg-teal-500 text-slate-950 font-black text-xs px-5 py-2.5 rounded-2xl game-btn-shadow">
+                        檢查組織圖答案
+                    </button>
+                    <div id="goResult" class="text-xs font-bold"></div>
+                </div>
+            </div>
+
+            <!-- Reading Comprehension Main Idea Question (P.43) -->
+            <div class="bg-slate-900/90 rounded-3xl p-6 border-2 border-slate-800 shadow-xl space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                    <h3 class="text-base font-bold text-white font-fun">Reading Comprehension 課文理解選擇題</h3>
+                    <span class="text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-xl">main 主要的 [men]</span>
+                </div>
+                <p class="font-bold text-slate-100 text-sm">What is the main idea of the reading?</p>
+                <div class="space-y-2.5 text-xs sm:text-sm">
+                    <button onclick="checkMainIdea('A')" id="compBtn-A" class="w-full text-left p-3.5 rounded-2xl bg-slate-950 border border-slate-800 hover:border-teal-400 text-slate-300 transition">
+                        (A) Everything on the Internet is fake.
+                    </button>
+                    <button onclick="checkMainIdea('B')" id="compBtn-B" class="w-full text-left p-3.5 rounded-2xl bg-slate-950 border border-slate-800 hover:border-teal-400 text-slate-300 transition">
+                        (B) Checking for spelling mistakes in your posts is important.
+                    </button>
+                    <button onclick="checkMainIdea('C')" id="compBtn-C" class="w-full text-left p-3.5 rounded-2xl bg-slate-950 border border-slate-800 hover:border-teal-400 text-slate-300 transition">
+                        (C) People have to check information before they share it with others.
+                    </button>
+                </div>
+                <div id="compFeedback" class="hidden p-3.5 rounded-2xl text-xs font-medium leading-relaxed"></div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 4: FACT-CHECKING DETECTIVE (P.44) -->
+        <!-- ========================================== -->
+        <section id="sec-detective" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-rose-600 via-amber-600 to-purple-700 rounded-3xl p-6 text-white shadow-xl flex justify-between items-center">
+                <div>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black uppercase font-fun">Textbook P.44 Project</span>
+                    <h2 class="text-2xl md:text-3xl font-black font-fun mt-2">🕵️‍♂️ 假訊息事實查核大偵探</h2>
+                    <p class="text-amber-100 text-sm mt-1">利用課文建議的查證三大招，找出這篇「檸檬對抗COVID-19」網路報導破綻！</p>
+                </div>
+                <div class="text-5xl hidden sm:block">🔍</div>
+            </div>
+
+            <!-- Simulated Browser Window -->
+            <div class="bg-slate-900 rounded-3xl border-2 border-slate-700 shadow-2xl overflow-hidden">
+                <!-- Browser Bar -->
+                <div class="bg-slate-800 px-4 py-3 flex items-center justify-between border-b border-slate-700">
+                    <div class="flex items-center gap-2">
+                        <span class="browser-bar-dot bg-rose-500"></span>
+                        <span class="browser-bar-dot bg-amber-400"></span>
+                        <span class="browser-bar-dot bg-emerald-500"></span>
+                        <span class="ml-3 text-xs text-slate-400 font-mono bg-slate-900 px-3 py-1 rounded-full flex items-center gap-1.5 border border-slate-700">
+                            <i class="fa-solid fa-lock text-rose-400 text-[10px]"></i>
+                            <span class="text-rose-300 font-bold underline cursor-pointer" onclick="revealClue(4)">http://Breaking-CNN.com/study-lemons-covid19</span>
+                        </span>
+                    </div>
+                    <span class="text-xs text-amber-400 font-bold flex items-center gap-1">
+                        <i class="fa-solid fa-magnifying-glass"></i> 點擊文章疑點進行調查！
+                    </span>
+                </div>
+
+                <!-- Simulated News Article Page -->
+                <div class="p-6 sm:p-8 space-y-5 bg-slate-950 text-slate-100">
+                    <!-- News Logo & Headline -->
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2 text-cyan-400 font-bold font-fun text-sm">
+                            <i class="fa-solid fa-globe"></i> Breaking-CNN.com (新聞即時報)
+                        </div>
+                        <h3 class="text-2xl sm:text-3xl font-black font-fun text-white">
+                            A Study Shows That Lemons Help Fight COVID-19
+                        </h3>
+                        <div class="text-xs text-slate-400 flex flex-wrap items-center gap-3 pt-1 border-b border-slate-800 pb-3">
+                            <span>by <strong onclick="revealClue(1)" class="text-cyan-400 hover:text-amber-300 underline cursor-pointer font-bold">Clark Kent</strong></span>
+                            <span>•</span>
+                            <span>July 13, 2020 | 7:14 a.m.</span>
+                            <div class="flex gap-2 ml-auto text-slate-500">
+                                <i class="fa-brands fa-facebook"></i>
+                                <i class="fa-brands fa-twitter"></i>
+                                <i class="fa-brands fa-instagram"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article Body with interactive clickable clues -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+                        <div class="md:col-span-2 space-y-4 text-sm sm:text-base leading-relaxed text-slate-300 font-normal">
+                            <p>
+                                In an <span onclick="revealClue(2)" class="bg-rose-500/20 text-rose-300 px-1.5 py-0.5 rounded font-bold underline decoration-rose-400 cursor-pointer" title="點擊調查此單字">interviaw</span> about lemons as a way to fight COVID-19, <span onclick="revealClue(3)" class="bg-cyan-500/20 text-cyan-300 px-1.5 py-0.5 rounded font-bold underline decoration-cyan-400 cursor-pointer" title="點擊調查此人物">Dr. Emmett Brown</span> from the New York City Department of Health said:
+                            </p>
+                            <blockquote class="border-l-4 border-amber-400 pl-4 py-1 italic text-slate-200 bg-slate-900/60 rounded-r-xl">
+                                "Drinking warm lemon water can help the body fight COVID-19. We asked 1,000 people to drink it every day for a month. After thirty days, we found that all of them were free from COVID-19. This may be because the vitamin C in the lemons helped protect them."
+                            </blockquote>
+                        </div>
+
+                        <!-- Picture Box -->
+                        <div class="bg-slate-900 p-3 rounded-2xl border border-slate-800 space-y-2 text-center">
+                            <div class="text-6xl py-4 bg-slate-950 rounded-xl">🍋🥤</div>
+                            <p class="text-[11px] text-slate-400">熱檸檬水與維他命C示意圖</p>
+                        </div>
+                    </div>
+
+                    <!-- Detective Clues Log Box -->
+                    <div class="bg-slate-900 p-5 rounded-2xl border-2 border-amber-500/40 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-amber-400 uppercase font-fun flex items-center gap-1.5">
+                                <i class="fa-solid fa-clipboard-check"></i> 偵探線索紀錄簿 (<span id="cluesFoundCount">0</span> / 4 項已解鎖)
+                            </span>
+                            <button onclick="stampFakeNewsVerdict()" id="verdictBtn" disabled class="bg-slate-800 text-slate-500 text-xs font-black px-4 py-2 rounded-xl transition">
+                                蓋上事實查核判決印章 🛡️
+                            </button>
+                        </div>
+                        <div id="cluesLog" class="space-y-2 text-xs">
+                            <div class="text-slate-500 italic">點擊上方新聞中的作者、名字、拼字或網址進行線索蒐集...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 5: VOCABULARY & PHRASES -->
+        <!-- ========================================== -->
+        <section id="sec-vocab" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-amber-600 to-rose-600 text-white rounded-3xl p-6 shadow-xl flex justify-between items-center">
+                <div>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black uppercase font-fun">Word Bank</span>
+                    <h2 class="text-2xl md:text-3xl font-black font-fun mt-2">🔤 Unit 2 閱讀核心字彙與片語庫</h2>
+                    <p class="text-amber-100 text-xs md:text-sm mt-1">掌握課本 P.41 ~ P.42 全部 18 個應用與延伸詞彙，點擊立即朗讀發音！</p>
+                </div>
+                <div class="text-5xl hidden sm:block">📖</div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="vocabGrid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="mt-12 border-t border-slate-800/80 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div>
+                Unit 2: The Movie Looks Exciting ・ 課文閱讀篇 (Reading)
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="hover:text-cyan-400 transition">學習總覽首頁</a>
+                <a href="u2_dialogue.html" class="hover:text-rose-400 transition">第二課對話篇</a>
+                <a href="u2_pattern.html" class="hover:text-purple-400 transition">第二課句型篇</a>
+                <a href="#top" class="hover:text-cyan-400 transition">回頂端 ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- 1. DATA STRUCTURES (TEXTBOOK ACCURATE) ---
+        const articleSentences = [
+            // Part 1 (P.41)
+            {
+                id: 1,
+                part: 1,
+                en: "Does this ever happen to you?",
+                zh: "這曾經發生在你身上嗎？",
+                note: "💡 this 指下一句即將描述的情境。"
+            },
+            {
+                id: 2,
+                part: 1,
+                en: "You're reading a news post, and it's so interesting that you share it with your friends in a Line group right away.",
+                zh: "你正在閱讀一篇新聞貼文，內容十分有趣以致於你立刻在 Line 群組分享給你的朋友們。",
+                note: "💡 so... that... (如此...以致於...)；right away (立刻，馬上)。"
+            },
+            {
+                id: 3,
+                part: 1,
+                en: "If so, you may be spreading fake information.",
+                zh: "如果你真的這麼做，你有可能在分享假資訊。",
+                note: "💡 If so (若是如此)；spread (散播，spread-spread-spread)；fake (假的)。"
+            },
+            {
+                id: 4,
+                part: 1,
+                en: "TV or newspaper companies usually check the facts before they report the news.",
+                zh: "電視或報紙公司通常在報導新聞前會查證事實。",
+                note: "💡 newspaper (報紙)；check the facts (查核事實)；report (報導)。"
+            },
+            {
+                id: 5,
+                part: 1,
+                en: "However, there's nobody to help check the facts on the Internet.",
+                zh: "然而，沒有人幫忙查證網路上的資訊真偽。",
+                note: "💡 However (然而，置句首後加逗號)；nobody (沒有人)。"
+            },
+            {
+                id: 6,
+                part: 1,
+                en: "Anybody can post anything online.",
+                zh: "任何人都可以上網張貼任何東西。",
+                note: "💡 anybody (= anyone，任何人)；post (發文，張貼)。"
+            },
+            {
+                id: 7,
+                part: 1,
+                en: "What's more, some people even write pieces of fake news by design to get as many hits as possible.",
+                zh: "而且，有些人甚至故意寫假新聞，為了盡可能獲得大量的點擊數。",
+                note: "💡 What's more (此外，而且)；pieces of news (一則則新聞)；by design (故意地)；as many hits as possible (盡可能多的點擊率)。"
+            },
+            {
+                id: 8,
+                part: 1,
+                en: "So, what can you do?",
+                zh: "那麼，你可以做些什麼？",
+                note: "💡 轉折問句，引出下文的三大因應妙招。"
+            },
+
+            // Part 2 (P.42)
+            {
+                id: 9,
+                part: 2,
+                en: "The Internet can be full of lies.",
+                zh: "網路世界可能充斥著謊言。",
+                note: "💡 be full of (充滿著...)；lie (謊言)。"
+            },
+            {
+                id: 10,
+                part: 2,
+                en: "Some information is true, and some is not, so it is important to learn to tell the difference. Here are some ways.",
+                zh: "有些資訊是真的，有些則不是，所以學會分辨差異很重要。這裡有些方法。",
+                note: "💡 tell the difference (分辨差異，tell 此處為「分辨」)；it is important to learn to..."
+            },
+            {
+                id: 11,
+                part: 2,
+                en: "1. Do some digging on the writer and the source. Make sure they are real.",
+                zh: "1. 調查作者和來源。確保他們是真的。",
+                note: "💡 do some digging (深入挖掘調查，dig-dug-dug)；source (來源)；real (真實的)。"
+            },
+            {
+                id: 12,
+                part: 2,
+                en: "2. Look at the sentences in the post. Are there spelling mistakes? If so, then it might be fake.",
+                zh: "2. 查看貼文中的句子。是否有拼字錯誤？如果有，那麼它就有可能是假的。",
+                note: "💡 sentence (句子)；spelling mistakes (拼字錯誤)；might be (可能是)。"
+            },
+            {
+                id: 13,
+                part: 2,
+                en: "3. Visit a fact-checking web page. Checking information is always a good idea.",
+                zh: "3. 造訪事實查證網頁。檢查資訊永遠是個好主意。",
+                note: "💡 fact-checking (事實查核)；web page (網頁)；動名詞 Checking 作主詞。"
+            },
+            {
+                id: 14,
+                part: 2,
+                en: "Now you have learned some tips for telling fake news from real news.",
+                zh: "現在你已經學到一些區分真新聞和假新聞的訣竅了。",
+                note: "💡 tell A from B (區分A與B)；tips (訣竅，秘訣)。"
+            },
+            {
+                id: 15,
+                part: 2,
+                en: "When you read something surprising next time, think twice before you share it.",
+                zh: "下一次當你讀到某件令人吃驚的事情時，分享前請三思。",
+                note: "💡 something surprising (不定代名詞後置修飾，令人吃驚用 -ing)；think twice (三思)。"
+            },
+            {
+                id: 16,
+                part: 2,
+                en: "Don't let people trick you into spreading lies.",
+                zh: "不要讓人騙你去散播謊言。",
+                note: "💡 trick sb into V-ing (誘騙某人去做...，介系詞 into 後接動名詞)。"
+            }
+        ];
+
+        // 18 Vocabulary Words
+        const readingVocab = [
+            { word: "lie", pos: "n. / v.", zh: "謊言；說謊 (現在分詞 lying)", ex: "The Internet can be full of lies." },
+            { word: "fake", pos: "adj.", zh: "假的；偽造的", ex: "You may be spreading fake information." },
+            { word: "newspaper", pos: "n.", zh: "報紙", ex: "Newspaper companies check the facts." },
+            { word: "nobody", pos: "pron.", zh: "無人；沒有人", ex: "There's nobody to help check the facts." },
+            { word: "anybody", pos: "pron.", zh: "任何人 (= anyone)", ex: "Anybody can post anything online." },
+            { word: "piece", pos: "n.", zh: "（一）則；張；片", ex: "They write pieces of fake news." },
+            { word: "post", pos: "v. / n.", zh: "張貼；貼文", ex: "You're reading a news post." },
+            { word: "right away", pos: "adv. phr.", zh: "立刻；馬上", ex: "You share it with your friends right away." },
+            { word: "hit", pos: "n.", zh: "點擊數；成功事物", ex: "To get as many hits as possible." },
+            { word: "spread", pos: "v.", zh: "散播；蔓延 (spread-spread-spread)", ex: "Stop spreading lies on the Net." },
+            { word: "by design", pos: "adv. phr.", zh: "故意地；刻意地", ex: "They wrote the story by design." },
+            { word: "dig", pos: "v.", zh: "挖掘；探究 (dig-dug-dug)", ex: "Do some digging on the writer." },
+            { word: "sentence", pos: "n.", zh: "句子", ex: "Look at the sentences in the post." },
+            { word: "spell", pos: "v.", zh: "拼字", ex: "Are there spelling mistakes in the article?" },
+            { word: "trick", pos: "v. / n.", zh: "誘騙；詭計 (trick sb into V-ing)", ex: "Don't let people trick you into doing it." },
+            { word: "tell", pos: "v.", zh: "分辨；區別 (tell A from B)", ex: "It is important to tell the difference." },
+            { word: "difference", pos: "n.", zh: "差別；差異", ex: "Can you tell the difference between them?" },
+            { word: "source", pos: "n.", zh: "來源；出處", ex: "Make sure the writer and the source are real." }
+        ];
+
+        // --- 2. AUDIOFX ---
+        const AudioFX = {
+            ctx: null,
+            muted: false,
+            init() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+            },
+            toggleMute() {
+                this.muted = !this.muted;
+                const icon = document.getElementById('soundIcon');
+                if (this.muted) {
+                    icon.className = 'fa-solid fa-volume-xmark text-rose-400';
+                } else {
+                    icon.className = 'fa-solid fa-volume-high text-cyan-400';
+                    this.playCoin();
+                }
+            },
+            playCorrect() {
+                if (this.muted) return;
+                try {
+                    this.init();
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, now);
+                    osc.frequency.setValueAtTime(659.25, now + 0.1);
+                    osc.frequency.setValueAtTime(783.99, now + 0.2);
+                    osc.frequency.setValueAtTime(1046.50, now + 0.3);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.45);
+                    osc.connect(gain); gain.connect(this.ctx.destination);
+                    osc.start(now); osc.stop(now + 0.45);
+                } catch(e) {}
+            },
+            playWrong() {
+                if (this.muted) return;
+                try {
+                    this.init();
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(220, now);
+                    osc.frequency.setValueAtTime(164.81, now + 0.12);
+                    gain.gain.setValueAtTime(0.18, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.28);
+                    osc.connect(gain); gain.connect(this.ctx.destination);
+                    osc.start(now); osc.stop(now + 0.28);
+                } catch(e) {}
+            },
+            playCoin() {
+                if (this.muted) return;
+                try {
+                    this.init();
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(987.77, now);
+                    osc.frequency.setValueAtTime(1318.51, now + 0.08);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                    osc.connect(gain); gain.connect(this.ctx.destination);
+                    osc.start(now); osc.stop(now + 0.3);
+                } catch(e) {}
+            },
+            playLevelUp() {
+                if (this.muted) return;
+                try {
+                    this.init();
+                    const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+                    notes.forEach((freq, idx) => {
+                        const now = this.ctx.currentTime + idx * 0.1;
+                        const osc = this.ctx.createOscillator();
+                        const gain = this.ctx.createGain();
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(freq, now);
+                        gain.gain.setValueAtTime(0.2, now);
+                        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+                        osc.connect(gain); gain.connect(this.ctx.destination);
+                        osc.start(now); osc.stop(now + 0.2);
+                    });
+                } catch(e) {}
+            }
+        };
+
+        // --- 3. GAMIFICATION STATE ---
+        let player = { xp: 0, level: 1, coins: 50 };
+
+        function loadProgress() {
+            try {
+                const saved = localStorage.getItem('kevinchang_u2_player');
+                if (saved) player = Object.assign(player, JSON.parse(saved));
+            } catch(e) {}
+            updateStatusUI();
+        }
+
+        function saveProgress() {
+            try {
+                localStorage.setItem('kevinchang_u2_player', JSON.stringify(player));
+            } catch(e) {}
+        }
+
+        function addXP(amount) {
+            player.xp += amount;
+            AudioFX.playCoin();
+            if (player.xp >= 100) {
+                player.level += Math.floor(player.xp / 100);
+                player.xp = player.xp % 100;
+                player.coins += 20;
+                AudioFX.playLevelUp();
+                confetti({ particleCount: 80, spread: 70 });
+            }
+            saveProgress();
+            updateStatusUI();
+        }
+
+        function updateStatusUI() {
+            document.getElementById('levelDisplay').innerText = player.level;
+            document.getElementById('xpText').innerText = `${player.xp} / 100`;
+            document.getElementById('xpBar').style.width = `${player.xp}%`;
+            document.getElementById('coinCount').innerText = player.coins;
+        }
+
+        // --- 4. TTS CONTROLLER ---
+        let isPlayingArticle = false;
+        let articlePlayIdx = 0;
+
+        function speakText(text, onEndCallback = null) {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.95;
+            if (onEndCallback) {
+                utterance.onend = onEndCallback;
+                utterance.onerror = onEndCallback;
+            }
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function stopArticleSpeech() {
+            window.speechSynthesis.cancel();
+            isPlayingArticle = false;
+            document.getElementById('playArticleIcon').className = 'fa-solid fa-play';
+            document.getElementById('playArticleText').innerText = '播放全篇文章朗讀 (+25 XP)';
+            document.querySelectorAll('.sentence-row').forEach(r => r.classList.remove('ring-2', 'ring-cyan-400', 'bg-slate-800'));
+        }
+
+        function togglePlayArticle() {
+            if (isPlayingArticle) {
+                stopArticleSpeech();
+            } else {
+                isPlayingArticle = true;
+                articlePlayIdx = 0;
+                document.getElementById('playArticleIcon').className = 'fa-solid fa-pause';
+                document.getElementById('playArticleText').innerText = '暫停朗讀';
+                playNextArticleSentence();
+            }
+        }
+
+        function playNextArticleSentence() {
+            if (!isPlayingArticle || articlePlayIdx >= articleSentences.length) {
+                if (isPlayingArticle) {
+                    addXP(25);
+                    confetti({ particleCount: 70 });
+                }
+                stopArticleSpeech();
+                return;
+            }
+
+            const item = articleSentences[articlePlayIdx];
+            highlightSentenceRow(item.id);
+
+            speakText(item.en, () => {
+                if (isPlayingArticle) {
+                    articlePlayIdx++;
+                    setTimeout(playNextArticleSentence, 500);
+                }
+            });
+        }
+
+        function highlightSentenceRow(id) {
+            document.querySelectorAll('.sentence-row').forEach(r => r.classList.remove('ring-2', 'ring-cyan-400', 'bg-slate-800'));
+            const target = document.getElementById(`sRow-${id}`);
+            if (target) {
+                target.classList.add('ring-2', 'ring-cyan-400', 'bg-slate-800');
+                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        function playSingleSentence(id) {
+            const item = articleSentences.find(s => s.id === id);
+            if (!item) return;
+            highlightSentenceRow(id);
+            speakText(item.en, () => {
+                setTimeout(() => {
+                    const row = document.getElementById(`sRow-${id}`);
+                    if (row) row.classList.remove('ring-2', 'ring-cyan-400');
+                }, 800);
+            });
+            addXP(2);
+        }
+
+        // --- 5. RENDER ARTICLE SENTENCES ---
+        function renderArticle() {
+            const p1 = document.getElementById('articlePart1Container');
+            const p2 = document.getElementById('articlePart2Container');
+            p1.innerHTML = '';
+            p2.innerHTML = '';
+
+            articleSentences.forEach(s => {
+                const html = `
+                    <div id="sRow-${s.id}" class="sentence-row bg-slate-950 p-4 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition duration-200 space-y-2 group">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="text-base sm:text-lg font-bold text-slate-100 font-fun leading-relaxed">
+                                ${s.en}
+                            </div>
+                            <button onclick="playSingleSentence(${s.id})" class="text-xs bg-slate-900 hover:bg-cyan-500 hover:text-slate-950 text-cyan-300 p-2 rounded-xl border border-slate-800 transition shrink-0" title="單句發音">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
+                        </div>
+                        <div class="article-zh text-xs sm:text-sm text-slate-400 font-medium">
+                            ${s.zh}
+                        </div>
+                        <div class="article-tip text-xs text-cyan-300/90 bg-slate-900 p-2.5 rounded-xl border border-slate-800 flex items-start gap-2">
+                            <span>📌</span>
+                            <div>${s.note}</div>
+                        </div>
+                    </div>
+                `;
+
+                if (s.part === 1) p1.innerHTML += html;
+                else p2.innerHTML += html;
+            });
+        }
+
+        function toggleArticleTranslation() {
+            const show = document.getElementById('toggleArticleZh').checked;
+            document.querySelectorAll('.article-zh').forEach(el => el.style.display = show ? 'block' : 'none');
+        }
+
+        function toggleArticleCallouts() {
+            const show = document.getElementById('toggleArticleTips').checked;
+            document.querySelectorAll('.article-tip').forEach(el => el.style.display = show ? 'flex' : 'none');
+        }
+
+        // --- 6. BEFORE & WHILE YOU READ LOGIC ---
+        function selectShareHabit(yes) {
+            AudioFX.playCoin();
+            const feed = document.getElementById('shareHabitFeedback');
+            feed.classList.remove('hidden');
+            if (yes) {
+                feed.innerText = "👍 感謝分享！在社群上與好友交流很棒，但記得在轉發前一定要停看聽查證喔！";
+                document.getElementById('btn-share-yes').classList.add('bg-cyan-600', 'text-slate-950', 'font-black');
+                document.getElementById('btn-share-no').classList.remove('bg-rose-600', 'text-white');
+            } else {
+                feed.innerText = "🛡️ 謹慎瀏覽也是一種好習慣！面對可疑新聞時，不隨便轉傳就是抵禦假訊息的第一道防線！";
+                document.getElementById('btn-share-no').classList.add('bg-rose-600', 'text-white', 'font-black');
+                document.getElementById('btn-share-yes').classList.remove('bg-cyan-600', 'text-slate-950');
+            }
+            addXP(5);
+        }
+
+        function checkTopic(idx) {
+            const feed = document.getElementById('topicFeedback');
+            feed.classList.remove('hidden');
+            if (idx === 0) {
+                AudioFX.playCorrect();
+                addXP(10);
+                document.getElementById('topicOpt-0').classList.add('bg-teal-600', 'text-slate-950', 'font-black');
+                document.getElementById('topicIcon-0').classList.remove('hidden');
+                feed.className = 'text-xs font-bold pt-1 text-emerald-400';
+                feed.innerText = "✓ 恭喜答對！文章主題即為「Fake information online (網路假訊息)」！";
+            } else {
+                AudioFX.playWrong();
+                feed.className = 'text-xs font-bold pt-1 text-rose-400';
+                feed.innerText = "✗ 再看一次標題與第一段喔！文章是在討論網路假訊息 (Fake information online)！";
+            }
+        }
+
+        // --- 7. GRAPHIC ORGANIZER & COMPREHENSION ---
+        function checkGraphicOrganizer() {
+            const p1 = document.getElementById('go_p1').value.trim().toLowerCase();
+            const p2 = document.getElementById('go_p2').value.trim().toLowerCase();
+            const s1 = document.getElementById('go_s1').value.trim().toLowerCase();
+            const s2_1 = document.getElementById('go_s2_1').value.trim().toLowerCase();
+            const s2_2 = document.getElementById('go_s2_2').value.trim().toLowerCase();
+            const s3_1 = document.getElementById('go_s3_1').value.trim().toLowerCase();
+            const s3_2 = document.getElementById('go_s3_2').value.trim().toLowerCase();
+            const res = document.getElementById('goResult');
+
+            const okP = (p1 === 'anybody' || p1 === 'anyone') && p2 === 'without';
+            const okS1 = s1 === 'real';
+            const okS2 = s2_1 === 'spelling' && (s2_2 === 'mistakes' || s2_2 === 'mistake');
+            const okS3 = s3_1 === 'web' && s3_2 === 'page';
+
+            if (okP && okS1 && okS2 && okS3) {
+                AudioFX.playCorrect();
+                addXP(25);
+                confetti({ particleCount: 70 });
+                res.className = 'text-xs font-bold text-emerald-400';
+                res.innerText = "✓ 完美全對！成功整理出假訊息的成因與查核三大招！";
+            } else {
+                AudioFX.playWrong();
+                res.className = 'text-xs font-bold text-rose-400';
+                res.innerText = "✗ 答案有些小錯誤，請確認：anybody / without / real / spelling mistakes / web page";
+            }
+        }
+
+        function checkMainIdea(choice) {
+            const feed = document.getElementById('compFeedback');
+            feed.classList.remove('hidden');
+            ['A','B','C'].forEach(c => {
+                document.getElementById(`compBtn-${c}`).className = 'w-full text-left p-3.5 rounded-2xl bg-slate-950 border border-slate-800 text-slate-300 transition';
+            });
+
+            if (choice === 'C') {
+                document.getElementById('compBtn-C').classList.add('bg-teal-600', 'text-slate-950', 'font-black');
+                AudioFX.playCorrect();
+                addXP(15);
+                feed.className = 'p-3.5 rounded-2xl text-xs font-medium leading-relaxed bg-emerald-950/60 border border-emerald-500/40 text-emerald-200 block';
+                feed.innerHTML = "<strong>🎉 正確答案為 (C)！</strong><br>課文主旨圍繞在人們可能在無形中散播假資訊，所以在分享任何資訊前仔細查證與思考十分重要！";
+            } else {
+                document.getElementById(`compBtn-${choice}`).classList.add('bg-rose-600', 'text-white');
+                document.getElementById('compBtn-C').classList.add('border-teal-400', 'text-teal-300');
+                AudioFX.playWrong();
+                feed.className = 'p-3.5 rounded-2xl text-xs font-medium leading-relaxed bg-rose-950/60 border border-rose-500/40 text-rose-200 block';
+                feed.innerHTML = `<strong>❌ (選了 ${choice}) 答錯囉！正解為 (C)。</strong><br>課文並非說網路上所有東西都是假的，而是提醒大家分享前必須主動查證。`;
+            }
+        }
+
+        // --- 8. DETECTIVE PROJECT (P.44) ---
+        let unlockedClues = new Set();
+
+        function revealClue(id) {
+            AudioFX.playCoin();
+            unlockedClues.add(id);
+            document.getElementById('cluesFoundCount').innerText = unlockedClues.size;
+
+            const log = document.getElementById('cluesLog');
+            if (unlockedClues.size === 1) log.innerHTML = '';
+
+            let clueHtml = "";
+            if (id === 1) {
+                clueHtml = `
+                    <div class="bg-slate-950 p-3 rounded-xl border border-cyan-500/40 text-cyan-200">
+                        🔍 <strong>線索 1【作者身分破綻】：</strong> 作者署名 <em>Clark Kent (克拉克・肯特)</em>，這其實是著名虛構超級英雄<strong>「超人 (Superman)」</strong>的地球化名！並非專業新聞醫藥記者！
+                    </div>
+                `;
+            } else if (id === 2) {
+                clueHtml = `
+                    <div class="bg-slate-950 p-3 rounded-xl border border-rose-500/40 text-rose-200">
+                        🔍 <strong>線索 2【拼字嚴重錯誤】：</strong> 第一行將採訪「interview」拼錯成 <em>「interviaw」</em>！嚴謹的主流新聞媒體絕不可能犯下此種低級拼字疏失！
+                    </div>
+                `;
+            } else if (id === 3) {
+                clueHtml = `
+                    <div class="bg-slate-950 p-3 rounded-xl border border-amber-500/40 text-amber-200">
+                        🔍 <strong>線索 3【專家來源虛構】：</strong> 查證紐約市衛生局 (NYC Health) 官網，根本沒有 <em>Dr. Emmett Brown</em>！這其實是經典科幻電影《回到未來》(Back to the Future) 裡愛因斯坦博士的名字！
+                    </div>
+                `;
+            } else if (id === 4) {
+                clueHtml = `
+                    <div class="bg-slate-950 p-3 rounded-xl border border-purple-500/40 text-purple-200">
+                        🔍 <strong>線索 4【仿冒釣魚網址】：</strong> 網址為 <em>Breaking-CNN.com</em>，借用 CNN 名義偽造網域，並非真實的官方網站 <em>cnn.com</em>！
+                    </div>
+                `;
+            }
+
+            log.innerHTML += clueHtml;
+
+            if (unlockedClues.size >= 3) {
+                const btn = document.getElementById('verdictBtn');
+                btn.disabled = false;
+                btn.className = 'bg-gradient-to-r from-rose-500 to-amber-500 text-slate-950 text-xs font-black px-5 py-2 rounded-xl transition shadow game-btn-shadow animate-pulse';
+            }
+        }
+
+        function stampFakeNewsVerdict() {
+            AudioFX.playCorrect();
+            addXP(30);
+            player.coins += 25;
+            updateStatusUI();
+            confetti({ particleCount: 100, spread: 80 });
+
+            alert("🚨【查核判決宣判】🚨\n\n經本首席偵探多方查證：\n1. 作者 Clark Kent 為虛構超人本名！\n2. 專家 Dr. Emmett Brown 為《回到未來》博士！\n3. 第一行 interview 拼錯成 interviaw！\n4. 網址 Breaking-CNN.com 為山寨釣魚站！\n\n★ 判決結果：100% 杜撰之不實假新聞！請勿轉發！★\n獎勵 +30 XP & +25 金幣！");
+        }
+
+        // --- 9. VOCABULARY GRID ---
+        function renderVocab() {
+            const grid = document.getElementById('vocabGrid');
+            grid.innerHTML = '';
+            readingVocab.forEach(v => {
+                grid.innerHTML += `
+                    <div class="bg-slate-900/90 rounded-2xl p-4 border border-slate-800 hover:border-cyan-400/60 transition shadow flex flex-col justify-between space-y-2 group">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h4 class="text-base font-bold font-fun text-white group-hover:text-cyan-300 transition">${v.word}</h4>
+                                    <span class="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded font-mono">${v.pos}</span>
+                                </div>
+                                <p class="text-xs text-amber-400/90 font-bold mt-0.5">${v.zh}</p>
+                            </div>
+                            <button onclick="speakText('${v.word.replace(/'/g, "\\'")}')" class="text-xs text-slate-400 hover:text-cyan-400 p-1.5 rounded-lg bg-slate-950 border border-slate-800">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
+                        </div>
+                        <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800/80 text-xs text-slate-300">
+                            <span class="text-slate-500 font-bold">例句：</span> ${v.ex}
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // --- 10. TAB SWITCHER ---
+        function switchTab(tabId) {
+            ['before', 'article', 'after', 'detective', 'vocab'].forEach(t => {
+                const sec = document.getElementById(`sec-${t}`);
+                const btn = document.getElementById(`tab-${t}`);
+                if (t === tabId) {
+                    sec.classList.remove('hidden');
+                    btn.className = 'tab-btn flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-600 text-slate-950 font-black shadow-lg whitespace-nowrap transition';
+                } else {
+                    sec.classList.add('hidden');
+                    btn.className = 'tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition';
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadProgress();
+            renderArticle();
+            renderVocab();
+        });
+    </script>
+</body>
+</html>

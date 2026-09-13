@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 2 Grammar Studio: The Movie Looks Exciting 句型文法大師</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                        fun: ['Fredoka', 'cursive', 'sans-serif']
+                    },
+                    colors: {
+                        studio: {
+                            purple: '#7c3aed',
+                            indigo: '#4f46e5',
+                            rose: '#f43f5e',
+                            amber: '#f59e0b',
+                            cyan: '#06b6d4',
+                            emerald: '#10b981',
+                            dark: '#0b0f19'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 3.5s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2.5s infinite'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-6px)' }
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 15px rgba(124, 58, 237, 0.3)' },
+                            '50%': { boxShadow: '0 0 28px rgba(124, 58, 237, 0.7)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { height: 6px; width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        .game-btn-shadow {
+            box-shadow: 0 5px 0 0 rgba(0,0,0,0.35);
+            transition: all 0.12s ease;
+        }
+        .game-btn-shadow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 0 0 rgba(0,0,0,0.35);
+        }
+        .game-btn-shadow:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 0 rgba(0,0,0,0.35);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans pb-16 selection:bg-purple-400 selection:text-slate-950">
+
+    <!-- TOP STATUS BAR -->
+    <header class="bg-slate-900/95 border-b-2 border-slate-800 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 py-2.5 flex flex-wrap justify-between items-center gap-3">
+            
+            <!-- Brand & Unit Title -->
+            <div class="flex items-center gap-3">
+                <a href="index.html" title="返回學習首頁" class="bg-slate-800 hover:bg-purple-500 hover:text-white text-purple-300 p-2.5 rounded-2xl border border-slate-700 shadow-md transition flex items-center gap-1.5 font-bold text-xs md:text-sm">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="hidden sm:inline">學習首頁</span>
+                </a>
+                <a href="u2_dialogue.html" title="前往第二課對話篇" class="bg-slate-800 hover:bg-rose-500 hover:text-white text-rose-300 p-2.5 rounded-2xl border border-slate-700 shadow-md transition flex items-center gap-1.5 font-bold text-xs md:text-sm">
+                    <i class="fa-solid fa-clapperboard"></i>
+                    <span class="hidden sm:inline">對話篇</span>
+                </a>
+                <div class="relative bg-gradient-to-tr from-purple-600 via-indigo-600 to-rose-500 p-2.5 rounded-2xl shadow-lg animate-float text-white">
+                    <i class="fa-solid fa-wand-magic-sparkles text-2xl"></i>
+                    <span class="absolute -top-1 -right-1 bg-amber-400 text-slate-950 text-[10px] font-black px-1.5 py-0.5 rounded-full border-2 border-slate-900">U2</span>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs bg-purple-500/20 text-purple-300 border border-purple-500/30 font-bold px-2 py-0.5 rounded-md uppercase tracking-wider font-fun">Unit 2 Grammar</span>
+                        <span id="userRank" class="text-xs bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold px-2 py-0.5 rounded-md font-fun">文法特級大師</span>
+                    </div>
+                    <h1 class="text-lg md:text-xl font-black font-fun tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-300 to-amber-300">
+                        Grammar Focus & Usage 句型文法總修煉
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Gamification Status -->
+            <div class="flex items-center gap-3 bg-slate-900/90 px-3.5 py-1.5 rounded-2xl border border-slate-800 shadow-inner">
+                <div class="flex items-center gap-1.5 font-black font-fun text-sm text-amber-400">
+                    <span class="text-xs text-slate-400">LV.</span><span id="levelDisplay">1</span>
+                </div>
+                <div class="w-px h-5 bg-slate-800"></div>
+                <div class="flex flex-col w-24 sm:w-32">
+                    <div class="flex justify-between text-[10px] font-bold text-slate-300 mb-0.5">
+                        <span>XP</span>
+                        <span id="xpText" class="text-amber-400">0 / 100</span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden border border-slate-700">
+                        <div id="xpBar" class="bg-gradient-to-r from-purple-500 via-rose-500 to-amber-400 h-full transition-all duration-300 w-0"></div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 border-l border-slate-800 pl-2.5">
+                    <div class="flex items-center gap-1 text-amber-300 font-bold text-xs" title="金幣">
+                        <i class="fa-solid fa-coins text-amber-400"></i>
+                        <span id="coinCount">50</span>
+                    </div>
+                    <button onclick="AudioFX.toggleMute()" id="muteBtn" title="開關音效" class="text-slate-400 hover:text-purple-300 p-1 text-xs">
+                        <i class="fa-solid fa-volume-high" id="soundIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="bg-slate-950/90 px-4 border-t border-slate-800/80">
+            <div class="max-w-6xl mx-auto flex overflow-x-auto custom-scrollbar gap-2 py-2 text-xs md:text-sm font-bold">
+                <button onclick="switchTab('map')" id="tab-map" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-black shadow-lg whitespace-nowrap transition">
+                    <i class="fa-solid fa-sitemap text-base"></i> 🗺️ 句型全景圖 (Overview)
+                </button>
+                <button onclick="switchTab('focus1')" id="tab-focus1" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
+                    <i class="fa-solid fa-masks-theater text-base text-rose-400"></i> 1. 情緒形容詞 (P.35)
+                </button>
+                <button onclick="switchTab('focus2')" id="tab-focus2" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
+                    <i class="fa-solid fa-bolt-lightning text-base text-amber-400"></i> 2. so... that... (P.36)
+                </button>
+                <button onclick="switchTab('usageA')" id="tab-usageA" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
+                    <i class="fa-solid fa-ruler-vertical text-base text-emerald-400"></i> 3. enough... to... (P.37)
+                </button>
+                <button onclick="switchTab('usageB')" id="tab-usageB" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
+                    <i class="fa-solid fa-triangle-exclamation text-base text-sky-400"></i> 4. too... to... (P.38)
+                </button>
+                <button onclick="switchTab('transform')" id="tab-transform" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
+                    <i class="fa-solid fa-shuffle text-base text-pink-400"></i> 5. 三合一句型變換
+                </button>
+                <button onclick="switchTab('quiz')" id="tab-quiz" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
+                    <i class="fa-solid fa-trophy text-base text-amber-400"></i> 🏆 實戰大會考 (10題)
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 mt-6 flex-grow w-full">
+
+        <!-- ========================================== -->
+        <!-- TAB 1: GRAMMAR OVERVIEW MAP -->
+        <!-- ========================================== -->
+        <section id="sec-map" class="space-y-6">
+            <!-- Hero Banner -->
+            <div class="rounded-3xl bg-gradient-to-r from-purple-900/60 via-slate-900 to-indigo-950/60 border border-purple-500/30 p-6 md:p-8 shadow-2xl relative overflow-hidden">
+                <div class="relative z-10 space-y-3 max-w-2xl">
+                    <div class="inline-flex items-center gap-2 bg-purple-500/20 text-purple-300 border border-purple-500/30 px-3 py-1 rounded-full text-xs font-bold font-fun">
+                        <i class="fa-solid fa-graduation-cap"></i> Unit 2 核心文法全攻略
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-black font-fun text-white">
+                        掌握情緒形容詞與三大因果句型 🎯
+                    </h2>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        本單元涵蓋國中英文最關鍵的四大句型：辨別 <span class="text-rose-400 font-bold">-ed（人感到）</span> 與 <span class="text-sky-400 font-bold">-ing（事物令人）</span>、熟記四大固定介系詞，並攻克會考必考的 <span class="text-amber-400 font-bold">so... that...</span>、<span class="text-emerald-400 font-bold">enough... to...</span> 與 <span class="text-indigo-400 font-bold">too... to...</span> 句型三合一互換！
+                    </p>
+                </div>
+                <div class="absolute right-4 bottom-2 text-9xl opacity-10 pointer-events-none hidden md:block">
+                    🎬
+                </div>
+            </div>
+
+            <!-- 4 Core Pillars Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Pillar 1 -->
+                <div onclick="switchTab('focus1')" class="bg-slate-900/90 rounded-3xl p-5 border-2 border-rose-500/40 hover:border-rose-400 transition cursor-pointer space-y-3 group shadow-xl">
+                    <div class="w-12 h-12 rounded-2xl bg-rose-500/20 text-rose-400 text-2xl flex items-center justify-center group-hover:scale-110 transition">
+                        🎭
+                    </div>
+                    <div>
+                        <span class="text-[11px] text-rose-400 font-bold font-fun uppercase">Focus 1 (P.35)</span>
+                        <h3 class="text-lg font-black font-fun text-white mt-0.5">情緒形容詞</h3>
+                        <p class="text-xs text-slate-400 mt-1">人感到 (-ed) vs. 事物令人 (-ing) 及固定介系詞。</p>
+                    </div>
+                    <div class="text-xs font-bold text-rose-300 flex items-center gap-1 pt-1">
+                        <span>進入修煉</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </div>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div onclick="switchTab('focus2')" class="bg-slate-900/90 rounded-3xl p-5 border-2 border-amber-500/40 hover:border-amber-400 transition cursor-pointer space-y-3 group shadow-xl">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 text-2xl flex items-center justify-center group-hover:scale-110 transition">
+                        ⚡
+                    </div>
+                    <div>
+                        <span class="text-[11px] text-amber-400 font-bold font-fun uppercase">Focus 2 (P.36)</span>
+                        <h3 class="text-lg font-black font-fun text-white mt-0.5">so... that...</h3>
+                        <p class="text-xs text-slate-400 mt-1">如此...以致於...因果句型與 very... so... 互換。</p>
+                    </div>
+                    <div class="text-xs font-bold text-amber-300 flex items-center gap-1 pt-1">
+                        <span>進入修煉</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </div>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div onclick="switchTab('usageA')" class="bg-slate-900/90 rounded-3xl p-5 border-2 border-emerald-500/40 hover:border-emerald-400 transition cursor-pointer space-y-3 group shadow-xl">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 text-2xl flex items-center justify-center group-hover:scale-110 transition">
+                        📏
+                    </div>
+                    <div>
+                        <span class="text-[11px] text-emerald-400 font-bold font-fun uppercase">Usage A (P.37)</span>
+                        <h3 class="text-lg font-black font-fun text-white mt-0.5">enough... to...</h3>
+                        <p class="text-xs text-slate-400 mt-1">形容詞 + enough 語序與 not... enough 否定變化。</p>
+                    </div>
+                    <div class="text-xs font-bold text-emerald-300 flex items-center gap-1 pt-1">
+                        <span>進入修煉</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </div>
+                </div>
+
+                <!-- Pillar 4 -->
+                <div onclick="switchTab('usageB')" class="bg-slate-900/90 rounded-3xl p-5 border-2 border-sky-500/40 hover:border-sky-400 transition cursor-pointer space-y-3 group shadow-xl">
+                    <div class="w-12 h-12 rounded-2xl bg-sky-500/20 text-sky-400 text-2xl flex items-center justify-center group-hover:scale-110 transition">
+                        ⚠️
+                    </div>
+                    <div>
+                        <span class="text-[11px] text-sky-400 font-bold font-fun uppercase">Usage B (P.38)</span>
+                        <h3 class="text-lg font-black font-fun text-white mt-0.5">too... to...</h3>
+                        <p class="text-xs text-slate-400 mt-1">太...以致於不能...，自帶否定含義與受詞省略。</p>
+                    </div>
+                    <div class="text-xs font-bold text-sky-300 flex items-center gap-1 pt-1">
+                        <span>進入修煉</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ultimate Transformation Showcase -->
+            <div class="bg-slate-900/90 rounded-3xl p-6 border-2 border-purple-500/40 shadow-2xl space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <div class="flex items-center gap-3">
+                        <span class="text-3xl">🔄</span>
+                        <div>
+                            <h3 class="text-xl font-black font-fun text-white">會考終極三大句型互換核心公式</h3>
+                            <p class="text-xs text-slate-400">課本 P.38 精選實例：水太冷了以致於我們無法在裡面游泳。</p>
+                        </div>
+                    </div>
+                    <button onclick="switchTab('transform')" class="bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow">
+                        進行動態互動代換 →
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                    <div class="bg-slate-950 p-4 rounded-2xl border border-rose-500/30 space-y-2">
+                        <div class="text-rose-400 font-bold text-xs uppercase">公式 1：too... to... (太...而不能...)</div>
+                        <p class="font-bold text-slate-100 font-fun text-sm">The water was <span class="text-rose-400 font-black underline">too</span> cold for us <span class="text-rose-400 font-black underline">to</span> swim in.</p>
+                        <p class="text-xs text-slate-400">⚠️ 注意：動詞 swim in 後面<span class="text-rose-400 font-bold">不可加 it</span>，因為受詞與主詞相同！</p>
+                    </div>
+
+                    <div class="bg-slate-950 p-4 rounded-2xl border border-emerald-500/30 space-y-2">
+                        <div class="text-emerald-400 font-bold text-xs uppercase">公式 2：not... enough to... (不夠...而不能...)</div>
+                        <p class="font-bold text-slate-100 font-fun text-sm">The water was <span class="text-emerald-400 font-black underline">not</span> warm <span class="text-emerald-400 font-black underline">enough</span> for us to swim in.</p>
+                        <p class="text-xs text-slate-400">💡 將 cold 換成相反詞 warm，形容詞放 enough 前面！<span class="text-emerald-400 font-bold">同樣省略 it</span>。</p>
+                    </div>
+
+                    <div class="bg-slate-950 p-4 rounded-2xl border border-purple-500/30 space-y-2">
+                        <div class="text-purple-400 font-bold text-xs uppercase">公式 3：so... that... couldn't (如此...以致於無法...)</div>
+                        <p class="font-bold text-slate-100 font-fun text-sm">The water was <span class="text-purple-400 font-black underline">so</span> cold <span class="text-purple-400 font-black underline">that</span> we couldn't swim in <span class="text-amber-400 font-black underline">it</span>.</p>
+                        <p class="text-xs text-slate-400">🌟 <strong class="text-amber-400">會考超級陷阱：</strong>that 後面為完整子句，介系詞 in 後<span class="text-amber-400 font-bold">必須保留 it</span>！</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 2: GRAMMAR FOCUS 1 (EMOTION ADJECTIVES P.35) -->
+        <!-- ========================================== -->
+        <section id="sec-focus1" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-rose-600 via-pink-600 to-purple-600 rounded-3xl p-6 text-white shadow-xl flex justify-between items-center">
+                <div>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black uppercase font-fun">Textbook P.35</span>
+                    <h2 class="text-2xl md:text-3xl font-black font-fun mt-2">Grammar Focus 1: 情緒形容詞速成</h2>
+                    <p class="text-rose-100 text-sm mt-1">主詞是事物（令人...）用現在分詞 -ing；主詞是人（感到...）用過去分詞 -ed！</p>
+                </div>
+                <div class="text-5xl hidden sm:block">🎭</div>
+            </div>
+
+            <!-- Focus 1 Comparison Box -->
+            <div class="bg-slate-900/90 rounded-3xl p-6 border-2 border-rose-500/40 shadow-xl space-y-5">
+                <h3 class="text-lg font-black font-fun text-white flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-400"></i>
+                    <span>課本句型觀察 (Grammar Frame)</span>
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Frame 1: Thing as Subject (-ing) -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border-2 border-sky-500/40 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold bg-sky-500/20 text-sky-300 px-3 py-1 rounded-full border border-sky-500/30">主詞為「事物」給人的感覺</span>
+                            <span class="text-xs text-sky-400 font-bold">V-ing (現在分詞)</span>
+                        </div>
+                        <div class="text-lg font-bold font-fun text-white">
+                            The movie is <span class="text-sky-300 font-black underline">interesting / exciting / boring / surprising</span> (to me).
+                        </div>
+                        <p class="text-xs text-slate-400">這部電影對我而言是「有趣／刺激／無聊／令人驚訝」的。(若要接對象用 to sb)</p>
+                    </div>
+
+                    <!-- Frame 2: Person as Subject (-ed + Prep) -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border-2 border-rose-500/40 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold bg-rose-500/20 text-rose-300 px-3 py-1 rounded-full border border-rose-500/30">主詞為「人」因事而感到</span>
+                            <span class="text-xs text-rose-400 font-bold">V-ed (過去分詞) + 介系詞</span>
+                        </div>
+                        <div class="text-lg font-bold font-fun text-white">
+                            I am <span class="text-rose-300 font-black underline">interested in / excited about / bored with / surprised at</span> the movie.
+                        </div>
+                        <p class="text-xs text-slate-400">我對這部電影「感興趣 / 感到興奮 / 感到無聊 / 感到驚訝」。</p>
+                    </div>
+                </div>
+
+                <!-- 4 Fixed Prepositions Pill Row -->
+                <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
+                    <span class="text-xs font-bold text-amber-400 block mb-2">⭐ 會考必考！過去分詞搭配固定介系詞：</span>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-fun font-bold">
+                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-700 text-center">
+                            <span class="text-slate-300">interested</span> <span class="text-amber-400 font-black">in</span>
+                        </div>
+                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-700 text-center">
+                            <span class="text-slate-300">excited</span> <span class="text-amber-400 font-black">about</span>
+                        </div>
+                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-700 text-center">
+                            <span class="text-slate-300">bored</span> <span class="text-amber-400 font-black">with</span>
+                        </div>
+                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-700 text-center">
+                            <span class="text-slate-300">surprised</span> <span class="text-amber-400 font-black">at</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Speak and Write Interactive Exercises (P.35) -->
+            <div class="space-y-4">
+                <h3 class="text-xl font-black font-fun text-white flex items-center gap-2">
+                    <i class="fa-solid fa-pencil text-rose-400"></i>
+                    <span>Speak and write 課本看圖實戰練習 (P.35 課本題目)</span>
+                </h3>
+
+                <!-- Example -->
+                <div class="bg-slate-900/90 rounded-3xl p-5 border border-slate-800 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-amber-500/20 text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">課本範例 (Example: interesting / interested)</span>
+                        <button onclick="speakText('The book is interesting to the children. The children are interested in the book.')" class="text-xs text-slate-300 hover:text-amber-400 bg-slate-800 px-3 py-1 rounded-xl">
+                            <i class="fa-solid fa-volume-high text-amber-400 mr-1"></i> 朗讀整組
+                        </button>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p class="font-bold text-slate-200">The book is <span class="text-sky-300 underline font-black">interesting to</span> the children.</p>
+                        <p class="font-bold text-slate-200">The children are <span class="text-rose-300 underline font-black">interested in</span> the book.</p>
+                    </div>
+                </div>
+
+                <!-- Exercise 1: exciting / excited -->
+                <div id="ex-f1-1" class="bg-slate-900/90 rounded-3xl p-5 border-2 border-slate-800 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-rose-500 text-white font-black text-xs flex items-center justify-center">1</span>
+                            <span class="font-bold text-white text-sm">題目 1：exciting / excited</span>
+                        </div>
+                        <button onclick="speakText('The man\'s idea is exciting to the people. The people are excited about the man\'s idea.')" class="text-xs text-slate-400 hover:text-white bg-slate-800 px-2.5 py-1 rounded-lg">
+                            <i class="fa-solid fa-volume-high mr-1"></i> 發音
+                        </button>
+                    </div>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="font-bold text-slate-300">The man's idea is</span>
+                            <input type="text" id="f1_1_input1" placeholder="填入形容詞" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-amber-300 font-bold w-28 focus:border-rose-400">
+                            <input type="text" id="f1_1_input2" placeholder="介系詞" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-amber-300 font-bold w-20 focus:border-rose-400">
+                            <span class="font-bold text-slate-300">the people.</span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="font-bold text-slate-300">The people</span>
+                            <input type="text" id="f1_1_input3" placeholder="be動詞" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-amber-300 font-bold w-20 focus:border-rose-400">
+                            <input type="text" id="f1_1_input4" placeholder="填入形容詞" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-amber-300 font-bold w-28 focus:border-rose-400">
+                            <input type="text" id="f1_1_input5" placeholder="介系詞" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-amber-300 font-bold w-24 focus:border-rose-400">
+                            <span class="font-bold text-slate-300">the man's idea.</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <button onclick="checkF1(1)" class="bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs px-4 py-2 rounded-xl game-btn-shadow">檢查答案</button>
+                        <div id="f1_1_result" class="text-xs font-bold"></div>
+                    </div>
+                </div>
+
+                <!-- Exercise 2: surprising / surprised -->
+                <div id="ex-f1-2" class="bg-slate-900/90 rounded-3xl p-5 border-2 border-slate-800 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-rose-500 text-white font-black text-xs flex items-center justify-center">2</span>
+                            <span class="font-bold text-white text-sm">題目 2：surprising / surprised</span>
+                        </div>
+                        <button onclick="speakText('The reporter\'s question is surprising to the actor. The actor is surprised at the reporter\'s question.')" class="text-xs text-slate-400 hover:text-white bg-slate-800 px-2.5 py-1 rounded-lg">
+                            <i class="fa-solid fa-volume-high mr-1"></i> 發音
+                        </button>
+                    </div>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="font-bold text-slate-300">The reporter's question is</span>
+                            <input type="text" id="f1_2_input1" placeholder="填入形容詞" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-amber-300 font-bold w-28 focus:border-rose-400">
+                            <input type="text" id="f1_2_input2" placeholder="介系詞" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-amber-300 font-bold w-20 focus:border-rose-400">
+                            <span class="font-bold text-slate-300">the actor.</span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="font-bold text-slate-300">The actor</span>
+                            <input type="text" id="f1_2_input3" placeholder="be動詞" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-amber-300 font-bold w-16 focus:border-rose-400">
+                            <input type="text" id="f1_2_input4" placeholder="填入形容詞" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-amber-300 font-bold w-28 focus:border-rose-400">
+                            <input type="text" id="f1_2_input5" placeholder="介系詞" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-amber-300 font-bold w-16 focus:border-rose-400">
+                            <span class="font-bold text-slate-300">the reporter's question.</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <button onclick="checkF1(2)" class="bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs px-4 py-2 rounded-xl game-btn-shadow">檢查答案</button>
+                        <div id="f1_2_result" class="text-xs font-bold"></div>
+                    </div>
+                </div>
+
+                <!-- Exercise 3: boring / bored (Past Tense!) -->
+                <div id="ex-f1-3" class="bg-slate-900/90 rounded-3xl p-5 border-2 border-slate-800 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-rose-500 text-white font-black text-xs flex items-center justify-center">3</span>
+                            <span class="font-bold text-white text-sm">題目 3：boring / bored (⚠️ 注意 last night 為過去式！)</span>
+                        </div>
+                        <button onclick="speakText('The TV show last night was boring to the woman. The woman was bored with the TV show last night.')" class="text-xs text-slate-400 hover:text-white bg-slate-800 px-2.5 py-1 rounded-lg">
+                            <i class="fa-solid fa-volume-high mr-1"></i> 發音
+                        </button>
+                    </div>
+                    <div class="space-y-3 text-sm">
+                        <div>
+                            <span class="font-bold text-slate-300 block mb-1">整句完成 1：The TV show last night...</span>
+                            <input type="text" id="f1_3_input1" placeholder="輸入：was boring to the woman" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-amber-300 font-bold focus:border-rose-400">
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-300 block mb-1">整句完成 2：The woman...</span>
+                            <input type="text" id="f1_3_input2" placeholder="輸入：was bored with the TV show last night" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-amber-300 font-bold focus:border-rose-400">
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <button onclick="checkF1(3)" class="bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs px-4 py-2 rounded-xl game-btn-shadow">檢查答案</button>
+                        <div id="f1_3_result" class="text-xs font-bold"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 3: GRAMMAR FOCUS 2 (so... that... P.36) -->
+        <!-- ========================================== -->
+        <section id="sec-focus2" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-amber-600 via-orange-600 to-rose-600 rounded-3xl p-6 text-white shadow-xl flex justify-between items-center">
+                <div>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black uppercase font-fun">Textbook P.36</span>
+                    <h2 class="text-2xl md:text-3xl font-black font-fun mt-2">Grammar Focus 2: so... that... 因果句型</h2>
+                    <p class="text-amber-100 text-sm mt-1">so + 形容詞 + that + 完整子句，表示「如此...以致於...」！</p>
+                </div>
+                <div class="text-5xl hidden sm:block">⚡</div>
+            </div>
+
+            <!-- Formula Box -->
+            <div class="bg-slate-900/90 rounded-3xl p-6 border-2 border-amber-500/40 shadow-xl space-y-4">
+                <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-2">
+                    <span class="text-xs font-bold text-amber-400 uppercase">句型公式：</span>
+                    <div class="text-base sm:text-lg font-bold font-fun text-white">
+                        S + be/連綴動詞 + <span class="text-amber-400 font-black">so</span> + adj. + <span class="text-rose-400 font-black">that</span> + S + V (完整子句)
+                    </div>
+                    <div class="text-xs text-slate-300 pt-1 space-y-1">
+                        <p>• I was <strong class="text-amber-400">so excited that</strong> I didn't think clearly. (我太興奮以致於沒有想清楚。)</p>
+                        <p>• The kids were <strong class="text-amber-400">so scared that</strong> they couldn't fall asleep. (孩子們害怕到無法入睡。)</p>
+                    </div>
+                </div>
+
+                <!-- Read & Switch Tip -->
+                <div class="bg-amber-950/40 p-4 rounded-2xl border border-amber-500/30 flex items-start gap-3">
+                    <span class="text-2xl">💡</span>
+                    <div class="text-xs sm:text-sm text-amber-200 leading-relaxed">
+                        <strong class="text-white">課本【讀一讀】重點互換：</strong><br>
+                        The movie was <span class="text-amber-400 font-bold">very</span> exciting, <span class="text-rose-400 font-bold">so</span> the students kept talking about it.<br>
+                        ➔ The movie was <span class="text-amber-400 font-bold">so</span> exciting <span class="text-rose-400 font-bold">that</span> the students kept talking about it.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exercises P.36 -->
+            <div class="space-y-4">
+                <h3 class="text-xl font-black font-fun text-white flex items-center gap-2">
+                    <i class="fa-solid fa-pencil text-amber-400"></i>
+                    <span>Speak and write 課本看圖實戰練習 (P.36)</span>
+                </h3>
+
+                <!-- Example -->
+                <div class="bg-slate-900/90 rounded-3xl p-5 border border-slate-800 space-y-2">
+                    <span class="bg-amber-500/20 text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">課本範例 (Brad / thirsty / he drank a bottle of water)</span>
+                    <p class="font-bold text-slate-200 text-sm">Brad was <span class="text-amber-400 underline font-black">so</span> thirsty <span class="text-rose-400 underline font-black">that</span> he drank a bottle of water.</p>
+                </div>
+
+                <!-- Item 1: cake / yummy -->
+                <div id="ex-f2-1" class="bg-slate-900/90 rounded-3xl p-5 border-2 border-slate-800 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-white text-sm">1. the cake / yummy / the dog wants to take a bite of it</span>
+                        <button onclick="speakText('The cake looks so yummy that the dog wants to take a bite of it.')" class="text-xs text-slate-400 hover:text-white bg-slate-800 px-2.5 py-1 rounded-lg">發音</button>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 text-sm">
+                        <span class="font-bold text-slate-300">The cake looks</span>
+                        <input type="text" id="f2_1_input1" placeholder="so" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-amber-300 font-bold w-16 focus:border-amber-400">
+                        <input type="text" id="f2_1_input2" placeholder="yummy" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-amber-300 font-bold w-24 focus:border-amber-400">
+                        <input type="text" id="f2_1_input3" placeholder="that" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-amber-300 font-bold w-16 focus:border-amber-400">
+                        <span class="font-bold text-slate-300">the dog wants to take a bite of it.</span>
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <button onclick="checkF2(1)" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs px-4 py-2 rounded-xl game-btn-shadow">檢查答案</button>
+                        <div id="f2_1_result" class="text-xs font-bold"></div>
+                    </div>
+                </div>
+
+                <!-- Item 2: girl / tired -->
+                <div id="ex-f2-2" class="bg-slate-900/90 rounded-3xl p-5 border-2 border-slate-800 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-white text-sm">2. the girl / tired / she couldn't get up early this morning</span>
+                        <button onclick="speakText('The girl was so tired that she couldn\'t get up early this morning.')" class="text-xs text-slate-400 hover:text-white bg-slate-800 px-2.5 py-1 rounded-lg">發音</button>
+                    </div>
+                    <div class="text-sm">
+                        <span class="font-bold text-slate-300 block mb-1">完成整句：The girl...</span>
+                        <input type="text" id="f2_2_input" placeholder="輸入：was so tired that she couldn't get up early this morning" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-amber-300 font-bold focus:border-amber-400">
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <button onclick="checkF2(2)" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs px-4 py-2 rounded-xl game-btn-shadow">檢查答案</button>
+                        <div id="f2_2_result" class="text-xs font-bold"></div>
+                    </div>
+                </div>
+
+                <!-- Item 3: movie / touching -->
+                <div id="ex-f2-3" class="bg-slate-900/90 rounded-3xl p-5 border-2 border-slate-800 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-white text-sm">3. the movie / touching / my sisters cried when they watched it</span>
+                        <button onclick="speakText('The movie was so touching that my sisters cried when they watched it.')" class="text-xs text-slate-400 hover:text-white bg-slate-800 px-2.5 py-1 rounded-lg">發音</button>
+                    </div>
+                    <div class="text-sm">
+                        <span class="font-bold text-slate-300 block mb-1">完成整句：The movie...</span>
+                        <input type="text" id="f2_3_input" placeholder="輸入：was so touching that my sisters cried when they watched it" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-amber-300 font-bold focus:border-amber-400">
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <button onclick="checkF2(3)" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs px-4 py-2 rounded-xl game-btn-shadow">檢查答案</button>
+                        <div id="f2_3_result" class="text-xs font-bold"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 4: USAGE A (enough... to... P.37) -->
+        <!-- ========================================== -->
+        <section id="sec-usageA" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 rounded-3xl p-6 text-white shadow-xl flex justify-between items-center">
+                <div>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black uppercase font-fun">Textbook P.37</span>
+                    <h2 class="text-2xl md:text-3xl font-black font-fun mt-2">Usage A: enough... to... 的用法</h2>
+                    <p class="text-emerald-100 text-sm mt-1">「形容詞 + enough + to VR」表示足夠...以致於能夠做某事！</p>
+                </div>
+                <div class="text-5xl hidden sm:block">🍎</div>
+            </div>
+
+            <!-- Formula & Sidebar Knowledge -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="md:col-span-2 bg-slate-900/90 rounded-3xl p-5 border-2 border-emerald-500/40 space-y-3">
+                    <span class="text-xs font-bold text-emerald-400 uppercase font-fun">核心句型結構：</span>
+                    <div class="space-y-2 text-sm">
+                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                            <p class="font-bold text-emerald-300 font-fun">肯定：S + be + <span class="underline decoration-emerald-400 font-black">adj. + enough + to VR</span></p>
+                            <p class="text-xs text-slate-400 mt-1">Mrs. Hugo is <strong class="text-white">old enough to be</strong> the actor's mother.</p>
+                        </div>
+                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                            <p class="font-bold text-rose-300 font-fun">否定：S + be + <span class="underline decoration-rose-400 font-black">not + adj. + enough + to VR</span></p>
+                            <p class="text-xs text-slate-400 mt-1">Zac is <strong class="text-white">not old enough to watch</strong> the movie.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar Cultural Note: on the tree vs in the tree -->
+                <div class="bg-slate-900/90 rounded-3xl p-5 border border-slate-700 space-y-2">
+                    <span class="text-xs font-bold text-amber-400 flex items-center gap-1">
+                        <i class="fa-solid fa-tree"></i> 課本側邊常考補充
+                    </span>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        • <strong class="text-amber-300">on the tree</strong>：表示樹木本身生長出來的花、葉、果實（如 apples on the tree）。<br>
+                        • <strong class="text-sky-300">in the tree</strong>：表示來自外部停在枝葉間的物體，如鳥、風箏（birds in the tree）。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Exercises P.37 -->
+            <div class="space-y-4">
+                <h3 class="text-xl font-black font-fun text-white flex items-center gap-2">
+                    <i class="fa-solid fa-pencil text-emerald-400"></i>
+                    <span>Speak and write 課本三題實戰 (P.37)</span>
+                </h3>
+
+                <!-- 1. Lucy tall -->
+                <div id="ex-uA-1" class="bg-slate-900/90 rounded-3xl p-5 border-2 border-slate-800 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-white text-sm">1. Lucy is very tall. Lucy can reach the apples on the tree.</span>
+                        <button onclick="speakText('Lucy is tall enough to reach the apples on the tree.')" class="text-xs text-slate-400 hover:text-white bg-slate-800 px-2.5 py-1 rounded-lg">發音</button>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 text-sm">
+                        <span class="font-bold text-slate-300">➔ Lucy is</span>
+                        <input type="text" id="uA_1_1" placeholder="tall" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-emerald-300 font-bold w-20 focus:border-emerald-400">
+                        <input type="text" id="uA_1_2" placeholder="enough" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-emerald-300 font-bold w-24 focus:border-emerald-400">
+                        <input type="text" id="uA_1_3" placeholder="to" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-emerald-300 font-bold w-16 focus:border-emerald-400">
+                        <span class="font-bold text-slate-300">reach the apples on the tree.</span>
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <button onclick="checkUA(1)" class="bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-black text-xs px-4 py-2 rounded-xl game-btn-shadow">檢查答案</button>
+                        <div id="uA_1_result" class="text-xs font-bold"></div>
+                    </div>
+                </div>
+
+                <!-- 2. shoes not big -->
+                <div id="ex-uA-2" class="bg-slate-900/90 rounded-3xl p-5 border-2 border-slate-800 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-white text-sm">2. The new shoes are not big enough. Lucy's grandpa can't wear the shoes.</span>
+                        <button onclick="speakText('The new shoes are not big enough for Lucy\'s grandpa to wear.')" class="text-xs text-slate-400 hover:text-white bg-slate-800 px-2.5 py-1 rounded-lg">發音</button>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 text-sm">
+                        <span class="font-bold text-slate-300">➔ The new shoes</span>
+                        <input type="text" id="uA_2_1" placeholder="are" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-emerald-300 font-bold w-16 focus:border-emerald-400">
+                        <span class="font-bold text-slate-300">not</span>
+                        <input type="text" id="uA_2_2" placeholder="big" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-emerald-300 font-bold w-20 focus:border-emerald-400">
+                        <input type="text" id="uA_2_3" placeholder="enough" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-emerald-300 font-bold w-24 focus:border-emerald-400">
+                        <span class="font-bold text-slate-300">for Lucy's grandpa to wear.</span>
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <button onclick="checkUA(2)" class="bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-black text-xs px-4 py-2 rounded-xl game-btn-shadow">檢查答案</button>
+                        <div id="uA_2_result" class="text-xs font-bold"></div>
+                    </div>
+                </div>
+
+                <!-- 3. grandma strong -->
+                <div id="ex-uA-3" class="bg-slate-900/90 rounded-3xl p-5 border-2 border-slate-800 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-white text-sm">3. Lucy's grandma is very strong. Lucy's grandma can move the heavy boxes by herself.</span>
+                        <button onclick="speakText('Lucy\'s grandma is strong enough to move the heavy boxes by herself.')" class="text-xs text-slate-400 hover:text-white bg-slate-800 px-2.5 py-1 rounded-lg">發音</button>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 text-sm">
+                        <span class="font-bold text-slate-300">➔ Lucy's grandma</span>
+                        <input type="text" id="uA_3_1" placeholder="is" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-emerald-300 font-bold w-16 focus:border-emerald-400">
+                        <input type="text" id="uA_3_2" placeholder="strong" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-emerald-300 font-bold w-24 focus:border-emerald-400">
+                        <input type="text" id="uA_3_3" placeholder="enough" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-emerald-300 font-bold w-24 focus:border-emerald-400">
+                        <input type="text" id="uA_3_4" placeholder="to" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-emerald-300 font-bold w-16 focus:border-emerald-400">
+                        <input type="text" id="uA_3_5" placeholder="move" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-emerald-300 font-bold w-20 focus:border-emerald-400">
+                        <span class="font-bold text-slate-300">the heavy boxes by herself.</span>
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <button onclick="checkUA(3)" class="bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-black text-xs px-4 py-2 rounded-xl game-btn-shadow">檢查答案</button>
+                        <div id="uA_3_result" class="text-xs font-bold"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 5: USAGE B (too... to... P.38) -->
+        <!-- ========================================== -->
+        <section id="sec-usageB" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-700 rounded-3xl p-6 text-white shadow-xl flex justify-between items-center">
+                <div>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black uppercase font-fun">Textbook P.38</span>
+                    <h2 class="text-2xl md:text-3xl font-black font-fun mt-2">Usage B: too... to... 的用法</h2>
+                    <p class="text-sky-100 text-sm mt-1">「too + 形容詞 + to VR」表面沒有 not，但本身即蘊含否定意思（太...以致於不能...）！</p>
+                </div>
+                <div class="text-5xl hidden sm:block">⚠️</div>
+            </div>
+
+            <!-- Usage B Rules Box -->
+            <div class="bg-slate-900/90 rounded-3xl p-6 border-2 border-sky-500/40 shadow-xl space-y-3">
+                <span class="text-xs font-bold text-sky-400 uppercase font-fun">課本句型觀察：</span>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                        <p class="font-bold text-white font-fun">Kim is <span class="text-sky-400 underline font-black">too young to</span> understand the movie.</p>
+                        <p class="text-xs text-slate-400 mt-1">金年紀太小，以致於看不懂這部電影。（主詞是人）</p>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                        <p class="font-bold text-white font-fun">The movie is <span class="text-sky-400 underline font-black">too scary for Kim to</span> watch.</p>
+                        <p class="text-xs text-slate-400 mt-1">這部電影對金而言太恐怖了以致於無法觀看。（主詞是物，加上 for sb，省略 it）</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exercises P.38 -->
+            <div class="space-y-4">
+                <h3 class="text-xl font-black font-fun text-white flex items-center gap-2">
+                    <i class="fa-solid fa-pencil text-sky-400"></i>
+                    <span>Speak and write 課本看圖實戰練習 (P.38)</span>
+                </h3>
+
+                <!-- Example: soup hot eat -->
+                <div class="bg-slate-900/90 rounded-3xl p-5 border border-slate-800 space-y-2">
+                    <span class="bg-amber-500/20 text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">課本範例 (the soup / hot / eat)</span>
+                    <p class="text-xs text-slate-400">Alice can't eat the soup because it is too hot.</p>
+                    <p class="font-bold text-slate-200 text-sm">➔ The soup is <span class="text-sky-300 underline font-black">too</span> hot for Alice <span class="text-sky-300 underline font-black">to</span> eat.</p>
+                </div>
+
+                <!-- Item 1: Matt surprised -->
+                <div id="ex-uB-1" class="bg-slate-900/90 rounded-3xl p-5 border-2 border-slate-800 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-white text-sm">1. Matt couldn't say anything... because he was too surprised.</span>
+                        <button onclick="speakText('Matt was too surprised to say anything when he got the gifts from his classmates.')" class="text-xs text-slate-400 hover:text-white bg-slate-800 px-2.5 py-1 rounded-lg">發音</button>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 text-sm">
+                        <span class="font-bold text-slate-300">➔ Matt was</span>
+                        <input type="text" id="uB_1_1" placeholder="too" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-sky-300 font-bold w-16 focus:border-sky-400">
+                        <input type="text" id="uB_1_2" placeholder="surprised" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-sky-300 font-bold w-28 focus:border-sky-400">
+                        <input type="text" id="uB_1_3" placeholder="to" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-sky-300 font-bold w-16 focus:border-sky-400">
+                        <input type="text" id="uB_1_4" placeholder="say" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-sky-300 font-bold w-20 focus:border-sky-400">
+                        <input type="text" id="uB_1_5" placeholder="anything" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-sky-300 font-bold w-28 focus:border-sky-400">
+                        <span class="font-bold text-slate-300">when he got the gifts from his classmates.</span>
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <button onclick="checkUB(1)" class="bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs px-4 py-2 rounded-xl game-btn-shadow">檢查答案</button>
+                        <div id="uB_1_result" class="text-xs font-bold"></div>
+                    </div>
+                </div>
+
+                <!-- Item 2: kids scared move -->
+                <div id="ex-uB-2" class="bg-slate-900/90 rounded-3xl p-5 border-2 border-slate-800 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-white text-sm">2. The kids didn't move because there was a snake in front of them.</span>
+                        <button onclick="speakText('The kids were too scared to move because of the snake.')" class="text-xs text-slate-400 hover:text-white bg-slate-800 px-2.5 py-1 rounded-lg">發音</button>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 text-sm">
+                        <span class="font-bold text-slate-300">➔ The kids were</span>
+                        <input type="text" id="uB_2_1" placeholder="too" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-sky-300 font-bold w-16 focus:border-sky-400">
+                        <input type="text" id="uB_2_2" placeholder="scared" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-sky-300 font-bold w-24 focus:border-sky-400">
+                        <input type="text" id="uB_2_3" placeholder="to" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-sky-300 font-bold w-16 focus:border-sky-400">
+                        <input type="text" id="uB_2_4" placeholder="move" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-sky-300 font-bold w-20 focus:border-sky-400">
+                        <span class="font-bold text-slate-300">because of the snake.</span>
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <button onclick="checkUB(2)" class="bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs px-4 py-2 rounded-xl game-btn-shadow">檢查答案</button>
+                        <div id="uB_2_result" class="text-xs font-bold"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 6: SENTENCE TRANSFORMATION MASTER -->
+        <!-- ========================================== -->
+        <section id="sec-transform" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-700 rounded-3xl p-6 text-white shadow-xl flex justify-between items-center">
+                <div>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black uppercase font-fun">Mastery Lab</span>
+                    <h2 class="text-2xl md:text-3xl font-black font-fun mt-2">🔄 三合一句型轉換實戰機</h2>
+                    <p class="text-pink-100 text-sm mt-1">too... to... ⇄ not... enough to... ⇄ so... that... can't/couldn't 自由切換！</p>
+                </div>
+                <div class="text-5xl hidden sm:block">🧩</div>
+            </div>
+
+            <!-- Interactive Transformer Box -->
+            <div class="bg-slate-900/90 rounded-3xl p-6 border-2 border-pink-500/40 shadow-2xl space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <span class="text-xs font-bold text-pink-400 uppercase font-fun">練習題：請將原句依提示轉換為另外兩種句型</span>
+                    <span class="text-xs text-amber-400 font-bold">⚠️ 注意受詞 it 的去留！</span>
+                </div>
+
+                <!-- Scenario 1: The box was too heavy for Leo to carry. -->
+                <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs bg-rose-500/20 text-rose-300 font-bold px-3 py-1 rounded-full">原句 (too... to)</span>
+                        <button onclick="speakText('The box was too heavy for Leo to carry.')" class="text-xs text-slate-400 hover:text-white bg-slate-900 px-2.5 py-1 rounded-lg">發音</button>
+                    </div>
+                    <p class="font-bold text-lg text-white font-fun">The box was <span class="text-rose-400 underline">too heavy</span> for Leo <span class="text-rose-400 underline">to carry</span>.</p>
+                    
+                    <!-- Form 2: not strong enough -->
+                    <div class="space-y-1 pt-2">
+                        <label class="text-xs font-bold text-emerald-400">變換成 not... enough (Leo was...)</label>
+                        <input type="text" id="trans1_enough" placeholder="Leo was not strong enough to carry the box." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-amber-300 font-bold">
+                    </div>
+
+                    <!-- Form 3: so... that... -->
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-purple-400">變換成 so... that... (The box was so... that...)</label>
+                        <input type="text" id="trans1_so" placeholder="The box was so heavy that Leo couldn't carry it." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-amber-300 font-bold">
+                    </div>
+
+                    <div class="flex justify-between items-center pt-2">
+                        <button onclick="checkTrans1()" class="bg-pink-600 hover:bg-pink-500 text-white font-bold text-xs px-4 py-2 rounded-xl game-btn-shadow">驗證變換</button>
+                        <div id="trans1_result" class="text-xs font-bold"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 7: 10-QUESTION GRAMMAR TEST -->
+        <!-- ========================================== -->
+        <section id="sec-quiz" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-purple-600 via-indigo-600 to-amber-600 rounded-3xl p-6 text-white shadow-xl flex justify-between items-center">
+                <div>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black uppercase font-fun">10-Question Master Test</span>
+                    <h2 class="text-2xl md:text-3xl font-black font-fun mt-2">🏆 Unit 2 句型實戰大會考</h2>
+                    <p class="text-purple-100 text-sm mt-1">融合情緒形容詞、固定介系詞、so... that...、enough、too... to... 綜合會考模擬題！</p>
+                </div>
+                <div class="text-5xl hidden sm:block">🎖️</div>
+            </div>
+
+            <!-- Quiz Questions Container -->
+            <div class="space-y-4" id="quizContainer">
+                <!-- 10 Questions injected by JS -->
+            </div>
+
+            <div class="bg-slate-900/90 p-5 rounded-3xl border border-slate-800 flex flex-wrap justify-between items-center gap-3">
+                <div class="text-sm font-bold text-slate-200">
+                    目前總分：<span id="quizScoreDisplay" class="text-amber-400 text-xl font-black">0</span> / 10 題
+                </div>
+                <button onclick="resetQuiz()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-xl text-xs font-bold transition border border-slate-700">
+                    <i class="fa-solid fa-rotate-right mr-1"></i> 重新作答
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="mt-12 border-t border-slate-800/80 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div>
+                Unit 2: The Movie Looks Exciting ・ 句型文法篇 (Grammar Focus)
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="hover:text-purple-400 transition">學習首頁</a>
+                <a href="u2_dialogue.html" class="hover:text-rose-400 transition">第二課對話篇</a>
+                <a href="pattern.html" class="hover:text-sky-400 transition">第一課句型篇</a>
+                <a href="#top" class="hover:text-purple-400 transition">回頂端 ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- 1. AUDIO SYNTHESIZER ---
+        const AudioFX = {
+            ctx: null,
+            muted: false,
+            init() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+            },
+            toggleMute() {
+                this.muted = !this.muted;
+                const icon = document.getElementById('soundIcon');
+                if (this.muted) {
+                    icon.className = 'fa-solid fa-volume-xmark text-rose-400';
+                } else {
+                    icon.className = 'fa-solid fa-volume-high text-purple-400';
+                    this.playCoin();
+                }
+            },
+            playCorrect() {
+                if (this.muted) return;
+                try {
+                    this.init();
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, now);
+                    osc.frequency.setValueAtTime(659.25, now + 0.1);
+                    osc.frequency.setValueAtTime(783.99, now + 0.2);
+                    osc.frequency.setValueAtTime(1046.50, now + 0.3);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.45);
+                    osc.connect(gain); gain.connect(this.ctx.destination);
+                    osc.start(now); osc.stop(now + 0.45);
+                } catch(e) {}
+            },
+            playWrong() {
+                if (this.muted) return;
+                try {
+                    this.init();
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(220, now);
+                    osc.frequency.setValueAtTime(164.81, now + 0.12);
+                    gain.gain.setValueAtTime(0.18, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.28);
+                    osc.connect(gain); gain.connect(this.ctx.destination);
+                    osc.start(now); osc.stop(now + 0.28);
+                } catch(e) {}
+            },
+            playCoin() {
+                if (this.muted) return;
+                try {
+                    this.init();
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(987.77, now);
+                    osc.frequency.setValueAtTime(1318.51, now + 0.08);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                    osc.connect(gain); gain.connect(this.ctx.destination);
+                    osc.start(now); osc.stop(now + 0.3);
+                } catch(e) {}
+            },
+            playLevelUp() {
+                if (this.muted) return;
+                try {
+                    this.init();
+                    const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+                    notes.forEach((freq, idx) => {
+                        const now = this.ctx.currentTime + idx * 0.1;
+                        const osc = this.ctx.createOscillator();
+                        const gain = this.ctx.createGain();
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(freq, now);
+                        gain.gain.setValueAtTime(0.2, now);
+                        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+                        osc.connect(gain); gain.connect(this.ctx.destination);
+                        osc.start(now); osc.stop(now + 0.2);
+                    });
+                } catch(e) {}
+            }
+        };
+
+        // --- 2. GAMIFICATION STATE ---
+        let player = { xp: 0, level: 1, coins: 50 };
+
+        function loadProgress() {
+            try {
+                const saved = localStorage.getItem('kevinchang_u2_player');
+                if (saved) player = Object.assign(player, JSON.parse(saved));
+            } catch(e) {}
+            updateStatusUI();
+        }
+
+        function saveProgress() {
+            try {
+                localStorage.setItem('kevinchang_u2_player', JSON.stringify(player));
+            } catch(e) {}
+        }
+
+        function addXP(amount) {
+            player.xp += amount;
+            AudioFX.playCoin();
+            if (player.xp >= 100) {
+                player.level += Math.floor(player.xp / 100);
+                player.xp = player.xp % 100;
+                player.coins += 20;
+                AudioFX.playLevelUp();
+                confetti({ particleCount: 80, spread: 70 });
+            }
+            saveProgress();
+            updateStatusUI();
+        }
+
+        function updateStatusUI() {
+            document.getElementById('levelDisplay').innerText = player.level;
+            document.getElementById('xpText').innerText = `${player.xp} / 100`;
+            document.getElementById('xpBar').style.width = `${player.xp}%`;
+            document.getElementById('coinCount').innerText = player.coins;
+        }
+
+        function speakText(text) {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.95;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // --- 3. EXERCISE VALIDATION FUNCTIONS ---
+        // Focus 1
+        function checkF1(item) {
+            if (item === 1) {
+                const a1 = document.getElementById('f1_1_input1').value.trim().toLowerCase();
+                const a2 = document.getElementById('f1_1_input2').value.trim().toLowerCase();
+                const a3 = document.getElementById('f1_1_input3').value.trim().toLowerCase();
+                const a4 = document.getElementById('f1_1_input4').value.trim().toLowerCase();
+                const a5 = document.getElementById('f1_1_input5').value.trim().toLowerCase();
+                const res = document.getElementById('f1_1_result');
+
+                if (a1 === 'exciting' && a2 === 'to' && a3 === 'are' && a4 === 'excited' && a5 === 'about') {
+                    AudioFX.playCorrect();
+                    addXP(10);
+                    res.className = 'text-xs font-bold text-emerald-400';
+                    res.innerText = '✓ 完全正確！(exciting to / are excited about)';
+                } else {
+                    AudioFX.playWrong();
+                    res.className = 'text-xs font-bold text-rose-400';
+                    res.innerText = '✗ 答案有誤喔！正解：exciting to / are excited about';
+                }
+            } else if (item === 2) {
+                const a1 = document.getElementById('f1_2_input1').value.trim().toLowerCase();
+                const a2 = document.getElementById('f1_2_input2').value.trim().toLowerCase();
+                const a3 = document.getElementById('f1_2_input3').value.trim().toLowerCase();
+                const a4 = document.getElementById('f1_2_input4').value.trim().toLowerCase();
+                const a5 = document.getElementById('f1_2_input5').value.trim().toLowerCase();
+                const res = document.getElementById('f1_2_result');
+
+                if (a1 === 'surprising' && a2 === 'to' && a3 === 'is' && a4 === 'surprised' && a5 === 'at') {
+                    AudioFX.playCorrect();
+                    addXP(10);
+                    res.className = 'text-xs font-bold text-emerald-400';
+                    res.innerText = '✓ 完全正確！(surprising to / is surprised at)';
+                } else {
+                    AudioFX.playWrong();
+                    res.className = 'text-xs font-bold text-rose-400';
+                    res.innerText = '✗ 答案有誤喔！正解：surprising to / is surprised at';
+                }
+            } else if (item === 3) {
+                const a1 = document.getElementById('f1_3_input1').value.trim().toLowerCase().replace(/\s+/g, ' ');
+                const a2 = document.getElementById('f1_3_input2').value.trim().toLowerCase().replace(/\s+/g, ' ');
+                const res = document.getElementById('f1_3_result');
+
+                const ok1 = a1 === 'was boring to the woman' || a1 === 'was boring to the woman.';
+                const ok2 = a2 === 'was bored with the tv show last night' || a2 === 'was bored with the tv show last night.';
+
+                if (ok1 && ok2) {
+                    AudioFX.playCorrect();
+                    addXP(15);
+                    res.className = 'text-xs font-bold text-emerald-400';
+                    res.innerText = '✓ 完全正確！掌握了過去式 was boring to 與 was bored with！';
+                } else {
+                    AudioFX.playWrong();
+                    res.className = 'text-xs font-bold text-rose-400';
+                    res.innerText = '✗ 請留意過去式 was！正解：was boring to the woman / was bored with the TV show last night';
+                }
+            }
+        }
+
+        // Focus 2
+        function checkF2(item) {
+            if (item === 1) {
+                const a1 = document.getElementById('f2_1_input1').value.trim().toLowerCase();
+                const a2 = document.getElementById('f2_1_input2').value.trim().toLowerCase();
+                const a3 = document.getElementById('f2_1_input3').value.trim().toLowerCase();
+                const res = document.getElementById('f2_1_result');
+                if (a1 === 'so' && a2 === 'yummy' && a3 === 'that') {
+                    AudioFX.playCorrect();
+                    addXP(10);
+                    res.className = 'text-xs font-bold text-emerald-400';
+                    res.innerText = '✓ 完全正確！(so yummy that)';
+                } else {
+                    AudioFX.playWrong();
+                    res.className = 'text-xs font-bold text-rose-400';
+                    res.innerText = '✗ 請輸入：so / yummy / that';
+                }
+            } else if (item === 2) {
+                const a = document.getElementById('f2_2_input').value.trim().toLowerCase().replace(/\s+/g, ' ').replace(/[.]$/, "");
+                const target = "was so tired that she couldn't get up early this morning";
+                const targetAlt = "was so tired that she could not get up early this morning";
+                const res = document.getElementById('f2_2_result');
+                if (a === target || a === targetAlt) {
+                    AudioFX.playCorrect();
+                    addXP(15);
+                    res.className = 'text-xs font-bold text-emerald-400';
+                    res.innerText = '✓ 太棒了！句子完全正確！';
+                } else {
+                    AudioFX.playWrong();
+                    res.className = 'text-xs font-bold text-rose-400';
+                    res.innerText = `✗ 正解為：${target}`;
+                }
+            } else if (item === 3) {
+                const a = document.getElementById('f2_3_input').value.trim().toLowerCase().replace(/\s+/g, ' ').replace(/[.]$/, "");
+                const target = "was so touching that my sisters cried when they watched it";
+                const res = document.getElementById('f2_3_result');
+                if (a === target) {
+                    AudioFX.playCorrect();
+                    addXP(15);
+                    res.className = 'text-xs font-bold text-emerald-400';
+                    res.innerText = '✓ 太棒了！句子完全正確！';
+                } else {
+                    AudioFX.playWrong();
+                    res.className = 'text-xs font-bold text-rose-400';
+                    res.innerText = `✗ 正解為：${target}`;
+                }
+            }
+        }
+
+        // Usage A
+        function checkUA(item) {
+            if (item === 1) {
+                const a1 = document.getElementById('uA_1_1').value.trim().toLowerCase();
+                const a2 = document.getElementById('uA_1_2').value.trim().toLowerCase();
+                const a3 = document.getElementById('uA_1_3').value.trim().toLowerCase();
+                const res = document.getElementById('uA_1_result');
+                if (a1 === 'tall' && a2 === 'enough' && a3 === 'to') {
+                    AudioFX.playCorrect();
+                    addXP(10);
+                    res.className = 'text-xs font-bold text-emerald-400';
+                    res.innerText = '✓ 完全正確！(tall enough to)';
+                } else {
+                    AudioFX.playWrong();
+                    res.className = 'text-xs font-bold text-rose-400';
+                    res.innerText = '✗ 請輸入：tall / enough / to';
+                }
+            } else if (item === 2) {
+                const a1 = document.getElementById('uA_2_1').value.trim().toLowerCase();
+                const a2 = document.getElementById('uA_2_2').value.trim().toLowerCase();
+                const a3 = document.getElementById('uA_2_3').value.trim().toLowerCase();
+                const res = document.getElementById('uA_2_result');
+                if (a1 === 'are' && a2 === 'big' && a3 === 'enough') {
+                    AudioFX.playCorrect();
+                    addXP(10);
+                    res.className = 'text-xs font-bold text-emerald-400';
+                    res.innerText = '✓ 完全正確！(are not big enough for Lucy\'s grandpa to wear)';
+                } else {
+                    AudioFX.playWrong();
+                    res.className = 'text-xs font-bold text-rose-400';
+                    res.innerText = '✗ 請輸入：are / big / enough';
+                }
+            } else if (item === 3) {
+                const a1 = document.getElementById('uA_3_1').value.trim().toLowerCase();
+                const a2 = document.getElementById('uA_3_2').value.trim().toLowerCase();
+                const a3 = document.getElementById('uA_3_3').value.trim().toLowerCase();
+                const a4 = document.getElementById('uA_3_4').value.trim().toLowerCase();
+                const a5 = document.getElementById('uA_3_5').value.trim().toLowerCase();
+                const res = document.getElementById('uA_3_result');
+                if (a1 === 'is' && a2 === 'strong' && a3 === 'enough' && a4 === 'to' && a5 === 'move') {
+                    AudioFX.playCorrect();
+                    addXP(15);
+                    res.className = 'text-xs font-bold text-emerald-400';
+                    res.innerText = '✓ 完全正確！(is strong enough to move)';
+                } else {
+                    AudioFX.playWrong();
+                    res.className = 'text-xs font-bold text-rose-400';
+                    res.innerText = '✗ 請輸入：is / strong / enough / to / move';
+                }
+            }
+        }
+
+        // Usage B
+        function checkUB(item) {
+            if (item === 1) {
+                const a1 = document.getElementById('uB_1_1').value.trim().toLowerCase();
+                const a2 = document.getElementById('uB_1_2').value.trim().toLowerCase();
+                const a3 = document.getElementById('uB_1_3').value.trim().toLowerCase();
+                const a4 = document.getElementById('uB_1_4').value.trim().toLowerCase();
+                const a5 = document.getElementById('uB_1_5').value.trim().toLowerCase();
+                const res = document.getElementById('uB_1_result');
+                if (a1 === 'too' && a2 === 'surprised' && a3 === 'to' && a4 === 'say' && a5 === 'anything') {
+                    AudioFX.playCorrect();
+                    addXP(15);
+                    res.className = 'text-xs font-bold text-emerald-400';
+                    res.innerText = '✓ 完全正確！(too surprised to say anything)';
+                } else {
+                    AudioFX.playWrong();
+                    res.className = 'text-xs font-bold text-rose-400';
+                    res.innerText = '✗ 請輸入：too / surprised / to / say / anything';
+                }
+            } else if (item === 2) {
+                const a1 = document.getElementById('uB_2_1').value.trim().toLowerCase();
+                const a2 = document.getElementById('uB_2_2').value.trim().toLowerCase();
+                const a3 = document.getElementById('uB_2_3').value.trim().toLowerCase();
+                const a4 = document.getElementById('uB_2_4').value.trim().toLowerCase();
+                const res = document.getElementById('uB_2_result');
+                if (a1 === 'too' && a2 === 'scared' && a3 === 'to' && a4 === 'move') {
+                    AudioFX.playCorrect();
+                    addXP(15);
+                    res.className = 'text-xs font-bold text-emerald-400';
+                    res.innerText = '✓ 完全正確！(too scared to move)';
+                } else {
+                    AudioFX.playWrong();
+                    res.className = 'text-xs font-bold text-rose-400';
+                    res.innerText = '✗ 請輸入：too / scared / to / move';
+                }
+            }
+        }
+
+        // Sentence Transformation
+        function checkTrans1() {
+            const a1 = document.getElementById('trans1_enough').value.trim().toLowerCase().replace(/\s+/g, ' ').replace(/[.]$/, "");
+            const a2 = document.getElementById('trans1_so').value.trim().toLowerCase().replace(/\s+/g, ' ').replace(/[.]$/, "");
+            const res = document.getElementById('trans1_result');
+
+            const ok1 = a1 === "leo was not strong enough to carry the box" || a1 === "the box was not light enough for leo to carry";
+            const ok2 = a2 === "the box was so heavy that leo couldn't carry it" || a2 === "the box was so heavy that leo could not carry it";
+
+            if (ok1 && ok2) {
+                AudioFX.playCorrect();
+                addXP(25);
+                confetti({ particleCount: 70 });
+                res.className = 'text-xs font-bold text-emerald-400';
+                res.innerText = '✓ 恭喜！兩種代換完全正確，且保留了 that 子句的 it！';
+            } else {
+                AudioFX.playWrong();
+                res.className = 'text-xs font-bold text-rose-400';
+                res.innerText = '✗ 有小錯誤喔！請確認：\n1. Leo was not strong enough to carry the box.\n2. The box was so heavy that Leo couldn\'t carry it. (記得加 it)';
+            }
+        }
+
+        // --- 4. 10-QUESTION GRAMMAR QUIZ ---
+        const quizQuestions = [
+            {
+                id: 1,
+                q: "The magic show was so ______ that all the children clapped their hands excitedly.",
+                options: ["excited", "exciting", "excitedly", "excite"],
+                answer: 1,
+                exp: "magic show 為事物，表「令人興奮的」，用現在分詞 exciting。"
+            },
+            {
+                id: 2,
+                q: "Are you ______ joining our school basketball team this semester?",
+                options: ["interested in", "interesting to", "interested about", "interesting with"],
+                answer: 0,
+                exp: "主詞是人 (you)，固定搭配介系詞片語為 be interested in + V-ing。"
+            },
+            {
+                id: 3,
+                q: "Mom was so tired ______ she fell asleep on the couch immediately.",
+                options: ["to", "for", "that", "so"],
+                answer: 2,
+                exp: "so + adj. + that + 子句，表「如此...以致於...」。"
+            },
+            {
+                id: 4,
+                q: "Grandpa is ______ to run a marathon, so he just takes a walk every morning.",
+                options: ["old enough", "too old", "so old", "very old"],
+                answer: 1,
+                exp: "too old to run 表「年紀太大以致於無法跑馬拉松」。"
+            },
+            {
+                id: 5,
+                q: "The question was not easy ______ for the little boy to answer.",
+                options: ["too", "so", "very", "enough"],
+                answer: 3,
+                exp: "not + adj. + enough (for sb) to V，enough 須置於形容詞後面。"
+            },
+            {
+                id: 6,
+                q: "The news was surprising ______ everyone in town. Everyone was surprised ______ it.",
+                options: ["to; at", "at; to", "in; about", "with; at"],
+                answer: 0,
+                exp: "事物 is surprising to sb（對某人而言令人驚訝）；人 is surprised at sth（因某事感到驚訝）。"
+            },
+            {
+                id: 7,
+                q: "The coffee was so bitter that I couldn't drink ______.",
+                options: ["it", "them", "one", "(省略不填)"],
+                answer: 0,
+                exp: "🌟 會考陷阱！that 子句為完整獨立子句，及物動詞 drink 後必須保留代名詞 it 指稱 the coffee！"
+            },
+            {
+                id: 8,
+                q: "Zac was ______ with the long lecture, so he started drawing pictures in his notebook.",
+                options: ["boring", "bored", "bore", "bores"],
+                answer: 1,
+                exp: "主詞 Zac 是人，感到無聊用過去分詞 bored (be bored with)。"
+            },
+            {
+                id: 9,
+                q: "There are lots of sweet red apples ______ the tree in our backyard.",
+                options: ["in", "on", "at", "to"],
+                answer: 1,
+                exp: "蘋果是樹本身生長出來的果實，使用 on the tree！"
+            },
+            {
+                id: 10,
+                q: "選出文法正確的句子：",
+                options: [
+                    "The tea is too hot for me to drink it.",
+                    "The tea is not enough cold for me to drink.",
+                    "The tea was so hot that I couldn't drink it.",
+                    "The tea was too hot that I couldn't drink."
+                ],
+                answer: 2,
+                exp: "選項A多了 it（too... to 不可加 it）；選項B語序錯應為 cold enough；選項D不可用 too... that。故正確只有 C！"
+            }
+        ];
+
+        let quizUserAnswers = {};
+
+        function renderQuiz() {
+            const c = document.getElementById('quizContainer');
+            c.innerHTML = '';
+
+            quizQuestions.forEach((q, idx) => {
+                const card = `
+                    <div id="quizCard-${q.id}" class="bg-slate-900/90 rounded-3xl p-5 border-2 border-slate-800 space-y-3 transition">
+                        <div class="flex items-start gap-3">
+                            <span class="w-7 h-7 rounded-full bg-purple-500/20 text-purple-300 font-black text-xs flex items-center justify-center shrink-0 border border-purple-500/30 font-fun">
+                                ${q.id}
+                            </span>
+                            <div class="font-bold text-slate-100 text-sm sm:text-base font-fun leading-snug">
+                                ${q.q}
+                            </div>
+                        </div>
+
+                        <!-- Options -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                            ${q.options.map((opt, oIdx) => `
+                                <button onclick="selectQuizOption(${q.id}, ${oIdx})" id="qBtn-${q.id}-${oIdx}" class="w-full text-left p-3 rounded-2xl bg-slate-950 border border-slate-800 hover:border-purple-400 text-xs font-bold text-slate-200 transition flex items-center gap-2">
+                                    <span class="w-5 h-5 rounded-full bg-slate-800 text-slate-400 text-[10px] flex items-center justify-center font-mono shrink-0">${['A','B','C','D'][oIdx]}</span>
+                                    <span>${opt}</span>
+                                </button>
+                            `).join('')}
+                        </div>
+
+                        <!-- Feedback -->
+                        <div id="quizFeed-${q.id}" class="hidden p-3 rounded-2xl text-xs font-medium leading-relaxed"></div>
+                    </div>
+                `;
+                c.innerHTML += card;
+            });
+        }
+
+        function selectQuizOption(qId, optIdx) {
+            if (quizUserAnswers[qId] !== undefined) return;
+            quizUserAnswers[qId] = optIdx;
+
+            const q = quizQuestions.find(item => item.id === qId);
+            const isCorrect = optIdx === q.answer;
+            const feed = document.getElementById(`quizFeed-${qId}`);
+            const btn = document.getElementById(`qBtn-${qId}-${optIdx}`);
+
+            if (isCorrect) {
+                btn.classList.add('bg-emerald-600', 'text-white', 'border-transparent');
+                AudioFX.playCorrect();
+                addXP(10);
+                feed.className = 'p-3 rounded-2xl text-xs font-medium leading-relaxed bg-emerald-950/60 border border-emerald-500/40 text-emerald-200 block';
+                feed.innerHTML = `<strong>🎉 答對了！</strong> ${q.exp}`;
+            } else {
+                btn.classList.add('bg-rose-600', 'text-white', 'border-transparent');
+                const correctBtn = document.getElementById(`qBtn-${qId}-${q.answer}`);
+                correctBtn.classList.add('border-emerald-400', 'text-emerald-300');
+                AudioFX.playWrong();
+                feed.className = 'p-3 rounded-2xl text-xs font-medium leading-relaxed bg-rose-950/60 border border-rose-500/40 text-rose-200 block';
+                feed.innerHTML = `<strong>❌ 答錯囉！</strong> 正確答案為 <strong>(${['A','B','C','D'][q.answer]})</strong>。<br>${q.exp}`;
+            }
+
+            // Update Total Score
+            let correctCount = 0;
+            quizQuestions.forEach(item => {
+                if (quizUserAnswers[item.id] === item.answer) correctCount++;
+            });
+            document.getElementById('quizScoreDisplay').innerText = correctCount;
+
+            if (Object.keys(quizUserAnswers).length === quizQuestions.length) {
+                confetti({ particleCount: 80, spread: 70 });
+                player.coins += correctCount * 5;
+                updateStatusUI();
+            }
+        }
+
+        function resetQuiz() {
+            quizUserAnswers = {};
+            document.getElementById('quizScoreDisplay').innerText = '0';
+            renderQuiz();
+        }
+
+        // --- 5. TAB SWITCHER ---
+        function switchTab(tabId) {
+            ['map', 'focus1', 'focus2', 'usageA', 'usageB', 'transform', 'quiz'].forEach(t => {
+                const sec = document.getElementById(`sec-${t}`);
+                const btn = document.getElementById(`tab-${t}`);
+                if (t === tabId) {
+                    sec.classList.remove('hidden');
+                    btn.className = 'tab-btn flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-black shadow-lg whitespace-nowrap transition';
+                } else {
+                    sec.classList.add('hidden');
+                    btn.className = 'tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition';
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadProgress();
+            renderQuiz();
+        });
+    </script>
+</body>
+</html>

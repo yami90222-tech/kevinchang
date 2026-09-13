@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 2 Comprehensive Review: The Movie Looks Exciting 全單元大會考</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                        fun: ['Fredoka', 'cursive', 'sans-serif']
+                    },
+                    colors: {
+                        review: {
+                            gold: '#f59e0b',
+                            purple: '#8b5cf6',
+                            rose: '#f43f5e',
+                            emerald: '#10b981',
+                            dark: '#0a0f1d'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 3.5s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-6px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { height: 6px; width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        .game-btn-shadow {
+            box-shadow: 0 5px 0 0 rgba(0,0,0,0.35);
+            transition: all 0.12s ease;
+        }
+        .game-btn-shadow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 0 0 rgba(0,0,0,0.35);
+        }
+        .game-btn-shadow:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 0 rgba(0,0,0,0.35);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans pb-16 selection:bg-amber-400 selection:text-slate-950">
+
+    <!-- TOP BAR -->
+    <header class="bg-slate-900/95 border-b-2 border-slate-800 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 py-2.5 flex flex-wrap justify-between items-center gap-3">
+            <div class="flex items-center gap-3">
+                <a href="index.html" title="返回學習首頁" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-amber-300 p-2.5 rounded-2xl border border-slate-700 shadow-md transition flex items-center gap-1.5 font-bold text-xs md:text-sm">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="hidden sm:inline">學習首頁</span>
+                </a>
+                <div class="relative bg-gradient-to-tr from-amber-500 via-rose-500 to-emerald-500 p-2.5 rounded-2xl shadow-lg animate-float text-slate-950">
+                    <i class="fa-solid fa-trophy text-2xl"></i>
+                    <span class="absolute -top-1 -right-1 bg-amber-400 text-slate-950 text-[10px] font-black px-1.5 py-0.5 rounded-full border-2 border-slate-900">U2</span>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold px-2 py-0.5 rounded-md uppercase tracking-wider font-fun">Unit 2 Review</span>
+                        <span id="userRank" class="text-xs bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold px-2 py-0.5 rounded-md font-fun">會考通關王者</span>
+                    </div>
+                    <h1 class="text-lg md:text-xl font-black font-fun tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-emerald-300 to-cyan-300">
+                        The Movie Looks Exciting 全單元核心總複習
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Gamification Status -->
+            <div class="flex items-center gap-3 bg-slate-900/90 px-3.5 py-1.5 rounded-2xl border border-slate-800 shadow-inner">
+                <div class="flex items-center gap-1.5 font-black font-fun text-sm text-amber-400">
+                    <span class="text-xs text-slate-400">LV.</span><span id="levelDisplay">1</span>
+                </div>
+                <div class="w-px h-5 bg-slate-800"></div>
+                <div class="flex flex-col w-24 sm:w-32">
+                    <div class="flex justify-between text-[10px] font-bold text-slate-300 mb-0.5">
+                        <span>XP</span>
+                        <span id="xpText" class="text-amber-400">0 / 100</span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden border border-slate-700">
+                        <div id="xpBar" class="bg-gradient-to-r from-amber-400 via-rose-500 to-emerald-400 h-full transition-all duration-300 w-0"></div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 border-l border-slate-800 pl-2.5">
+                    <div class="flex items-center gap-1 text-amber-300 font-bold text-xs" title="金幣">
+                        <i class="fa-solid fa-coins text-amber-400"></i>
+                        <span id="coinCount">50</span>
+                    </div>
+                    <button onclick="AudioFX.toggleMute()" id="muteBtn" title="開關音效" class="text-slate-400 hover:text-amber-300 p-1 text-xs">
+                        <i class="fa-solid fa-volume-high" id="soundIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="bg-slate-950/90 px-4 border-t border-slate-800/80">
+            <div class="max-w-6xl mx-auto flex overflow-x-auto custom-scrollbar gap-2 py-2 text-xs md:text-sm font-bold">
+                <button onclick="switchTab('cards')" id="tab-cards" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-emerald-600 text-slate-950 font-black shadow-lg whitespace-nowrap transition">
+                    <i class="fa-solid fa-clone text-base"></i> 🎴 核心重點速記卡
+                </button>
+                <button onclick="switchTab('exam')" id="tab-exam" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
+                    <i class="fa-solid fa-pen-nib text-base text-rose-400"></i> 📝 綜合模擬會考 (15題)
+                </button>
+                <button onclick="switchTab('cert')" id="tab-cert" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
+                    <i class="fa-solid fa-award text-base text-amber-400"></i> 🏆 通關證書與榮譽榜
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 mt-6 flex-grow w-full">
+
+        <!-- ========================================== -->
+        <!-- TAB 1: FLASHCARDS RECAP -->
+        <!-- ========================================== -->
+        <section id="sec-cards" class="space-y-6">
+            <div class="rounded-3xl bg-gradient-to-r from-slate-900 via-amber-950/40 to-slate-900 border border-amber-500/30 p-6 md:p-8 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="space-y-3 max-w-2xl text-center md:text-left">
+                    <div class="inline-flex items-center gap-2 bg-amber-500/20 text-amber-300 border border-amber-500/30 px-3 py-1 rounded-full text-xs font-bold font-fun">
+                        <i class="fa-solid fa-bolt"></i> 第二課高頻精華統整
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-black font-fun text-white">
+                        跨模組核心統整速記卡 🎴
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        涵蓋對話篇、句型文法篇與閱讀事實查核的核心考點！翻牌秒記、快速複習！
+                    </p>
+                </div>
+                <div class="text-center bg-slate-900/90 px-5 py-4 rounded-3xl border border-slate-700 shrink-0">
+                    <span class="text-4xl">🍿🎬</span>
+                    <div class="text-xs text-amber-400 font-bold mt-1">U2 知識全覆蓋</div>
+                </div>
+            </div>
+
+            <!-- Quick Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Card 1 -->
+                <div class="bg-slate-900/90 rounded-3xl p-5 border-2 border-rose-500/40 space-y-3 shadow-xl">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-rose-400 font-fun uppercase">考點 1：情緒形容詞</span>
+                        <span class="text-xs bg-rose-500/20 text-rose-300 px-2 py-0.5 rounded font-mono">必考</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white font-fun">-ed (人感到) vs. -ing (事物令人)</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        • interested in / interesting to<br>
+                        • excited about / exciting to<br>
+                        • bored with / boring to<br>
+                        • surprised at / surprising to
+                    </p>
+                    <button onclick="speakText('I am interested in the movie. The movie is interesting to me.')" class="text-xs text-rose-300 hover:text-white bg-slate-950 px-3 py-1 rounded-xl border border-slate-800">
+                        <i class="fa-solid fa-volume-high mr-1"></i> 朗讀經典例句
+                    </button>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-slate-900/90 rounded-3xl p-5 border-2 border-amber-500/40 space-y-3 shadow-xl">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-amber-400 font-fun uppercase">考點 2：三大因果句型</span>
+                        <span class="text-xs bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded font-mono">會考熱點</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white font-fun">so... that... / enough / too... to</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        • S + be + so adj. that + 子句<br>
+                        • S + be + adj. + enough + to VR<br>
+                        • S + be + too + adj. + to VR (自帶否定)<br>
+                        ⚠️ 注意：that 子句須保留受詞代名詞 it！
+                    </p>
+                    <button onclick="speakText('The tea was so hot that I couldn\'t drink it. It was too hot to drink.')" class="text-xs text-amber-300 hover:text-white bg-slate-950 px-3 py-1 rounded-xl border border-slate-800">
+                        <i class="fa-solid fa-volume-high mr-1"></i> 朗讀代換例句
+                    </button>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-slate-900/90 rounded-3xl p-5 border-2 border-emerald-500/40 space-y-3 shadow-xl">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-emerald-400 font-fun uppercase">考點 3：數位素養與查核</span>
+                        <span class="text-xs bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-mono">新課綱素養</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white font-fun">三大查證步驟 (Fact-Checking)</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        1. 查證作者與來源 (author & source)<br>
+                        2. 檢查拼字與文法錯誤 (spelling mistakes)<br>
+                        3. 造訪事實查核網站 (fact-checking page)<br>
+                        ★ 分享前請三思 (Think twice before sharing!)
+                    </p>
+                    <button onclick="speakText('Think twice before you share news on the Internet.')" class="text-xs text-emerald-300 hover:text-white bg-slate-950 px-3 py-1 rounded-xl border border-slate-800">
+                        <i class="fa-solid fa-volume-high mr-1"></i> 朗讀素養金句
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center pt-4">
+                <button onclick="switchTab('exam')" class="bg-gradient-to-r from-amber-500 to-emerald-500 text-slate-950 font-black font-fun px-8 py-3.5 rounded-2xl game-btn-shadow text-base">
+                    開始 15 題全單元綜合模擬會考 🚀
+                </button>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 2: 15-QUESTION COMPREHENSIVE EXAM -->
+        <!-- ========================================== -->
+        <section id="sec-exam" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-purple-600 via-rose-600 to-amber-600 rounded-3xl p-6 text-white shadow-xl flex justify-between items-center">
+                <div>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black uppercase font-fun">Unit 2 Comprehensive Exam</span>
+                    <h2 class="text-2xl md:text-3xl font-black font-fun mt-2">📝 綜合實戰模擬會考 (共 15 題)</h2>
+                    <p class="text-purple-100 text-sm mt-1">融合對話篇、句型篇、閱讀篇之綜合大會考，挑戰全對解鎖榮譽證書！</p>
+                </div>
+                <div class="text-5xl hidden sm:block">🏆</div>
+            </div>
+
+            <!-- Questions Container -->
+            <div class="space-y-4" id="examContainer">
+                <!-- Injected by JS -->
+            </div>
+
+            <div class="bg-slate-900/90 p-5 rounded-3xl border border-slate-800 flex flex-wrap justify-between items-center gap-3">
+                <div class="text-sm font-bold text-slate-200">
+                    目前測驗得分：<span id="examScoreDisplay" class="text-amber-400 text-xl font-black">0</span> / 15 題
+                </div>
+                <button onclick="resetExam()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-xl text-xs font-bold transition border border-slate-700">
+                    <i class="fa-solid fa-rotate-right mr-1"></i> 重新測驗
+                </button>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 3: CERTIFICATE -->
+        <!-- ========================================== -->
+        <section id="sec-cert" class="hidden space-y-6">
+            <div class="bg-slate-900/95 rounded-3xl p-8 border-4 border-amber-500/50 shadow-2xl text-center space-y-6 max-w-2xl mx-auto relative overflow-hidden">
+                <div class="text-6xl animate-bounce">🎖️</div>
+                <div>
+                    <span class="text-xs font-black uppercase tracking-widest text-amber-400 font-fun">Certificate of Mastery</span>
+                    <h2 class="text-2xl sm:text-3xl font-black font-fun text-white mt-1">Unit 2 英語大師榮譽通關證書</h2>
+                    <p class="text-xs text-slate-400 mt-2">恭喜完成第二課【The Movie Looks Exciting】全模組深度修煉！</p>
+                </div>
+
+                <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-3 text-left">
+                    <div class="flex justify-between text-xs text-slate-300 border-b border-slate-800 pb-2">
+                        <span>修煉單元：Unit 2 The Movie Looks Exciting</span>
+                        <span class="text-emerald-400 font-bold">認證合格 ✓</span>
+                    </div>
+                    <div class="flex justify-between text-xs text-slate-300 border-b border-slate-800 pb-2">
+                        <span>對話篇：客廳與電影院情境對話、聽力與口說邀約</span>
+                        <span class="text-amber-400 font-bold">100% 完成</span>
+                    </div>
+                    <div class="flex justify-between text-xs text-slate-300 border-b border-slate-800 pb-2">
+                        <span>句型篇：情緒形容詞、so... that...、enough、too... to...</span>
+                        <span class="text-amber-400 font-bold">精通掌握</span>
+                    </div>
+                    <div class="flex justify-between text-xs text-slate-300">
+                        <span>閱讀篇：Are You Sharing Lies? 事實查核專題偵探</span>
+                        <span class="text-cyan-400 font-bold">特級偵探勳章</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-center gap-3 pt-2">
+                    <a href="index.html" class="bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-black px-6 py-2.5 rounded-xl game-btn-shadow text-sm">
+                        返回學習首頁 🏠
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="mt-12 border-t border-slate-800/80 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div>Unit 2: The Movie Looks Exciting ・ 核心綜合總複習 (Review)</div>
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="hover:text-amber-400 transition">學習首頁</a>
+                <a href="u2_dialogue.html" class="hover:text-rose-400 transition">第二課對話</a>
+                <a href="u2_pattern.html" class="hover:text-purple-400 transition">第二課句型</a>
+                <a href="u2_reading.html" class="hover:text-cyan-400 transition">第二課閱讀</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        const AudioFX = {
+            ctx: null,
+            muted: false,
+            init() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); },
+            toggleMute() {
+                this.muted = !this.muted;
+                document.getElementById('soundIcon').className = this.muted ? 'fa-solid fa-volume-xmark text-rose-400' : 'fa-solid fa-volume-high text-amber-400';
+            },
+            playCorrect() {
+                if (this.muted) return;
+                try {
+                    this.init();
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, now);
+                    osc.frequency.setValueAtTime(659.25, now + 0.1);
+                    osc.frequency.setValueAtTime(783.99, now + 0.2);
+                    osc.frequency.setValueAtTime(1046.50, now + 0.3);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.45);
+                    osc.connect(gain); gain.connect(this.ctx.destination);
+                    osc.start(now); osc.stop(now + 0.45);
+                } catch(e) {}
+            },
+            playWrong() {
+                if (this.muted) return;
+                try {
+                    this.init();
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(220, now);
+                    osc.frequency.setValueAtTime(164.81, now + 0.12);
+                    gain.gain.setValueAtTime(0.18, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.28);
+                    osc.connect(gain); gain.connect(this.ctx.destination);
+                    osc.start(now); osc.stop(now + 0.28);
+                } catch(e) {}
+            },
+            playCoin() {
+                if (this.muted) return;
+                try {
+                    this.init();
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(987.77, now);
+                    osc.frequency.setValueAtTime(1318.51, now + 0.08);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                    osc.connect(gain); gain.connect(this.ctx.destination);
+                    osc.start(now); osc.stop(now + 0.3);
+                } catch(e) {}
+            }
+        };
+
+        let player = { xp: 0, level: 1, coins: 50 };
+        function loadProgress() {
+            try {
+                const saved = localStorage.getItem('kevinchang_u2_player');
+                if (saved) player = Object.assign(player, JSON.parse(saved));
+            } catch(e) {}
+            updateStatusUI();
+        }
+        function saveProgress() {
+            try { localStorage.setItem('kevinchang_u2_player', JSON.stringify(player)); } catch(e) {}
+        }
+        function addXP(amount) {
+            player.xp += amount;
+            AudioFX.playCoin();
+            if (player.xp >= 100) {
+                player.level += Math.floor(player.xp / 100);
+                player.xp = player.xp % 100;
+                player.coins += 20;
+                confetti({ particleCount: 80 });
+            }
+            saveProgress();
+            updateStatusUI();
+        }
+        function updateStatusUI() {
+            document.getElementById('levelDisplay').innerText = player.level;
+            document.getElementById('xpText').innerText = `${player.xp} / 100`;
+            document.getElementById('xpBar').style.width = `${player.xp}%`;
+            document.getElementById('coinCount').innerText = player.coins;
+        }
+
+        function speakText(text) {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.95;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        const examQuestions = [
+            { id: 1, q: "Zac was surprised ______ that Ryan Bank won several awards since he was eight.", options: ["hear", "hearing", "to hear", "heard"], answer: 2, exp: "be surprised to VR 表「因做某事而感到驚訝」。" },
+            { id: 2, q: "Mom is old enough ______ Ryan Bank's mother.", options: ["be", "to be", "being", "is"], answer: 1, exp: "adj. + enough + to VR，此處接 to be。" },
+            { id: 3, q: "Scary movies are ______ to Zac, so he won't watch the movie with Mom.", options: ["bored", "boring", "boredom", "bores"], answer: 1, exp: "Scary movies 是事物，對人而言令人無聊用 boring (boring to me)。" },
+            { id: 4, q: "Mom was ______ excited that she didn't think clearly and almost downloaded a pirated movie.", options: ["too", "so", "very", "quite"], answer: 1, exp: "so... that... 子句表示「如此興奮以致於...」。" },
+            { id: 5, q: "This movie is not for people under 18. Zac is ______ to watch it.", options: ["too young", "young enough", "so young", "too old"], answer: 0, exp: "too young to watch it (年紀太小不能看)。" },
+            { id: 6, q: "Would you like ______ the new steak house with me?", options: ["try", "trying", "to try", "tried"], answer: 2, exp: "Would you like + to VR？為禮貌邀約句型。" },
+            { id: 7, q: "Do you feel like ______ Halloween with us tonight?", options: ["celebrate", "celebrating", "to celebrate", "celebrated"], answer: 1, exp: "Do you feel like + V-ing？feel like 後面必須接動名詞。" },
+            { id: 8, q: "We shouldn't watch pirated movies, ______?", options: ["should we", "shouldn't we", "do we", "don't we"], answer: 0, exp: "附加問句：前面否定 (shouldn't)，後面用肯定 (should we)。" },
+            { id: 9, q: "The soup was so hot that Alice couldn't drink ______.", options: ["it", "them", "one", "(不填)"], answer: 0, exp: "that 子句為完整子句，及物動詞 drink 後面必須保留代名詞 it 指稱 the soup！" },
+            { id: 10, q: "Lucy is tall enough to reach the red apples ______ the tree.", options: ["in", "on", "at", "to"], answer: 1, exp: "蘋果為樹木生長的果實，使用 on the tree。" },
+            { id: 11, q: "If there are ______ mistakes in the news post, it might be fake information.", options: ["spell", "spelling", "spelled", "spells"], answer: 1, exp: "spelling mistakes 拼字錯誤（名詞片語）。" },
+            { id: 12, q: "Anybody ______ post anything on the Internet freely.", options: ["can", "should", "must", "need"], answer: 0, exp: "課文原句：Anybody can post anything online." },
+            { id: 13, q: "Don't let dishonest people trick you into ______ lies.", options: ["spread", "spreading", "to spread", "spreads"], answer: 1, exp: "trick sb into + V-ing (誘騙某人去做某事)。" },
+            { id: 14, q: "Some people write fake news by design to get as many ______ as possible.", options: ["hits", "tickets", "actors", "castles"], answer: 0, exp: "get as many hits as possible (獲得盡可能多的網路點擊數)。" },
+            { id: 15, q: "When you read something surprising online next time, you should ______.", options: ["share it right away", "think twice before you share it", "download it immediately", "trick your friends"], answer: 1, exp: "課文最後提醒：think twice before you share it (分享前請三思)！" }
+        ];
+
+        let examAnswers = {};
+
+        function renderExam() {
+            const container = document.getElementById('examContainer');
+            container.innerHTML = '';
+            examQuestions.forEach(q => {
+                container.innerHTML += `
+                    <div id="eCard-${q.id}" class="bg-slate-900/90 rounded-3xl p-5 border-2 border-slate-800 space-y-3">
+                        <div class="flex items-start gap-3">
+                            <span class="w-7 h-7 rounded-full bg-amber-500/20 text-amber-300 font-black text-xs flex items-center justify-center shrink-0 border border-amber-500/30 font-fun">
+                                ${q.id}
+                            </span>
+                            <div class="font-bold text-slate-100 text-sm sm:text-base font-fun leading-snug">
+                                ${q.q}
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                            ${q.options.map((opt, idx) => `
+                                <button onclick="selectExamOption(${q.id}, ${idx})" id="eBtn-${q.id}-${idx}" class="w-full text-left p-3 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-400 text-xs font-bold text-slate-200 transition flex items-center gap-2">
+                                    <span class="w-5 h-5 rounded-full bg-slate-800 text-slate-400 text-[10px] flex items-center justify-center font-mono shrink-0">${['A','B','C','D'][idx]}</span>
+                                    <span>${opt}</span>
+                                </button>
+                            `).join('')}
+                        </div>
+                        <div id="eFeed-${q.id}" class="hidden p-3 rounded-2xl text-xs font-medium leading-relaxed"></div>
+                    </div>
+                `;
+            });
+        }
+
+        function selectExamOption(qId, optIdx) {
+            if (examAnswers[qId] !== undefined) return;
+            examAnswers[qId] = optIdx;
+
+            const q = examQuestions.find(item => item.id === qId);
+            const isCorrect = optIdx === q.answer;
+            const feed = document.getElementById(`eFeed-${qId}`);
+            const btn = document.getElementById(`eBtn-${qId}-${optIdx}`);
+
+            if (isCorrect) {
+                btn.classList.add('bg-emerald-600', 'text-white', 'border-transparent');
+                AudioFX.playCorrect();
+                addXP(10);
+                feed.className = 'p-3 rounded-2xl text-xs font-medium leading-relaxed bg-emerald-950/60 border border-emerald-500/40 text-emerald-200 block';
+                feed.innerHTML = `<strong>🎉 答對了！</strong> ${q.exp}`;
+            } else {
+                btn.classList.add('bg-rose-600', 'text-white', 'border-transparent');
+                const correctBtn = document.getElementById(`eBtn-${qId}-${q.answer}`);
+                correctBtn.classList.add('border-emerald-400', 'text-emerald-300');
+                AudioFX.playWrong();
+                feed.className = 'p-3 rounded-2xl text-xs font-medium leading-relaxed bg-rose-950/60 border border-rose-500/40 text-rose-200 block';
+                feed.innerHTML = `<strong>❌ 答錯囉！</strong> 正確答案為 <strong>(${['A','B','C','D'][q.answer]})</strong>。<br>${q.exp}`;
+            }
+
+            let correctCount = 0;
+            examQuestions.forEach(item => { if (examAnswers[item.id] === item.answer) correctCount++; });
+            document.getElementById('examScoreDisplay').innerText = correctCount;
+
+            if (Object.keys(examAnswers).length === examQuestions.length) {
+                confetti({ particleCount: 90, spread: 80 });
+                player.coins += correctCount * 5;
+                updateStatusUI();
+                if (correctCount >= 12) {
+                    setTimeout(() => {
+                        alert(`🏆 總得分 ${correctCount} / 15！榮獲通關榮譽證書！`);
+                        switchTab('cert');
+                    }, 800);
+                }
+            }
+        }
+
+        function resetExam() {
+            examAnswers = {};
+            document.getElementById('examScoreDisplay').innerText = '0';
+            renderExam();
+        }
+
+        function switchTab(tabId) {
+            ['cards', 'exam', 'cert'].forEach(t => {
+                const sec = document.getElementById(`sec-${t}`);
+                const btn = document.getElementById(`tab-${t}`);
+                if (t === tabId) {
+                    sec.classList.remove('hidden');
+                    btn.className = 'tab-btn flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-emerald-600 text-slate-950 font-black shadow-lg whitespace-nowrap transition';
+                } else {
+                    sec.classList.add('hidden');
+                    btn.className = 'tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition';
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadProgress();
+            renderExam();
+        });
+    </script>
+</body>
+</html>

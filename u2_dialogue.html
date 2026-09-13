@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 2 English RPG: The Movie Looks Exciting 電影英語大冒險</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                        fun: ['Fredoka', 'cursive', 'sans-serif']
+                    },
+                    colors: {
+                        cinema: {
+                            gold: '#f59e0b',
+                            red: '#e11d48',
+                            purple: '#9333ea',
+                            dark: '#0a0f1d',
+                            card: '#151f32',
+                            accent: '#38bdf8'
+                        }
+                    },
+                    animation: {
+                        'bounce-short': 'bounce 0.6s ease-in-out 1',
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                        'float': 'float 3.2s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 15px rgba(245, 158, 11, 0.4)' },
+                            '50%': { boxShadow: '0 0 28px rgba(245, 158, 11, 0.8)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-6px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { height: 6px; width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        .game-btn-shadow {
+            box-shadow: 0 5px 0 0 rgba(0,0,0,0.35);
+            transition: all 0.12s ease;
+        }
+        .game-btn-shadow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 0 0 rgba(0,0,0,0.35);
+        }
+        .game-btn-shadow:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 0 rgba(0,0,0,0.35);
+        }
+        .ticket-cutout-left {
+            mask-image: radial-gradient(circle at 0% 50%, transparent 12px, black 12.5px);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans pb-16 selection:bg-amber-400 selection:text-slate-950">
+
+    <!-- TOP GAMIFICATION STATUS BAR -->
+    <header class="bg-slate-900/95 border-b-2 border-slate-800 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 py-2.5 flex flex-wrap justify-between items-center gap-3">
+            
+            <!-- Logo & Unit Title -->
+            <div class="flex items-center gap-3">
+                <a href="index.html" title="返回學習首頁" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-amber-300 p-2.5 rounded-2xl border border-slate-700 shadow-md transition flex items-center gap-1.5 font-bold text-xs md:text-sm">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="hidden sm:inline">學習首頁</span>
+                </a>
+                <div class="relative bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 p-2.5 rounded-2xl shadow-lg animate-float text-white">
+                    <i class="fa-solid fa-film text-2xl"></i>
+                    <span id="badgeIcon" class="absolute -top-1 -right-1 bg-amber-400 text-slate-950 text-[10px] font-black px-1.5 py-0.5 rounded-full border-2 border-slate-900">U2</span>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs bg-rose-500/20 text-rose-300 border border-rose-500/30 font-bold px-2 py-0.5 rounded-md uppercase tracking-wider font-fun">Unit 2 Dialogue</span>
+                        <span id="userRank" class="text-xs bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold px-2 py-0.5 rounded-md font-fun">電影影評新星</span>
+                    </div>
+                    <h1 class="text-lg md:text-xl font-black font-fun tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-rose-300 to-purple-300">
+                        The Movie Looks Exciting 電影對話大冒險
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Player XP & Coins Dashboard -->
+            <div class="flex items-center gap-3 bg-slate-900/90 px-3.5 py-1.5 rounded-2xl border border-slate-800 shadow-inner">
+                <!-- Level -->
+                <div class="flex items-center gap-1.5 font-black font-fun text-sm text-amber-400">
+                    <span class="text-xs text-slate-400">LV.</span><span id="levelDisplay">1</span>
+                </div>
+                <div class="w-px h-5 bg-slate-800"></div>
+                <!-- XP Bar -->
+                <div class="flex flex-col w-24 sm:w-32">
+                    <div class="flex justify-between text-[10px] font-bold text-slate-300 mb-0.5">
+                        <span>XP</span>
+                        <span id="xpText" class="text-amber-400">0 / 100</span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden border border-slate-700">
+                        <div id="xpBar" class="bg-gradient-to-r from-amber-400 via-rose-500 to-purple-500 h-full transition-all duration-300 w-0"></div>
+                    </div>
+                </div>
+
+                <!-- Coins & Sound -->
+                <div class="flex items-center gap-2 border-l border-slate-800 pl-2.5">
+                    <div class="flex items-center gap-1 text-amber-300 font-bold text-xs" title="金幣">
+                        <i class="fa-solid fa-coins text-amber-400"></i>
+                        <span id="coinCount">50</span>
+                    </div>
+                    <button onclick="AudioFX.toggleMute()" id="muteBtn" title="開關音效" class="text-slate-400 hover:text-amber-300 p-1 text-xs">
+                        <i class="fa-solid fa-volume-high" id="soundIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="bg-slate-950/90 px-4 border-t border-slate-800/80">
+            <div class="max-w-6xl mx-auto flex overflow-x-auto custom-scrollbar gap-2 py-2 text-xs md:text-sm font-bold">
+                <button onclick="switchTab('dialogue')" id="tab-dialogue" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-rose-600 text-slate-950 font-black shadow-lg whitespace-nowrap transition">
+                    <i class="fa-solid fa-clapperboard text-base"></i> 🎬 課文冒險 (Dialogue)
+                </button>
+                <button onclick="switchTab('roleplay')" id="tab-roleplay" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
+                    <i class="fa-solid fa-microphone-lines text-base text-rose-400"></i> 🎙️ 角色配音 (Dubbing)
+                </button>
+                <button onclick="switchTab('quiz')" id="tab-quiz" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
+                    <i class="fa-solid fa-headphones text-base text-purple-400"></i> 🎧 聽力測驗 (T/F Quiz)
+                </button>
+                <button onclick="switchTab('oral')" id="tab-oral" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
+                    <i class="fa-solid fa-comments text-base text-sky-400"></i> 🗣️ 口說邀約 (Oral Practice)
+                </button>
+                <button onclick="switchTab('vocab')" id="tab-vocab" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
+                    <i class="fa-solid fa-spell-check text-base text-amber-400"></i> 🔤 單字與文法 (Vocab & Focus)
+                </button>
+                <button onclick="switchTab('games')" id="tab-games" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
+                    <i class="fa-solid fa-gamepad text-base text-emerald-400"></i> 🎮 電影遊戲 (Mini Games)
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 mt-6 flex-grow w-full">
+
+        <!-- ========================================== -->
+        <!-- TAB 1: INTERACTIVE COMIC DIALOGUE -->
+        <!-- ========================================== -->
+        <section id="sec-dialogue" class="space-y-6">
+            
+            <!-- Dialogue Header & Banner -->
+            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-purple-950/50 to-slate-900 border border-slate-800 p-6 shadow-xl flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="space-y-2 text-center md:text-left">
+                    <div class="inline-flex items-center gap-2 bg-rose-500/20 border border-rose-500/40 text-rose-300 px-3 py-1 rounded-full text-xs font-bold font-fun">
+                        <i class="fa-solid fa-ticket text-rose-400"></i>
+                        <span>課本 P.32 ~ P.33 完整對話篇</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black font-fun text-white">
+                        The Movie Looks Exciting 🎬
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-300 max-w-2xl">
+                        跟著柴克 (Zac) 與媽媽 (Mom) 一起探索最新電影！掌握 <span class="text-amber-400 font-bold">連綴動詞 + 情緒形容詞 (-ed vs -ing)</span>、<span class="text-rose-400 font-bold">enough... to...</span> 與 <span class="text-purple-400 font-bold">so... that...</span> 關鍵句型！
+                    </p>
+                </div>
+                <div class="flex items-center gap-3 shrink-0">
+                    <div class="text-center bg-slate-900/80 px-4 py-3 rounded-2xl border border-slate-700">
+                        <span class="text-2xl">🍿</span>
+                        <div class="text-[11px] text-slate-400 font-bold mt-1">客廳與劇院</div>
+                    </div>
+                    <div class="text-center bg-slate-900/80 px-4 py-3 rounded-2xl border border-slate-700">
+                        <span class="text-2xl">👻</span>
+                        <div class="text-[11px] text-slate-400 font-bold mt-1">古堡幽靈新片</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dialogue Control Toolbar -->
+            <div class="bg-slate-900/90 p-4 rounded-3xl border border-slate-800 flex flex-wrap items-center justify-between gap-4 shadow-xl">
+                <div class="flex items-center gap-3">
+                    <button id="playAllBtn" onclick="togglePlayAll()" class="bg-gradient-to-r from-amber-500 to-rose-600 hover:from-amber-400 hover:to-rose-500 text-slate-950 font-black px-5 py-2.5 rounded-2xl shadow-lg game-btn-shadow flex items-center gap-2 text-sm">
+                        <i id="playAllIcon" class="fa-solid fa-play"></i>
+                        <span id="playAllText">播放全課對話 (+25 XP)</span>
+                    </button>
+                    <button onclick="stopSpeech()" class="bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold px-4 py-2.5 rounded-2xl transition flex items-center gap-1.5 text-xs border border-slate-700">
+                        <i class="fa-solid fa-stop"></i> 停止
+                    </button>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3 text-xs md:text-sm font-semibold">
+                    <!-- Speed toggle -->
+                    <div class="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800">
+                        <button onclick="setTTSRate(0.8, this)" class="rate-btn text-slate-400 px-2.5 py-1 rounded-lg transition font-medium">0.8x 慢速</button>
+                        <button onclick="setTTSRate(1.0, this)" class="rate-btn bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-lg transition shadow">1.0x 標準</button>
+                        <button onclick="setTTSRate(1.2, this)" class="rate-btn text-slate-400 px-2.5 py-1 rounded-lg transition font-medium">1.2x 挑戰</button>
+                    </div>
+
+                    <!-- Chinese translation toggle -->
+                    <label class="flex items-center gap-2 cursor-pointer bg-slate-950 px-3 py-2 rounded-xl border border-slate-800 transition hover:bg-slate-800">
+                        <input type="checkbox" id="toggleChinese" checked onchange="toggleTranslation()" class="accent-amber-400 w-4 h-4 rounded">
+                        <span class="text-slate-300">中文對照</span>
+                    </label>
+
+                    <!-- Grammar toggle -->
+                    <label class="flex items-center gap-2 cursor-pointer bg-slate-950 px-3 py-2 rounded-xl border border-slate-800 transition hover:bg-slate-800">
+                        <input type="checkbox" id="toggleGrammar" checked onchange="toggleGrammarHighlights()" class="accent-amber-400 w-4 h-4 rounded">
+                        <span class="text-slate-300">文法句型解析</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Dialogue Scene 1: (In the living room) -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-3 pt-2">
+                    <div class="w-10 h-10 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center font-bold text-lg">
+                        <i class="fa-solid fa-couch"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-black font-fun text-amber-300">Part 1: (In the living room)</h3>
+                        <p class="text-xs text-slate-400">場景一：在客廳裡，媽媽看著電影掉眼淚...</p>
+                    </div>
+                </div>
+                <div class="space-y-3" id="dialoguePart1">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Dialogue Scene 2: (An hour later) -->
+            <div class="space-y-4 pt-4">
+                <div class="flex items-center gap-3 pt-2">
+                    <div class="w-10 h-10 rounded-2xl bg-rose-500/20 text-rose-400 border border-rose-500/30 flex items-center justify-center font-bold text-lg">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-black font-fun text-rose-300">Part 2: (An hour later)</h3>
+                        <p class="text-xs text-slate-400">場景二：一小時後，媽媽想下載榮恩・班克的新片...</p>
+                    </div>
+                </div>
+                <div class="space-y-3" id="dialoguePart2">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 2: ROLEPLAY & DUBBING STUDIO -->
+        <!-- ========================================== -->
+        <section id="sec-roleplay" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-rose-600 via-purple-700 to-indigo-700 rounded-3xl p-6 text-white shadow-xl relative overflow-hidden">
+                <div class="relative z-10">
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider font-fun">Dubbing Studio</span>
+                    <h2 class="text-2xl md:text-3xl font-black font-fun mt-2">🎙️ 課文角色配音配對挑戰</h2>
+                    <p class="text-rose-100 text-sm mt-1">選定你要挑戰飾演的角色，跟著英文提示開口朗讀，系統自動為你打分並獲得金幣！</p>
+                </div>
+                <div class="absolute -right-4 -bottom-6 text-8xl opacity-15 pointer-events-none">🎬</div>
+            </div>
+
+            <!-- Character Chooser -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <button onclick="selectRoleplayCharacter('Mom')" id="roleBtn-Mom" class="p-5 rounded-3xl border-2 border-rose-500 bg-slate-900/90 hover:bg-rose-950/30 transition flex items-center gap-4 text-left group">
+                    <div class="w-16 h-16 rounded-2xl bg-rose-500/20 text-4xl flex items-center justify-center shrink-0 border border-rose-400/40 group-hover:scale-110 transition">
+                        👩
+                    </div>
+                    <div>
+                        <div class="text-xs text-rose-400 font-bold uppercase font-fun">Role 1: 媽媽</div>
+                        <h3 class="text-xl font-bold text-white font-fun">Mom</h3>
+                        <p class="text-xs text-slate-400 mt-1">榮恩・班克的頭號大粉絲！看電影感動落淚，差點下載盜版電影。</p>
+                    </div>
+                </button>
+
+                <button onclick="selectRoleplayCharacter('Zac')" id="roleBtn-Zac" class="p-5 rounded-3xl border-2 border-slate-700 bg-slate-900/90 hover:bg-sky-950/30 transition flex items-center gap-4 text-left group">
+                    <div class="w-16 h-16 rounded-2xl bg-sky-500/20 text-4xl flex items-center justify-center shrink-0 border border-sky-400/40 group-hover:scale-110 transition">
+                        👦
+                    </div>
+                    <div>
+                        <div class="text-xs text-sky-400 font-bold uppercase font-fun">Role 2: 柴克</div>
+                        <h3 class="text-xl font-bold text-white font-fun">Zac</h3>
+                        <p class="text-xs text-slate-400 mt-1">媽媽的兒子。對恐怖片敬謝不敏，並及時提醒媽媽要支持正版電影！</p>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Roleplay Stage Display -->
+            <div class="bg-slate-900/90 rounded-3xl p-6 border border-slate-800 shadow-2xl space-y-6">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs bg-slate-800 text-slate-300 font-bold px-3 py-1 rounded-full">你飾演的角色：</span>
+                        <span id="activeRoleName" class="text-lg font-black text-rose-400 font-fun">Mom 👩</span>
+                    </div>
+                    <div class="text-xs text-amber-400 font-bold flex items-center gap-1">
+                        <i class="fa-solid fa-star"></i> 進度：<span id="roleplayProgress">1 / 8 句</span>
+                    </div>
+                </div>
+
+                <!-- Current Roleplay Cue Card -->
+                <div id="roleplayCard" class="bg-slate-950 rounded-2xl p-6 border-2 border-rose-500/40 space-y-4 text-center">
+                    <div id="roleSpeakerBadge" class="inline-block bg-rose-500/20 text-rose-300 font-bold px-3 py-1 rounded-full text-xs">
+                        換你開口唸這一句囉！
+                    </div>
+                    <div id="roleEnglishCue" class="text-xl md:text-2xl font-black text-amber-300 font-fun leading-relaxed">
+                        "I'm crying because my favorite actor, Ryan Bank, is crying in the movie now. His acting really touches my heart."
+                    </div>
+                    <p id="roleChineseCue" class="text-sm text-slate-400">
+                        「我哭是因為我最喜愛的演員，榮恩・班克，正在電影中哭泣。他的表演真的很觸動我的心。」
+                    </p>
+
+                    <div class="pt-4 flex flex-wrap justify-center items-center gap-3">
+                        <button onclick="playRoleplayAudio()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 border border-slate-700">
+                            <i class="fa-solid fa-volume-high text-amber-400"></i> 聽示範發音
+                        </button>
+                        <button onclick="recordAndValidateRoleplayLine()" class="bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-400 hover:to-purple-500 text-white px-6 py-3 rounded-xl font-black text-sm shadow-lg game-btn-shadow flex items-center gap-2">
+                            <i class="fa-solid fa-check-circle"></i> 我唸完了！配音挑戰 (+15 XP)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 3: SECTION C: LISTEN AND WRITE T OR F -->
+        <!-- ========================================== -->
+        <section id="sec-quiz" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 rounded-3xl p-6 text-white shadow-xl flex justify-between items-center">
+                <div>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black uppercase font-fun">Textbook Section C (P.34)</span>
+                    <h2 class="text-2xl md:text-3xl font-black font-fun mt-2">🎧 Listen and Write T or F</h2>
+                    <p class="text-purple-100 text-sm mt-1">根據對話內容，聽到的描述為正確寫 T，不正確的寫 F。點擊喇叭可聽朗讀！</p>
+                </div>
+                <div class="text-5xl hidden sm:block">📝</div>
+            </div>
+
+            <!-- Quiz Container -->
+            <div class="space-y-4" id="tfQuizContainer">
+                <!-- 4 Questions dynamically rendered with full feedback and textbook clues -->
+            </div>
+
+            <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 flex justify-between items-center">
+                <div class="text-sm font-bold text-slate-300">
+                    測驗得分：<span id="tfQuizScore" class="text-amber-400 text-lg">0</span> / 4 題
+                </div>
+                <button onclick="resetTFQuiz()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-2 rounded-xl text-xs font-bold transition border border-slate-700">
+                    <i class="fa-solid fa-rotate-right mr-1"></i> 重新測驗
+                </button>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 4: ORAL PRACTICE - INVITING PEOPLE -->
+        <!-- ========================================== -->
+        <section id="sec-oral" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-sky-600 via-teal-600 to-emerald-600 rounded-3xl p-6 text-white shadow-xl">
+                <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black uppercase font-fun">Textbook P.34 Oral Practice</span>
+                <h2 class="text-2xl md:text-3xl font-black font-fun mt-2">🗣️ Inviting People 邀約他人與回應</h2>
+                <p class="text-sky-100 text-sm mt-1">掌握 3 大經典邀約問句、肯定答應與委婉婉拒之生活實用語！</p>
+            </div>
+
+            <!-- Read and Learn Rules Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <!-- Q Box: Inviting -->
+                <div class="bg-slate-900/90 rounded-3xl p-6 border-2 border-sky-500/40 shadow-xl space-y-4">
+                    <div class="flex items-center gap-3">
+                        <span class="w-9 h-9 rounded-2xl bg-sky-500/20 text-sky-400 font-black flex items-center justify-center font-fun text-xl">Q</span>
+                        <h3 class="text-lg font-black font-fun text-white">邀約他人問句句型 (Inviting)</h3>
+                    </div>
+                    <ul class="space-y-3 text-sm">
+                        <li class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 flex items-start gap-3">
+                            <span class="text-sky-400 font-bold text-xs mt-0.5">模式 1</span>
+                            <div>
+                                <p class="font-bold text-sky-300 font-fun text-base">Would you like to <span class="underline decoration-sky-400 font-black">VR (原形動詞)</span> with me?</p>
+                                <p class="text-xs text-slate-400 mt-1">你想要跟我一起去...嗎？(最禮貌正式)</p>
+                            </div>
+                        </li>
+                        <li class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 flex items-start gap-3">
+                            <span class="text-teal-400 font-bold text-xs mt-0.5">模式 2</span>
+                            <div>
+                                <p class="font-bold text-teal-300 font-fun text-base">Do you feel like <span class="underline decoration-teal-400 font-black">V-ing (動名詞)</span> with me?</p>
+                                <p class="text-xs text-slate-400 mt-1">你想不想跟我一起...呢？(feel like + V-ing)</p>
+                            </div>
+                        </li>
+                        <li class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 flex items-start gap-3">
+                            <span class="text-emerald-400 font-bold text-xs mt-0.5">模式 3</span>
+                            <div>
+                                <p class="font-bold text-emerald-300 font-fun text-base">Are you interested in <span class="underline decoration-emerald-400 font-black">V-ing (動名詞)</span> with me?</p>
+                                <p class="text-xs text-slate-400 mt-1">你有興趣跟我一起...嗎？(interested in + V-ing)</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- A Box: Responding -->
+                <div class="bg-slate-900/90 rounded-3xl p-6 border-2 border-emerald-500/40 shadow-xl space-y-4">
+                    <div class="flex items-center gap-3">
+                        <span class="w-9 h-9 rounded-2xl bg-emerald-500/20 text-emerald-400 font-black flex items-center justify-center font-fun text-xl">A</span>
+                        <h3 class="text-lg font-black font-fun text-white">如何回應邀約 (Responding)</h3>
+                    </div>
+                    <ul class="space-y-3 text-sm">
+                        <li class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 flex items-start gap-3">
+                            <span class="text-emerald-400 font-bold text-xs mt-0.5">欣然接受</span>
+                            <div>
+                                <p class="font-bold text-emerald-300 font-fun text-base">Sure. <span class="underline decoration-emerald-400">______</span> is/are my favorite.</p>
+                                <p class="text-xs text-slate-400 mt-1">當然！...是我的最愛。(例：Steak is my favorite.)</p>
+                            </div>
+                        </li>
+                        <li class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 flex items-start gap-3">
+                            <span class="text-rose-400 font-bold text-xs mt-0.5">客氣婉拒</span>
+                            <div>
+                                <p class="font-bold text-rose-300 font-fun text-base">I'll pass. I don't like <span class="underline decoration-rose-400">______</span>.</p>
+                                <p class="text-xs text-slate-400 mt-1">不用了，我不喜歡...。(例：scary movies)</p>
+                            </div>
+                        </li>
+                        <li class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 flex items-start gap-3">
+                            <span class="text-amber-400 font-bold text-xs mt-0.5">另有安排</span>
+                            <div>
+                                <p class="font-bold text-amber-300 font-fun text-base">I'll pass. I already have plans.</p>
+                                <p class="text-xs text-slate-400 mt-1">不用了，我已經有其他安排了。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Pair Up Practice Exercises (P.34) -->
+            <div class="space-y-4">
+                <h3 class="text-xl font-black font-fun text-white flex items-center gap-2">
+                    <i class="fa-solid fa-users text-amber-400"></i>
+                    <span>Pair Up 課本雙人對話練習 (課本 P.34 範例與任務)</span>
+                </h3>
+
+                <!-- Example Card -->
+                <div class="bg-slate-900/90 rounded-3xl p-5 border border-slate-800 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-amber-500/20 text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">課本範例 (Example)</span>
+                        <button onclick="speakText('Are you interested in watching the movie with me? I will pass. I do not like scary movies.')" class="text-xs text-slate-300 hover:text-amber-400 bg-slate-800 px-3 py-1 rounded-xl">
+                            <i class="fa-solid fa-volume-high text-amber-400 mr-1"></i> 朗讀整組
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800">
+                            <span class="text-sky-400 font-bold text-xs">A (邀約)</span>
+                            <p class="font-bold text-slate-200 mt-1">Are you interested in <span class="text-amber-400 underline">watching the movie</span> with me?</p>
+                            <p class="text-xs text-slate-400">你有興趣跟我一起看這部電影嗎？</p>
+                        </div>
+                        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800">
+                            <span class="text-rose-400 font-bold text-xs">B (回應)</span>
+                            <p class="font-bold text-slate-200 mt-1">I'll pass. I don't like <span class="text-rose-400 underline">scary movies</span>.</p>
+                            <p class="text-xs text-slate-400">不用了。我不喜歡恐怖電影。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise 1: Steak House -->
+                <div class="bg-slate-900/90 rounded-3xl p-5 border-2 border-emerald-500/30 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-emerald-500 text-slate-950 font-black text-xs flex items-center justify-center">1</span>
+                            <span class="font-bold text-emerald-300 text-sm">任務一：try the new steak house 🥩</span>
+                        </div>
+                        <button onclick="speakText('Would you like to try the new steak house with me? Sure. Steak is my favorite.')" class="text-xs text-slate-300 hover:text-emerald-400 bg-slate-800 px-3 py-1 rounded-xl">
+                            <i class="fa-solid fa-volume-high text-emerald-400 mr-1"></i> 朗讀示範
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800">
+                            <span class="text-sky-400 font-bold text-xs">A (邀約)</span>
+                            <p class="font-bold text-slate-200 mt-1">Would you like to <span class="text-emerald-400 font-black">try the new steak house</span> with me?</p>
+                            <p class="text-xs text-slate-400">你想要跟我一起去嚐嚐看那家新牛排館嗎？</p>
+                        </div>
+                        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800">
+                            <span class="text-emerald-400 font-bold text-xs">B (答應)</span>
+                            <p class="font-bold text-slate-200 mt-1">Sure. <span class="text-emerald-400 font-black">Steak is my favorite</span>.</p>
+                            <p class="text-xs text-slate-400">當然好啊！牛排是我的最愛。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise 2: Halloween -->
+                <div class="bg-slate-900/90 rounded-3xl p-5 border-2 border-purple-500/30 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-purple-500 text-slate-950 font-black text-xs flex items-center justify-center">2</span>
+                            <span class="font-bold text-purple-300 text-sm">任務二：celebrate Halloween 🎃</span>
+                        </div>
+                        <button onclick="speakText('Are you interested in celebrating Halloween with us? I will pass. I already have plans.')" class="text-xs text-slate-300 hover:text-purple-400 bg-slate-800 px-3 py-1 rounded-xl">
+                            <i class="fa-solid fa-volume-high text-purple-400 mr-1"></i> 朗讀示範
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800">
+                            <span class="text-sky-400 font-bold text-xs">A (邀約)</span>
+                            <p class="font-bold text-slate-200 mt-1">Are you interested in <span class="text-purple-400 font-black">celebrating Halloween with us</span>?</p>
+                            <p class="text-xs text-slate-400">你有興趣跟我們一起慶祝萬聖節嗎？</p>
+                        </div>
+                        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800">
+                            <span class="text-rose-400 font-bold text-xs">B (婉拒)</span>
+                            <p class="font-bold text-slate-200 mt-1">I'll pass. <span class="text-purple-400 font-black">I already have plans</span>.</p>
+                            <p class="text-xs text-slate-400">不用了。我已經有其他計畫了。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Dialogue Builder Simulator -->
+            <div class="bg-slate-900 rounded-3xl p-6 border-2 border-amber-500/40 shadow-2xl space-y-4">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">🤖</span>
+                    <div>
+                        <h3 class="text-lg font-black font-fun text-white">互動邀約模擬器 (Oral Dialogue Builder)</h3>
+                        <p class="text-xs text-slate-400">自由搭配句型與活動，立即聆聽擬真口語對話！</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                    <div>
+                        <label class="block text-slate-400 font-bold mb-1">1. 選擇邀約句型：</label>
+                        <select id="simPattern" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-white font-bold" onchange="updateSimDialogue()">
+                            <option value="would">Would you like to...</option>
+                            <option value="feel">Do you feel like...</option>
+                            <option value="interested">Are you interested in...</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 font-bold mb-1">2. 選擇活動內容：</label>
+                        <select id="simActivity" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-white font-bold" onchange="updateSimDialogue()">
+                            <option value="movie">watch the movie (看電影)</option>
+                            <option value="steak">try the new steak house (吃牛排)</option>
+                            <option value="halloween">celebrate Halloween (慶祝萬聖節)</option>
+                            <option value="castle">visit the old castle (探訪古堡)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 font-bold mb-1">3. 選擇對方回應：</label>
+                        <select id="simResponse" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-white font-bold" onchange="updateSimDialogue()">
+                            <option value="accept">Sure. It is my favorite! (欣然接受)</option>
+                            <option value="decline_like">I'll pass. I don't like it. (不喜歡)</option>
+                            <option value="decline_plan">I'll pass. I already have plans. (已有安排)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-amber-400">對話預覽與即時朗讀</span>
+                        <button onclick="playSimAudio()" class="bg-gradient-to-r from-amber-500 to-rose-600 text-slate-950 font-black text-xs px-4 py-2 rounded-xl game-btn-shadow flex items-center gap-1.5">
+                            <i class="fa-solid fa-play"></i> 播放雙人對話
+                        </button>
+                    </div>
+                    <div class="space-y-1.5 text-sm">
+                        <p id="simLineA" class="font-bold text-sky-300 font-fun">A: Would you like to watch the movie with me?</p>
+                        <p id="simLineB" class="font-bold text-emerald-300 font-fun">B: Sure. Movies are my favorite.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 5: VOCABULARY & GRAMMAR FOCUS -->
+        <!-- ========================================== -->
+        <section id="sec-vocab" class="hidden space-y-6">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-amber-600 via-rose-600 to-purple-700 text-white rounded-3xl p-6 shadow-xl flex justify-between items-center">
+                <div>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black uppercase font-fun">Word Bank & Grammar Rules</span>
+                    <h2 class="text-2xl md:text-3xl font-black font-fun mt-2">🔤 Unit 2 重點單字與文法速查</h2>
+                    <p class="text-amber-100 text-xs md:text-sm mt-1">涵蓋課本 P.32 ~ P.33 全數 27 個應用字彙與關鍵情緒形容詞對決！</p>
+                </div>
+                <div class="text-5xl hidden sm:block">📚</div>
+            </div>
+
+            <!-- GRAMMAR HIGHLIGHT: -ed vs -ing -->
+            <div class="bg-slate-900/95 rounded-3xl p-6 border-2 border-amber-500/50 shadow-2xl space-y-5">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <div class="flex items-center gap-3">
+                        <span class="text-3xl">⚖️</span>
+                        <div>
+                            <h3 class="text-xl font-black font-fun text-amber-300">文法特訓：情緒形容詞 -ed vs. -ing 大對決！</h3>
+                            <p class="text-xs text-slate-400">人感到...用 -ed；事物令人...用 -ing！</p>
+                        </div>
+                    </div>
+                    <span class="text-xs bg-amber-500/20 text-amber-300 px-3 py-1 rounded-full font-bold border border-amber-500/30 hidden sm:inline">會考必考重點</span>
+                </div>
+
+                <!-- Comparison Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead>
+                            <tr class="bg-slate-950 text-slate-400 text-xs uppercase border-b border-slate-800">
+                                <th class="p-3">情緒動詞</th>
+                                <th class="p-3 text-rose-400">-ed (人感到...)</th>
+                                <th class="p-3 text-sky-400">-ing (事物令人...)</th>
+                                <th class="p-3">課文經典金句</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800 text-xs md:text-sm">
+                            <tr>
+                                <td class="p-3 font-bold text-amber-400 font-fun">excite</td>
+                                <td class="p-3"><span class="font-bold text-rose-300 font-fun">excited</span> (感到興奮的)</td>
+                                <td class="p-3"><span class="font-bold text-sky-300 font-fun">exciting</span> (令人刺激的)</td>
+                                <td class="p-3 text-slate-300">The movie looks <strong class="text-sky-300">exciting</strong>. / I was so <strong class="text-rose-300">excited</strong> that...</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-amber-400 font-fun">bore</td>
+                                <td class="p-3"><span class="font-bold text-rose-300 font-fun">bored</span> (感到無聊的)</td>
+                                <td class="p-3"><span class="font-bold text-sky-300 font-fun">boring</span> (令人無聊的)</td>
+                                <td class="p-3 text-slate-300">I'll never be <strong class="text-rose-300">bored</strong> with them. / Scary movies are <strong class="text-sky-300">boring</strong> to me.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-amber-400 font-fun">surprise</td>
+                                <td class="p-3"><span class="font-bold text-rose-300 font-fun">surprised</span> (感到驚訝的)</td>
+                                <td class="p-3"><span class="font-bold text-sky-300 font-fun">surprising</span> (令人驚訝的)</td>
+                                <td class="p-3 text-slate-300">I'm <strong class="text-rose-300">surprised</strong> to hear that. / That's not <strong class="text-sky-300">surprising</strong>.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-amber-400 font-fun">interest</td>
+                                <td class="p-3"><span class="font-bold text-rose-300 font-fun">interested</span> (感興趣的)</td>
+                                <td class="p-3"><span class="font-bold text-sky-300 font-fun">interesting</span> (有趣的)</td>
+                                <td class="p-3 text-slate-300">Are you <strong class="text-rose-300">interested</strong> in watching it?</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Three Key Patterns Formula -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+                    <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                        <span class="text-xs font-bold text-rose-400">句型 1</span>
+                        <h4 class="font-bold text-white font-fun text-sm mt-1">adj. + enough + to V</h4>
+                        <p class="text-xs text-slate-400 mt-1">足夠...以致於能夠...</p>
+                        <p class="text-xs text-amber-300 mt-2 font-fun">"I'm old enough to be his mom."</p>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                        <span class="text-xs font-bold text-sky-400">句型 2</span>
+                        <h4 class="font-bold text-white font-fun text-sm mt-1">too + adj. + to V</h4>
+                        <p class="text-xs text-slate-400 mt-1">太...以致於不能...</p>
+                        <p class="text-xs text-amber-300 mt-2 font-fun">"I'm too young to watch it."</p>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                        <span class="text-xs font-bold text-purple-400">句型 3</span>
+                        <h4 class="font-bold text-white font-fun text-sm mt-1">so + adj. + that + 子句</h4>
+                        <p class="text-xs text-slate-400 mt-1">如此...以致於...</p>
+                        <p class="text-xs text-amber-300 mt-2 font-fun">"I was so excited that I didn't think clearly."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vocabulary Cards Grid -->
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-xl font-black font-fun text-white flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-rose-400"></i>
+                        <span>課本核心單字寶庫 (共 27 詞)</span>
+                    </h3>
+                    <input type="text" id="vocabFilter" onkeyup="filterVocab()" placeholder="搜尋單字..." class="bg-slate-900 border border-slate-700 text-xs px-3 py-1.5 rounded-xl text-white focus:outline-none focus:border-amber-400">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="vocabGrid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 6: MINI GAMES ARCADE -->
+        <!-- ========================================== -->
+        <section id="sec-games" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 rounded-3xl p-6 text-white shadow-xl flex justify-between items-center">
+                <div>
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black uppercase font-fun">Mini-Games Arcade</span>
+                    <h2 class="text-2xl md:text-3xl font-black font-fun mt-2">🎮 電影英語大亂鬥</h2>
+                    <p class="text-emerald-100 text-sm mt-1">組裝台詞、單字翻牌與劇院正版大考驗，贏取金幣與榮譽勳章！</p>
+                </div>
+                <div class="text-6xl hidden sm:block">🕹️</div>
+            </div>
+
+            <!-- Game Mode Buttons -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <button onclick="startMiniGame('scramble')" class="bg-slate-900/90 border-2 border-emerald-500/40 hover:border-emerald-400 p-5 rounded-3xl text-left space-y-3 hover:bg-emerald-950/20 transition group">
+                    <div class="w-12 h-12 bg-emerald-500/20 rounded-2xl flex items-center justify-center text-emerald-300 text-2xl group-hover:scale-110 transition">🎬</div>
+                    <div>
+                        <h3 class="font-bold text-white text-lg font-fun">1. 電影台詞重組</h3>
+                        <p class="text-xs text-slate-400 mt-1">把被打散的單字依文法順序拼組成立刻通順的課文金句！</p>
+                    </div>
+                    <span class="inline-block text-xs text-emerald-400 font-bold">開始挑戰 →</span>
+                </button>
+
+                <button onclick="startMiniGame('memory')" class="bg-slate-900/90 border-2 border-amber-500/40 hover:border-amber-400 p-5 rounded-3xl text-left space-y-3 hover:bg-amber-950/20 transition group">
+                    <div class="w-12 h-12 bg-amber-500/20 rounded-2xl flex items-center justify-center text-amber-300 text-2xl group-hover:scale-110 transition">🃏</div>
+                    <div>
+                        <h3 class="font-bold text-white text-lg font-fun">2. 單字翻牌配對</h3>
+                        <p class="text-xs text-slate-400 mt-1">翻開卡牌配對英文單字與繁體中文，鍛鍊超強瞬間記憶！</p>
+                    </div>
+                    <span class="inline-block text-xs text-amber-400 font-bold">開始挑戰 →</span>
+                </button>
+
+                <button onclick="startMiniGame('ethics')" class="bg-slate-900/90 border-2 border-purple-500/40 hover:border-purple-400 p-5 rounded-3xl text-left space-y-3 hover:bg-purple-950/20 transition group">
+                    <div class="w-12 h-12 bg-purple-500/20 rounded-2xl flex items-center justify-center text-purple-300 text-2xl group-hover:scale-110 transition">🍿</div>
+                    <div>
+                        <h3 class="font-bold text-white text-lg font-fun">3. 劇院正版大考驗</h3>
+                        <p class="text-xs text-slate-400 mt-1">情境選擇題！幫媽媽做出正確決定，分辨 -ed/-ing 與分級規範！</p>
+                    </div>
+                    <span class="inline-block text-xs text-purple-400 font-bold">開始挑戰 →</span>
+                </button>
+            </div>
+
+            <!-- Game Play Screen Canvas/Box -->
+            <div id="gamePlayArea" class="bg-slate-900/90 rounded-3xl p-6 border-2 border-slate-800 shadow-2xl min-h-[360px] flex flex-col justify-center items-center text-center">
+                <div class="text-slate-400 text-sm space-y-2">
+                    <p class="text-5xl animate-bounce">👇</p>
+                    <p class="font-bold text-lg text-slate-200">請點選上方任一遊戲模式，即刻展開互動對戰！</p>
+                    <p class="text-xs text-slate-500">過關可獲得 +30 XP 與 +20 金幣獎勵</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="mt-12 border-t border-slate-800/80 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div>
+                Unit 2: The Movie Looks Exciting ・ 國中英語互動學習基地
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="hover:text-amber-400 transition">學習總覽首頁</a>
+                <a href="dialogue.html" class="hover:text-amber-400 transition">第一課對話篇</a>
+                <a href="#top" class="hover:text-amber-400 transition">回頂端 ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- 1. DATA DEFINITIONS (ACCURATE TEXTBOOK SOURCE) ---
+        const dialogueLines = [
+            // Part 1: (In the living room)
+            { 
+                id: 0, 
+                part: 1, 
+                speaker: 'Zac', 
+                avatar: '👦', 
+                role: 'son', 
+                text: "Why are you crying, Mom? Is there anything wrong?", 
+                zh: "媽，妳為什麼在哭？發生什麼事了嗎？", 
+                tip: "💡 anything wrong：不定代名詞 anything 後置形容詞 wrong 修飾；問句「有哪裡不對勁嗎？」" 
+            },
+            { 
+                id: 1, 
+                part: 1, 
+                speaker: 'Mom', 
+                avatar: '👩', 
+                role: 'mom', 
+                text: "I'm crying because my favorite actor, Ryan Bank, is crying in the movie now. His acting really touches my heart.", 
+                zh: "我哭是因為我最喜愛的演員，榮恩・班克，正在電影中哭泣。他的表演真的很觸動我的心。", 
+                tip: "💡 actor (男演員)；touch one's heart (觸動某人的心／深深感動某人)。" 
+            },
+            { 
+                id: 2, 
+                part: 1, 
+                speaker: 'Zac', 
+                avatar: '👦', 
+                role: 'son', 
+                text: "That young star? You surprise me, Mom.", 
+                zh: "那名年輕的明星？媽，妳讓我好驚訝。", 
+                tip: "💡 surprise 此處為一般及物動詞：「使...感到驚訝」。" 
+            },
+            { 
+                id: 3, 
+                part: 1, 
+                speaker: 'Mom', 
+                avatar: '👩', 
+                role: 'mom', 
+                text: "Yeah. I'm old enough to be his mom. I'm now a big fan of his. I want to watch all his movies, and I think I'll never be bored with them.", 
+                zh: "沒錯。我年紀大到可以當他媽媽了。我現在是他的超級粉絲。我想要看他所有的電影，而且我想我永遠不會對它們感到無聊。", 
+                tip: "💡 核心句型：old enough to be his mom (足夠...以致於能...)；a big fan of his (雙重所有格)；be bored with (對...感到無聊)。" 
+            },
+            { 
+                id: 4, 
+                part: 1, 
+                speaker: 'Zac', 
+                avatar: '👦', 
+                role: 'son', 
+                text: "Why do you like him so much?", 
+                zh: "妳為什麼這麼喜歡他？", 
+                tip: "💡 so much (如此地／這麼多)。" 
+            },
+            { 
+                id: 5, 
+                part: 1, 
+                speaker: 'Mom', 
+                avatar: '👩', 
+                role: 'mom', 
+                text: "Well, he is talented and hard-working. Guess what? He has won several awards since he started acting at age eight.", 
+                zh: "嗯，他既有才華又勤奮。你猜怎麼著？從他八歲開始演戲至今，他已經獲得好幾個獎項了。", 
+                tip: "💡 talented (有才華的)；hard-working (勤勉的)；Guess what? (你猜猜看？口語常用)；since + 過去時間點/子句搭配現在完成式 has won。" 
+            },
+            { 
+                id: 6, 
+                part: 1, 
+                speaker: 'Zac', 
+                avatar: '👦', 
+                role: 'son', 
+                text: "I'm surprised to hear that.", 
+                zh: "我很驚訝聽到這件事。", 
+                tip: "💡 情緒形容詞：be surprised to V (人感到驚訝去做某事，人感到...用 -ed)。" 
+            },
+
+            // Part 2: (An hour later)
+            { 
+                id: 7, 
+                part: 2, 
+                speaker: 'Mom', 
+                avatar: '👩', 
+                role: 'mom', 
+                text: "Zac, Ryan Bank's latest movie looks exciting. It's about ghosts in an old castle. I want to watch it, but your dad doesn't.", 
+                zh: "柴克，榮恩・班克最新的電影看起來很刺激。它是關於一座古堡裡的鬼。我想看這部電影，但你爸爸不想。", 
+                tip: "💡 連綴動詞：looks exciting (看起來令人刺激)；ghosts (鬼魂)；castle (城堡)；...but your dad doesn't (簡略代名詞與助動詞)。" 
+            },
+            { 
+                id: 8, 
+                part: 2, 
+                speaker: 'Zac', 
+                avatar: '👦', 
+                role: 'son', 
+                text: "That's not surprising. Dad hates scary movies.", 
+                zh: "不意外。爸爸討厭恐怖電影。", 
+                tip: "💡 surprising (令人驚訝的，主詞 That 為事物，用 -ing)；scary movies (恐怖片)。" 
+            },
+            { 
+                id: 9, 
+                part: 2, 
+                speaker: 'Mom', 
+                avatar: '👩', 
+                role: 'mom', 
+                text: "What about you? Are you interested in watching it?", 
+                zh: "那你呢？你有興趣看這部電影嗎？", 
+                tip: "💡 核心片語：be interested in + V-ing/N (對...感到有興趣，介系詞 in 後接動名詞 watching)。" 
+            },
+            { 
+                id: 10, 
+                part: 2, 
+                speaker: 'Zac', 
+                avatar: '👦', 
+                role: 'son', 
+                text: "I'll pass. Scary movies are boring to me. Besides, it says this movie is not for people under 18. I'm too young to watch it.", 
+                zh: "不用了。恐怖電影對我來說很無聊。此外，這裡說這部電影不適合十八歲以下的人看。我年紀太小，不能看這部電影。", 
+                tip: "💡 I'll pass. (不用了／我先略過)；boring to me (對我而言令人無聊)；Besides (此外)；too young to watch it (太...以致於不能...)。" 
+            },
+            { 
+                id: 11, 
+                part: 2, 
+                speaker: 'Mom', 
+                avatar: '👩', 
+                role: 'mom', 
+                text: "Oh! I didn't see that.", 
+                zh: "噢！我沒有看到那個。", 
+                tip: "💡 didn't see that：指剛才沒注意到電影年齡分級 (under 18) 的警語標籤。" 
+            },
+            { 
+                id: 12, 
+                part: 2, 
+                speaker: 'Zac', 
+                avatar: '👦', 
+                role: 'son', 
+                text: "Wait. This movie is in theaters now. Why are you downloading it from the Internet? We shouldn't watch pirated movies, should we?", 
+                zh: "等等。這部電影現在還在上映中。妳為什麼從網路上發載？我們不應該看盜版電影，不是嗎？", 
+                tip: "💡 in theaters (電影上映中)；download... from the Internet (從網路上下載)；pirated movies (盜版影片)；附加問句 ..., should we?" 
+            },
+            { 
+                id: 13, 
+                part: 2, 
+                speaker: 'Mom', 
+                avatar: '👩', 
+                role: 'mom', 
+                text: "Sorry, I set a bad example. I was so excited that I didn't think clearly. I'll go book a ticket online.", 
+                zh: "抱歉，我做了不好的示範。我太興奮了以致於沒有想清楚。我會在網路上訂票。", 
+                tip: "💡 set a bad example (樹立壞榜樣)；so excited that... (如此興奮以致於...；人感到興奮用 excited)；book a ticket online (線上訂票)。" 
+            },
+            { 
+                id: 14, 
+                part: 2, 
+                speaker: 'Zac', 
+                avatar: '👦', 
+                role: 'son', 
+                text: "I'm proud of you, Mom.", 
+                zh: "媽，我為妳感到驕傲。", 
+                tip: "💡 be proud of (為...感到自豪／驕傲)。" 
+            }
+        ];
+
+        // 27 Vocabulary Words from U2 p.32-33
+        const vocabularyList = [
+            { word: "actor", pos: "n.", zh: "演員（尤指男演員）", ex: "Ryan Bank is my favorite actor." },
+            { word: "touch", pos: "v.", zh: "觸動；碰觸", ex: "His acting really touches my heart." },
+            { word: "heart", pos: "n.", zh: "心；心臟", ex: "The song touches everyone's heart." },
+            { word: "surprise", pos: "v. / n.", zh: "使驚訝；驚喜", ex: "You surprise me, Mom." },
+            { word: "bored", pos: "adj.", zh: "感到無聊的（修飾人）", ex: "I think I'll never be bored with them." },
+            { word: "hard-working", pos: "adj.", zh: "努力工作的；勤奮的", ex: "He is talented and hard-working." },
+            { word: "guess", pos: "v.", zh: "猜測", ex: "Guess what? He has won several awards." },
+            { word: "several", pos: "adj.", zh: "好幾個的；數個的", ex: "He has won several awards since age eight." },
+            { word: "surprised", pos: "adj.", zh: "感到驚訝的（修飾人）", ex: "I'm surprised to hear that." },
+            { word: "talented", pos: "adj.", zh: "有才華的；天才的", ex: "She is a talented young artist." },
+            { word: "award", pos: "n.", zh: "獎項；獎品", ex: "The actor won the best actor award." },
+            { word: "exciting", pos: "adj.", zh: "令人興奮的；刺激的（修飾事物）", ex: "Ryan Bank's latest movie looks exciting." },
+            { word: "ghost", pos: "n.", zh: "鬼魂；幽靈", ex: "It's about ghosts in an old castle." },
+            { word: "castle", pos: "n.", zh: "城堡", ex: "They visited a centuries-old castle." },
+            { word: "surprising", pos: "adj.", zh: "令人驚訝的（修飾事物）", ex: "That's not surprising. Dad hates scary movies." },
+            { word: "interested", pos: "adj.", zh: "感興趣的（修飾人）", ex: "Are you interested in watching it?" },
+            { word: "boring", pos: "adj.", zh: "令人無聊的（修飾事物）", ex: "Scary movies are boring to me." },
+            { word: "download", pos: "v.", zh: "下載", ex: "Why are you downloading it from the Internet?" },
+            { word: "Internet", pos: "n.", zh: "網際網路 (= Net)", ex: "You can find information on the Internet." },
+            { word: "set", pos: "v.", zh: "樹立；設定 (set-set-set)", ex: "Sorry, I set a bad example." },
+            { word: "excited", pos: "adj.", zh: "感到興奮的（修飾人）", ex: "I was so excited that I didn't think clearly." },
+            { word: "ticket", pos: "n.", zh: "票；入場券", ex: "I'll go book a ticket online." },
+            { word: "online", pos: "adv. / adj.", zh: "在線上；網路上的", ex: "I like shopping online." },
+            { word: "proud", pos: "adj.", zh: "自豪的；驕傲的", ex: "I'm proud of you, Mom." },
+            { word: "book", pos: "v.", zh: "預訂；預購", ex: "Can you book two tickets for the show?" },
+            { word: "pirated", pos: "adj.", zh: "盜版的", ex: "We shouldn't watch pirated movies." },
+            { word: "I'll pass.", pos: "phr.", zh: "不用了；我先略過", ex: "Would you like coffee? I'll pass, thanks." }
+        ];
+
+        // Section C T/F Quiz (Textbook p. 34)
+        const tfQuizQuestions = [
+            {
+                id: 1,
+                audioText: "It's surprising to Zac that his mother is a fan of a young actor.",
+                text: "1. It's surprising to Zac that his mother is a fan of a young actor.",
+                answer: 'T',
+                evidence: "課本對話中，柴克驚訝地說：「That young star? You surprise me, Mom. You're old enough to be his mom!」，因此柴克對於媽媽是年輕男演員的粉絲感到很驚訝是正確的 (T)。"
+            },
+            {
+                id: 2,
+                audioText: "Ryan Bank began his career as a child actor.",
+                text: "2. Ryan Bank began his career as a child actor.",
+                answer: 'T',
+                evidence: "課本媽媽提到：「He has won several awards since he started acting at age eight.」從八歲就開始演戲，確實是童星出身 (child actor)，因此為正確 (T)。"
+            },
+            {
+                id: 3,
+                audioText: "Zac is interested in scary movies.",
+                text: "3. Zac is interested in scary movies.",
+                answer: 'F',
+                evidence: "課本柴克回答：「I'll pass. Scary movies are boring to me.」柴克覺得恐怖片很無聊，並不想看，因此本題為錯誤 (F)。"
+            },
+            {
+                id: 4,
+                audioText: "Zac's mother decided to watch Ryan Bank's new movie at a theater.",
+                text: "4. Zac's mother decided to watch Ryan Bank's new movie at a theater.",
+                answer: 'T',
+                evidence: "課本媽媽聽了柴克的勸阻後說：「Sorry, I set a bad example... I'll go book a ticket online.」決定支持正版去電影院看，因此為正確 (T)。"
+            }
+        ];
+
+        // --- 2. AUDIO SYNTHESIZER (WEB AUDIO API) ---
+        const AudioFX = {
+            ctx: null,
+            muted: false,
+            init() {
+                if (!this.ctx) {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+            },
+            toggleMute() {
+                this.muted = !this.muted;
+                const icon = document.getElementById('soundIcon');
+                if (this.muted) {
+                    icon.className = 'fa-solid fa-volume-xmark text-rose-400';
+                } else {
+                    icon.className = 'fa-solid fa-volume-high text-amber-400';
+                    this.playCoin();
+                }
+            },
+            playCorrect() {
+                if (this.muted) return;
+                try {
+                    this.init();
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, now); // C5
+                    osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
+                    osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
+                    osc.frequency.setValueAtTime(1046.50, now + 0.3); // C6
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.45);
+                    osc.connect(gain); gain.connect(this.ctx.destination);
+                    osc.start(now); osc.stop(now + 0.45);
+                } catch(e) {}
+            },
+            playWrong() {
+                if (this.muted) return;
+                try {
+                    this.init();
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(220, now);
+                    osc.frequency.setValueAtTime(164.81, now + 0.12);
+                    gain.gain.setValueAtTime(0.18, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.28);
+                    osc.connect(gain); gain.connect(this.ctx.destination);
+                    osc.start(now); osc.stop(now + 0.28);
+                } catch(e) {}
+            },
+            playCoin() {
+                if (this.muted) return;
+                try {
+                    this.init();
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(987.77, now); // B5
+                    osc.frequency.setValueAtTime(1318.51, now + 0.08); // E6
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                    osc.connect(gain); gain.connect(this.ctx.destination);
+                    osc.start(now); osc.stop(now + 0.3);
+                } catch(e) {}
+            },
+            playLevelUp() {
+                if (this.muted) return;
+                try {
+                    this.init();
+                    const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+                    notes.forEach((freq, idx) => {
+                        const now = this.ctx.currentTime + idx * 0.1;
+                        const osc = this.ctx.createOscillator();
+                        const gain = this.ctx.createGain();
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(freq, now);
+                        gain.gain.setValueAtTime(0.2, now);
+                        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+                        osc.connect(gain); gain.connect(this.ctx.destination);
+                        osc.start(now); osc.stop(now + 0.2);
+                    });
+                } catch(e) {}
+            }
+        };
+
+        // --- 3. GAMIFICATION STATE ---
+        let player = {
+            xp: 0,
+            level: 1,
+            coins: 50
+        };
+
+        function loadProgress() {
+            try {
+                const saved = localStorage.getItem('kevinchang_u2_player');
+                if (saved) player = Object.assign(player, JSON.parse(saved));
+            } catch(e) {}
+            updateStatusUI();
+        }
+
+        function saveProgress() {
+            try {
+                localStorage.setItem('kevinchang_u2_player', JSON.stringify(player));
+            } catch(e) {}
+        }
+
+        function addXP(amount) {
+            player.xp += amount;
+            AudioFX.playCoin();
+            if (player.xp >= 100) {
+                player.level += Math.floor(player.xp / 100);
+                player.xp = player.xp % 100;
+                player.coins += 20;
+                AudioFX.playLevelUp();
+                confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+            }
+            saveProgress();
+            updateStatusUI();
+        }
+
+        function updateStatusUI() {
+            document.getElementById('levelDisplay').innerText = player.level;
+            document.getElementById('xpText').innerText = `${player.xp} / 100`;
+            document.getElementById('xpBar').style.width = `${player.xp}%`;
+            document.getElementById('coinCount').innerText = player.coins;
+        }
+
+        // --- 4. TEXT TO SPEECH (TTS) CONTROLLER ---
+        let currentRate = 1.0;
+        let isPlayingAll = false;
+        let playAllIndex = 0;
+
+        function setTTSRate(rate, btn) {
+            currentRate = rate;
+            document.querySelectorAll('.rate-btn').forEach(b => {
+                b.className = 'rate-btn text-slate-400 px-2.5 py-1 rounded-lg transition font-medium';
+            });
+            btn.className = 'rate-btn bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-lg transition shadow';
+        }
+
+        function speakText(text, role = 'narrator', onEndCallback = null) {
+            if (!('speechSynthesis' in window)) {
+                alert("很抱歉，您的瀏覽器不支援語音朗讀功能。");
+                return;
+            }
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = currentRate;
+
+            // Character pitch modulation
+            if (role === 'mom' || role === 'Mom') {
+                utterance.pitch = 1.25; // slightly higher feminine voice
+            } else if (role === 'son' || role === 'Zac') {
+                utterance.pitch = 1.0; // standard boy voice
+            } else {
+                utterance.pitch = 1.1;
+            }
+
+            if (onEndCallback) {
+                utterance.onend = onEndCallback;
+                utterance.onerror = onEndCallback;
+            }
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function stopSpeech() {
+            window.speechSynthesis.cancel();
+            isPlayingAll = false;
+            const playAllBtn = document.getElementById('playAllBtn');
+            const playAllText = document.getElementById('playAllText');
+            const playAllIcon = document.getElementById('playAllIcon');
+            playAllIcon.className = 'fa-solid fa-play';
+            playAllText.innerText = '播放全課對話 (+25 XP)';
+            document.querySelectorAll('.dialogue-card').forEach(c => c.classList.remove('ring-4', 'ring-amber-400', 'bg-slate-800'));
+        }
+
+        function togglePlayAll() {
+            if (isPlayingAll) {
+                stopSpeech();
+            } else {
+                isPlayingAll = true;
+                playAllIndex = 0;
+                const playAllText = document.getElementById('playAllText');
+                const playAllIcon = document.getElementById('playAllIcon');
+                playAllIcon.className = 'fa-solid fa-pause';
+                playAllText.innerText = '暫停播放';
+                playNextInSequence();
+            }
+        }
+
+        function playNextInSequence() {
+            if (!isPlayingAll || playAllIndex >= dialogueLines.length) {
+                if (isPlayingAll) {
+                    addXP(25);
+                    confetti({ particleCount: 60, spread: 60 });
+                }
+                stopSpeech();
+                return;
+            }
+
+            const item = dialogueLines[playAllIndex];
+            highlightDialogueCard(item.id);
+
+            speakText(item.text, item.role, () => {
+                if (isPlayingAll) {
+                    playAllIndex++;
+                    setTimeout(playNextInSequence, 600);
+                }
+            });
+        }
+
+        function highlightDialogueCard(id) {
+            document.querySelectorAll('.dialogue-card').forEach(c => c.classList.remove('ring-4', 'ring-amber-400', 'bg-slate-800'));
+            const target = document.getElementById(`dialogue-card-${id}`);
+            if (target) {
+                target.classList.add('ring-4', 'ring-amber-400', 'bg-slate-800');
+                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        function playSentence(id) {
+            const item = dialogueLines.find(l => l.id === id);
+            if (!item) return;
+            highlightDialogueCard(id);
+            speakText(item.text, item.role, () => {
+                setTimeout(() => {
+                    const card = document.getElementById(`dialogue-card-${id}`);
+                    if (card) card.classList.remove('ring-4', 'ring-amber-400');
+                }, 800);
+            });
+            addXP(2);
+        }
+
+        // --- 5. RENDER DIALOGUE CARDS ---
+        function renderDialogue() {
+            const part1Container = document.getElementById('dialoguePart1');
+            const part2Container = document.getElementById('dialoguePart2');
+            part1Container.innerHTML = '';
+            part2Container.innerHTML = '';
+
+            dialogueLines.forEach(line => {
+                const isMom = line.role === 'mom';
+                const borderColor = isMom ? 'border-rose-500/50' : 'border-sky-500/50';
+                const roleBadgeColor = isMom ? 'bg-rose-500/20 text-rose-300 border-rose-500/30' : 'bg-sky-500/20 text-sky-300 border-sky-500/30';
+                const speakerName = isMom ? 'Mom 👩' : 'Zac 👦';
+
+                const cardHtml = `
+                    <div id="dialogue-card-${line.id}" class="dialogue-card bg-slate-900/90 rounded-3xl p-5 border-2 ${borderColor} transition-all duration-300 hover:border-amber-400 shadow-lg relative group">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-2">
+                            <div class="flex items-center gap-2.5">
+                                <span class="w-9 h-9 rounded-2xl ${roleBadgeColor} border flex items-center justify-center text-lg shadow">
+                                    ${line.avatar}
+                                </span>
+                                <span class="font-black font-fun text-white text-base">${speakerName}</span>
+                            </div>
+                            <button onclick="playSentence(${line.id})" class="text-xs bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-amber-300 font-bold px-3 py-1.5 rounded-xl border border-slate-700 transition flex items-center gap-1.5 shadow">
+                                <i class="fa-solid fa-volume-high"></i>
+                                <span>單句發音</span>
+                            </button>
+                        </div>
+
+                        <!-- English Line -->
+                        <div class="text-base sm:text-lg font-bold text-slate-100 font-fun leading-relaxed mt-1">
+                            ${line.text}
+                        </div>
+
+                        <!-- Chinese Translation -->
+                        <div class="trans-text text-xs sm:text-sm text-slate-400 mt-1.5 font-medium">
+                            ${line.zh}
+                        </div>
+
+                        <!-- Grammar Tip Box -->
+                        ${line.tip ? `
+                            <div class="grammar-note mt-3 p-2.5 rounded-2xl bg-slate-950 border border-slate-800 text-xs text-amber-200/90 flex items-start gap-2">
+                                <span class="text-amber-400 font-bold shrink-0">📌</span>
+                                <div class="leading-relaxed">${line.tip}</div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+
+                if (line.part === 1) {
+                    part1Container.innerHTML += cardHtml;
+                } else {
+                    part2Container.innerHTML += cardHtml;
+                }
+            });
+        }
+
+        function toggleTranslation() {
+            const show = document.getElementById('toggleChinese').checked;
+            document.querySelectorAll('.trans-text').forEach(el => {
+                el.style.display = show ? 'block' : 'none';
+            });
+        }
+
+        function toggleGrammarHighlights() {
+            const show = document.getElementById('toggleGrammar').checked;
+            document.querySelectorAll('.grammar-note').forEach(el => {
+                el.style.display = show ? 'flex' : 'none';
+            });
+        }
+
+        // --- 6. ROLEPLAY / DUBBING ---
+        let currentRole = 'Mom';
+        let roleplayIndex = 0;
+        let roleFilteredLines = [];
+
+        function selectRoleplayCharacter(char) {
+            currentRole = char;
+            document.getElementById('roleBtn-Mom').className = char === 'Mom' 
+                ? 'p-5 rounded-3xl border-2 border-rose-500 bg-slate-900/90 transition flex items-center gap-4 text-left group' 
+                : 'p-5 rounded-3xl border-2 border-slate-700 bg-slate-900/90 hover:bg-rose-950/30 transition flex items-center gap-4 text-left group';
+            
+            document.getElementById('roleBtn-Zac').className = char === 'Zac' 
+                ? 'p-5 rounded-3xl border-2 border-sky-500 bg-slate-900/90 transition flex items-center gap-4 text-left group' 
+                : 'p-5 rounded-3xl border-2 border-slate-700 bg-slate-900/90 hover:bg-sky-950/30 transition flex items-center gap-4 text-left group';
+
+            document.getElementById('activeRoleName').innerText = char === 'Mom' ? 'Mom 👩' : 'Zac 👦';
+            document.getElementById('activeRoleName').className = char === 'Mom' ? 'text-lg font-black text-rose-400 font-fun' : 'text-lg font-black text-sky-400 font-fun';
+
+            roleFilteredLines = dialogueLines.filter(l => (char === 'Mom' ? l.role === 'mom' : l.role === 'son'));
+            roleplayIndex = 0;
+            updateRoleplayCard();
+        }
+
+        function updateRoleplayCard() {
+            if (!roleFilteredLines.length) return;
+            const currentLine = roleFilteredLines[roleplayIndex];
+            document.getElementById('roleEnglishCue').innerText = `"${currentLine.text}"`;
+            document.getElementById('roleChineseCue').innerText = `「${currentLine.zh}」`;
+            document.getElementById('roleplayProgress').innerText = `${roleplayIndex + 1} / ${roleFilteredLines.length} 句`;
+        }
+
+        function playRoleplayAudio() {
+            const currentLine = roleFilteredLines[roleplayIndex];
+            if (currentLine) {
+                speakText(currentLine.text, currentLine.role);
+            }
+        }
+
+        function recordAndValidateRoleplayLine() {
+            AudioFX.playCorrect();
+            addXP(15);
+            player.coins += 5;
+            updateStatusUI();
+
+            roleplayIndex++;
+            if (roleplayIndex >= roleFilteredLines.length) {
+                confetti({ particleCount: 100, spread: 80 });
+                alert(`🎉 恭喜你完成了 ${currentRole === 'Mom' ? '媽媽 (Mom)' : '柴克 (Zac)'} 的全數配音演練！獲得雙倍獎勵！`);
+                roleplayIndex = 0;
+            }
+            updateRoleplayCard();
+        }
+
+        // --- 7. SECTION C: T/F QUIZ ---
+        let tfUserAnswers = {};
+
+        function renderTFQuiz() {
+            const container = document.getElementById('tfQuizContainer');
+            container.innerHTML = '';
+
+            tfQuizQuestions.forEach(q => {
+                const card = `
+                    <div id="tfCard-${q.id}" class="bg-slate-900/90 rounded-3xl p-5 border-2 border-slate-800 space-y-3 transition">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="flex items-start gap-3">
+                                <span class="w-7 h-7 rounded-full bg-purple-500/20 text-purple-300 font-black text-xs flex items-center justify-center shrink-0 mt-0.5 border border-purple-500/30 font-fun">
+                                    ${q.id}
+                                </span>
+                                <div>
+                                    <p class="font-bold text-slate-100 text-sm sm:text-base font-fun leading-snug">${q.text}</p>
+                                </div>
+                            </div>
+                            <button onclick="speakText('${q.audioText.replace(/'/g, "\\'")}')" class="text-xs bg-slate-800 hover:bg-purple-600 hover:text-white text-purple-300 px-3 py-1.5 rounded-xl border border-slate-700 transition flex items-center gap-1 shrink-0">
+                                <i class="fa-solid fa-volume-high"></i>
+                                <span class="hidden sm:inline">聽朗讀</span>
+                            </button>
+                        </div>
+
+                        <!-- Options Buttons: T vs F -->
+                        <div class="flex items-center gap-3 pt-2">
+                            <button onclick="submitTFAnswer(${q.id}, 'T')" id="btn-t-${q.id}" class="flex-1 py-2.5 rounded-2xl bg-slate-950 border-2 border-slate-700 hover:border-emerald-400 font-black font-fun text-sm sm:text-base text-slate-200 transition game-btn-shadow">
+                                <i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> T (True 正確)
+                            </button>
+                            <button onclick="submitTFAnswer(${q.id}, 'F')" id="btn-f-${q.id}" class="flex-1 py-2.5 rounded-2xl bg-slate-950 border-2 border-slate-700 hover:border-rose-400 font-black font-fun text-sm sm:text-base text-slate-200 transition game-btn-shadow">
+                                <i class="fa-solid fa-xmark text-rose-400 mr-1.5"></i> F (False 錯誤)
+                            </button>
+                        </div>
+
+                        <!-- Feedback Box (Hidden initially) -->
+                        <div id="tfFeedback-${q.id}" class="hidden p-3 rounded-2xl text-xs font-medium leading-relaxed">
+                            <!-- Populated on click -->
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+        }
+
+        function submitTFAnswer(qId, choice) {
+            if (tfUserAnswers[qId] !== undefined) return; // already answered
+            tfUserAnswers[qId] = choice;
+
+            const q = tfQuizQuestions.find(item => item.id === qId);
+            const isCorrect = choice === q.answer;
+            const feedbackBox = document.getElementById(`tfFeedback-${qId}`);
+            const tBtn = document.getElementById(`btn-t-${qId}`);
+            const fBtn = document.getElementById(`btn-f-${qId}`);
+
+            if (choice === 'T') {
+                tBtn.classList.add(isCorrect ? 'bg-emerald-600' : 'bg-rose-600', 'border-transparent', 'text-white');
+            } else {
+                fBtn.classList.add(isCorrect ? 'bg-emerald-600' : 'bg-rose-600', 'border-transparent', 'text-white');
+            }
+
+            feedbackBox.classList.remove('hidden');
+            if (isCorrect) {
+                AudioFX.playCorrect();
+                addXP(10);
+                feedbackBox.className = 'p-3 rounded-2xl text-xs font-medium leading-relaxed bg-emerald-950/60 border border-emerald-500/40 text-emerald-200';
+                feedbackBox.innerHTML = `<strong>🎉 答對了！</strong> 正解為 <strong>${q.answer}</strong>。<br>${q.evidence}`;
+            } else {
+                AudioFX.playWrong();
+                feedbackBox.className = 'p-3 rounded-2xl text-xs font-medium leading-relaxed bg-rose-950/60 border border-rose-500/40 text-rose-200';
+                feedbackBox.innerHTML = `<strong>❌ 答錯囉！</strong> 正解為 <strong>${q.answer}</strong>。<br>${q.evidence}`;
+            }
+
+            // Update Score
+            let correctCount = 0;
+            tfQuizQuestions.forEach(item => {
+                if (tfUserAnswers[item.id] === item.answer) correctCount++;
+            });
+            document.getElementById('tfQuizScore').innerText = correctCount;
+
+            if (Object.keys(tfUserAnswers).length === tfQuizQuestions.length && correctCount === 4) {
+                confetti({ particleCount: 70, spread: 60 });
+            }
+        }
+
+        function resetTFQuiz() {
+            tfUserAnswers = {};
+            document.getElementById('tfQuizScore').innerText = '0';
+            renderTFQuiz();
+        }
+
+        // --- 8. ORAL SIMULATOR ---
+        function updateSimDialogue() {
+            const pat = document.getElementById('simPattern').value;
+            const act = document.getElementById('simActivity').value;
+            const resp = document.getElementById('simResponse').value;
+
+            let qText = "";
+            if (pat === 'would') {
+                if (act === 'movie') qText = "Would you like to watch the movie with me?";
+                if (act === 'steak') qText = "Would you like to try the new steak house with me?";
+                if (act === 'halloween') qText = "Would you like to celebrate Halloween with me?";
+                if (act === 'castle') qText = "Would you like to visit the old castle with me?";
+            } else if (pat === 'feel') {
+                if (act === 'movie') qText = "Do you feel like watching the movie with me?";
+                if (act === 'steak') qText = "Do you feel like trying the new steak house with me?";
+                if (act === 'halloween') qText = "Do you feel like celebrating Halloween with me?";
+                if (act === 'castle') qText = "Do you feel like visiting the old castle with me?";
+            } else {
+                if (act === 'movie') qText = "Are you interested in watching the movie with me?";
+                if (act === 'steak') qText = "Are you interested in trying the new steak house with me?";
+                if (act === 'halloween') qText = "Are you interested in celebrating Halloween with me?";
+                if (act === 'castle') qText = "Are you interested in visiting the old castle with me?";
+            }
+
+            let aText = "";
+            if (resp === 'accept') {
+                if (act === 'steak') aText = "Sure. Steak is my favorite!";
+                else aText = "Sure. That is my favorite!";
+            } else if (resp === 'decline_like') {
+                if (act === 'movie') aText = "I'll pass. I don't like scary movies.";
+                else aText = "I'll pass. I don't like crowded places.";
+            } else {
+                aText = "I'll pass. I already have plans.";
+            }
+
+            document.getElementById('simLineA').innerText = `A: ${qText}`;
+            document.getElementById('simLineB').innerText = `B: ${aText}`;
+        }
+
+        function playSimAudio() {
+            const lineA = document.getElementById('simLineA').innerText.replace("A: ", "");
+            const lineB = document.getElementById('simLineB').innerText.replace("B: ", "");
+            speakText(lineA, 'Zac', () => {
+                setTimeout(() => {
+                    speakText(lineB, 'Mom');
+                }, 500);
+            });
+            addXP(5);
+        }
+
+        // --- 9. VOCABULARY SECTION ---
+        function renderVocab(filterText = '') {
+            const grid = document.getElementById('vocabGrid');
+            grid.innerHTML = '';
+            const filtered = vocabularyList.filter(v => 
+                v.word.toLowerCase().includes(filterText.toLowerCase()) || 
+                v.zh.includes(filterText)
+            );
+
+            filtered.forEach(v => {
+                const card = `
+                    <div class="bg-slate-900/90 rounded-2xl p-4 border border-slate-800 hover:border-amber-400/60 transition shadow flex flex-col justify-between space-y-2 group">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h4 class="text-base font-bold font-fun text-white group-hover:text-amber-300 transition">${v.word}</h4>
+                                    <span class="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded font-mono">${v.pos}</span>
+                                </div>
+                                <p class="text-xs text-amber-400/90 font-bold mt-0.5">${v.zh}</p>
+                            </div>
+                            <button onclick="speakText('${v.word.replace(/'/g, "\\'")}')" class="text-xs text-slate-400 hover:text-amber-400 p-1.5 rounded-lg bg-slate-950 border border-slate-800">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
+                        </div>
+                        <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800/80 text-xs text-slate-300">
+                            <span class="text-slate-500 font-bold">例句：</span> ${v.ex}
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += card;
+            });
+        }
+
+        function filterVocab() {
+            const query = document.getElementById('vocabFilter').value;
+            renderVocab(query);
+        }
+
+        // --- 10. MINI GAMES HUB ---
+        const scrambleSentences = [
+            {
+                words: ["The", "movie", "looks", "exciting."],
+                correct: "The movie looks exciting."
+            },
+            {
+                words: ["I'm", "old", "enough", "to", "be", "his", "mom."],
+                correct: "I'm old enough to be his mom."
+            },
+            {
+                words: ["Scary", "movies", "are", "boring", "to", "me."],
+                correct: "Scary movies are boring to me."
+            },
+            {
+                words: ["I", "was", "so", "excited", "that", "I", "didn't", "think", "clearly."],
+                correct: "I was so excited that I didn't think clearly."
+            }
+        ];
+        let currentScrambleIdx = 0;
+        let userAssembled = [];
+
+        function startMiniGame(type) {
+            const area = document.getElementById('gamePlayArea');
+            if (type === 'scramble') {
+                currentScrambleIdx = 0;
+                loadScrambleRound();
+            } else if (type === 'memory') {
+                loadMemoryGame();
+            } else if (type === 'ethics') {
+                loadEthicsQuiz();
+            }
+        }
+
+        function loadScrambleRound() {
+            userAssembled = [];
+            const round = scrambleSentences[currentScrambleIdx];
+            const shuffled = [...round.words].sort(() => Math.random() - 0.5);
+            const area = document.getElementById('gamePlayArea');
+
+            area.innerHTML = `
+                <div class="w-full max-w-xl space-y-5 text-left">
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                        <span class="text-xs font-bold text-emerald-400 font-fun uppercase">🎬 電影台詞重組挑戰 (關卡 ${currentScrambleIdx + 1} / ${scrambleSentences.length})</span>
+                        <span class="text-xs text-slate-400 font-bold">點擊單字積木排列句型</span>
+                    </div>
+
+                    <!-- Assembled Slot -->
+                    <div id="assembledSlot" class="min-h-[56px] bg-slate-950 rounded-2xl border-2 border-dashed border-emerald-500/40 p-3 flex flex-wrap gap-2 items-center">
+                        <span class="text-xs text-slate-500 italic">點擊下方單字放入這裡...</span>
+                    </div>
+
+                    <!-- Available Word Pills -->
+                    <div id="wordPills" class="flex flex-wrap gap-2.5">
+                        ${shuffled.map((w, i) => `
+                            <button onclick="pickWord('${w}', this)" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-emerald-600 text-white font-fun font-bold text-sm border border-slate-700 game-btn-shadow transition">
+                                ${w}
+                            </button>
+                        `).join('')}
+                    </div>
+
+                    <div class="flex items-center justify-between pt-2">
+                        <button onclick="loadScrambleRound()" class="text-xs text-slate-400 hover:text-white px-3 py-1.5 rounded-lg border border-slate-700">
+                            <i class="fa-solid fa-rotate-left mr-1"></i> 重置重排
+                        </button>
+                        <button onclick="checkScrambleAnswer()" class="bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 font-black font-fun px-6 py-2.5 rounded-2xl game-btn-shadow text-sm">
+                            檢查句子 ✓
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function pickWord(word, btn) {
+            userAssembled.push(word);
+            btn.disabled = true;
+            btn.classList.add('opacity-30', 'pointer-events-none');
+            const slot = document.getElementById('assembledSlot');
+            if (userAssembled.length === 1) slot.innerHTML = '';
+            slot.innerHTML += `<span class="bg-emerald-500 text-slate-950 font-black font-fun text-xs px-2.5 py-1 rounded-lg">${word}</span>`;
+        }
+
+        function checkScrambleAnswer() {
+            const userStr = userAssembled.join(' ');
+            const target = scrambleSentences[currentScrambleIdx].correct;
+            if (userStr === target) {
+                AudioFX.playCorrect();
+                addXP(15);
+                currentScrambleIdx++;
+                if (currentScrambleIdx < scrambleSentences.length) {
+                    alert("🎉 太強了！答對了，進入下一題！");
+                    loadScrambleRound();
+                } else {
+                    confetti({ particleCount: 80, spread: 70 });
+                    alert("🏆 恭喜！你完成了所有電影台詞重組挑戰！獎勵金幣 +20！");
+                    player.coins += 20;
+                    updateStatusUI();
+                    currentScrambleIdx = 0;
+                    loadScrambleRound();
+                }
+            } else {
+                AudioFX.playWrong();
+                alert(`❌ 順序有小錯誤喔！再試一次吧！\n正解為：${target}`);
+                loadScrambleRound();
+            }
+        }
+
+        // Memory Game
+        function loadMemoryGame() {
+            const pairs = [
+                { id: 1, text: "actor", match: 1, isZh: false },
+                { id: 1, text: "演員", match: 1, isZh: true },
+                { id: 2, text: "exciting", match: 2, isZh: false },
+                { id: 2, text: "令人刺激的", match: 2, isZh: true },
+                { id: 3, text: "boring", match: 3, isZh: false },
+                { id: 3, text: "令人無聊的", match: 3, isZh: true },
+                { id: 4, text: "download", match: 4, isZh: false },
+                { id: 4, text: "下載", match: 4, isZh: true }
+            ].sort(() => Math.random() - 0.5);
+
+            const area = document.getElementById('gamePlayArea');
+            let firstCard = null;
+            let lock = false;
+            let matchedCount = 0;
+
+            area.innerHTML = `
+                <div class="w-full max-w-xl space-y-4">
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                        <span class="text-xs font-bold text-amber-400 font-fun uppercase">🃏 單字翻牌配對</span>
+                        <span class="text-xs text-slate-400">配對英單與中文</span>
+                    </div>
+                    <div class="grid grid-cols-4 gap-3" id="memoryCardsGrid">
+                        ${pairs.map((p, idx) => `
+                            <button data-match="${p.match}" data-text="${p.text}" onclick="flipMemoryCard(this)" class="memory-card h-20 rounded-2xl bg-slate-800 border-2 border-slate-700 hover:border-amber-400 text-sm font-bold font-fun text-slate-300 flex items-center justify-center p-2 text-center transition game-btn-shadow">
+                                ❓
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            window.flipMemoryCard = function(btn) {
+                if (lock || btn.dataset.flipped === 'true' || btn.dataset.matched === 'true') return;
+                btn.innerText = btn.dataset.text;
+                btn.classList.add('bg-amber-500', 'text-slate-950', 'border-amber-400');
+                btn.classList.remove('bg-slate-800', 'text-slate-300');
+                btn.dataset.flipped = 'true';
+
+                if (!firstCard) {
+                    firstCard = btn;
+                } else {
+                    lock = true;
+                    if (firstCard.dataset.match === btn.dataset.match) {
+                        AudioFX.playCorrect();
+                        firstCard.dataset.matched = 'true';
+                        btn.dataset.matched = 'true';
+                        firstCard.classList.add('bg-emerald-500', 'text-slate-950');
+                        btn.classList.add('bg-emerald-500', 'text-slate-950');
+                        matchedCount += 2;
+                        firstCard = null;
+                        lock = false;
+                        if (matchedCount === pairs.length) {
+                            addXP(25);
+                            player.coins += 15;
+                            updateStatusUI();
+                            confetti({ particleCount: 70 });
+                            setTimeout(() => alert("🎉 完美配對所有卡牌！獎勵 +25 XP & +15 金幣！"), 300);
+                        }
+                    } else {
+                        AudioFX.playWrong();
+                        setTimeout(() => {
+                            firstCard.innerText = '❓';
+                            btn.innerText = '❓';
+                            firstCard.classList.remove('bg-amber-500', 'text-slate-950', 'border-amber-400');
+                            btn.classList.remove('bg-amber-500', 'text-slate-950', 'border-amber-400');
+                            firstCard.classList.add('bg-slate-800', 'text-slate-300');
+                            btn.classList.add('bg-slate-800', 'text-slate-300');
+                            firstCard.dataset.flipped = 'false';
+                            btn.dataset.flipped = 'false';
+                            firstCard = null;
+                            lock = false;
+                        }, 900);
+                    }
+                }
+            };
+        }
+
+        // Cinema Ethics Quiz
+        function loadEthicsQuiz() {
+            const area = document.getElementById('gamePlayArea');
+            area.innerHTML = `
+                <div class="w-full max-w-lg space-y-4 text-left">
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                        <span class="text-xs font-bold text-purple-400 font-fun uppercase">🍿 劇院正版與文法考驗</span>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                        <p class="font-bold text-white text-sm">問題：當媽媽太興奮想從網路下載院線片時，柴克為什麼提醒她「We shouldn't watch pirated movies」？</p>
+                        <div class="space-y-2 text-xs">
+                            <button onclick="handleEthicsChoice(false)" class="w-full p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-left text-slate-200 border border-slate-700">A. 因為家裡網路連線速度太慢了</button>
+                            <button onclick="handleEthicsChoice(true)" class="w-full p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-left text-slate-200 border border-slate-700">B. 院線片應支持正版購票觀賞，尊重創作者智慧財產權</button>
+                            <button onclick="handleEthicsChoice(false)" class="w-full p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-left text-slate-200 border border-slate-700">C. 因為爸爸想要一起看恐怖片</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            window.handleEthicsChoice = function(correct) {
+                if (correct) {
+                    AudioFX.playCorrect();
+                    addXP(20);
+                    confetti({ particleCount: 60 });
+                    alert("🌟 觀念完全正確！支持正版電影、尊重創作者心血！媽媽也決定立刻在線上訂票支持！");
+                } else {
+                    AudioFX.playWrong();
+                    alert("觀念不太正確喔！請再想一想為什麼不能看盜版電影 (pirated movies) 呢？");
+                }
+            };
+        }
+
+        // --- 11. TAB SWITCHER ---
+        function switchTab(tabId) {
+            ['dialogue', 'roleplay', 'quiz', 'oral', 'vocab', 'games'].forEach(t => {
+                const sec = document.getElementById(`sec-${t}`);
+                const btn = document.getElementById(`tab-${t}`);
+                if (t === tabId) {
+                    sec.classList.remove('hidden');
+                    btn.className = 'tab-btn flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-rose-600 text-slate-950 font-black shadow-lg whitespace-nowrap transition';
+                } else {
+                    sec.classList.add('hidden');
+                    btn.className = 'tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition';
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadProgress();
+            renderDialogue();
+            renderTFQuiz();
+            renderVocab();
+            selectRoleplayCharacter('Mom');
+            updateSimDialogue();
+        });
+    </script>
+</body>
+</html>

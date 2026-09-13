@@ -107,34 +107,132 @@
 
         <section id="tab-verbs" class="tab-content block space-y-6">
             <!-- Rules Banner -->
+            <!-- Learning Objectives & Verb Encyclopedia Banner -->
             <div class="bg-white rounded-3xl p-6 card-shadow border border-sky-100">
-                <div class="flex items-center space-x-3 mb-4">
-                    <span class="bg-indigo-100 text-indigo-700 font-extrabold px-3 py-1 rounded-full text-sm">文法大基石</span>
-                    <h2 class="text-xl font-bold text-slate-800">什麼是 p.p. (過去分詞)？</h2>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-indigo-100 text-indigo-700 font-extrabold px-3 py-1 rounded-full text-xs">文法大基石</span>
+                            <h2 class="text-xl md:text-2xl font-black text-slate-800">認識 p.p. (過去分詞) 與動詞三態變化</h2>
+                        </div>
+                        <p class="text-slate-600 text-sm mt-1">
+                            現在完成式必備公式：<span class="grammar-have">Have / Has</span> + <span class="grammar-pp">p.p. (過去分詞)</span>
+                        </p>
+                    </div>
+                    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-3 text-xs text-amber-900 flex items-start space-x-2">
+                        <i class="fa-solid fa-bullseye text-amber-500 mt-0.5 text-base"></i>
+                        <div>
+                            <span class="font-bold block">課本教學目標：</span>
+                            1. 學生能熟悉動詞的三態變化。<br>
+                            2. 學生能使用現在完成式描述經驗、持續狀態與已完成動作。
+                        </div>
+                    </div>
                 </div>
-                <p class="text-slate-600 leading-relaxed text-sm md:text-base">
-                    在現在完成式中，我們一定要使用 <span class="grammar-have">Have / Has</span> 加上動詞的第三個形態：<span class="grammar-pp">p.p. (過去分詞)</span>！<br>
-                    規則動詞只要加上 <span class="font-bold text-indigo-600">-ed</span>，不規則動詞就需要特別記起來喔！
-                </p>
 
-                <!-- Quick Formula Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-                    <div class="bg-indigo-50/80 p-4 rounded-2xl border border-indigo-100 flex flex-col items-center text-center">
-                        <span class="text-xs font-bold text-indigo-500 uppercase">規則動詞 (加 -ed)</span>
-                        <div class="text-lg font-black text-indigo-900 mt-1">climb ➔ climbed ➔ <span class="text-purple-600">climbed</span></div>
-                        <div class="text-xs text-slate-500 mt-1">try ➔ tried ➔ <span class="text-purple-600">tried</span></div>
+                <!-- Verb Category Quick Filters & Search -->
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                    <div class="flex flex-wrap gap-1.5" id="verbCategoryFilters">
+                        <button onclick="filterVerbCategory('all')" class="verb-cat-btn active bg-indigo-600 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition shadow">全部 (41)</button>
+                        <button onclick="filterVerbCategory('regular')" class="verb-cat-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-xl transition">規則變化 (14)</button>
+                        <button onclick="filterVerbCategory('AAA')" class="verb-cat-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-xl transition">A-A-A (3)</button>
+                        <button onclick="filterVerbCategory('ABA')" class="verb-cat-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-xl transition">A-B-A (2)</button>
+                        <button onclick="filterVerbCategory('ABB')" class="verb-cat-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-xl transition">A-B-B (10)</button>
+                        <button onclick="filterVerbCategory('ABC')" class="verb-cat-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-xl transition">A-B-C (12)</button>
                     </div>
-                    <div class="bg-purple-50/80 p-4 rounded-2xl border border-purple-100 flex flex-col items-center text-center">
-                        <span class="text-xs font-bold text-purple-500 uppercase">不規則 (三態同形 A-A-A)</span>
-                        <div class="text-lg font-black text-purple-900 mt-1">cut ➔ cut ➔ <span class="text-purple-600">cut</span></div>
-                        <div class="text-xs text-slate-500 mt-1">read ➔ read ➔ <span class="text-purple-600">read</span></div>
-                    </div>
-                    <div class="bg-pink-50/80 p-4 rounded-2xl border border-pink-100 flex flex-col items-center text-center">
-                        <span class="text-xs font-bold text-pink-500 uppercase">不規則 (三態不同 A-B-C)</span>
-                        <div class="text-lg font-black text-pink-900 mt-1">go ➔ went ➔ <span class="text-purple-600">gone</span></div>
-                        <div class="text-xs text-slate-500 mt-1">drive ➔ drove ➔ <span class="text-purple-600">driven</span></div>
+
+                    <div class="relative w-full sm:w-64">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+                        <input type="text" id="verbSearchInput" oninput="searchVerbs()" placeholder="搜尋動詞 (如: read, climb, 跑)..." class="w-full pl-8 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-sky-500">
                     </div>
                 </div>
+
+                <!-- Verb Encyclopedia Grid -->
+                <div id="verbEncyclopediaGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 max-h-[460px] overflow-y-auto p-1 pr-2">
+                    <!-- Dynamic Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Write Exercise: 課本手寫過去分詞測驗 (Image 1 下方) -->
+            <div class="bg-white rounded-3xl p-6 card-shadow border border-sky-100">
+                <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-9 h-9 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-black">
+                            <i class="fa-solid fa-pen-nib"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-black text-slate-800">Write. 課本隨堂手寫測驗：寫出動詞的過去分詞 (p.p.)</h3>
+                            <p class="text-xs text-slate-500">動手寫寫看！全對可獲得 +30 學習星星喔！</p>
+                        </div>
+                    </div>
+                    <button onclick="checkWriteExercise()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 py-2 rounded-xl text-xs transition shadow flex items-center space-x-1.5">
+                        <i class="fa-solid fa-check"></i>
+                        <span>檢查答案</span>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="writeExerciseGrid">
+                    <!-- 1. run -->
+                    <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <span class="font-black text-slate-400 text-sm">1.</span>
+                            <span class="font-black text-slate-800">run ➔</span>
+                        </div>
+                        <input id="write_0" type="text" placeholder="輸入 p.p." class="w-28 px-2 py-1 text-center font-bold text-sm border-2 border-slate-300 rounded-xl focus:outline-none focus:border-purple-500 transition">
+                        <span id="write_msg_0" class="w-6 text-center text-sm font-bold"></span>
+                    </div>
+
+                    <!-- 2. read -->
+                    <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <span class="font-black text-slate-400 text-sm">2.</span>
+                            <span class="font-black text-slate-800">read ➔</span>
+                        </div>
+                        <input id="write_1" type="text" placeholder="輸入 p.p." class="w-28 px-2 py-1 text-center font-bold text-sm border-2 border-slate-300 rounded-xl focus:outline-none focus:border-purple-500 transition">
+                        <span id="write_msg_1" class="w-6 text-center text-sm font-bold"></span>
+                    </div>
+
+                    <!-- 3. keep -->
+                    <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <span class="font-black text-slate-400 text-sm">3.</span>
+                            <span class="font-black text-slate-800">keep ➔</span>
+                        </div>
+                        <input id="write_2" type="text" placeholder="輸入 p.p." class="w-28 px-2 py-1 text-center font-bold text-sm border-2 border-slate-300 rounded-xl focus:outline-none focus:border-purple-500 transition">
+                        <span id="write_msg_2" class="w-6 text-center text-sm font-bold"></span>
+                    </div>
+
+                    <!-- 4. go -->
+                    <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <span class="font-black text-slate-400 text-sm">4.</span>
+                            <span class="font-black text-slate-800">go ➔</span>
+                        </div>
+                        <input id="write_3" type="text" placeholder="輸入 p.p." class="w-28 px-2 py-1 text-center font-bold text-sm border-2 border-slate-300 rounded-xl focus:outline-none focus:border-purple-500 transition">
+                        <span id="write_msg_3" class="w-6 text-center text-sm font-bold"></span>
+                    </div>
+
+                    <!-- 5. drive -->
+                    <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <span class="font-black text-slate-400 text-sm">5.</span>
+                            <span class="font-black text-slate-800">drive ➔</span>
+                        </div>
+                        <input id="write_4" type="text" placeholder="輸入 p.p." class="w-28 px-2 py-1 text-center font-bold text-sm border-2 border-slate-300 rounded-xl focus:outline-none focus:border-purple-500 transition">
+                        <span id="write_msg_4" class="w-6 text-center text-sm font-bold"></span>
+                    </div>
+
+                    <!-- 6. begin -->
+                    <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <span class="font-black text-slate-400 text-sm">6.</span>
+                            <span class="font-black text-slate-800">begin ➔</span>
+                        </div>
+                        <input id="write_5" type="text" placeholder="輸入 p.p." class="w-28 px-2 py-1 text-center font-bold text-sm border-2 border-slate-300 rounded-xl focus:outline-none focus:border-purple-500 transition">
+                        <span id="write_msg_5" class="w-6 text-center text-sm font-bold"></span>
+                    </div>
+                </div>
+
+                <div id="writeOverallFeedback" class="mt-4 text-center font-bold text-sm h-6"></div>
             </div>
 
             <!-- Interactive Verb Matching Game -->
@@ -142,7 +240,7 @@
                 <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
                     <h3 class="text-lg font-bold text-slate-800 flex items-center space-x-2">
                         <i class="fa-solid fa-gamepad text-sky-500"></i>
-                        <span>課本核心動詞 p.p. 配對小測驗</span>
+                        <span>課本核心動詞 p.p. 三選一配對快打</span>
                     </h3>
                     <span class="text-xs bg-sky-100 text-sky-700 px-3 py-1 rounded-full font-medium">請選出正確的 p.p. (過去分詞)</span>
                 </div>
@@ -155,107 +253,276 @@
 
         <section id="tab-focusA" class="tab-content hidden space-y-6">
             <!-- Focus A Formula Box -->
+            <!-- Grammar Focus A Formula Banner -->
             <div class="bg-white rounded-3xl p-6 card-shadow border border-sky-100">
-                <div class="bg-sky-50 border-l-4 border-sky-500 p-4 rounded-r-2xl mb-6">
-                    <h3 class="text-lg font-black text-sky-800 mb-2">💡 句型 A：詢問過去是否有某個「經驗」</h3>
-                    <div class="text-sm md:text-base space-y-2 font-mono">
-                        <p>問句：<span class="grammar-have">Have / Has</span> + <span class="grammar-sub">主詞</span> + <span class="text-pink-600 font-bold">ever</span> + <span class="grammar-pp">p.p.</span> ?</p>
-                        <p>肯定：Yes, <span class="grammar-sub">主詞</span> + <span class="grammar-have">have/has</span>. (<span class="grammar-sub">S</span> + <span class="grammar-have">have/has</span> + <span class="grammar-pp">p.p.</span> <span class="grammar-time font-normal">once/twice/many times</span>)</p>
-                        <p>否定：No, <span class="grammar-sub">主詞</span> + <span class="grammar-have">haven't/hasn't</span>. (<span class="grammar-sub">S</span> + <span class="grammar-have">have/has</span> + <span class="text-pink-600 font-bold">never</span> + <span class="grammar-pp">p.p.</span>)</p>
+                <div class="bg-sky-50 border-l-4 border-sky-500 p-5 rounded-r-2xl mb-6">
+                    <div class="flex items-center justify-between flex-wrap gap-2 mb-3">
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-sky-600 text-white font-black text-xs px-2.5 py-0.5 rounded-lg">句型 A</span>
+                            <h3 class="text-lg font-black text-sky-900">Grammar Focus A：詢問過去是否有某個「經驗」</h3>
+                        </div>
+                        <span class="text-xs bg-amber-100 text-amber-800 font-bold px-2.5 py-1 rounded-full border border-amber-200">
+                            💡 句型 A 表達「從過去到目前為止的經驗」
+                        </span>
+                    </div>
+
+                    <!-- Formula Comparison Table -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 text-xs md:text-sm">
+                        <!-- Questions -->
+                        <div class="bg-white p-4 rounded-xl border border-sky-200 space-y-2">
+                            <span class="font-black text-sky-700 block uppercase tracking-wide">❓ 疑問句 (Question)</span>
+                            <div class="font-mono space-y-1.5 text-slate-700">
+                                <p><span class="grammar-have">Have</span> <span class="grammar-sub">you / they</span> <span class="text-pink-600 font-bold">ever</span> <span class="grammar-pp">tried</span> exercising?</p>
+                                <p><span class="grammar-have">Have</span> <span class="grammar-sub">you / they</span> <span class="text-pink-600 font-bold">ever</span> <span class="grammar-pp">been</span> to Taipei?</p>
+                                <div class="border-t border-slate-100 my-1.5"></div>
+                                <p><span class="grammar-have">Has</span> <span class="grammar-sub">he / she</span> <span class="text-pink-600 font-bold">ever</span> <span class="grammar-pp">tried</span> exercising?</p>
+                                <p><span class="grammar-have">Has</span> <span class="grammar-sub">he / she</span> <span class="text-pink-600 font-bold">ever</span> <span class="grammar-pp">been</span> to Taipei?</p>
+                            </div>
+                        </div>
+
+                        <!-- Affirmative -->
+                        <div class="bg-white p-4 rounded-xl border border-emerald-200 space-y-2">
+                            <span class="font-black text-emerald-700 block uppercase tracking-wide">✅ 肯定簡答與詳答 (Yes)</span>
+                            <div class="font-mono space-y-1 text-slate-700">
+                                <p><span class="font-bold text-emerald-600">Yes,</span> I / we / they <span class="grammar-have">have</span>.</p>
+                                <p><span class="font-bold text-emerald-600">Yes,</span> he / she <span class="grammar-have">has</span>.</p>
+                                <div class="border-t border-slate-100 my-1.5"></div>
+                                <p>I / We / They <span class="grammar-have">have</span> <span class="grammar-pp">tried</span> exercising (<span class="grammar-time">before</span>).</p>
+                                <p>He / She <span class="grammar-have">has</span> <span class="grammar-pp">been</span> to Taipei (<span class="grammar-time">many times</span>).</p>
+                                <p class="text-[11px] text-slate-400 mt-1 italic">▲ 詳答部分可省略括號詞彙</p>
+                            </div>
+                        </div>
+
+                        <!-- Negative -->
+                        <div class="bg-white p-4 rounded-xl border border-rose-200 space-y-2">
+                            <span class="font-black text-rose-700 block uppercase tracking-wide">❌ 否定簡答與詳答 (No)</span>
+                            <div class="font-mono space-y-1 text-slate-700">
+                                <p><span class="font-bold text-rose-600">No,</span> I / we / they <span class="grammar-have">haven't</span>.</p>
+                                <p><span class="font-bold text-rose-600">No,</span> he / she <span class="grammar-have">hasn't</span>.</p>
+                                <div class="border-t border-slate-100 my-1.5"></div>
+                                <p>I / We / They <span class="grammar-have">have</span> <span class="text-pink-600 font-bold">never</span> <span class="grammar-pp">tried</span> exercising.</p>
+                                <p>He / She <span class="grammar-have">has</span> <span class="text-pink-600 font-bold">never</span> <span class="grammar-pp">been</span> to Taipei.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contraction Box -->
+                    <div class="mt-4 bg-white p-3 rounded-xl border border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                        <span class="font-bold text-slate-500 font-sans">常用縮寫表：</span>
+                        <span>I have = <strong class="text-indigo-600">I've</strong></span>
+                        <span>we have = <strong class="text-indigo-600">we've</strong></span>
+                        <span>you have = <strong class="text-indigo-600">you've</strong></span>
+                        <span>they have = <strong class="text-indigo-600">they've</strong></span>
+                        <span>he has = <strong class="text-indigo-600">he's</strong></span>
+                        <span>she has = <strong class="text-indigo-600">she's</strong></span>
+                        <span>have not = <strong class="text-rose-600">haven't</strong></span>
+                        <span>has not = <strong class="text-rose-600">hasn't</strong></span>
                     </div>
                 </div>
 
-                <!-- Scenario Table based on Image -->
-                <h4 class="font-bold text-slate-700 mb-3 flex items-center space-x-2">
-                    <i class="fa-solid fa-list-check text-indigo-500"></i>
-                    <span>人物活動紀錄表 (對照回答問題)</span>
-                </h4>
-                <div class="overflow-x-auto rounded-2xl border border-slate-200 mb-6">
-                    <table class="w-full text-sm text-center">
+                <!-- Activity Record Matrix (課本活動記錄表) -->
+                <div class="flex items-center justify-between mb-3">
+                    <h4 class="font-black text-slate-800 flex items-center space-x-2">
+                        <i class="fa-solid fa-clipboard-list text-indigo-500"></i>
+                        <span>Speak and write. 根據活動記錄表說說看、寫寫看</span>
+                    </h4>
+                    <span class="text-xs bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full font-bold">課本第 2 頁</span>
+                </div>
+
+                <div class="overflow-x-auto rounded-2xl border border-slate-200 mb-6 shadow-sm">
+                    <table class="w-full text-xs sm:text-sm text-center">
                         <thead class="bg-slate-100 text-slate-700 font-bold">
                             <tr>
-                                <th class="p-3 border-b">名字</th>
-                                <th class="p-3 border-b bg-amber-50">⛰️ climb a mountain</th>
-                                <th class="p-3 border-b bg-blue-50">🌊 swim in the sea</th>
-                                <th class="p-3 border-b bg-green-50">🐄 feed a cow</th>
-                                <th class="p-3 border-b bg-rose-50">🐸 try frog meat</th>
+                                <th class="p-3 border-b text-slate-500 font-medium">人物 \ 活動</th>
+                                <th class="p-3 border-b bg-amber-50/70 text-amber-900">
+                                    <div class="text-lg">⛰️</div>
+                                    <div>climb a mountain</div>
+                                    <div class="text-[10px] text-slate-400 font-normal">爬山</div>
+                                </th>
+                                <th class="p-3 border-b bg-sky-50/70 text-sky-900">
+                                    <div class="text-lg">🌊</div>
+                                    <div>swim in the sea</div>
+                                    <div class="text-[10px] text-slate-400 font-normal">海中游泳</div>
+                                </th>
+                                <th class="p-3 border-b bg-emerald-50/70 text-emerald-900">
+                                    <div class="text-lg">🐄</div>
+                                    <div>feed a cow</div>
+                                    <div class="text-[10px] text-slate-400 font-normal">餵牛</div>
+                                </th>
+                                <th class="p-3 border-b bg-rose-50/70 text-rose-900">
+                                    <div class="text-lg">🐸</div>
+                                    <div>try frog meat</div>
+                                    <div class="text-[10px] text-slate-400 font-normal">嚐青蛙肉</div>
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 font-medium">
                             <tr>
-                                <td class="p-3 bg-slate-50 font-bold">Harry</td>
+                                <td class="p-3 bg-slate-50 font-black text-slate-800">Harry</td>
                                 <td class="p-3 bg-amber-50/30 text-emerald-600 font-bold">✓ 1 time</td>
-                                <td class="p-3 text-slate-400">✕ (0 time)</td>
-                                <td class="p-3 text-slate-400">✕</td>
+                                <td class="p-3 text-slate-300">✕ (0)</td>
+                                <td class="p-3 text-slate-300">✕ (0)</td>
                                 <td class="p-3 bg-rose-50/30 text-emerald-600 font-bold">✓ 1 time</td>
                             </tr>
                             <tr>
-                                <td class="p-3 bg-slate-50 font-bold">Kate</td>
-                                <td class="p-3 text-slate-400">✕</td>
-                                <td class="p-3 bg-blue-50/30 text-emerald-600 font-bold">✓ 1 time</td>
-                                <td class="p-3 bg-green-50/30 text-emerald-600 font-bold">✓ many times</td>
+                                <td class="p-3 bg-slate-50 font-black text-slate-800">Kate</td>
+                                <td class="p-3 text-slate-300">✕ (0)</td>
+                                <td class="p-3 bg-sky-50/30 text-emerald-600 font-bold">✓ 1 time</td>
+                                <td class="p-3 bg-emerald-50/30 text-emerald-600 font-bold">✓ many times</td>
                                 <td class="p-3 bg-rose-50/30 text-emerald-600 font-bold">✓ 2 times</td>
                             </tr>
                             <tr>
-                                <td class="p-3 bg-slate-50 font-bold">Jim</td>
-                                <td class="p-3 text-slate-400">✕</td>
-                                <td class="p-3 bg-blue-50/30 text-emerald-600 font-bold">✓ many times</td>
-                                <td class="p-3 bg-green-50/30 text-emerald-600 font-bold">✓ 2 times</td>
-                                <td class="p-3 text-slate-400">✕ (0 time)</td>
+                                <td class="p-3 bg-slate-50 font-black text-slate-800">Jim</td>
+                                <td class="p-3 text-slate-300">✕ (0)</td>
+                                <td class="p-3 bg-sky-50/30 text-emerald-600 font-bold">✓ many times</td>
+                                <td class="p-3 bg-emerald-50/30 text-emerald-600 font-bold">✓ 2 times</td>
+                                <td class="p-3 text-slate-300">✕ (0)</td>
                             </tr>
                             <tr>
-                                <td class="p-3 bg-slate-50 font-bold">Amy and Ben</td>
+                                <td class="p-3 bg-slate-50 font-black text-slate-800">Amy and Ben</td>
                                 <td class="p-3 bg-amber-50/30 text-emerald-600 font-bold">✓ 1 time</td>
-                                <td class="p-3 bg-blue-50/30 text-emerald-600 font-bold">✓ 2 times</td>
-                                <td class="p-3 text-slate-400">✕</td>
+                                <td class="p-3 bg-sky-50/30 text-emerald-600 font-bold">✓ 2 times</td>
+                                <td class="p-3 text-slate-300">✕ (0)</td>
                                 <td class="p-3 bg-rose-50/30 text-emerald-600 font-bold">✓ many times</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <!-- Interactive Fill in the Blanks Task -->
-                <div class="space-y-6">
-                    <!-- Q1 -->
-                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
-                        <div class="font-bold text-slate-800 mb-2 flex items-center justify-between">
-                            <span>1. Q: <span class="grammar-have">Has</span> Kate <span class="text-pink-600">ever</span> fed a cow?</span>
-                            <button onclick="playTTS('Has Kate ever fed a cow? Yes, she has. She has fed a cow many times.')" class="text-sky-600 hover:text-sky-800 text-sm">
-                                <i class="fa-solid fa-volume-high"></i> 朗讀
+                <!-- Example Cards from Textbook -->
+                <div class="bg-amber-50/70 border border-amber-200 rounded-2xl p-4 mb-6 space-y-2">
+                    <span class="bg-amber-400 text-slate-900 font-black text-xs px-2.5 py-0.5 rounded-lg">課本範例 Example</span>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm">
+                        <div class="bg-white p-3 rounded-xl border border-amber-200 flex justify-between items-start">
+                            <div>
+                                <p class="font-bold text-slate-800">A: <span class="grammar-have">Has</span> Harry <span class="text-pink-600 font-bold">ever</span> <span class="grammar-pp">climbed</span> a mountain?</p>
+                                <p class="text-emerald-700 font-medium">B: Yes, he <span class="grammar-have">has</span>. He <span class="grammar-have">has</span> <span class="grammar-pp">climbed</span> a mountain <span class="grammar-time">once</span>.</p>
+                            </div>
+                            <button onclick="playTTS('Has Harry ever climbed a mountain? Yes, he has. He has climbed a mountain once.')" class="text-sky-600 hover:text-sky-800 p-1">
+                                <i class="fa-solid fa-volume-high"></i>
                             </button>
                         </div>
-                        <p class="text-sm text-slate-600 mb-3">請點選下方單字組出答句：「是的，她有。她已經餵過牛好多次了。」</p>
+                        <div class="bg-white p-3 rounded-xl border border-amber-200 flex justify-between items-start">
+                            <div>
+                                <p class="font-bold text-slate-800">A: <span class="grammar-have">Has</span> Harry <span class="text-pink-600 font-bold">ever</span> <span class="grammar-pp">swum</span> in the sea?</p>
+                                <p class="text-rose-700 font-medium">B: No, he <span class="grammar-have">hasn't</span>. He <span class="grammar-have">has</span> <span class="text-pink-600 font-bold">never</span> <span class="grammar-pp">swum</span> in the sea.</p>
+                            </div>
+                            <button onclick="playTTS('Has Harry ever swum in the sea? No, he hasn\'t. He has never swum in the sea.')" class="text-sky-600 hover:text-sky-800 p-1">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-                        <!-- Interactive Assembly Area -->
+                <!-- Interactive Assembly Tasks (Kate, Jim, Amy & Ben) -->
+                <div class="space-y-6">
+                    <!-- Q1: Kate -->
+                    <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200">
+                        <div class="font-bold text-slate-800 mb-2 flex items-center justify-between flex-wrap gap-2">
+                            <span>1. Q: <span class="grammar-have">Has</span> Kate <span class="text-pink-600">ever</span> fed a cow?</span>
+                            <button onclick="playTTS('Has Kate ever fed a cow? Yes, she has. She has fed a cow many times.')" class="text-sky-600 hover:text-sky-800 text-xs font-bold">
+                                <i class="fa-solid fa-volume-high"></i> 朗讀整句
+                            </button>
+                        </div>
+                        <p class="text-xs text-slate-500 mb-3">請點選下方單字組出答句：「是的，她有。她已經餵過牛好多次了。」</p>
+
                         <div id="sentenceBuilderA1" class="min-h-[50px] bg-white rounded-xl p-3 border-2 border-dashed border-sky-300 flex flex-wrap gap-2 items-center mb-3">
                             <span class="text-slate-400 text-xs italic pointer-events-none">請由下方點擊單字放到這裡...</span>
                         </div>
-                        <div id="wordBankA1" class="flex flex-wrap gap-2">
-                            <!-- Populated by JS -->
-                        </div>
-                        <div class="mt-3 flex justify-between items-center">
-                            <button onclick="checkSentence('A1')" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-1.5 rounded-xl text-sm transition">檢查答案</button>
-                            <span id="feedbackA1" class="text-sm font-bold"></span>
+                        <div id="wordBankA1" class="flex flex-wrap gap-2 mb-3"></div>
+                        <div class="flex justify-between items-center">
+                            <button onclick="checkSentence('A1')" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-1.5 rounded-xl text-xs sm:text-sm transition shadow">檢查答案</button>
+                            <span id="feedbackA1" class="text-xs sm:text-sm font-bold"></span>
                         </div>
                     </div>
 
-                    <!-- Q2 -->
-                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
-                        <div class="font-bold text-slate-800 mb-2 flex items-center justify-between">
+                    <!-- Q2: Jim -->
+                    <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200">
+                        <div class="font-bold text-slate-800 mb-2 flex items-center justify-between flex-wrap gap-2">
                             <span>2. Q: <span class="grammar-have">Has</span> Jim <span class="text-pink-600">ever</span> tried frog meat?</span>
-                            <button onclick="playTTS('Has Jim ever tried frog meat? No, he hasn\'t. He has never tried frog meat.')" class="text-sky-600 hover:text-sky-800 text-sm">
-                                <i class="fa-solid fa-volume-high"></i> 朗讀
+                            <button onclick="playTTS('Has Jim ever tried frog meat? No, he hasn\'t. He has never tried frog meat.')" class="text-sky-600 hover:text-sky-800 text-xs font-bold">
+                                <i class="fa-solid fa-volume-high"></i> 朗讀整句
                             </button>
                         </div>
-                        <p class="text-sm text-slate-600 mb-3">請點選單字組出：「不，他沒有。他從未吃過蛙肉。」</p>
+                        <p class="text-xs text-slate-500 mb-3">請點選單字組出：「不，他沒有。他從未吃過蛙肉。」</p>
 
                         <div id="sentenceBuilderA2" class="min-h-[50px] bg-white rounded-xl p-3 border-2 border-dashed border-sky-300 flex flex-wrap gap-2 items-center mb-3">
                             <span class="text-slate-400 text-xs italic pointer-events-none">請由下方點擊單字放到這裡...</span>
                         </div>
-                        <div id="wordBankA2" class="flex flex-wrap gap-2"></div>
-                        <div class="mt-3 flex justify-between items-center">
-                            <button onclick="checkSentence('A2')" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-1.5 rounded-xl text-sm transition">檢查答案</button>
-                            <span id="feedbackA2" class="text-sm font-bold"></span>
+                        <div id="wordBankA2" class="flex flex-wrap gap-2 mb-3"></div>
+                        <div class="flex justify-between items-center">
+                            <button onclick="checkSentence('A2')" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-1.5 rounded-xl text-xs sm:text-sm transition shadow">檢查答案</button>
+                            <span id="feedbackA2" class="text-xs sm:text-sm font-bold"></span>
+                        </div>
+                    </div>
+
+                    <!-- Q3: Amy and Ben (課本第 3 題補全) -->
+                    <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200">
+                        <div class="font-bold text-slate-800 mb-2 flex items-center justify-between flex-wrap gap-2">
+                            <span>3. Q: <span class="grammar-have">Have</span> Amy and Ben <span class="text-pink-600">ever</span> swum in the sea?</span>
+                            <button onclick="playTTS('Have Amy and Ben ever swum in the sea? Yes, they have. They have swum in the sea twice.')" class="text-sky-600 hover:text-sky-800 text-xs font-bold">
+                                <i class="fa-solid fa-volume-high"></i> 朗讀整句
+                            </button>
+                        </div>
+                        <p class="text-xs text-slate-500 mb-3">請點選單字組出：「是的，他們有。他們曾在海裡游過兩次泳。」</p>
+
+                        <div id="sentenceBuilderA3" class="min-h-[50px] bg-white rounded-xl p-3 border-2 border-dashed border-sky-300 flex flex-wrap gap-2 items-center mb-3">
+                            <span class="text-slate-400 text-xs italic pointer-events-none">請由下方點擊單字放到這裡...</span>
+                        </div>
+                        <div id="wordBankA3" class="flex flex-wrap gap-2 mb-3"></div>
+                        <div class="flex justify-between items-center">
+                            <button onclick="checkSentence('A3')" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-1.5 rounded-xl text-xs sm:text-sm transition shadow">檢查答案</button>
+                            <span id="feedbackA3" class="text-xs sm:text-sm font-bold"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Answer the questions. 根據你的經驗回答問題 (課本 Image 2 下方) -->
+                <div class="mt-8 pt-6 border-t border-slate-200">
+                    <h4 class="font-black text-slate-800 flex items-center space-x-2 mb-4">
+                        <i class="fa-solid fa-user-pen text-purple-600"></i>
+                        <span>Answer the questions. 根據你的個人經驗回答問題</span>
+                    </h4>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Personal Q1 -->
+                        <div class="bg-indigo-50/60 p-4 rounded-2xl border border-indigo-200 space-y-3">
+                            <p class="font-black text-indigo-900 text-sm">1. Q: Have you ever climbed a mountain?</p>
+                            <p class="text-xs text-slate-500">你有爬過山嗎？請依你的個人經驗選擇答句：</p>
+                            <div class="space-y-2">
+                                <button onclick="setPersonalAnswer(1, 'Yes, I have. I have climbed a mountain before.')" class="w-full text-left p-2.5 bg-white hover:bg-emerald-50 border border-slate-200 hover:border-emerald-400 rounded-xl text-xs font-bold text-slate-700 transition">
+                                    🌲 Yes, I have. I have climbed a mountain before. (有爬過)
+                                </button>
+                                <button onclick="setPersonalAnswer(1, 'No, I haven\'t. I have never climbed a mountain.')" class="w-full text-left p-2.5 bg-white hover:bg-rose-50 border border-slate-200 hover:border-rose-400 rounded-xl text-xs font-bold text-slate-700 transition">
+                                    🏡 No, I haven't. I have never climbed a mountain. (從沒爬過)
+                                </button>
+                            </div>
+                            <div id="personalAnswerBox1" class="hidden p-2.5 bg-white rounded-xl border border-indigo-300 flex justify-between items-center">
+                                <span id="personalAnswerText1" class="text-xs font-bold text-indigo-900"></span>
+                                <button id="personalTTSBtn1" class="text-indigo-600 hover:text-indigo-800 text-xs font-bold">
+                                    <i class="fa-solid fa-volume-high"></i> 發音
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Personal Q2 -->
+                        <div class="bg-indigo-50/60 p-4 rounded-2xl border border-indigo-200 space-y-3">
+                            <p class="font-black text-indigo-900 text-sm">2. Q: Have you and your family ever tried frog meat?</p>
+                            <p class="text-xs text-slate-500">你和你的家人吃過青蛙肉嗎？請依真實情況選擇：</p>
+                            <div class="space-y-2">
+                                <button onclick="setPersonalAnswer(2, 'Yes, we have. We have tried frog meat before.')" class="w-full text-left p-2.5 bg-white hover:bg-emerald-50 border border-slate-200 hover:border-emerald-400 rounded-xl text-xs font-bold text-slate-700 transition">
+                                    🍲 Yes, we have. We have tried frog meat before. (有吃過)
+                                </button>
+                                <button onclick="setPersonalAnswer(2, 'No, we haven\'t. We have never tried frog meat.')" class="w-full text-left p-2.5 bg-white hover:bg-rose-50 border border-slate-200 hover:border-rose-400 rounded-xl text-xs font-bold text-slate-700 transition">
+                                    🙅 No, we haven't. We have never tried frog meat. (從沒吃過)
+                                </button>
+                            </div>
+                            <div id="personalAnswerBox2" class="hidden p-2.5 bg-white rounded-xl border border-indigo-300 flex justify-between items-center">
+                                <span id="personalAnswerText2" class="text-xs font-bold text-indigo-900"></span>
+                                <button id="personalTTSBtn2" class="text-indigo-600 hover:text-indigo-800 text-xs font-bold">
+                                    <i class="fa-solid fa-volume-high"></i> 發音
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -358,46 +625,193 @@
 
         <section id="tab-focusC" class="tab-content hidden space-y-6">
             <div class="bg-white rounded-3xl p-6 card-shadow border border-sky-100">
-                <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-2xl mb-6">
-                    <h3 class="text-lg font-black text-purple-900 mb-2">💡 句型 C：事情做完了嗎？(already 已經 vs. yet 還沒)</h3>
-                    <div class="text-sm md:text-base space-y-2">
-                        <p>問句：<span class="grammar-have">Have / Has</span> + <span class="grammar-sub">S</span> + <span class="grammar-pp">p.p.</span> ... <span class="text-rose-600 font-bold">(yet)</span>?</p>
-                        <p class="text-emerald-700 font-bold">肯定句 (做了)：S + have/has + <span class="bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">already</span> + p.p.</p>
-                        <p class="text-rose-700 font-bold">否定句 (還沒)：S + haven't/hasn't + p.p. ... <span class="bg-rose-100 text-rose-800 px-1.5 py-0.5 rounded">yet</span>.</p>
+                
+                <!-- Grammar Focus C Formula Banner -->
+                <div class="bg-purple-50 border-l-4 border-purple-500 p-5 rounded-r-2xl mb-6">
+                    <div class="flex items-center justify-between flex-wrap gap-2 mb-3">
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-purple-600 text-white font-black text-xs px-2.5 py-0.5 rounded-lg">句型 C</span>
+                            <h3 class="text-lg font-black text-purple-900">Grammar Focus C：事情做完了嗎？(already 已經 vs. yet 還沒)</h3>
+                        </div>
+                        <span class="text-xs bg-rose-100 text-rose-800 font-bold px-2.5 py-1 rounded-full border border-rose-200">
+                            💡 句型 C 表達「到目前為止已完成或未完成某事」
+                        </span>
+                    </div>
+
+                    <!-- Core Table -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+                        <!-- Questions -->
+                        <div class="bg-white p-3.5 rounded-xl border border-purple-200 space-y-1.5 font-mono">
+                            <span class="font-bold text-purple-700 font-sans block">❓ 問句 (Question)</span>
+                            <p><span class="grammar-have">Have</span> they <span class="grammar-pp">had</span> breakfast <span class="text-rose-600 font-bold">(yet)</span>?</p>
+                            <p><span class="grammar-have">Has</span> she <span class="grammar-pp">lost</span> five kilos <span class="text-rose-600 font-bold">(yet)</span>?</p>
+                        </div>
+
+                        <!-- Yes -->
+                        <div class="bg-white p-3.5 rounded-xl border border-emerald-200 space-y-1 font-mono">
+                            <span class="font-bold text-emerald-700 font-sans block">✅ 肯定 (已完成)</span>
+                            <p>Yes, they <span class="grammar-have">have</span>. / she <span class="grammar-have">has</span>.</p>
+                            <p>They have <span class="bg-emerald-100 text-emerald-800 font-bold px-1 rounded">(already)</span> <span class="grammar-pp">had</span> breakfast.</p>
+                            <p>She has <span class="grammar-pp">lost</span> five kilos.</p>
+                        </div>
+
+                        <!-- No -->
+                        <div class="bg-white p-3.5 rounded-xl border border-rose-200 space-y-1 font-mono">
+                            <span class="font-bold text-rose-700 font-sans block">❌ 否定 (未完成)</span>
+                            <p>No, they <span class="grammar-have">haven't</span>. / she <span class="grammar-have">hasn't</span>.</p>
+                            <p>They haven't <span class="grammar-pp">had</span> breakfast <span class="bg-rose-100 text-rose-800 font-bold px-1 rounded">(yet)</span>.</p>
+                            <p>She hasn't <span class="grammar-pp">lost</span> five kilos <span class="bg-rose-100 text-rose-800 font-bold px-1 rounded">(yet)</span>.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 text-xs text-slate-600 flex flex-wrap gap-4 pt-2 border-t border-purple-200">
+                        <span>✨ <strong class="text-emerald-700">already</strong>：常放在 have/has 之後，主要用於「肯定句」。</span>
+                        <span>✨ <strong class="text-rose-700">yet</strong>：常放在句尾，用於「否定句」(表示還沒) 或「疑問句」(表示了嗎)。</span>
                     </div>
                 </div>
 
-                <!-- Interactive Scenario Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Scenario 1: Kids & Cat -->
-                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 text-xl font-bold">🐱</div>
-                            <div>
-                                <h4 class="font-bold text-slate-800">1. find their cat (找貓)</h4>
-                                <span class="text-xs text-rose-500 font-bold">狀態：還沒找到 ✕</span>
+                <!-- 4 Scenarios from Textbook (Image 3) -->
+                <div class="flex items-center justify-between mb-4">
+                    <h4 class="font-black text-slate-800 flex items-center space-x-2">
+                        <i class="fa-solid fa-camera-retro text-purple-600"></i>
+                        <span>Speak and write. 根據圖片內容說說看、寫寫看 (課本第 3 頁)</span>
+                    </h4>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    
+                    <!-- Example: Amy / wake up -->
+                    <div class="bg-slate-50 p-5 rounded-2xl border-2 border-amber-200 space-y-3 relative">
+                        <span class="absolute -top-3 left-4 bg-amber-400 text-slate-900 font-black text-[11px] px-2.5 py-0.5 rounded-full shadow">
+                            課本範例 Example
+                        </span>
+                        <div class="flex items-center justify-between pt-1">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center text-amber-600 text-2xl font-bold shadow-sm">
+                                    👶
+                                </div>
+                                <div>
+                                    <h5 class="font-black text-slate-800">Amy / wake up (醒來)</h5>
+                                    <span class="text-xs text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-md">狀態：已經醒來 ✓</span>
+                                </div>
                             </div>
+                            <button onclick="playTTS('Has Amy woken up yet? Yes, she has. She has already woken up.')" class="text-sky-600 hover:text-sky-800 text-sm">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
                         </div>
-                        <p class="text-sm">Q: <span class="grammar-have">Have</span> the kids <span class="grammar-pp">found</span> their cat <span class="text-rose-600 font-bold">yet</span>?</p>
-                        <p class="text-sm">A: No, they haven't. They haven't <span class="grammar-pp">found</span> it <input id="c1_input" type="text" placeholder="填入 yet 或 already" class="w-28 border-2 border-sky-300 rounded-lg px-2 py-0.5 font-bold text-center text-sm focus:outline-none focus:border-sky-500">.</p>
-                        <button onclick="checkInput('c1_input', 'yet', 'c1_msg')" class="bg-purple-600 text-white font-bold text-xs px-3 py-1.5 rounded-lg hover:bg-purple-700 transition">送出答案</button>
-                        <span id="c1_msg" class="text-xs font-bold ml-2"></span>
+
+                        <div class="text-xs sm:text-sm space-y-2 bg-white p-3 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-700">Q: <span class="grammar-have">Has</span> Amy <span class="grammar-pp">woken</span> up <span class="text-rose-600 font-bold">yet</span>?</p>
+                            <p class="font-medium text-slate-700">A: Yes, she <span class="grammar-have">has</span>. (She has <span class="bg-emerald-100 text-emerald-800 px-1 font-bold rounded">already</span> <span class="grammar-pp">woken</span> up.)</p>
+                        </div>
                     </div>
 
-                    <!-- Scenario 2: Ken & Dishes -->
+                    <!-- Scenario 1: the kids / find their cat -->
                     <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 text-xl font-bold">🍽️</div>
-                            <div>
-                                <h4 class="font-bold text-slate-800">2. do the dishes (洗碗)</h4>
-                                <span class="text-xs text-emerald-600 font-bold">狀態：已經洗好 ✓</span>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 text-2xl font-bold shadow-sm">
+                                    😿
+                                </div>
+                                <div>
+                                    <h5 class="font-black text-slate-800">1. the kids / find their cat (找貓咪)</h5>
+                                    <span class="text-xs text-rose-600 font-bold bg-rose-50 px-2 py-0.5 rounded-md">狀態：還沒找到 ✕</span>
+                                </div>
                             </div>
+                            <button onclick="playTTS('Have the kids found their cat yet? No, they haven\'t. They haven\'t found it yet.')" class="text-sky-600 hover:text-sky-800 text-sm">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
                         </div>
-                        <p class="text-sm">Q: <span class="grammar-have">Has</span> Ken <span class="grammar-pp">done</span> the dishes <span class="text-rose-600 font-bold">yet</span>?</p>
-                        <p class="text-sm">A: Yes, he has. He has <input id="c2_input" type="text" placeholder="填入 yet 或 already" class="w-28 border-2 border-sky-300 rounded-lg px-2 py-0.5 font-bold text-center text-sm focus:outline-none focus:border-sky-500"> <span class="grammar-pp">done</span> the dishes.</p>
-                        <button onclick="checkInput('c2_input', 'already', 'c2_msg')" class="bg-purple-600 text-white font-bold text-xs px-3 py-1.5 rounded-lg hover:bg-purple-700 transition">送出答案</button>
-                        <span id="c2_msg" class="text-xs font-bold ml-2"></span>
+
+                        <div class="text-xs sm:text-sm space-y-2.5 bg-white p-3 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-700">
+                                Q: <span class="grammar-have">Have</span> the kids 
+                                <input id="sc1_pp" type="text" placeholder="find 的 p.p." class="w-20 border border-sky-300 rounded px-1.5 py-0.5 text-center font-bold text-purple-700 focus:outline-none"> 
+                                their cat <span class="text-rose-600 font-bold">yet</span>?
+                            </p>
+                            <p class="font-medium text-slate-700">
+                                A: No, they haven't. (They haven't <span class="grammar-pp">found</span> it 
+                                <input id="c1_input" type="text" placeholder="yet 或 already" class="w-24 border-2 border-sky-300 rounded px-1.5 py-0.5 text-center font-bold text-sky-700 focus:outline-none">.)
+                            </p>
+                        </div>
+
+                        <div class="flex justify-between items-center pt-1">
+                            <button onclick="checkScenario1()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-xl shadow transition">送出答案</button>
+                            <span id="c1_msg" class="text-xs font-bold"></span>
+                        </div>
                     </div>
+
+                    <!-- Scenario 2: Ken / do the dishes -->
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 text-2xl font-bold shadow-sm">
+                                    🍽️
+                                </div>
+                                <div>
+                                    <h5 class="font-black text-slate-800">2. Ken / do the dishes (洗碗盤)</h5>
+                                    <span class="text-xs text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-md">狀態：已經洗好 ✓</span>
+                                </div>
+                            </div>
+                            <button onclick="playTTS('Has Ken done the dishes yet? Yes, he has. He has already done the dishes.')" class="text-sky-600 hover:text-sky-800 text-sm">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
+                        </div>
+
+                        <div class="text-xs sm:text-sm space-y-2.5 bg-white p-3 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-700">
+                                Q: <span class="grammar-have">Has</span> Ken 
+                                <input id="sc2_pp" type="text" placeholder="do 的 p.p." class="w-20 border border-sky-300 rounded px-1.5 py-0.5 text-center font-bold text-purple-700 focus:outline-none"> 
+                                the dishes <span class="text-rose-600 font-bold">yet</span>?
+                            </p>
+                            <p class="font-medium text-slate-700">
+                                A: Yes, he has. (He has 
+                                <input id="c2_input" type="text" placeholder="yet 或 already" class="w-24 border-2 border-sky-300 rounded px-1.5 py-0.5 text-center font-bold text-sky-700 focus:outline-none"> 
+                                <span class="grammar-pp">done</span> the dishes.)
+                            </p>
+                        </div>
+
+                        <div class="flex justify-between items-center pt-1">
+                            <button onclick="checkScenario2()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-xl shadow transition">送出答案</button>
+                            <span id="c2_msg" class="text-xs font-bold"></span>
+                        </div>
+                    </div>
+
+                    <!-- Scenario 3: the workers / speak to their boss (課本第 3 題補全) -->
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-600 text-2xl font-bold shadow-sm">
+                                    👔
+                                </div>
+                                <div>
+                                    <h5 class="font-black text-slate-800">3. the workers / speak to their boss (報告老闆)</h5>
+                                    <span class="text-xs text-rose-600 font-bold bg-rose-50 px-2 py-0.5 rounded-md">狀態：尚未報告 ✕</span>
+                                </div>
+                            </div>
+                            <button onclick="playTTS('Have the workers spoken to their boss yet? No, they haven\'t. They haven\'t spoken to their boss yet.')" class="text-sky-600 hover:text-sky-800 text-sm">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
+                        </div>
+
+                        <div class="text-xs sm:text-sm space-y-2.5 bg-white p-3 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-700">
+                                Q: <span class="grammar-have">Have</span> the workers 
+                                <input id="sc3_pp" type="text" placeholder="speak 的 p.p." class="w-20 border border-sky-300 rounded px-1.5 py-0.5 text-center font-bold text-purple-700 focus:outline-none"> 
+                                to their boss <span class="text-rose-600 font-bold">yet</span>?
+                            </p>
+                            <p class="font-medium text-slate-700">
+                                A: No, they haven't. They haven't <span class="grammar-pp">spoken</span> to their boss 
+                                <input id="c3_input" type="text" placeholder="yet 或 already" class="w-24 border-2 border-sky-300 rounded px-1.5 py-0.5 text-center font-bold text-sky-700 focus:outline-none">.
+                            </p>
+                        </div>
+
+                        <div class="flex justify-between items-center pt-1">
+                            <button onclick="checkScenario3()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-xl shadow transition">送出答案</button>
+                            <span id="c3_msg" class="text-xs font-bold"></span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -518,19 +932,199 @@
             activeBtn.classList.remove('bg-white/70', 'text-slate-600', 'border-transparent');
         }
 
-        const verbList = [
+        /* ==========================================================
+           VERB DATABASE (課本 41 組動詞：14 規則 + 27 不規則完整清單)
+           ========================================================== */
+        const allVerbs = [
+            // 規則動詞 (14)
+            { base: 'cheat', past: 'cheated', pp: 'cheated', mean: '欺騙/作弊', cat: 'regular', rule: '加 -ed' },
+            { base: 'climb', past: 'climbed', pp: 'climbed', mean: '攀爬/登山', cat: 'regular', rule: '加 -ed' },
+            { base: 'exercise', past: 'exercised', pp: 'exercised', mean: '運動', cat: 'regular', rule: '加 -d' },
+            { base: 'join', past: 'joined', pp: 'joined', mean: '參加/加入', cat: 'regular', rule: '加 -ed' },
+            { base: 'live', past: 'lived', pp: 'lived', mean: '居住/生活', cat: 'regular', rule: '加 -d' },
+            { base: 'stay', past: 'stayed', pp: 'stayed', mean: '停留/維持', cat: 'regular', rule: '加 -ed' },
+            { base: 'want', past: 'wanted', pp: 'wanted', mean: '想要', cat: 'regular', rule: '加 -ed' },
+            { base: 'work', past: 'worked', pp: 'worked', mean: '工作/運作', cat: 'regular', rule: '加 -ed' },
+            { base: 'copy', past: 'copied', pp: 'copied', mean: '複製/抄寫', cat: 'regular', rule: '去 y 改 ied' },
+            { base: 'cry', past: 'cried', pp: 'cried', mean: '哭泣', cat: 'regular', rule: '去 y 改 ied' },
+            { base: 'study', past: 'studied', pp: 'studied', mean: '研讀/學習', cat: 'regular', rule: '去 y 改 ied' },
+            { base: 'try', past: 'tried', pp: 'tried', mean: '嘗試/試試', cat: 'regular', rule: '去 y 改 ied' },
+            { base: 'mop', past: 'mopped', pp: 'mopped', mean: '拖地', cat: 'regular', rule: '重複字尾 + ed' },
+            { base: 'plan', past: 'planned', pp: 'planned', mean: '計畫', cat: 'regular', rule: '重複字尾 + ed' },
+
+            // 不規則 A-A-A (3)
+            { base: 'cut', past: 'cut', pp: 'cut', mean: '剪/切', cat: 'AAA', note: '三態同形' },
+            { base: 'put', past: 'put', pp: 'put', mean: '放置', cat: 'AAA', note: '三態同形' },
+            { base: 'read', past: 'read', pp: 'read', mean: '閱讀', cat: 'AAA', note: '[rid] ➔ [rɛd] ➔ [rɛd]' },
+
+            // 不規則 A-B-A (2)
+            { base: 'come', past: 'came', pp: 'come', mean: '來', cat: 'ABA', note: '原形與 p.p. 同形' },
+            { base: 'run', past: 'ran', pp: 'run', mean: '跑步/經營', cat: 'ABA', note: '原形與 p.p. 同形' },
+
+            // 不規則 A-B-B (10)
+            { base: 'build', past: 'built', pp: 'built', mean: '建造', cat: 'ABB', note: '過去式與 p.p. 同形' },
+            { base: 'feed', past: 'fed', pp: 'fed', mean: '餵養', cat: 'ABB', note: '過去式與 p.p. 同形' },
+            { base: 'find', past: 'found', pp: 'found', mean: '尋找/發現', cat: 'ABB', note: '過去式與 p.p. 同形' },
+            { base: 'get', past: 'got', pp: 'got', mean: '獲得/變成', cat: 'ABB', note: '過去式與 p.p. 同形' },
+            { base: 'have', past: 'had', pp: 'had', mean: '擁有/吃', cat: 'ABB', note: '過去式與 p.p. 同形' },
+            { base: 'keep', past: 'kept', pp: 'kept', mean: '保持/保留', cat: 'ABB', note: '過去式與 p.p. 同形' },
+            { base: 'lose', past: 'lost', pp: 'lost', mean: '遺失/輸掉', cat: 'ABB', note: '過去式與 p.p. 同形' },
+            { base: 'make', past: 'made', pp: 'made', mean: '製造/使', cat: 'ABB', note: '過去式與 p.p. 同形' },
+            { base: 'teach', past: 'taught', pp: 'taught', mean: '教導', cat: 'ABB', note: '過去式與 p.p. 同形' },
+            { base: 'think', past: 'thought', pp: 'thought', mean: '想/認為', cat: 'ABB', note: '過去式與 p.p. 同形' },
+
+            // 不規則 A-B-C (12)
+            { base: 'be', past: 'was/were', pp: 'been', mean: '是/在', cat: 'ABC', note: '三態皆不同' },
+            { base: 'begin', past: 'began', pp: 'begun', mean: '開始', cat: 'ABC', note: '三態皆不同' },
+            { base: 'do', past: 'did', pp: 'done', mean: '做', cat: 'ABC', note: '三態皆不同' },
+            { base: 'drive', past: 'drove', pp: 'driven', mean: '駕駛/開車', cat: 'ABC', note: '三態皆不同' },
+            { base: 'eat', past: 'ate', pp: 'eaten', mean: '吃', cat: 'ABC', note: '三態皆不同' },
+            { base: 'go', past: 'went', pp: 'gone', mean: '去', cat: 'ABC', note: '三態皆不同' },
+            { base: 'know', past: 'knew', pp: 'known', mean: '知道/認識', cat: 'ABC', note: '三態皆不同' },
+            { base: 'see', past: 'saw', pp: 'seen', mean: '看見', cat: 'ABC', note: '三態皆不同' },
+            { base: 'speak', past: 'spoke', pp: 'spoken', mean: '說/講', cat: 'ABC', note: '三態皆不同' },
+            { base: 'swim', past: 'swam', pp: 'swum', mean: '游泳', cat: 'ABC', note: '三態皆不同' },
+            { base: 'take', past: 'took', pp: 'taken', mean: '拿/花費', cat: 'ABC', note: '三態皆不同' },
+            { base: 'wake', past: 'woke', pp: 'woken', mean: '醒來', cat: 'ABC', note: '三態皆不同' }
+        ];
+
+        let currentVerbCat = 'all';
+
+        function renderVerbEncyclopedia(list) {
+            const grid = document.getElementById('verbEncyclopediaGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            if (list.length === 0) {
+                grid.innerHTML = '<div class="col-span-full py-8 text-center text-slate-400 text-sm">找不到符合的動詞喔！</div>';
+                return;
+            }
+
+            list.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-50 hover:bg-white p-3 rounded-2xl border border-slate-200 hover:border-indigo-300 hover:shadow-md transition space-y-1 relative group";
+                
+                let badgeClass = "bg-slate-200 text-slate-700";
+                let tagText = item.cat.toUpperCase();
+                if (item.cat === 'regular') { badgeClass = "bg-sky-100 text-sky-800"; tagText = item.rule || "規則"; }
+                if (item.cat === 'AAA') { badgeClass = "bg-emerald-100 text-emerald-800"; }
+                if (item.cat === 'ABA') { badgeClass = "bg-amber-100 text-amber-800"; }
+                if (item.cat === 'ABB') { badgeClass = "bg-purple-100 text-purple-800"; }
+                if (item.cat === 'ABC') { badgeClass = "bg-pink-100 text-pink-800"; }
+
+                card.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="font-extrabold text-slate-800 text-sm">${item.base}</span>
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-md ${badgeClass}">${tagText}</span>
+                    </div>
+                    <div class="text-[11px] text-slate-500 font-mono">
+                        ${item.past} ➔ <strong class="text-purple-600 font-bold">${item.pp}</strong>
+                    </div>
+                    <div class="flex items-center justify-between pt-1 border-t border-slate-100 text-[11px] text-slate-400">
+                        <span>${item.mean} ${item.note ? `<span class="text-[10px] text-indigo-500 font-sans">(${item.note})</span>` : ''}</span>
+                        <button onclick="playTTS('${item.base}, ${item.past}, ${item.pp}')" class="text-slate-400 hover:text-sky-600 p-1" title="發音三態">
+                            <i class="fa-solid fa-volume-high text-xs"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterVerbCategory(cat) {
+            currentVerbCat = cat;
+            document.querySelectorAll('.verb-cat-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-indigo-600', 'text-white', 'shadow');
+                btn.classList.add('bg-slate-100', 'text-slate-700');
+            });
+            if (event && event.target) {
+                event.target.classList.add('active', 'bg-indigo-600', 'text-white', 'shadow');
+                event.target.classList.remove('bg-slate-100', 'text-slate-700');
+            }
+
+            searchVerbs();
+        }
+
+        function searchVerbs() {
+            const searchInput = document.getElementById('verbSearchInput');
+            const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+            let filtered = allVerbs;
+
+            if (currentVerbCat !== 'all') {
+                filtered = filtered.filter(v => v.cat === currentVerbCat);
+            }
+
+            if (query) {
+                filtered = filtered.filter(v => 
+                    v.base.toLowerCase().includes(query) || 
+                    v.past.toLowerCase().includes(query) || 
+                    v.pp.toLowerCase().includes(query) ||
+                    v.mean.includes(query)
+                );
+            }
+
+            renderVerbEncyclopedia(filtered);
+        }
+
+        /* ==========================================================
+           WRITE EXERCISE (課本手寫動詞過去分詞測驗)
+           ========================================================== */
+        const writeTargets = ['run', 'read', 'kept', 'gone', 'driven', 'begun'];
+
+        function checkWriteExercise() {
+            let correctCount = 0;
+            writeTargets.forEach((correctVal, i) => {
+                const input = document.getElementById(`write_${i}`);
+                const msg = document.getElementById(`write_msg_${i}`);
+                if (!input || !msg) return;
+                const userVal = input.value.trim().toLowerCase();
+
+                if (userVal === correctVal) {
+                    correctCount++;
+                    input.className = "w-28 px-2 py-1 text-center font-bold text-sm border-2 border-emerald-500 bg-emerald-50 text-emerald-800 rounded-xl";
+                    msg.innerHTML = '<i class="fa-solid fa-check text-emerald-600"></i>';
+                } else {
+                    input.className = "w-28 px-2 py-1 text-center font-bold text-sm border-2 border-rose-400 bg-rose-50 text-rose-800 rounded-xl";
+                    msg.innerHTML = '<i class="fa-solid fa-xmark text-rose-500"></i>';
+                }
+            });
+
+            const overall = document.getElementById('writeOverallFeedback');
+            if (overall) {
+                if (correctCount === 6) {
+                    overall.className = "mt-4 text-center font-black text-emerald-600 text-sm";
+                    overall.innerHTML = "🎉 太優秀了！6 題全部正確！獲得 +30 星星！";
+                    playSound('correct');
+                    confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
+                    addScore(30);
+                } else {
+                    overall.className = "mt-4 text-center font-bold text-rose-500 text-xs";
+                    overall.innerHTML = `答對了 ${correctCount}/6 題，紅色標註的答案再想想看喔！（小提示：read 的 p.p. 也是 read 喔！）`;
+                    playSound('wrong');
+                }
+            }
+        }
+
+        /* ==========================================================
+           VERB QUIZ MATCHING GAME (三選一小測驗)
+           ========================================================== */
+        const verbQuizItems = [
             { base: 'run (跑步)', options: ['ran', 'run', 'running'], correct: 'run', type: '不規則 A-B-A' },
             { base: 'read (閱讀)', options: ['read', 'red', 'reading'], correct: 'read', type: '不規則 A-A-A' },
             { base: 'keep (保持)', options: ['keeped', 'kept', 'keeping'], correct: 'kept', type: '不規則 A-B-B' },
             { base: 'go (去)', options: ['went', 'gone', 'goed'], correct: 'gone', type: '不規則 A-B-C' },
             { base: 'drive (開車)', options: ['drove', 'driven', 'drived'], correct: 'driven', type: '不規則 A-B-C' },
             { base: 'begin (開始)', options: ['began', 'begun', 'beginned'], correct: 'begun', type: '不規則 A-B-C' },
+            { base: 'swim (游泳)', options: ['swam', 'swum', 'swimming'], correct: 'swum', type: '不規則 A-B-C' },
+            { base: 'feed (餵食)', options: ['fed', 'feeded', 'food'], correct: 'fed', type: '不規則 A-B-B' },
+            { base: 'wake (醒來)', options: ['woke', 'woken', 'waked'], correct: 'woken', type: '不規則 A-B-C' }
         ];
 
         function initVerbGrid() {
             const grid = document.getElementById('verbQuizGrid');
+            if (!grid) return;
             grid.innerHTML = '';
-            verbList.forEach((item, index) => {
+            verbQuizItems.forEach((item, index) => {
                 const card = document.createElement('div');
                 card.className = "bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3";
                 card.innerHTML = `
@@ -564,6 +1158,9 @@
             }
         }
 
+        /* ==========================================================
+           FOCUS A: SENTENCE BUILDERS (Kate, Jim, Amy & Ben)
+           ========================================================== */
         const sentenceConfigs = {
             'A1': {
                 target: ['Yes,', 'she', 'has.', 'She', 'has', 'fed', 'a cow', 'many times.'],
@@ -572,22 +1169,26 @@
             'A2': {
                 target: ['No,', 'he', 'hasn\'t.', 'He', 'has', 'never', 'tried', 'frog meat.'],
                 bank: ['No,', 'he', 'hasn\'t.', 'He', 'has', 'have', 'never', 'tried', 'frog meat.', 'once.'],
+            },
+            'A3': {
+                target: ['Yes,', 'they', 'have.', 'They', 'have', 'swum', 'in the sea', 'twice.'],
+                bank: ['Yes,', 'they', 'have.', 'They', 'has', 'swum', 'in the sea', 'twice.', 'never', 'swam'],
             }
         };
 
-        const currentAnswers = { A1: [], A2: [] };
+        const currentAnswers = { A1: [], A2: [], A3: [] };
 
         function initSentenceBuilders() {
-            ['A1', 'A2'].forEach(key => {
+            ['A1', 'A2', 'A3'].forEach(key => {
                 const config = sentenceConfigs[key];
                 const bankEl = document.getElementById(`wordBank${key}`);
+                if (!bankEl) return;
                 bankEl.innerHTML = '';
                 
-                // Shuffle bank
                 const shuffled = [...config.bank].sort(() => Math.random() - 0.5);
                 shuffled.forEach(word => {
                     const btn = document.createElement('button');
-                    btn.className = "word-chip bg-sky-100 hover:bg-sky-200 text-sky-800 font-bold px-3 py-1.5 rounded-xl text-sm shadow-sm";
+                    btn.className = "word-chip bg-sky-100 hover:bg-sky-200 text-sky-800 font-bold px-3 py-1.5 rounded-xl text-xs sm:text-sm shadow-sm";
                     btn.innerText = word;
                     btn.onclick = () => addWordToSentence(key, word, btn);
                     bankEl.appendChild(btn);
@@ -603,6 +1204,7 @@
 
         function renderSentenceArea(key) {
             const area = document.getElementById(`sentenceBuilder${key}`);
+            if (!area) return;
             if (currentAnswers[key].length === 0) {
                 area.innerHTML = '<span class="text-slate-400 text-xs italic pointer-events-none">請由下方點擊單字放到這裡...</span>';
                 return;
@@ -610,8 +1212,8 @@
             area.innerHTML = '';
             currentAnswers[key].forEach((word, idx) => {
                 const chip = document.createElement('span');
-                chip.className = "bg-indigo-600 text-white font-bold px-3 py-1 rounded-lg text-sm shadow flex items-center space-x-1 cursor-pointer";
-                chip.innerHTML = `<span>${word}</span> <i class="fa-solid fa-xmark text-xs opacity-70"></i>`;
+                chip.className = "bg-indigo-600 text-white font-bold px-2.5 py-1 rounded-lg text-xs sm:text-sm shadow flex items-center space-x-1 cursor-pointer hover:bg-indigo-700 transition";
+                chip.innerHTML = `<span>${word}</span> <i class="fa-solid fa-xmark text-[10px] opacity-70"></i>`;
                 chip.onclick = () => removeWordFromSentence(key, idx, word);
                 area.appendChild(chip);
             });
@@ -621,7 +1223,6 @@
             currentAnswers[key].splice(idx, 1);
             renderSentenceArea(key);
             
-            // Re-enable in bank
             const bankBtns = document.getElementById(`wordBank${key}`).querySelectorAll('button');
             for (let btn of bankBtns) {
                 if (btn.innerText === word && btn.classList.contains('pointer-events-none')) {
@@ -637,18 +1238,36 @@
             const feedback = document.getElementById(`feedback${key}`);
 
             if (userArr.join(' ') === targetArr.join(' ')) {
-                feedback.className = "text-sm font-bold text-emerald-600";
+                feedback.className = "text-xs sm:text-sm font-bold text-emerald-600";
                 feedback.innerText = "🎉 完全正確！太厲害了！";
                 playSound('correct');
                 confetti({ particleCount: 40, spread: 60, origin: { y: 0.8 } });
                 addScore(15);
             } else {
-                feedback.className = "text-sm font-bold text-rose-500";
+                feedback.className = "text-xs sm:text-sm font-bold text-rose-500";
                 feedback.innerText = "❌ 順序或單字不太對，再試看看！";
                 playSound('wrong');
             }
         }
 
+        /* Personal Answer Helper */
+        function setPersonalAnswer(qNum, sentence) {
+            const box = document.getElementById(`personalAnswerBox${qNum}`);
+            const textEl = document.getElementById(`personalAnswerText${qNum}`);
+            const btn = document.getElementById(`personalTTSBtn${qNum}`);
+            
+            if (box && textEl && btn) {
+                box.classList.remove('hidden');
+                textEl.innerText = sentence;
+                btn.onclick = () => playTTS(sentence);
+                playSound('correct');
+                addScore(5);
+            }
+        }
+
+        /* ==========================================================
+           FOCUS B: SORTING GAME (for vs since)
+           ========================================================== */
         const sortingItems = [
             { text: 'ten years (10年)', type: 'for' },
             { text: 'last month (上個月)', type: 'since' },
@@ -656,10 +1275,13 @@
             { text: '2 p.m. (下午2點)', type: 'since' },
             { text: 'a week (一個星期)', type: 'for' },
             { text: 'they were young (他們年輕時)', type: 'since' },
+            { text: 'two hours (兩小時)', type: 'for' },
+            { text: 'yesterday (昨天)', type: 'since' }
         ];
 
         function initSortingGame() {
             const pool = document.getElementById('sortingItemPool');
+            if (!pool) return;
             pool.innerHTML = '';
             sortingItems.forEach((item, idx) => {
                 const chip = document.createElement('div');
@@ -707,17 +1329,65 @@
             }
         }
 
-        function checkInput(inputId, correctVal, msgId) {
-            const val = document.getElementById(inputId).value.trim().toLowerCase();
-            const msg = document.getElementById(msgId);
-            if (val === correctVal.toLowerCase()) {
+        /* ==========================================================
+           FOCUS C: SCENARIOS 1, 2, 3 CHECKS (already vs yet)
+           ========================================================== */
+        function checkScenario1() {
+            const pp = document.getElementById('sc1_pp').value.trim().toLowerCase();
+            const input = document.getElementById('c1_input').value.trim().toLowerCase();
+            const msg = document.getElementById('c1_msg');
+
+            const isPpOk = (pp === 'found');
+            const isWordOk = (input === 'yet');
+
+            if (isPpOk && isWordOk) {
                 msg.className = "text-xs font-bold text-emerald-600";
-                msg.innerText = "✓ 完全正確！";
+                msg.innerText = "✓ 完全正確！(found / yet)";
                 playSound('correct');
                 addScore(10);
             } else {
                 msg.className = "text-xs font-bold text-rose-500";
-                msg.innerText = `✕ 再想想，答案是 ${correctVal}`;
+                msg.innerText = `✕ 答錯囉！提示：find 的 p.p. 是 found，否定句句尾用 yet！`;
+                playSound('wrong');
+            }
+        }
+
+        function checkScenario2() {
+            const pp = document.getElementById('sc2_pp').value.trim().toLowerCase();
+            const input = document.getElementById('c2_input').value.trim().toLowerCase();
+            const msg = document.getElementById('c2_msg');
+
+            const isPpOk = (pp === 'done');
+            const isWordOk = (input === 'already');
+
+            if (isPpOk && isWordOk) {
+                msg.className = "text-xs font-bold text-emerald-600";
+                msg.innerText = "✓ 完全正確！(done / already)";
+                playSound('correct');
+                addScore(10);
+            } else {
+                msg.className = "text-xs font-bold text-rose-500";
+                msg.innerText = `✕ 答錯囉！提示：do 的 p.p. 是 done，肯定句放 already！`;
+                playSound('wrong');
+            }
+        }
+
+        function checkScenario3() {
+            const pp = document.getElementById('sc3_pp').value.trim().toLowerCase();
+            const input = document.getElementById('c3_input').value.trim().toLowerCase();
+            const msg = document.getElementById('c3_msg');
+
+            const isPpOk = (pp === 'spoken');
+            const isWordOk = (input === 'yet');
+
+            if (isPpOk && isWordOk) {
+                msg.className = "text-xs font-bold text-emerald-600";
+                msg.innerText = "✓ 完全正確！(spoken / yet)";
+                playSound('correct');
+                addScore(10);
+            } else {
+                msg.className = "text-xs font-bold text-rose-500";
+                msg.innerText = `✕ 答錯囉！提示：speak 的 p.p. 是 spoken，否定句句尾用 yet！`;
                 playSound('wrong');
             }
         }
@@ -969,6 +1639,7 @@
         }
 
         window.onload = function() {
+            renderVerbEncyclopedia(allVerbs);
             initVerbGrid();
             initSentenceBuilders();
             initSortingGame();

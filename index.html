@@ -81,6 +81,8 @@
             background-size: 24px 24px;
         }
     </style>
+    <!-- Audio Guard 課堂音效防亂按 (5秒冷卻鎖定) -->
+    <script src="audio-guard.js"></script>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans bg-grid-pattern selection:bg-amber-400 selection:text-slate-950 relative overflow-x-hidden">
 
@@ -313,7 +315,7 @@
                     <div>
                         <div class="flex items-center justify-between text-xs text-amber-400 font-bold mb-2">
                             <span>🌟 今日激勵金句 (Quote of the Day)</span>
-                            <button onclick="speakQuote()" class="text-xs text-slate-300 hover:text-white bg-slate-800 px-2 py-0.5 rounded-md flex items-center gap-1">
+                            <button id="speakQuoteBtn" onclick="speakQuote(this)" class="speak-btn text-xs text-slate-300 hover:text-white bg-slate-800 px-2 py-0.5 rounded-md flex items-center gap-1 transition" title="朗讀 (5秒冷卻)">
                                 <i class="fa-solid fa-volume-high text-amber-400"></i> 朗讀
                             </button>
                         </div>
@@ -361,7 +363,6 @@
     <!-- INTERACTIVE SCRIPTS -->
     <script>
         // State
-        let audioEnabled = true;
         const quotes = [
             { en: "Practice makes perfect. Small steps lead to big achievements!", zh: "熟能生巧。每一小步都能累積巨大的成就！" },
             { en: "A journey of a thousand miles begins with a single step.", zh: "千里之行，始於足下。" },
@@ -398,49 +399,21 @@
             refreshDailyWarmup();
         });
 
-        // Speech synthesis for Quote
-        function speakQuote() {
+        // Speech synthesis for Quote (整合 AudioGuard 5 秒冷卻鎖定)
+        function speakQuote(btn) {
             const quoteText = quotes[currentQuoteIdx].en;
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(quoteText);
-                utterance.lang = 'en-US';
-                utterance.rate = 0.9;
-                window.speechSynthesis.speak(utterance);
-            }
+            const targetBtn = btn || document.getElementById('speakQuoteBtn');
+            AudioGuard.speak(quoteText, { button: targetBtn });
         }
 
-        // Toggle Audio Effects
+        // Toggle Audio Effects (切換課堂三段模式)
         function toggleAudioFx() {
-            audioEnabled = !audioEnabled;
-            const icon = document.getElementById('audioIcon');
-            const btnText = document.querySelector('#audioFxBtn span');
-            if (audioEnabled) {
-                icon.className = 'fa-solid fa-volume-high text-amber-400';
-                if (btnText) btnText.innerText = '音效開';
-                playBeep(600, 0.1);
-            } else {
-                icon.className = 'fa-solid fa-volume-xmark text-slate-500';
-                if (btnText) btnText.innerText = '音效關';
-            }
+            AudioGuard.cycleMode();
         }
 
-        // Simple Web Audio API Beep
+        // Simple Web Audio API Beep (由 AudioGuard 單例與音量限制器託管)
         function playBeep(freq = 520, duration = 0.15) {
-            if (!audioEnabled) return;
-            try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(freq, ctx.currentTime);
-                gain.gain.setValueAtTime(0.08, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                osc.start();
-                osc.stop(ctx.currentTime + duration);
-            } catch(e) {}
+            AudioGuard.playSFX('beep');
         }
 
         // Refresh Daily Warmup

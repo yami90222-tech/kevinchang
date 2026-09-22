@@ -393,12 +393,12 @@
         }
 
         function speakText(text) {
-            if (!('speechSynthesis' in window)) return;
-            window.speechSynthesis.cancel();
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'en-US';
-            utterance.rate = 0.95;
-            window.speechSynthesis.speak(utterance);
+            if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') return;
+            const synth = window.speechSynthesis;
+            const utterance = new SpeechSynthesisUtterance(String(text ?? ''));
+            utterance.lang = 'en-US'; utterance.rate = 0.95;
+            synth.cancel();
+            setTimeout(() => { try { synth.resume(); synth.speak(utterance); } catch (err) { console.error(err); } }, 120);
         }
 
         const examQuestions = [
@@ -516,5 +516,36 @@
             renderExam();
         });
     </script>
+
+<script>
+/* 課堂按鈕防連點：任一按鈕按下後，全頁按鈕鎖定 5 秒 */
+(function () {
+  let locked = false, timer = null, saved = new Map();
+  document.addEventListener('click', function (event) {
+    const button = event.target.closest && event.target.closest('button');
+    if (!button || locked || button.disabled) {
+      if (locked) { event.preventDefault(); event.stopImmediatePropagation(); }
+      return;
+    }
+    // Allow the first click to execute, then lock every button.
+    locked = true;
+    document.querySelectorAll('button').forEach(btn => {
+      saved.set(btn, btn.disabled);
+      btn.disabled = true;
+      btn.classList.add('opacity-50', 'cursor-not-allowed');
+    });
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      document.querySelectorAll('button').forEach(btn => {
+        btn.disabled = saved.has(btn) ? saved.get(btn) : false;
+        btn.classList.remove('opacity-50', 'cursor-not-allowed');
+      });
+      saved.clear(); locked = false;
+    }, 5000);
+  }, true);
+})();
+</script>
+
 </body>
 </html>
+

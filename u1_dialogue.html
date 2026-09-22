@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 1 English RPG: Healthy Habits & Dieting 英語大闖關</title>
+    <title>Unit 1 English RPG: Healthy Habits & Dieting ?梯?憭折???/title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -77,9 +77,9 @@
             
             <!-- Logo & Level Title -->
             <div class="flex items-center gap-3">
-                <a href="index.html" title="返回學習首頁" class="bg-slate-700/80 hover:bg-amber-500 hover:text-slate-950 text-amber-300 p-2.5 rounded-2xl border border-slate-600 shadow-md transition-all duration-200 flex items-center gap-1.5 font-bold text-xs md:text-sm">
+                <a href="index.html" title="餈?摮貊?擐?" class="bg-slate-700/80 hover:bg-amber-500 hover:text-slate-950 text-amber-300 p-2.5 rounded-2xl border border-slate-600 shadow-md transition-all duration-200 flex items-center gap-1.5 font-bold text-xs md:text-sm">
                     <i class="fa-solid fa-house"></i>
-                    <span class="hidden sm:inline">學習首頁</span>
+                    <span class="hidden sm:inline">摮貊?擐?</span>
                 </a>
                 <div class="relative bg-gradient-to-tr from-amber-500 to-yellow-400 p-2.5 rounded-2xl shadow-lg animate-float text-slate-900">
                     <i class="fa-solid fa-gamepad text-2xl"></i>
@@ -88,11 +88,10 @@
                 <div>
                     <div class="flex items-center gap-2">
                         <span class="text-xs bg-yellow-400/20 text-yellow-300 font-bold px-2 py-0.5 rounded-md uppercase tracking-wider font-fun">Unit 1 Dialogue</span>
-                        <span id="userRank" class="text-xs bg-purple-500/30 text-purple-300 font-bold px-2 py-0.5 rounded-md font-fun">英勇初學者</span>
+                        <span id="userRank" class="text-xs bg-purple-500/30 text-purple-300 font-bold px-2 py-0.5 rounded-md font-fun">?勗??飛??/span>
                     </div>
                     <h1 class="text-lg md:text-xl font-black font-fun tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-orange-400 to-pink-400">
-                        Healthy Habits & Dieting 英語大冒險
-                    </h1>
+                        Healthy Habits & Dieting ?梯?憭批???                    </h1>
                 </div>
             </div>
 
@@ -101,7 +100,7 @@
                 <!-- XP Bar -->
                 <div class="flex flex-col w-28 md:w-36">
                     <div class="flex justify-between text-[11px] font-bold text-slate-300 mb-1">
-                        <span>XP 經驗值</span>
+                        <span>XP 蝬???/span>
                         <span id="xpText" class="text-yellow-400">0 / 100</span>
                     </div>
                     <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden border border-slate-700">
@@ -127,19 +126,19 @@
         <nav class="bg-slate-900/80 px-4 border-t border-slate-800">
             <div class="max-w-6xl mx-auto flex overflow-x-auto custom-scrollbar no-scrollbar gap-2 py-2 text-xs md:text-sm font-bold">
                 <button onclick="switchTab('dialogue')" id="tab-dialogue" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-600 text-slate-950 font-black shadow-lg whitespace-nowrap transition">
-                    <i class="fa-solid fa-book-open text-base"></i> 課文冒險 (Dialogue)
+                    <i class="fa-solid fa-book-open text-base"></i> 隤脫?? (Dialogue)
                 </button>
                 <button onclick="switchTab('roleplay')" id="tab-roleplay" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
-                    <i class="fa-solid fa-microphone text-base text-pink-400"></i> 角色配對大挑戰 (Dubbing)
+                    <i class="fa-solid fa-microphone text-base text-pink-400"></i> 閫??憭扳???(Dubbing)
                 </button>
                 <button onclick="switchTab('games')" id="tab-games" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
-                    <i class="fa-solid fa-gamepad text-base text-purple-400"></i> 遊戲大亂鬥 (Mini Games)
+                    <i class="fa-solid fa-gamepad text-base text-purple-400"></i> ?憭找?擛?(Mini Games)
                 </button>
                 <button onclick="switchTab('vocab')" id="tab-vocab" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
-                    <i class="fa-solid fa-spell-check text-base text-sky-400"></i> 單字寶典 (Vocab)
+                    <i class="fa-solid fa-spell-check text-base text-sky-400"></i> ?桀?撖嗅 (Vocab)
                 </button>
                 <button onclick="switchTab('verbs')" id="tab-verbs" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 whitespace-nowrap transition">
-                    <i class="fa-solid fa-wand-magic-sparkles text-base text-emerald-400"></i> 動詞三態變幻 (Verbs)
+                    <i class="fa-solid fa-wand-magic-sparkles text-base text-emerald-400"></i> ??銝?霈劂 (Verbs)
                 </button>
             </div>
         </nav>
@@ -155,28 +154,28 @@
                 <div class="flex items-center gap-3">
                     <button id="playAllBtn" onclick="togglePlayAll()" class="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-extrabold px-5 py-2.5 rounded-2xl shadow-lg game-btn-shadow flex items-center gap-2">
                         <i id="playAllIcon" class="fa-solid fa-play"></i>
-                        <span id="playAllText">播放全課對話 (+20 XP)</span>
+                        <span id="playAllText">?剜?刻玨撠店 (+20 XP)</span>
                     </button>
                     <button onclick="stopSpeech()" class="bg-slate-700 text-slate-300 hover:bg-slate-600 font-bold px-4 py-2.5 rounded-2xl transition flex items-center gap-1.5 text-xs">
-                        <i class="fa-solid fa-square"></i> 停止
+                        <i class="fa-solid fa-square"></i> ?迫
                     </button>
                 </div>
 
                 <div class="flex flex-wrap items-center gap-3 text-xs md:text-sm font-semibold">
                     <!-- Speed toggle -->
                     <div class="flex items-center bg-slate-900/80 p-1 rounded-xl border border-slate-700">
-                        <button onclick="setTTSRate(0.8, this)" class="rate-btn text-slate-400 px-2.5 py-1 rounded-lg transition font-medium">0.8x 慢速</button>
-                        <button onclick="setTTSRate(1.0, this)" class="rate-btn bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-lg transition shadow">1.0x 標準</button>
+                        <button onclick="setTTSRate(0.8, this)" class="rate-btn text-slate-400 px-2.5 py-1 rounded-lg transition font-medium">0.8x ?ａ?/button>
+                        <button onclick="setTTSRate(1.0, this)" class="rate-btn bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-lg transition shadow">1.0x 璅?</button>
                     </div>
 
                     <label class="flex items-center gap-2 cursor-pointer bg-slate-900/60 hover:bg-slate-900 px-3 py-2 rounded-xl border border-slate-700 transition">
                         <input type="checkbox" id="toggleChinese" checked onchange="toggleTranslation()" class="accent-amber-400 w-4 h-4 rounded">
-                        <span class="text-slate-300">中文對照</span>
+                        <span class="text-slate-300">銝剜?撠</span>
                     </label>
 
                     <label class="flex items-center gap-2 cursor-pointer bg-slate-900/60 hover:bg-slate-900 px-3 py-2 rounded-xl border border-slate-700 transition">
                         <input type="checkbox" id="toggleGrammar" checked onchange="toggleGrammarHighlights()" class="accent-amber-400 w-4 h-4 rounded">
-                        <span class="text-slate-300">句型文法解析</span>
+                        <span class="text-slate-300">?亙???閫??</span>
                     </label>
                 </div>
             </div>
@@ -192,33 +191,33 @@
             <div class="bg-gradient-to-r from-pink-600 via-rose-600 to-purple-600 rounded-3xl p-6 text-white shadow-xl relative overflow-hidden">
                 <div class="relative z-10">
                     <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider">Karaoke & Voice Challenge</span>
-                    <h2 class="text-2xl md:text-3xl font-black font-fun mt-2">🎙️ 課文角色配對大挑戰</h2>
-                    <p class="text-pink-100 text-sm mt-1">選擇你要擔綱的角色，隨著英文提示朗讀句子，贏取雙倍 XP 與星等評分！</p>
+                    <h2 class="text-2xl md:text-3xl font-black font-fun mt-2">??儭?隤脫?閫??憭扳???/h2>
+                    <p class="text-pink-100 text-sm mt-1">?豢?雿??雇???莎??刻??望??內???亙?嚗?????XP ??蝑???</p>
                 </div>
-                <div class="absolute -right-4 -bottom-6 text-8xl opacity-20 pointer-events-none">🎭</div>
+                <div class="absolute -right-4 -bottom-6 text-8xl opacity-20 pointer-events-none">?</div>
             </div>
 
             <!-- Character Chooser -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <button onclick="selectRoleplayCharacter('Ela')" id="roleBtn-Ela" class="p-5 rounded-3xl border-2 border-pink-500 bg-slate-800/80 hover:bg-pink-950/30 transition flex items-center gap-4 text-left group relative overflow-hidden">
                     <div class="w-16 h-16 rounded-2xl bg-pink-500/20 text-4xl flex items-center justify-center shrink-0 border border-pink-400/30 group-hover:scale-110 transition">
-                        👩
+                        ?
                     </div>
                     <div>
                         <div class="text-xs text-pink-400 font-bold uppercase font-fun">Character 1</div>
-                        <h3 class="text-xl font-bold text-white font-fun">Ela (愛拉)</h3>
-                        <p class="text-xs text-slate-400 mt-1">正在減重，只吃一根香蕉卻肚子餓的不舒服國中生。</p>
+                        <h3 class="text-xl font-bold text-white font-fun">Ela (??)</h3>
+                        <p class="text-xs text-slate-400 mt-1">甇?皜?嚗???寥????擗?銝???銝剔???/p>
                     </div>
                 </button>
 
                 <button onclick="selectRoleplayCharacter('Cody')" id="roleBtn-Cody" class="p-5 rounded-3xl border-2 border-slate-700 bg-slate-800/80 hover:bg-sky-950/30 transition flex items-center gap-4 text-left group relative overflow-hidden">
                     <div class="w-16 h-16 rounded-2xl bg-sky-500/20 text-4xl flex items-center justify-center shrink-0 border border-sky-400/30 group-hover:scale-110 transition">
-                        👦
+                        ?
                     </div>
                     <div>
                         <div class="text-xs text-sky-400 font-bold uppercase font-fun">Character 2</div>
-                        <h3 class="text-xl font-bold text-white font-fun">Cody (科迪)</h3>
-                        <p class="text-xs text-slate-400 mt-1">給予健康飲食與運動建議的热心同學。</p>
+                        <h3 class="text-xl font-bold text-white font-fun">Cody (蝘羲)</h3>
+                        <p class="text-xs text-slate-400 mt-1">蝯虫??亙熒憌脤????遣霅啁??剖??飛??/p>
                     </div>
                 </button>
             </div>
@@ -227,32 +226,29 @@
             <div class="bg-slate-800/90 rounded-3xl p-6 border border-slate-700 shadow-2xl space-y-6">
                 <div class="flex justify-between items-center border-b border-slate-700 pb-4">
                     <div class="flex items-center gap-2">
-                        <span class="text-xs bg-slate-700 text-slate-300 font-bold px-3 py-1 rounded-full">你飾演的角色：</span>
-                        <span id="activeRoleName" class="text-lg font-black text-pink-400 font-fun">Ela 👩</span>
+                        <span class="text-xs bg-slate-700 text-slate-300 font-bold px-3 py-1 rounded-full">雿ˇ瞍?閫嚗?/span>
+                        <span id="activeRoleName" class="text-lg font-black text-pink-400 font-fun">Ela ?</span>
                     </div>
                     <div class="text-xs text-yellow-400 font-bold flex items-center gap-1">
-                        <i class="fa-solid fa-star"></i> 進度：<span id="roleplayProgress">0 / 10 句</span>
+                        <i class="fa-solid fa-star"></i> ?脣漲嚗?span id="roleplayProgress">0 / 10 ??/span>
                     </div>
                 </div>
 
                 <!-- Current Roleplay Cue Card -->
                 <div id="roleplayCard" class="bg-slate-900 rounded-2xl p-6 border-2 border-slate-700 space-y-4 text-center">
                     <div id="roleSpeakerBadge" class="inline-block bg-pink-500/20 text-pink-300 font-bold px-3 py-1 rounded-full text-xs">
-                        換你開口唸這一句囉！
-                    </div>
+                        ????賊??亙?嚗?                    </div>
                     <div id="roleEnglishCue" class="text-xl md:text-2xl font-bold text-yellow-300 font-fun leading-relaxed">
                         "I don't feel well. I'm so hungry."
                     </div>
                     <p id="roleChineseCue" class="text-sm text-slate-400">
-                        「我覺得不太舒服。我好餓。」
-                    </p>
+                        ??閬箏?銝云????憟賡???                    </p>
 
                     <div class="pt-4 flex flex-wrap justify-center items-center gap-3">
                         <button onclick="playRoleplayPartnerAudio()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2">
-                            <i class="fa-solid fa-volume-high text-yellow-400"></i> 聽示範發音
-                        </button>
+                            <i class="fa-solid fa-volume-high text-yellow-400"></i> ?賜內蝭??                        </button>
                         <button onclick="recordAndValidateRoleplayLine()" class="bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-400 hover:to-rose-500 text-white px-6 py-3 rounded-xl font-black text-sm shadow-lg game-btn-shadow flex items-center gap-2">
-                            <i class="fa-solid fa-check-circle"></i> 我唸完了！大聲挑戰 (+10 XP)
+                            <i class="fa-solid fa-check-circle"></i> ?摰?嚗之?脫???(+10 XP)
                         </button>
                     </div>
                 </div>
@@ -264,47 +260,47 @@
             <div class="bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 rounded-3xl p-6 text-white shadow-xl flex justify-between items-center">
                 <div>
                     <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black uppercase">Mini-Games Hub</span>
-                    <h2 class="text-2xl md:text-3xl font-black font-fun mt-2">🎮 課文語文大亂鬥</h2>
-                    <p class="text-purple-100 text-sm mt-1">邊玩遊戲邊複習英文句型、單字與健康飲食概念！</p>
+                    <h2 class="text-2xl md:text-3xl font-black font-fun mt-2">? 隤脫?隤?憭找?擛?/h2>
+                    <p class="text-purple-100 text-sm mt-1">????蝧??摮??亙熒憌脤?璁艙嚗?/p>
                 </div>
-                <div class="text-6xl hidden sm:block">👾</div>
+                <div class="text-6xl hidden sm:block">?</div>
             </div>
 
             <!-- Game Mode Selector -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <button onclick="startMiniGame('scramble')" class="bg-slate-800/90 border-2 border-purple-500/50 hover:border-purple-400 p-5 rounded-3xl text-left space-y-3 hover:bg-purple-950/20 transition group">
-                    <div class="w-12 h-12 bg-purple-500/20 rounded-2xl flex items-center justify-center text-purple-300 text-2xl group-hover:scale-110 transition">🧩</div>
+                    <div class="w-12 h-12 bg-purple-500/20 rounded-2xl flex items-center justify-center text-purple-300 text-2xl group-hover:scale-110 transition">?妝</div>
                     <div>
-                        <h3 class="font-bold text-white text-lg font-fun">1. 句型重組打怪</h3>
-                        <p class="text-xs text-slate-400 mt-1">把散落的單字拼湊成正確課文句型！</p>
+                        <h3 class="font-bold text-white text-lg font-fun">1. ?亙?????/h3>
+                        <p class="text-xs text-slate-400 mt-1">??賜??桀??潭??迤蝣箄玨???</p>
                     </div>
-                    <span class="inline-block text-xs text-purple-400 font-bold">點擊開始 →</span>
+                    <span class="inline-block text-xs text-purple-400 font-bold">暺??? ??/span>
                 </button>
 
                 <button onclick="startMiniGame('memory')" class="bg-slate-800/90 border-2 border-amber-500/50 hover:border-amber-400 p-5 rounded-3xl text-left space-y-3 hover:bg-amber-950/20 transition group">
-                    <div class="w-12 h-12 bg-amber-500/20 rounded-2xl flex items-center justify-center text-amber-300 text-2xl group-hover:scale-110 transition">🃏</div>
+                    <div class="w-12 h-12 bg-amber-500/20 rounded-2xl flex items-center justify-center text-amber-300 text-2xl group-hover:scale-110 transition">??</div>
                     <div>
-                        <h3 class="font-bold text-white text-lg font-fun">2. 單字翻牌配對</h3>
-                        <p class="text-xs text-slate-400 mt-1">考驗記憶力！將英文單字與中文翻譯對應成功。</p>
+                        <h3 class="font-bold text-white text-lg font-fun">2. ?桀?蝧餌???</h3>
+                        <p class="text-xs text-slate-400 mt-1">??閮??撠?摮?銝剜?蝧餉陌撠?????/p>
                     </div>
-                    <span class="inline-block text-xs text-amber-400 font-bold">點擊開始 →</span>
+                    <span class="inline-block text-xs text-amber-400 font-bold">暺??? ??/span>
                 </button>
 
                 <button onclick="startMiniGame('dietSim')" class="bg-slate-800/90 border-2 border-emerald-500/50 hover:border-emerald-400 p-5 rounded-3xl text-left space-y-3 hover:bg-emerald-950/20 transition group">
-                    <div class="w-12 h-12 bg-emerald-500/20 rounded-2xl flex items-center justify-center text-emerald-300 text-2xl group-hover:scale-110 transition">🥗</div>
+                    <div class="w-12 h-12 bg-emerald-500/20 rounded-2xl flex items-center justify-center text-emerald-300 text-2xl group-hover:scale-110 transition">??</div>
                     <div>
-                        <h3 class="font-bold text-white text-lg font-fun">3. Ela 的健康生活大作戰</h3>
-                        <p class="text-xs text-slate-400 mt-1">幫 Ela 安排均衡飲食與運動，不要讓她餓昏倒！</p>
+                        <h3 class="font-bold text-white text-lg font-fun">3. Ela ?摨瑞?瘣餃之雿</h3>
+                        <p class="text-xs text-slate-400 mt-1">撟?Ela 摰??﹛憌脤?????銝?霈旦擗???</p>
                     </div>
-                    <span class="inline-block text-xs text-emerald-400 font-bold">點擊開始 →</span>
+                    <span class="inline-block text-xs text-emerald-400 font-bold">暺??? ??/span>
                 </button>
             </div>
 
             <!-- Game Play Screen Canvas/Box -->
             <div id="gamePlayArea" class="bg-slate-800 rounded-3xl p-6 border-2 border-slate-700 shadow-2xl min-h-[350px] flex flex-col justify-center items-center text-center">
                 <div class="text-slate-400 text-sm space-y-2">
-                    <p class="text-4xl animate-bounce">👇</p>
-                    <p class="font-bold text-lg text-slate-200">請點擊上方任意遊戲模式開始關卡挑戰！</p>
+                    <p class="text-4xl animate-bounce">??</p>
+                    <p class="font-bold text-lg text-slate-200">隢????嫣遙???脫芋撘?憪??⊥??堆?</p>
                 </div>
             </div>
         </section>
@@ -313,10 +309,10 @@
         <section id="sec-vocab" class="hidden space-y-6">
             <div class="bg-gradient-to-r from-sky-600 to-blue-700 text-white rounded-3xl p-6 shadow-xl flex justify-between items-center">
                 <div>
-                    <h2 class="text-2xl font-bold font-fun">🔤 Unit 1 重點字彙庫</h2>
-                    <p class="text-sky-100 text-xs md:text-sm mt-1">點擊發音按鈕聽標準美式發音，點擊卡片查看詳細例句。</p>
+                    <h2 class="text-2xl font-bold font-fun">? Unit 1 ??摮?摨?/h2>
+                    <p class="text-sky-100 text-xs md:text-sm mt-1">暺??潮???賣?皞?撘?喉?暺??∠??亦?閰喟敦靘??/p>
                 </div>
-                <div class="text-4xl">📚</div>
+                <div class="text-4xl">??</div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="vocabGrid">
@@ -327,26 +323,26 @@
         <!-- TAB 5: IRREGULAR VERBS SECTION -->
         <section id="sec-verbs" class="hidden space-y-6">
             <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white rounded-3xl p-6 shadow-xl">
-                <h2 class="text-2xl font-bold font-fun">✨ 動詞三態魔法進化庫</h2>
-                <p class="text-emerald-100 text-xs md:text-sm mt-1">課文中涉及的重要不規則動詞三態變化（原形 → 過去式 → 過去分詞 p.p.）</p>
+                <h2 class="text-2xl font-bold font-fun">????銝?擳??脣?摨?/h2>
+                <p class="text-emerald-100 text-xs md:text-sm mt-1">隤脫?銝剜?????銝???閰??????耦 ???撘?????? p.p.嚗?/p>
             </div>
 
             <div class="bg-slate-800 rounded-3xl border border-slate-700 overflow-hidden shadow-xl">
                 <div class="p-4 bg-slate-900 border-b border-slate-700 flex justify-between items-center flex-wrap gap-2">
-                    <span class="font-bold text-slate-300 text-sm">課文核心動詞對照</span>
+                    <span class="font-bold text-slate-300 text-sm">隤脫??詨???撠</span>
                     <button id="toggleVerbQuizBtn" onclick="toggleVerbQuizMode()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs px-3.5 py-2 rounded-xl transition shadow">
-                        <i class="fa-solid fa-gamepad"></i> 開啟填空特訓挑戰
+                        <i class="fa-solid fa-gamepad"></i> ??憛怎征?寡??
                     </button>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
                             <tr class="bg-slate-900/60 text-slate-400 text-xs uppercase tracking-wider border-b border-slate-700">
-                                <th class="p-3 md:p-4">原形 (Base)</th>
-                                <th class="p-3 md:p-4">過去式 (Past)</th>
-                                <th class="p-3 md:p-4">過去分詞 (p.p.)</th>
-                                <th class="p-3 md:p-4">中文釋義</th>
-                                <th class="p-3 md:p-4 text-center">發音</th>
+                                <th class="p-3 md:p-4">?耦 (Base)</th>
+                                <th class="p-3 md:p-4">?撘?(Past)</th>
+                                <th class="p-3 md:p-4">??? (p.p.)</th>
+                                <th class="p-3 md:p-4">銝剜??儔</th>
+                                <th class="p-3 md:p-4 text-center">?潮</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-700/50 text-sm font-medium" id="verbsTableBody">
@@ -362,58 +358,58 @@
     <script>
         // --- DATA STRUCTURES (TEXTBOOK ACCURATE) ---
         const dialogueLines = [
-            { id: 0, speaker: 'Ela', avatar: '👩', bg: 'border-l-pink-500', text: "I don't feel well. I'm so hungry.", zh: "我覺得不太舒服。我好餓。", tip: null },
-            { id: 1, speaker: 'Cody', avatar: '👦', bg: 'border-l-sky-500', text: "Are you all right? Have you had breakfast yet?", zh: "妳還好嗎？妳吃早餐了嗎？", tip: "💡 現在完成式：Have + 主詞 + p.p. ... yet? (用於詢問是否已經完成)" },
-            { id: 2, speaker: 'Ela', avatar: '👩', bg: 'border-l-pink-500', text: "Yes, I have already had breakfast, but I only ate a banana. I'm on a diet.", zh: "有啊，我已經吃過早餐了，但我只吃了一根香蕉。我正在節食。", tip: "💡 片語：be on a diet (正在節食)" },
-            { id: 3, speaker: 'Cody', avatar: '👦', bg: 'border-l-sky-500', text: "Here. You need to eat something to raise your blood sugar. How long have you been on a diet?", zh: "給妳。妳需要吃點東西來提高血糖。妳節食多久了？", tip: "💡 句型：How long have you been...? (詢問持續了多久)" },
-            { id: 4, speaker: 'Ela', avatar: '👩', bg: 'border-l-pink-500', text: "Since I last saw the photo of us in the Line group. I look fat in the photo. Now I eat very little for each meal, and sometimes, I just skip meals.", zh: "自從我上次在 Line 群組看到我們的照片。我在照片裡看起來好胖。現在我每餐都吃很少，有時候甚至直接不吃。", tip: "💡 用法：Since + 過去時間點/過去式子句 (表示自從...以來)" },
-            { id: 5, speaker: 'Cody', avatar: '👦', bg: 'border-l-sky-500', text: "You haven't eaten enough food for over a week. That's crazy!", zh: "妳已經一星期多沒有吃夠食物了。這太荒唐了！", tip: null },
-            { id: 6, speaker: 'Ela', avatar: '👩', bg: 'border-l-pink-500', text: "I know, but I really want to be as slim as possible.", zh: "我知道，但我真的很希望能儘可能苗條。", tip: "💡 句型：as + 形容詞/副詞 + as possible (盡可能的...)" },
-            { id: 7, speaker: 'Cody', avatar: '👦', bg: 'border-l-sky-500', text: "Appearance is not everything, and I think you look great.", zh: "外表並非一切，而且我覺得妳看起來很棒。", tip: null },
-            { id: 8, speaker: 'Cody', avatar: '👦', bg: 'border-l-sky-500', text: "If you really want to lose weight, I have some tips for you.", zh: "如果妳真的想減重，我有一些小建議給妳。", tip: null },
-            { id: 9, speaker: 'Ela', avatar: '👩', bg: 'border-l-pink-500', text: "I'm all ears!", zh: "我洗耳恭聽！", tip: "💡 實用成語：I'm all ears! (我全神貫注聽你說)" },
-            { id: 10, speaker: 'Cody', avatar: '👦', bg: 'border-l-sky-500', text: "A balanced diet is important. Eating so little or eating only one type of food is bad for your health.", zh: "均衡的飲食很重要。吃得太少或只吃單一種類的食物對健康有害。", tip: "💡 動名詞主詞：Eating so little... is bad for health." },
-            { id: 11, speaker: 'Ela', avatar: '👩', bg: 'border-l-pink-500', text: "I didn't know that. What else?", zh: "我以前不知道耶。還有別的建議嗎？", tip: null },
-            { id: 12, speaker: 'Cody', avatar: '👦', bg: 'border-l-sky-500', text: "Have you ever tried exercising?", zh: "妳曾經試過運動嗎？", tip: "💡 完成式詢問經驗：Have you ever + p.p.?" },
-            { id: 13, speaker: 'Ela', avatar: '👩', bg: 'border-l-pink-500', text: "No, I never have. I don't like to exercise.", zh: "沒有，我從來沒有過。我不喜歡運動。", tip: null },
-            { id: 14, speaker: 'Cody', avatar: '👦', bg: 'border-l-sky-500', text: "You haven't seen my sister for a long time, have you? She has lost five kilograms since she started exercising.", zh: "妳很久沒看到我姊姊了吧，對不對？她自從開始運動後已經瘦了五公斤了。", tip: "💡 附加問句：..., have you?" },
-            { id: 15, speaker: 'Ela', avatar: '👩', bg: 'border-l-pink-500', text: "Five kilos? How does she do it?", zh: "五公斤？她是怎麼做到的？", tip: null },
-            { id: 16, speaker: 'Cody', avatar: '👦', bg: 'border-l-sky-500', text: "She exercises at least three times a week.", zh: "她一星期至少運動三次。", tip: "💡 片語：at least (至少)" },
-            { id: 17, speaker: 'Ela', avatar: '👩', bg: 'border-l-pink-500', text: "So building a habit of exercising is also important?", zh: "所以養成運動的習慣也很重要囉？", tip: null },
-            { id: 18, speaker: 'Cody', avatar: '👦', bg: 'border-l-sky-500', text: "You got it.", zh: "沒錯，妳答對了。", tip: "💡 口語俚語：You got it! (你懂了/答對了)" },
-            { id: 19, speaker: 'Ela', avatar: '👩', bg: 'border-l-pink-500', text: "I see. I need to take action now.", zh: "我知道了。我現在需要採取行動。", tip: "💡 片語：take action (採取行動)" }
+            { id: 0, speaker: 'Ela', avatar: '?', bg: 'border-l-pink-500', text: "I don't feel well. I'm so hungry.", zh: "?死敺?憭芾???憟賡???, tip: null },
+            { id: 1, speaker: 'Cody', avatar: '?', bg: 'border-l-sky-500', text: "Are you all right? Have you had breakfast yet?", zh: "憒喲?憟賢?嚗有?擗???", tip: "? ?曉摰?撘?Have + 銝餉? + p.p. ... yet? (?冽閰Ｗ??臬撌脩?摰?)" },
+            { id: 2, speaker: 'Ela', avatar: '?', bg: 'border-l-pink-500', text: "Yes, I have already had breakfast, but I only ate a banana. I'm on a diet.", zh: "??嚗?撌脩????拚?鈭?雿??芸?鈭??寥???甇?蝭憌?, tip: "? ??嚗e on a diet (甇?蝭憌?" },
+            { id: 3, speaker: 'Cody', avatar: '?', bg: 'border-l-sky-500', text: "Here. You need to eat something to raise your blood sugar. How long have you been on a diet?", zh: "蝯血有?有?閬?暺镼蹂???銵蝟有蝭憌?銋?嚗?, tip: "? ?亙?嚗ow long have you been...? (閰Ｗ???鈭?銋?" },
+            { id: 4, speaker: 'Ela', avatar: '?', bg: 'border-l-pink-500', text: "Since I last saw the photo of us in the Line group. I look fat in the photo. Now I eat very little for each meal, and sometimes, I just skip meals.", zh: "?芸???甈∪ Line 蝢斤?????抒????函?ㄐ?絲靘末??冽?瘥??賢?敺?嚗????喟?乩???, tip: "? ?冽?嚗ince + ???暺??撘???(銵函內?芸?...隞乩?)" },
+            { id: 5, speaker: 'Cody', avatar: '?', bg: 'border-l-sky-500', text: "You haven't eaten enough food for over a week. That's crazy!", zh: "憒喳歇蝬???憭???憭??拐??云??鈭?", tip: null },
+            { id: 6, speaker: 'Ela', avatar: '?', bg: 'border-l-pink-500', text: "I know, but I really want to be as slim as possible.", zh: "???雿???敺????質?璇?, tip: "? ?亙?嚗s + 敶Ｗ捆閰??航? + as possible (?∪?賜?...)" },
+            { id: 7, speaker: 'Cody', avatar: '?', bg: 'border-l-sky-500', text: "Appearance is not everything, and I think you look great.", zh: "憭”銝阡?銝?????死敺有?絲靘?璉?, tip: null },
+            { id: 8, speaker: 'Cody', avatar: '?', bg: 'border-l-sky-500', text: "If you really want to lose weight, I have some tips for you.", zh: "憒?憒喟??皜?嚗???鈭?撱箄降蝯血有??, tip: null },
+            { id: 9, speaker: 'Ela', avatar: '?', bg: 'border-l-pink-500', text: "I'm all ears!", zh: "???單?踝?", tip: "? 撖衣??嚗'm all ears! (?蟡疵瘜刻雿牧)" },
+            { id: 10, speaker: 'Cody', avatar: '?', bg: 'border-l-sky-500', text: "A balanced diet is important. Eating so little or eating only one type of food is bad for your health.", zh: "?﹛?ㄡ憌?????敺云撠??芸??桐?蝔桅????拙??亙熒?拿??, tip: "? ??閰蜓閰?Eating so little... is bad for health." },
+            { id: 11, speaker: 'Ela', avatar: '?', bg: 'border-l-pink-500', text: "I didn't know that. What else?", zh: "?誑???仿??嗚???遣霅啣?嚗?, tip: null },
+            { id: 12, speaker: 'Cody', avatar: '?', bg: 'border-l-sky-500', text: "Have you ever tried exercising?", zh: "憒單蝬岫????嚗?, tip: "? 摰?撘岷??撽?Have you ever + p.p.?" },
+            { id: 13, speaker: 'Ela', avatar: '?', bg: 'border-l-pink-500', text: "No, I never have. I don't like to exercise.", zh: "瘝?嚗?敺?瘝???銝?甇⊿???, tip: null },
+            { id: 14, speaker: 'Cody', avatar: '?', bg: 'border-l-sky-500', text: "You haven't seen my sister for a long time, have you? She has lost five kilograms since she started exercising.", zh: "憒喳?銋????憪??改?撠?撠?憟寡敺?憪???撌脩??虫?鈭?支???, tip: "? ???嚗?.., have you?" },
+            { id: 15, speaker: 'Ela', avatar: '?', bg: 'border-l-pink-500', text: "Five kilos? How does she do it?", zh: "鈭?歹?憟寞?獐???", tip: null },
+            { id: 16, speaker: 'Cody', avatar: '?', bg: 'border-l-sky-500', text: "She exercises at least three times a week.", zh: "憟嫣????喳???銝活??, tip: "? ??嚗t least (?喳?)" },
+            { id: 17, speaker: 'Ela', avatar: '?', bg: 'border-l-pink-500', text: "So building a habit of exercising is also important?", zh: "?隞仿?????蝧銋?????", tip: null },
+            { id: 18, speaker: 'Cody', avatar: '?', bg: 'border-l-sky-500', text: "You got it.", zh: "瘝嚗有蝑?鈭?, tip: "? ???靽?嚗ou got it! (雿?鈭?蝑?鈭?" },
+            { id: 19, speaker: 'Ela', avatar: '?', bg: 'border-l-pink-500', text: "I see. I need to take action now.", zh: "??????曉?閬????, tip: "? ??嚗ake action (?∪?銵?)" }
         ];
 
         const vocabularyList = [
-            { word: "yet", pos: "adv.", zh: "還（沒）", ex: "Have you had breakfast yet?" },
-            { word: "already", pos: "adv.", zh: "已經", ex: "I have already had breakfast." },
-            { word: "diet", pos: "n. / v.", zh: "節食；飲食", ex: "I'm on a diet." },
-            { word: "raise", pos: "v.", zh: "提高；舉起", ex: "Eat something to raise your blood sugar." },
-            { word: "since", pos: "prep. / conj.", zh: "自從", ex: "Since I last saw the photo..." },
-            { word: "photo", pos: "n.", zh: "照片", ex: "I look fat in the photo." },
-            { word: "crazy", pos: "adj.", zh: "荒唐的；瘋狂的", ex: "That's crazy!" },
-            { word: "as... as possible", pos: "phr.", zh: "盡可能的...", ex: "I want to be as slim as possible." },
-            { word: "slim", pos: "adj.", zh: "苗條的；微小的", ex: "She wants to stay slim." },
-            { word: "skip", pos: "v.", zh: "省略；略過", ex: "Sometimes, I just skip meals." },
-            { word: "appearance", pos: "n.", zh: "外表；外觀", ex: "Appearance is not everything." },
-            { word: "type", pos: "n.", zh: "類型；種類", ex: "Eating only one type of food is bad." },
-            { word: "ever", pos: "adv.", zh: "曾經", ex: "Have you ever tried exercising?" },
-            { word: "habit", pos: "n.", zh: "習慣", ex: "Building a habit of exercising is important." },
-            { word: "take action", pos: "phr.", zh: "採取行動", ex: "I need to take action now." },
-            { word: "be all ears", pos: "phr.", zh: "洗耳恭聽", ex: "I'm all ears!" },
-            { word: "at least", pos: "phr.", zh: "至少", ex: "Exercises at least three times a week." },
-            { word: "You got it.", pos: "phr.", zh: "沒錯；妳答對了。", ex: "You got it." },
-            { word: "weight", pos: "n.", zh: "體重", ex: "If you really want to lose weight..." },
-            { word: "balanced", pos: "adj.", zh: "均衡的", ex: "A balanced diet is important." }
+            { word: "yet", pos: "adv.", zh: "??瘝?", ex: "Have you had breakfast yet?" },
+            { word: "already", pos: "adv.", zh: "撌脩?", ex: "I have already had breakfast." },
+            { word: "diet", pos: "n. / v.", zh: "蝭憌?憌脤?", ex: "I'm on a diet." },
+            { word: "raise", pos: "v.", zh: "??嚗?韏?, ex: "Eat something to raise your blood sugar." },
+            { word: "since", pos: "prep. / conj.", zh: "?芸?", ex: "Since I last saw the photo..." },
+            { word: "photo", pos: "n.", zh: "?抒?", ex: "I look fat in the photo." },
+            { word: "crazy", pos: "adj.", zh: "????????, ex: "That's crazy!" },
+            { word: "as... as possible", pos: "phr.", zh: "?∪?賜?...", ex: "I want to be as slim as possible." },
+            { word: "slim", pos: "adj.", zh: "????敺桀???, ex: "She wants to stay slim." },
+            { word: "skip", pos: "v.", zh: "?嚗??, ex: "Sometimes, I just skip meals." },
+            { word: "appearance", pos: "n.", zh: "憭”嚗?閫", ex: "Appearance is not everything." },
+            { word: "type", pos: "n.", zh: "憿?嚗車憿?, ex: "Eating only one type of food is bad." },
+            { word: "ever", pos: "adv.", zh: "?曄?", ex: "Have you ever tried exercising?" },
+            { word: "habit", pos: "n.", zh: "蝧", ex: "Building a habit of exercising is important." },
+            { word: "take action", pos: "phr.", zh: "?∪?銵?", ex: "I need to take action now." },
+            { word: "be all ears", pos: "phr.", zh: "瘣單??, ex: "I'm all ears!" },
+            { word: "at least", pos: "phr.", zh: "?喳?", ex: "Exercises at least three times a week." },
+            { word: "You got it.", pos: "phr.", zh: "瘝嚗有蝑?鈭?, ex: "You got it." },
+            { word: "weight", pos: "n.", zh: "擃?", ex: "If you really want to lose weight..." },
+            { word: "balanced", pos: "adj.", zh: "?﹛??, ex: "A balanced diet is important." }
         ];
 
         const irregularVerbsList = [
-            { base: "have", past: "had", pp: "had", zh: "有；吃" },
-            { base: "be", past: "was / were", pp: "been", zh: "是；存在" },
-            { base: "eat", past: "ate", pp: "eaten", zh: "吃" },
-            { base: "try", past: "tried", pp: "tried", zh: "嘗試" },
-            { base: "see", past: "saw", pp: "seen", zh: "看見" },
-            { base: "lose", past: "lost", pp: "lost", zh: "失去；減去" }
+            { base: "have", past: "had", pp: "had", zh: "???? },
+            { base: "be", past: "was / were", pp: "been", zh: "?荔?摮" },
+            { base: "eat", past: "ate", pp: "eaten", zh: "?? },
+            { base: "try", past: "tried", pp: "tried", zh: "?岫" },
+            { base: "see", past: "saw", pp: "seen", zh: "??" },
+            { base: "lose", past: "lost", pp: "lost", zh: "憭勗嚗??? }
         ];
 
         // --- GAMIFICATION & AUDIO FX ---
@@ -500,28 +496,58 @@
             document.getElementById('coinCount').innerText = playerState.coins;
             document.getElementById('streakCount').innerText = playerState.streak;
 
-            const ranks = ['英勇初學者', '語言探險家', '單字收割者', '語法小達人', '健康英語大師'];
+            const ranks = ['?勗??飛??, '隤??ａ摰?, '?桀??嗅??, '隤?撠?鈭?, '?亙熒?梯?憭批葦'];
             const rankIdx = Math.min(playerState.level - 1, ranks.length - 1);
             document.getElementById('userRank').innerText = ranks[rankIdx];
         }
 
         // --- TTS SPEECH CONTROLLER ---
         let ttsRate = 1.0;
-        let speechSynth = window.speechSynthesis;
+        const speechSynth = ('speechSynthesis' in window) ? window.speechSynthesis : null;
         let isPlayingAll = false;
         let currentSeqIdx = 0;
+        let ttsRequestId = 0;
 
-        function speakText(text, callback = null) {
-            if (!speechSynth) return;
+        // 頝函汗?刻??喃耨敺抬?蝑?瘨???????橘?銝阡?典?函?蝢??望?隤??        function speakText(text, callback = null) {
+            if (!speechSynth || typeof SpeechSynthesisUtterance === 'undefined') {
+                console.warn('甇斤汗?其??舀隤???嚗eb Speech API嚗?);
+                if (callback) callback();
+                return;
+            }
+
+            const requestId = ++ttsRequestId;
             speechSynth.cancel();
-            const utterance = new SpeechSynthesisUtterance(text);
+            const utterance = new SpeechSynthesisUtterance(String(text));
             utterance.lang = 'en-US';
             utterance.rate = ttsRate;
-            if (callback) {
-                utterance.onend = callback;
-                utterance.onerror = callback;
-            }
-            speechSynth.speak(utterance);
+            utterance.pitch = 1;
+            const voices = speechSynth.getVoices ? speechSynth.getVoices() : [];
+            const englishVoice = voices.find(v => /^en-US/i.test(v.lang))
+                || voices.find(v => /^en/i.test(v.lang));
+            if (englishVoice) utterance.voice = englishVoice;
+
+            let callbackCalled = false;
+            const finish = () => {
+                if (callbackCalled || requestId !== ttsRequestId) return;
+                callbackCalled = true;
+                if (callback) callback();
+            };
+            utterance.onend = finish;
+            utterance.onerror = (event) => {
+                console.warn('隤?剜?潛???嚗?, event.error || event);
+                finish();
+            };
+
+            // Chrome/Edge ??cancel() 敺???speak() ?嗥??莎?蝔?撱園頛帘摰?            window.setTimeout(() => {
+                if (requestId !== ttsRequestId) return;
+                try {
+                    speechSynth.resume();
+                    speechSynth.speak(utterance);
+                } catch (err) {
+                    console.error('?⊥???隤?剜嚗?, err);
+                    finish();
+                }
+            }, 120);
         }
 
         function setTTSRate(rate, btn) {
@@ -534,9 +560,10 @@
 
         function stopSpeech() {
             isPlayingAll = false;
+            ttsRequestId++; // 霈??芸銵?撱園?剜憭望?
             if (speechSynth) speechSynth.cancel();
             document.getElementById('playAllIcon').className = 'fa-solid fa-play';
-            document.getElementById('playAllText').innerText = '播放全課對話 (+20 XP)';
+            document.getElementById('playAllText').innerText = '?剜?刻玨撠店 (+20 XP)';
             unhighlightAllDialogue();
         }
 
@@ -547,7 +574,7 @@
                 isPlayingAll = true;
                 currentSeqIdx = 0;
                 document.getElementById('playAllIcon').className = 'fa-solid fa-pause';
-                document.getElementById('playAllText').innerText = '暫停播放';
+                document.getElementById('playAllText').innerText = '?怠??剜';
                 playNextDialogueInSequence();
             }
         }
@@ -649,7 +676,7 @@
                 <tr class="hover:bg-slate-700/30 transition">
                     <td class="p-3 md:p-4 font-bold text-emerald-400 font-fun">${v.base}</td>
                     <td class="p-3 md:p-4 font-mono">
-                        ${isVerbQuizMode ? `<input type="text" data-ans="${v.past}" class="verb-input bg-slate-900 border border-slate-600 rounded px-2 py-1 text-xs text-yellow-300 w-24" placeholder="過去式">` : `<span class="text-slate-200">${v.past}</span>`}
+                        ${isVerbQuizMode ? `<input type="text" data-ans="${v.past}" class="verb-input bg-slate-900 border border-slate-600 rounded px-2 py-1 text-xs text-yellow-300 w-24" placeholder="?撘?>` : `<span class="text-slate-200">${v.past}</span>`}
                     </td>
                     <td class="p-3 md:p-4 font-mono">
                         ${isVerbQuizMode ? `<input type="text" data-ans="${v.pp}" class="verb-input bg-slate-900 border border-slate-600 rounded px-2 py-1 text-xs text-yellow-300 w-24" placeholder="p.p.">` : `<span class="text-slate-200">${v.pp}</span>`}
@@ -667,7 +694,7 @@
         function toggleVerbQuizMode() {
             isVerbQuizMode = !isVerbQuizMode;
             const btn = document.getElementById('toggleVerbQuizBtn');
-            btn.innerHTML = isVerbQuizMode ? `<i class="fa-solid fa-eye"></i> 顯示正確解答` : `<i class="fa-solid fa-gamepad"></i> 開啟填空特訓挑戰`;
+            btn.innerHTML = isVerbQuizMode ? `<i class="fa-solid fa-eye"></i> 憿舐內甇?Ⅱ閫??` : `<i class="fa-solid fa-gamepad"></i> ??憛怎征?寡??`;
             renderVerbsTable();
         }
 
@@ -681,7 +708,7 @@
             document.getElementById('roleBtn-Ela').className = role === 'Ela' ? "p-5 rounded-3xl border-2 border-pink-500 bg-pink-950/20 transition flex items-center gap-4 text-left group" : "p-5 rounded-3xl border-2 border-slate-700 bg-slate-800/80 transition flex items-center gap-4 text-left group";
             document.getElementById('roleBtn-Cody').className = role === 'Cody' ? "p-5 rounded-3xl border-2 border-sky-500 bg-sky-950/20 transition flex items-center gap-4 text-left group" : "p-5 rounded-3xl border-2 border-slate-700 bg-slate-800/80 transition flex items-center gap-4 text-left group";
             
-            document.getElementById('activeRoleName').innerText = role === 'Ela' ? 'Ela 👩' : 'Cody 👦';
+            document.getElementById('activeRoleName').innerText = role === 'Ela' ? 'Ela ?' : 'Cody ?';
             document.getElementById('activeRoleName').className = role === 'Ela' ? 'text-lg font-black text-pink-400 font-fun' : 'text-lg font-black text-sky-400 font-fun';
 
             roleLines = dialogueLines.filter(l => l.speaker === role);
@@ -693,10 +720,10 @@
             if (currentRoleIdx >= roleLines.length) {
                 document.getElementById('roleplayCard').innerHTML = `
                     <div class="py-8 space-y-4">
-                        <div class="text-5xl">🎉</div>
-                        <h3 class="text-2xl font-black text-yellow-300 font-fun">太棒了！你完成了 ${currentRole} 的全部配音挑戰！</h3>
-                        <p class="text-sm text-slate-300">獲得獎勵 +50 XP 經驗值！</p>
-                        <button onclick="selectRoleplayCharacter('${currentRole}')" class="bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-950 font-black px-6 py-3 rounded-2xl shadow-lg">再挑戰一次</button>
+                        <div class="text-5xl">??</div>
+                        <h3 class="text-2xl font-black text-yellow-300 font-fun">憭芣?鈭?雿??? ${currentRole} ??券??單??堆?</h3>
+                        <p class="text-sm text-slate-300">?脣?? +50 XP 蝬??潘?</p>
+                        <button onclick="selectRoleplayCharacter('${currentRole}')" class="bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-950 font-black px-6 py-3 rounded-2xl shadow-lg">???唬?甈?/button>
                     </div>
                 `;
                 addXP(50);
@@ -704,7 +731,7 @@
             }
 
             const line = roleLines[currentRoleIdx];
-            document.getElementById('roleplayProgress').innerText = `${currentRoleIdx + 1} / ${roleLines.length} 句`;
+            document.getElementById('roleplayProgress').innerText = `${currentRoleIdx + 1} / ${roleLines.length} ?匝;
             document.getElementById('roleEnglishCue').innerText = `"${line.text}"`;
             document.getElementById('roleChineseCue').innerText = line.zh;
         }
@@ -751,12 +778,12 @@
             container.innerHTML = `
                 <div class="w-full max-w-xl space-y-6">
                     <div class="flex justify-between items-center text-xs text-yellow-300 font-bold">
-                        <span>🧩 句型重組關卡</span>
-                        <span>關卡 ${currentScrambleIdx + 1} / ${scrambleQuestions.length}</span>
+                        <span>?妝 ?亙????</span>
+                        <span>? ${currentScrambleIdx + 1} / ${scrambleQuestions.length}</span>
                     </div>
 
                     <div id="wordTargetBox" class="min-h-[60px] bg-slate-900 border-2 border-dashed border-purple-500 rounded-2xl p-3 flex flex-wrap gap-2 items-center justify-center">
-                        <span class="text-slate-500 text-xs">點擊下方的單字，重組正確句子...</span>
+                        <span class="text-slate-500 text-xs">暺?銝?摮???甇?Ⅱ?亙?...</span>
                     </div>
 
                     <div id="wordBank" class="flex flex-wrap gap-2 justify-center">
@@ -768,8 +795,8 @@
                     </div>
 
                     <div class="flex gap-3 justify-center">
-                        <button onclick="resetScrambleGame()" class="bg-slate-700 text-slate-300 px-4 py-2 rounded-xl text-xs font-bold">重置</button>
-                        <button onclick="checkScrambleAnswer()" class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black px-6 py-2 rounded-xl text-sm shadow game-btn-shadow">檢查答案</button>
+                        <button onclick="resetScrambleGame()" class="bg-slate-700 text-slate-300 px-4 py-2 rounded-xl text-xs font-bold">?蔭</button>
+                        <button onclick="checkScrambleAnswer()" class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black px-6 py-2 rounded-xl text-sm shadow game-btn-shadow">瑼Ｘ蝑?</button>
                     </div>
                 </div>
             `;
@@ -807,10 +834,10 @@
 
         // Mini Game 2: Speed Memory Match Card Matrix
         let memoryCards = [
-            { text: "diet", pairId: 1 }, { text: "節食；飲食", pairId: 1 },
-            { text: "since", pairId: 2 }, { text: "自從", pairId: 2 },
-            { text: "raise", pairId: 3 }, { text: "提高；舉起", pairId: 3 },
-            { text: "skip", pairId: 4 }, { text: "省略；略過", pairId: 4 }
+            { text: "diet", pairId: 1 }, { text: "蝭憌?憌脤?", pairId: 1 },
+            { text: "since", pairId: 2 }, { text: "?芸?", pairId: 2 },
+            { text: "raise", pairId: 3 }, { text: "??嚗?韏?, pairId: 3 },
+            { text: "skip", pairId: 4 }, { text: "?嚗??, pairId: 4 }
         ];
         let flippedMemoryCards = [];
 
@@ -820,7 +847,7 @@
 
             container.innerHTML = `
                 <div class="w-full max-w-md space-y-4">
-                    <div class="text-xs text-amber-300 font-bold">🃏 單字極速翻牌配對 (將對應的英文與中文翻開)</div>
+                    <div class="text-xs text-amber-300 font-bold">?? ?桀?璆菟蕃??撠?(撠????望??葉?蕃??</div>
                     <div class="grid grid-cols-4 gap-3">
                         ${shuffled.map((card, idx) => `
                             <button onclick="flipMemoryCard(${idx}, ${card.pairId}, '${card.text}', this)" class="mem-card-btn h-20 bg-slate-900 border-2 border-amber-500/40 rounded-2xl font-bold text-xs text-transparent hover:border-amber-400 transition flex items-center justify-center p-2 text-center">
@@ -867,10 +894,10 @@
             container.innerHTML = `
                 <div class="w-full max-w-md space-y-5 bg-slate-900 p-6 rounded-3xl border border-emerald-500/40">
                     <div class="flex items-center gap-3 justify-center">
-                        <div class="text-4xl animate-bounce">👩</div>
+                        <div class="text-4xl animate-bounce">?</div>
                         <div class="text-left">
-                            <h4 class="font-bold text-white font-fun">Ela 的健康養成計畫</h4>
-                            <p class="text-xs text-slate-400">幫助 Ela 達成健康減重與運動習慣！</p>
+                            <h4 class="font-bold text-white font-fun">Ela ?摨琿?????/h4>
+                            <p class="text-xs text-slate-400">撟怠 Ela ???亙熒皜????????</p>
                         </div>
                     </div>
 
@@ -878,7 +905,7 @@
                     <div class="space-y-2 text-xs font-bold text-slate-300">
                         <div>
                             <div class="flex justify-between mb-1">
-                                <span>體力與血糖 (Energy)</span>
+                                <span>擃???蝟?(Energy)</span>
                                 <span id="energyVal" class="text-emerald-400">${elaHealth.energy}%</span>
                             </div>
                             <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
@@ -888,8 +915,8 @@
 
                         <div>
                             <div class="flex justify-between mb-1">
-                                <span>每週運動次數 (At least 3 times/week)</span>
-                                <span id="exerciseVal" class="text-sky-400">${elaHealth.exerciseCount} 次</span>
+                                <span>瘥梢??活??(At least 3 times/week)</span>
+                                <span id="exerciseVal" class="text-sky-400">${elaHealth.exerciseCount} 甈?/span>
                             </div>
                             <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
                                 <div id="exerciseBar" class="bg-sky-400 h-full transition-all duration-300" style="width: ${(elaHealth.exerciseCount/3)*100}%"></div>
@@ -900,19 +927,18 @@
                     <!-- Action buttons -->
                     <div class="grid grid-cols-3 gap-2">
                         <button onclick="feedEla('banana')" class="bg-slate-800 hover:bg-slate-700 p-3 rounded-2xl border border-slate-700 text-xs font-bold text-amber-300">
-                            🍌 只吃一根香蕉<br><span class="text-[10px] text-slate-400">(血糖太低!)</span>
+                            ?? ?芸?銝?寥???br><span class="text-[10px] text-slate-400">(銵蝟云雿?)</span>
                         </button>
                         <button onclick="feedEla('balanced')" class="bg-slate-800 hover:bg-slate-700 p-3 rounded-2xl border border-slate-700 text-xs font-bold text-emerald-300">
-                            🥗 均衡飲食<br><span class="text-[10px] text-slate-400">(Balanced Diet)</span>
+                            ?? ?﹛憌脤?<br><span class="text-[10px] text-slate-400">(Balanced Diet)</span>
                         </button>
                         <button onclick="feedEla('exercise')" class="bg-slate-800 hover:bg-slate-700 p-3 rounded-2xl border border-slate-700 text-xs font-bold text-sky-300">
-                            🏃‍♀️ 開始運動<br><span class="text-[10px] text-slate-400">(Exercise)</span>
+                            ????儭?????<br><span class="text-[10px] text-slate-400">(Exercise)</span>
                         </button>
                     </div>
 
                     <div id="simFeedback" class="text-xs text-yellow-300 font-bold bg-slate-950 p-3 rounded-xl min-h-[40px] flex items-center justify-center">
-                        請為 Ela 選擇健康行動！
-                    </div>
+                        隢 Ela ?豢??亙熒銵?嚗?                    </div>
                 </div>
             `;
         }
@@ -921,34 +947,34 @@
             const feedback = document.getElementById('simFeedback');
             if (action === 'banana') {
                 elaHealth.energy = Math.max(10, elaHealth.energy - 10);
-                feedback.innerText = "⚠️ 警告：只吃香蕉無法提供足夠熱量！Ela 覺得很餓又頭暈。";
+                feedback.innerText = "?? 霅血?嚗???瘜?靘雲憭??Ela 閬箏?敺????;
                 AudioFX.playWrong();
             } else if (action === 'balanced') {
                 elaHealth.energy = Math.min(100, elaHealth.energy + 30);
-                feedback.innerText = "✨ 太棒了！均衡飲食為 Ela 提升了血糖與健康指數！ (+15 XP)";
+                feedback.innerText = "??憭芣?鈭??﹛憌脤???Ela ??鈭?蝟??亙熒?嚗?(+15 XP)";
                 AudioFX.playCorrect();
                 addXP(15);
             } else if (action === 'exercise') {
                 if (elaHealth.energy < 20) {
-                    feedback.innerText = "❌ 體力過低！Ela 沒吃飽無法運動，請先補充均衡飲食！";
+                    feedback.innerText = "??擃???嚗la 瘝?憌賜瘜???隢?鋆??﹛憌脤?嚗?;
                     AudioFX.playWrong();
                     return;
                 }
                 elaHealth.exerciseCount++;
                 elaHealth.energy = Math.max(10, elaHealth.energy - 15);
                 if (elaHealth.exerciseCount >= 3) {
-                    feedback.innerText = "🎉 恭喜！達成每週至少運動 3 次的習慣！Ela 成功健康減重 5 公斤！";
+                    feedback.innerText = "?? ?剖?嚗????梯撠???3 甈∠?蝧嚗la ???亙熒皜? 5 ?祆嚗?;
                     AudioFX.playLevelUp();
                     addXP(30);
                 } else {
-                    feedback.innerText = "🏃‍♀️ Ela 完成了一次體能訓練！繼續保持！";
+                    feedback.innerText = "????儭?Ela 摰?鈭?甈⊿??質?蝺湛?蝜潛?靽?嚗?;
                     AudioFX.playCorrect();
                 }
             }
             // Update UI
             document.getElementById('energyVal').innerText = `${elaHealth.energy}%`;
             document.getElementById('energyBar').style.width = `${elaHealth.energy}%`;
-            document.getElementById('exerciseVal').innerText = `${elaHealth.exerciseCount} 次`;
+            document.getElementById('exerciseVal').innerText = `${elaHealth.exerciseCount} 甈︶;
             document.getElementById('exerciseBar').style.width = `${Math.min(100, (elaHealth.exerciseCount/3)*100)}%`;
         }
 
@@ -980,5 +1006,61 @@
             updateGamificationUI();
         };
     </script>
+
+
+    <!-- ?函??? 5 蝘?COOL DOWN嚗誑鈭辣憪晷?舀????????? -->
+    <script>
+    (() => {
+        const COOLDOWN_MS = 5000;
+        const cooldowns = new WeakMap();
+
+        document.addEventListener('click', (event) => {
+            const button = event.target.closest('button');
+            if (!button) return;
+
+            const now = Date.now();
+            const active = cooldowns.get(button);
+            if (active && active.until > now) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                return;
+            }
+            if (button.disabled) return;
+
+            const state = {
+                until: now + COOLDOWN_MS,
+                originalHTML: button.innerHTML,
+                wasDisabled: button.disabled,
+                timer: null
+            };
+            cooldowns.set(button, state);
+            button.dataset.cooldownActive = 'true';
+            button.setAttribute('aria-live', 'polite');
+            button.classList.add('opacity-60', 'cursor-not-allowed');
+
+            // 撱嗅??嚗Ⅱ靽活暺??蝬????質甇?虜?瑁???            window.setTimeout(() => {
+                if (cooldowns.get(button) === state) button.disabled = true;
+            }, 0);
+
+            const refresh = () => {
+                const remaining = Math.max(0, Math.ceil((state.until - Date.now()) / 1000));
+                if (remaining > 0) {
+                    button.innerHTML = `COOL DOWN ${remaining}s`;
+                    return;
+                }
+                window.clearInterval(state.timer);
+                button.innerHTML = state.originalHTML;
+                button.disabled = state.wasDisabled;
+                button.classList.remove('opacity-60', 'cursor-not-allowed');
+                button.removeAttribute('data-cooldown-active');
+                button.removeAttribute('aria-live');
+                cooldowns.delete(button);
+            };
+            refresh();
+            state.timer = window.setInterval(refresh, 200);
+        }, true);
+    })();
+    </script>
+
 </body>
 </html>

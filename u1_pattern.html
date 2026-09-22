@@ -1557,47 +1557,64 @@
             chatLog.scrollTop = chatLog.scrollHeight;
         }
 
-        async function playTTS(text) {
+        // 使用瀏覽器內建英文語音，避免外部 TTS API / API Key 失效造成無聲。
+        function playTTS(text) {
+            if (!('speechSynthesis' in window)) {
+                alert('此瀏覽器不支援語音播放，請改用最新版 Chrome 或 Edge。');
+                return;
+            }
             try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${geminiApiKey}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: `Say in clear English: ${text}` }] }],
-                        generationConfig: {
-                            responseModalities: ["AUDIO"],
-                            speechConfig: {
-                                voiceConfig: { prebuiltVoiceConfig: { voiceName: "Puck" } }
-                            }
-                        }
-                    })
-                });
-
-                const data = await response.json();
-                const inlineData = data?.candidates?.[0]?.content?.parts?.[0]?.inlineData;
-
-                if (inlineData && inlineData.data) {
-                    const mimeType = inlineData.mimeType || "audio/L16;rate=24000";
-                    const rateMatch = mimeType.match(/rate=(\d+)/);
-                    const sampleRate = rateMatch ? parseInt(rateMatch[1], 10) : 24000;
-
-                    // Convert base64 PCM16 to WAV Blob
-                    const rawData = atob(inlineData.data);
-                    const pcm16 = new Int16Array(rawData.length / 2);
-                    for (let i = 0; i < pcm16.length; i++) {
-                        pcm16[i] = rawData.charCodeAt(i * 2) | (rawData.charCodeAt(i * 2 + 1) << 8);
-                    }
-
-                    const wavBlob = createWavBlob(pcm16, sampleRate);
-                    const audio = new Audio(URL.createObjectURL(wavBlob));
-                    audio.play();
-                } else {
-                    fallbackBrowserTTS(text);
-                }
-            } catch (e) {
-                fallbackBrowserTTS(text);
+                speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.9;
+                const voices = speechSynthesis.getVoices();
+                const englishVoice = voices.find(v => /^en(-|_)/i.test(v.lang));
+                if (englishVoice) utterance.voice = englishVoice;
+                speechSynthesis.speak(utterance);
+            } catch (error) {
+                console.error('TTS playback failed:', error);
             }
         }
+
+        // 全站按鈕冷卻：任一按鈕按下後，所有按鈕鎖定 5 秒，避免連續亂按。
+        (() => {
+            let coolingDown = false;
+            document.addEventListener('click', (event) => {
+                const button = event.target.closest('button');
+                if (!button || coolingDown) {
+                    if (coolingDown && button) event.preventDefault();
+                    return;
+                }
+                coolingDown = true;
+                const buttons = Array.from(document.querySelectorAll('button'));
+                const previousStates = buttons.map(btn => btn.disabled);
+                buttons.forEach(btn => {
+                    btn.disabled = true;
+                    btn.classList.add('opacity-50', 'cursor-not-allowed');
+                    btn.dataset.cooldownLabel = btn.innerHTML;
+                });
+                // 顯示冷卻倒數，不改動按鈕原本的文字內容
+                let remaining = 5;
+                const label = button.querySelector('[data-cooldown]');
+                const originalText = button.innerText;
+                button.setAttribute('aria-label', `${originalText}，冷卻中 5 秒`);
+                const interval = setInterval(() => {
+                    remaining--;
+                    button.setAttribute('aria-label', `${originalText}，冷卻中 ${remaining} 秒`);
+                    if (remaining <= 0) {
+                        clearInterval(interval);
+                        buttons.forEach((btn, i) => {
+                            btn.disabled = previousStates[i];
+                            btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                            btn.removeAttribute('aria-label');
+                            delete btn.dataset.cooldownLabel;
+                        });
+                        coolingDown = false;
+                    }
+                }, 1000);
+            }, false);
+        })();
 
         function createWavBlob(pcm16, sampleRate) {
             const buffer = new ArrayBuffer(44 + pcm16.length * 2);

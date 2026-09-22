@@ -820,15 +820,24 @@
             document.getElementById('connectionFeedback').classList.remove('hidden');
         }
 
-        // Web Speech API
+        // Stable browser-native speech playback (no external API/key required)
         function speakText(text) {
-            if ('speechSynthesis' in window) {
+            if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
+                console.warn('此瀏覽器不支援語音朗讀功能。');
+                return;
+            }
+            try {
                 window.speechSynthesis.cancel();
-                const rate = parseFloat(document.getElementById('ttsSpeedSelect').value) || 1.0;
-                const u = new SpeechSynthesisUtterance(text);
-                u.lang = 'en-US';
-                u.rate = rate;
-                window.speechSynthesis.speak(u);
+                const rateEl = document.getElementById('ttsSpeedSelect');
+                const rate = rateEl ? (parseFloat(rateEl.value) || 1.0) : 1.0;
+                const utterance = new SpeechSynthesisUtterance(String(text || '').trim());
+                utterance.lang = 'en-US';
+                utterance.rate = rate;
+                utterance.onerror = (event) => console.warn('語音播放未完成：', event.error || 'unknown');
+                // A short defer helps browsers reliably restart speech after cancel().
+                window.setTimeout(() => window.speechSynthesis.speak(utterance), 80);
+            } catch (error) {
+                console.error('語音播放錯誤：', error);
             }
         }
 
@@ -1055,5 +1064,52 @@
             localStorage.setItem('english_user_stars', (prevTotal + pts).toString());
         }
     </script>
+
+    <script>
+    // 課堂防亂按：任一按鈕按下後，全頁按鈕冷卻 5 秒；不依賴外部 audio-guard.js。
+    (() => {
+        const COOLDOWN_MS = 5000;
+        let coolingDown = false;
+        let cooldownTimer = null;
+        let originalDisabled = new WeakMap();
+
+        function setButtonsDisabled(disabled) {
+            document.querySelectorAll('button').forEach(button => {
+                if (disabled) {
+                    if (!originalDisabled.has(button)) originalDisabled.set(button, button.disabled);
+                    button.disabled = true;
+                    button.setAttribute('aria-disabled', 'true');
+                    button.classList.add('opacity-50', 'cursor-not-allowed');
+                } else {
+                    button.disabled = originalDisabled.has(button) ? originalDisabled.get(button) : false;
+                    button.removeAttribute('aria-disabled');
+                    button.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+            });
+        }
+
+        document.addEventListener('click', event => {
+            const button = event.target.closest('button');
+            if (!button) return;
+            if (coolingDown) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                return;
+            }
+            // Allow the button's own handler to finish before disabling controls.
+            coolingDown = true;
+            window.setTimeout(() => setButtonsDisabled(true), 0);
+            if (cooldownTimer) window.clearTimeout(cooldownTimer);
+            cooldownTimer = window.setTimeout(() => {
+                setButtonsDisabled(false);
+                coolingDown = false;
+                originalDisabled = new WeakMap();
+                cooldownTimer = null;
+            }, COOLDOWN_MS);
+        }, true);
+    })();
+    </script>
+
 </body>
 </html>
+

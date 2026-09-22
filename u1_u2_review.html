@@ -1,7 +1,8 @@
 ﻿<!doctype html>
 <html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Unit 1 + Unit 2 跨單元綜合複習</title>
 <script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-<style>body{font-family:'Noto Sans TC',sans-serif;background:#020617;background-image:radial-gradient(circle at 12% 8%,#f59e0b30,transparent 27rem),radial-gradient(circle at 87% 35%,#22d3ee25,transparent 28rem)}.fun{font-family:Fredoka,'Noto Sans TC',sans-serif}.panel{background:#0f172bd9;border:1px solid #94a3b833;backdrop-filter:blur(12px)}.choice{transition:.18s}.choice:hover{transform:translateY(-2px);border-color:#fbbf24;background:#1e293b}.choice input{accent-color:#f59e0b}</style>    <!-- Audio Guard 課堂音效防亂按 (5秒冷卻鎖定) -->
+<style>body{font-family:'Noto Sans TC',sans-serif;background:#020617;background-image:radial-gradient(circle at 12% 8%,#f59e0b30,transparent 27rem),radial-gradient(circle at 87% 35%,#22d3ee25,transparent 28rem)}.fun{font-family:Fredoka,'Noto Sans TC',sans-serif}.panel{background:#0f172bd9;border:1px solid #94a3b833;backdrop-filter:blur(12px)}.choice{transition:.18s}.choice:hover{transform:translateY(-2px);border-color:#fbbf24;background:#1e293b}.choice input{accent-color:#f59e0b}</style>
+    <!-- Audio Guard 課堂音效防亂按 (5秒冷卻鎖定) -->
     <script src="audio-guard.js"></script>
 </head>
 <body class="min-h-screen text-slate-100"><header class="sticky top-0 z-10 border-b border-slate-700/60 bg-slate-950/85 backdrop-blur"><div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3"><a class="text-sm font-bold text-amber-300" href="index.html"><i class="fa-solid fa-house mr-1"></i>學習基地</a><div class="text-center"><p class="text-[11px] tracking-widest font-bold text-cyan-300">CROSS-UNIT REVIEW</p><h1 class="fun text-lg font-black">Unit 1 + Unit 2 綜合複習</h1></div><span class="text-xs text-slate-300">已作答 <b id="progress" class="text-amber-300">0 / 16</b></span></div></header>
@@ -15,4 +16,35 @@ const qs=[
 ['Mia has lived in Hualien _______ five years.',['for','since','yet','ever'],0,'for + 一段時間；five years 是持續的時間長度。'],['Have you _______ watched this movie before?',['yet','ever','for','already'],1,'現在完成式疑問句問「曾經」使用 ever。'],['Ben is not at home. He has _______ to the library.',['been','gone','went','go'],1,'has gone to 表示去了且尚未回來。'],["The puzzle was so difficult that I couldn't finish _______.",['them','it','its','one'],1,'so...that... 子句中要保留受詞代名詞：finish it。'],['I am _______ in the story because it is very _______.',['interesting; interested','interested; interesting','excited; excited','boring; bored'],1,'-ed 描述人的感受；-ing 描述事物帶來的感覺。'],['The soup is too hot _______.',['to drink','that drink','enough to drink','drinking'],0,'too + adj. + to VR 表示「太…而不能…」。'],['Which is a healthy suggestion?',['Skip meals every day.','Cut down on junk food.','Never eat vegetables.','Stay up late every night.'],1,'少吃垃圾食物並維持均衡飲食是健康習慣。'],["Patty hasn't finished her homework _______.",['already','yet','ever','since'],1,'否定句句尾的「尚未」使用 yet。'],['Which sentence is an appropriate invitation?',['Why not go to the movies with me?','You are boring the movie.','I have gone movie yesterday.','Too exciting that go.'],0,'Why not + 原形動詞…? 可用來提出邀約或建議。'],['The box is light enough _______.',['to carry','that I carry','too carry','carrying it'],0,'adj. + enough + to VR 表示「夠…可以…」。'],['What should you check before sharing online news?',['Only the number of likes','Author and source','The color of the post','Your favorite actor'],1,'查核作者與來源是辨識資訊可信度的重要步驟。'],['A balanced diet gives teenagers enough _______ for school and exercise.',['energy','junk','lies','movies'],0,'energy 是活力／能量。'],['Zac has lived here _______ he was born.',['for','since','already','never'],1,'since + 過去式子句，表示從過去持續到現在。'],['Which verb form is correct?',['write – wrote – written','write – writed – writed','write – written – wrote','write – wrote – wrote'],0,'write 的三態為 write – wrote – written。'],['What is the main message of Unit 1 reading?',['Extreme dieting is best.','Health needs food, exercise, and self-confidence.','Snacks replace meals.','Teenagers need no energy.'],1,'課文強調均衡飲食、規律運動和正向自信，避免極端節食。'],['Think twice before you _______ news on the Internet.',['share','skip','exercise','invite'],0,'網路消息分享前要先查證。']];
 const f=document.querySelector('#examForm');qs.forEach((q,i)=>f.insertAdjacentHTML('beforeend',`<fieldset id="q${i}" class="panel rounded-2xl p-5"><legend class="sr-only">第 ${i+1} 題</legend><p class="font-bold text-sm leading-6">${i+1}. ${q[0]}</p><div class="mt-4 space-y-2">${q[1].map((o,j)=>`<label class="choice flex cursor-pointer items-center gap-3 rounded-xl border border-slate-700 p-3 text-xs"><input type="radio" name="q${i}" value="${j}"><span>${'ABCD'[j]}. ${o}</span></label>`).join('')}</div><p class="ex hidden mt-3 rounded-xl p-3 text-xs leading-5"></p></fieldset>`));
 function submitExam(){let s=0,a=0;qs.forEach((q,i)=>{let c=document.querySelector('#q'+i),v=c.querySelector('input:checked'),e=c.querySelector('.ex'),ok=v&&+v.value===q[2];if(v)a++;if(ok)s++;e.className='ex mt-3 rounded-xl p-3 text-xs leading-5 '+(ok?'bg-emerald-500/15 text-emerald-100':'bg-rose-500/15 text-rose-100');e.innerHTML=(ok?'✓ 正確！':'✗ 正確答案：<b>'+('ABCD'[q[2]])+'. '+q[1][q[2]]+'</b><br>')+'<span class="text-slate-200">'+q[3]+'</span>'});document.querySelector('#progress').textContent=a+' / 16';let p=Math.round(s/16*100),r=document.querySelector('#result'),t=p>=85?'表現太好了！你已具備跨單元應用能力。':p>=60?'基礎已掌握，建議回看解析後再挑戰一次。':'先從兩課重點卡複習，再重新作答，你會進步很快！';r.innerHTML=`<div class="text-5xl">${p>=85?'🏆':'📚'}</div><h3 class="fun mt-3 text-2xl font-black">你的成績：${s} / 16（${p}%）</h3><p class="mt-2 text-sm text-slate-300">${t}</p>`;r.classList.remove('hidden');r.scrollIntoView({behavior:'smooth',block:'center'});if(p>=85&&window.confetti)confetti({particleCount:130,spread:80,origin:{y:.65}})}
-</script></body></html>
+</script>
+<script>
+/* 課堂按鈕防連點：任一按鈕按下後，全頁按鈕鎖定 5 秒 */
+(function () {
+  let locked = false, timer = null, saved = new Map();
+  document.addEventListener('click', function (event) {
+    const button = event.target.closest && event.target.closest('button');
+    if (!button || locked || button.disabled) {
+      if (locked) { event.preventDefault(); event.stopImmediatePropagation(); }
+      return;
+    }
+    // Allow the first click to execute, then lock every button.
+    locked = true;
+    document.querySelectorAll('button').forEach(btn => {
+      saved.set(btn, btn.disabled);
+      btn.disabled = true;
+      btn.classList.add('opacity-50', 'cursor-not-allowed');
+    });
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      document.querySelectorAll('button').forEach(btn => {
+        btn.disabled = saved.has(btn) ? saved.get(btn) : false;
+        btn.classList.remove('opacity-50', 'cursor-not-allowed');
+      });
+      saved.clear(); locked = false;
+    }, 5000);
+  }, true);
+})();
+</script>
+
+</body></html>
+

@@ -1,14 +1,15 @@
 /**
  * =================================================================
- * AudioGuard - 課堂智慧音訊管家與防亂按防護引擎 (全域 5 秒冷卻鎖定版)
+ * AudioGuard - 課堂智慧音訊管家與防亂按防護引擎 (PATTERN 全面支援版)
  * 適用路徑：D:\GOOGLE雲端\我的雲端硬碟\壽豐國中\115英語教學\GitHub\kevinchang
  * =================================================================
- * 解決學生課堂中瘋狂連點、按不同按鈕洗音效與互相干擾問題。
+ * 解決學生課堂中瘋狂連點、按不同按鈕洗音效、刷題目與互相干擾問題。
  * 
  * 核心規則：
  * 【全域 5 秒冷卻鎖定 (Global 5s Cooldown)】：
- * 限制一次只能按一個按鈕！只要點擊任何發音或音效按鈕，全站所有發音按鈕
- * 立即同步進入 5 秒冷卻鎖定，頂部顯示倒數計時進度條。
+ * 限制一次只能按一個按鈕！點擊任何發音 (TTS)、句型練習 (Pattern)、
+ * 題目檢查 (Check)、單字卡或音效 (SFX) 按鈕後，全站所有互動按鈕
+ * 立即同步進入 5 秒冷卻鎖定，頂部顯示倒數進度膠囊條。
  * 5 秒倒數結束前，完全禁止點擊下一個按鈕！
  */
 
@@ -53,7 +54,7 @@ const AudioGuard = (function() {
             pill.innerHTML = `
                 <div id="globalCooldownCard" class="flex items-center gap-3 bg-slate-900/95 text-amber-300 px-5 py-2.5 rounded-full border-2 border-amber-500/80 shadow-2xl backdrop-blur-md text-xs sm:text-sm font-bold font-fun">
                     <i class="fa-solid fa-hourglass-half text-amber-400 text-sm animate-spin"></i>
-                    <span id="globalCooldownText">發音冷卻中：<strong id="globalCooldownSec" class="text-amber-400 text-base font-black">5</strong> 秒後才可按下一題</span>
+                    <span id="globalCooldownText">冷卻中：<strong id="globalCooldownSec" class="text-amber-400 text-base font-black">5</strong> 秒後才可按下一題</span>
                     <div class="w-20 bg-slate-800 h-2.5 rounded-full overflow-hidden border border-slate-700 hidden sm:block">
                         <div id="globalCooldownBar" class="bg-gradient-to-r from-amber-400 to-orange-500 h-full w-full transition-all duration-1000 ease-linear"></div>
                     </div>
@@ -78,7 +79,7 @@ const AudioGuard = (function() {
             setTimeout(() => {
                 card.classList.remove('ring-4', 'ring-rose-500', 'bg-rose-950/90', 'scale-105');
                 if (globalCooldownRemaining > 0) {
-                    textEl.innerHTML = `發音冷卻中：<strong id="globalCooldownSec" class="text-amber-400 text-base font-black">${globalCooldownRemaining}</strong> 秒後才可按下一題`;
+                    textEl.innerHTML = `冷卻中：<strong id="globalCooldownSec" class="text-amber-400 text-base font-black">${globalCooldownRemaining}</strong> 秒後才可按下一題`;
                 }
             }, 1000);
         }
@@ -87,11 +88,11 @@ const AudioGuard = (function() {
         pill.classList.add('translate-y-0', 'opacity-100');
     }
 
-    // 檢查元素是否為發音或音效按鈕
-    function isAudioButton(btn) {
+    // 檢查元素是否為發音或句型互動按鈕 (全面涵蓋 Pattern, Dialogue, Reading, Review)
+    function isAudioOrQuizButton(btn) {
         if (!btn || !(btn instanceof Element)) return false;
 
-        // 排除控制列、選單分頁切換按鈕、送出答案或重整按鈕
+        // 排除導覽列、頁籤分頁切換按鈕、AI 彈窗關閉按鈕
         if (btn.id === 'audioGuardBtn' || btn.id === 'audioFxBtn' || 
             btn.classList.contains('classroom-audio-btn') ||
             btn.classList.contains('no-cooldown') ||
@@ -99,21 +100,24 @@ const AudioGuard = (function() {
             btn.id.startsWith('tab-') || btn.id.startsWith('btn-tab') ||
             btn.id === 'playAllBtn' || btn.id === 'playAllText' ||
             btn.id === 'playAllIcon' || btn.id === 'togglePlayLetterBtn' ||
-            btn.getAttribute('role') === 'tab') {
+            btn.getAttribute('role') === 'tab' ||
+            btn.getAttribute('onclick')?.includes('switchTab') ||
+            btn.getAttribute('onclick')?.includes('toggleAiModal')) {
             return false;
         }
 
         const onclickStr = btn.getAttribute('onclick') || '';
+        // 包含 Pattern 的 playTTS, checkSentence, checkVerbCard, checkScenario, checkDropdown, sortItem, selectQuizAnswer, checkF1, checkExercise 等
         return btn.classList.contains('audio-btn') || 
                btn.classList.contains('speak-btn') || 
                btn.hasAttribute('data-speak') ||
-               /speak|playSound|playBeep|speakText|speakQuote|speakVerb|speakPattern|speakSentence|playDialogueLine|speakVocab|speakVerbItem/i.test(onclickStr);
+               /speak|play|sound|audio|tts|check|quiz|answer|sort|card|verb|scenario|dropdown|f1|f2|exercise|fillin|pair/i.test(onclickStr);
     }
 
-    // 搜尋頁面上所有的發音按鈕
-    function getAllAudioButtons() {
-        return Array.from(document.querySelectorAll('button, .audio-btn, .speak-btn, [data-speak]'))
-                    .filter(isAudioButton);
+    // 搜尋頁面上所有發音與互動答題按鈕
+    function getAllInteractiveButtons() {
+        return Array.from(document.querySelectorAll('button, .audio-btn, .speak-btn, [data-speak], .choice-btn'))
+                    .filter(isAudioOrQuizButton);
     }
 
     // 播放特定頻率小音效
@@ -134,9 +138,8 @@ const AudioGuard = (function() {
         } catch(e) {}
     }
 
-    // 啟動全域 5 秒冷卻鎖定 (限制一次只能按一個按鈕)
+    // 啟動全域 5 秒冷卻鎖定
     function startGlobalCooldown(triggerBtn, seconds = DEFAULT_COOLDOWN_SECONDS) {
-        // 若已經在全域冷卻中，更新警告並返回
         if (globalCooldownRemaining > 0) {
             showCooldownBlockedWarning(globalCooldownRemaining);
             return false;
@@ -144,17 +147,17 @@ const AudioGuard = (function() {
 
         globalCooldownRemaining = seconds;
 
-        // 1. 鎖定全站所有發音按鈕
-        currentLockedButtons = getAllAudioButtons();
+        // 1. 鎖定全站發音與作答按鈕
+        currentLockedButtons = getAllInteractiveButtons();
         currentLockedButtons.forEach(btn => {
             btn._globalAudioLocked = true;
             btn.classList.add('opacity-50', 'cursor-not-allowed');
         });
 
-        // 2. 當前觸發按鈕特別標註倒數中
+        // 2. 當前觸發按鈕標註倒數
         currentActiveButton = triggerBtn;
-        if (triggerBtn) {
-            currentActiveButtonOriginalHtml = triggerBtn.innerHTML;
+        if (triggerBtn && !triggerBtn.dataset.originalHtml) {
+            triggerBtn.dataset.originalHtml = triggerBtn.innerHTML;
             const isIconOnly = triggerBtn.textContent.trim().length === 0;
             if (isIconOnly) {
                 triggerBtn.innerHTML = `<span class="text-[11px] font-black font-fun text-amber-400 animate-pulse">${seconds}s</span>`;
@@ -170,7 +173,7 @@ const AudioGuard = (function() {
         const textEl = document.getElementById('globalCooldownText');
 
         if (secEl) secEl.innerText = seconds;
-        if (textEl) textEl.innerHTML = `發音冷卻中：<strong id="globalCooldownSec" class="text-amber-400 text-base font-black">${seconds}</strong> 秒後才可按下一題`;
+        if (textEl) textEl.innerHTML = `冷卻中：<strong id="globalCooldownSec" class="text-amber-400 text-base font-black">${seconds}</strong> 秒後才可按下一題`;
         if (barEl) barEl.style.width = '100%';
 
         pill.classList.remove('-translate-y-16', 'opacity-0', 'pointer-events-none');
@@ -182,13 +185,11 @@ const AudioGuard = (function() {
             globalCooldownRemaining--;
 
             if (globalCooldownRemaining > 0) {
-                // 更新頂部顯示
                 const curSecEl = document.getElementById('globalCooldownSec');
                 if (curSecEl) curSecEl.innerText = globalCooldownRemaining;
                 if (barEl) barEl.style.width = `${(globalCooldownRemaining / seconds) * 100}%`;
 
-                // 更新觸發按鈕顯示
-                if (currentActiveButton) {
+                if (currentActiveButton && currentActiveButton.dataset.originalHtml) {
                     const isIconOnly = currentActiveButton.textContent.trim().length <= 3;
                     if (isIconOnly) {
                         currentActiveButton.innerHTML = `<span class="text-[11px] font-black font-fun text-amber-400 animate-pulse">${globalCooldownRemaining}s</span>`;
@@ -197,7 +198,6 @@ const AudioGuard = (function() {
                     }
                 }
             } else {
-                // 倒數結束：解除全域鎖定！
                 endGlobalCooldown();
             }
         }, 1000);
@@ -210,21 +210,18 @@ const AudioGuard = (function() {
         clearInterval(globalCooldownTimer);
         globalCooldownRemaining = 0;
 
-        // 解鎖全站按鈕
         currentLockedButtons.forEach(btn => {
             btn._globalAudioLocked = false;
             btn.classList.remove('opacity-50', 'cursor-not-allowed');
         });
         currentLockedButtons = [];
 
-        // 恢復觸發按鈕的原始文字外觀
-        if (currentActiveButton && currentActiveButtonOriginalHtml) {
-            currentActiveButton.innerHTML = currentActiveButtonOriginalHtml;
+        if (currentActiveButton && currentActiveButton.dataset.originalHtml) {
+            currentActiveButton.innerHTML = currentActiveButton.dataset.originalHtml;
+            delete currentActiveButton.dataset.originalHtml;
             currentActiveButton = null;
-            currentActiveButtonOriginalHtml = '';
         }
 
-        // 隱藏頂部提示條
         const pill = getCooldownPill();
         if (pill) {
             pill.classList.remove('translate-y-0', 'opacity-100');
@@ -236,30 +233,22 @@ const AudioGuard = (function() {
     return {
         DEFAULT_COOLDOWN_SECONDS,
 
-        // 取得目前冷卻剩餘秒數
         getRemainingCooldown() {
             return globalCooldownRemaining;
         },
 
-        // 取得目前模式
         getMode() {
             return currentMode;
         },
 
-        // 設定模式
         setMode(newMode) {
             if (!['all', 'tts_only', 'mute'].includes(newMode)) return;
             currentMode = newMode;
             localStorage.setItem('classroom_audio_mode', newMode);
-
-            if (newMode === 'mute') {
-                this.stopAll();
-            }
-
+            if (newMode === 'mute') this.stopAll();
             this.updateWidgetUI();
         },
 
-        // 循環切換模式
         cycleMode() {
             if (currentMode === 'all') {
                 this.setMode('tts_only');
@@ -270,46 +259,42 @@ const AudioGuard = (function() {
             }
         },
 
-        // 停止所有聲音
         stopAll() {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
             }
         },
 
-        // 啟動全域 5 秒鎖定 API
         lockAll(triggerBtn, seconds = DEFAULT_COOLDOWN_SECONDS) {
             return startGlobalCooldown(triggerBtn, seconds);
         },
 
-        // 語音朗讀 (TTS) - 內建全域 5 秒冷卻、單音源互斥
+        // 語音朗讀 (TTS) - 內建全域 5 秒冷卻
         speak(text, options = {}) {
             if (!text) return false;
-
-            // 靜音模式直接不發聲
             if (currentMode === 'mute') {
                 if (options.onEnd) options.onEnd();
                 return false;
             }
 
-            // 檢查全域冷卻：若正在 5 秒冷卻中，完全禁止下一個按鈕發音！
+            // 若在冷卻中，阻擋並警告
             if (!options.skipCooldownCheck && globalCooldownRemaining > 0) {
                 showCooldownBlockedWarning(globalCooldownRemaining);
                 return false;
             }
 
             if (!('speechSynthesis' in window)) {
-                console.warn('此瀏覽器不支援 Web Speech API');
+                console.warn('瀏覽器不支援 Web Speech API');
                 return false;
             }
 
             const buttonEl = options.button;
             const cooldownSec = options.cooldown !== undefined ? options.cooldown : DEFAULT_COOLDOWN_SECONDS;
 
-            // 立即啟動全域 5 秒冷卻鎖定！
+            // 啟動全域 5 秒冷卻
             startGlobalCooldown(buttonEl, cooldownSec);
 
-            // 單音源互斥：永遠先取消上一段未播完的語音
+            // 單音源互斥：取消上一段語音
             window.speechSynthesis.cancel();
 
             const utterance = new SpeechSynthesisUtterance(text);
@@ -329,9 +314,18 @@ const AudioGuard = (function() {
             return true;
         },
 
-        // 遊戲音效播放 (Web Audio API)
-        playSFX(type) {
+        // 遊戲音效播放 (Web Audio API) - 同步支援全域冷卻管制
+        playSFX(type, triggerBtn = null) {
             if (currentMode === 'mute' || currentMode === 'tts_only') return;
+
+            // 若冷卻中，阻擋音效
+            if (globalCooldownRemaining > 0) {
+                showCooldownBlockedWarning(globalCooldownRemaining);
+                return false;
+            }
+
+            // 啟動全域冷卻
+            startGlobalCooldown(triggerBtn, DEFAULT_COOLDOWN_SECONDS);
 
             try {
                 const ctx = getAudioContext();
@@ -381,7 +375,7 @@ const AudioGuard = (function() {
                         osc.start(now + i * 0.07);
                         osc.stop(now + i * 0.07 + 0.22);
                     });
-                } else if (type === 'click' || type === 'card') {
+                } else if (type === 'click' || type === 'card' || type === 'coin') {
                     playBeepTone(480, 0.06, 'triangle');
                 } else if (type === 'beep') {
                     playBeepTone(580, 0.1, 'sine');
@@ -389,7 +383,6 @@ const AudioGuard = (function() {
             } catch(e) {}
         },
 
-        // 更新各頁面的音效切換按鈕外觀
         updateWidgetUI() {
             const btns = document.querySelectorAll('#audioGuardBtn, #audioFxBtn, .classroom-audio-btn');
             btns.forEach(btn => {
@@ -415,22 +408,28 @@ const AudioGuard = (function() {
             });
         },
 
-        // 初始化全域監聽與攔截
         init() {
             // 全域守護原生 speechSynthesis.speak
             if ('speechSynthesis' in window && !window.speechSynthesis._audioGuardPatched) {
                 const origSpeak = window.speechSynthesis.speak.bind(window.speechSynthesis);
                 window.speechSynthesis.speak = function(utterance) {
                     if (currentMode === 'mute') return;
+                    if (globalCooldownRemaining > 0) {
+                        showCooldownBlockedWarning(globalCooldownRemaining);
+                        return;
+                    }
                     origSpeak(utterance);
                 };
                 window.speechSynthesis._audioGuardPatched = true;
             }
 
+            // 全域橋接 Pattern 頁面原生函數
+            window.playSound = (type) => this.playSFX(type);
+            window.playTTS = (text, btn) => this.speak(text, { button: btn });
+
             const setup = () => {
                 this.updateWidgetUI();
 
-                // 綁定音訊切換按鈕
                 const btns = document.querySelectorAll('#audioGuardBtn, #audioFxBtn, .classroom-audio-btn');
                 btns.forEach(btn => {
                     btn.onclick = (e) => {
@@ -440,7 +439,6 @@ const AudioGuard = (function() {
                     };
                 });
 
-                // 使用者第一次互動時解鎖 AudioContext
                 const unlockAudio = () => {
                     getAudioContext();
                     window.removeEventListener('click', unlockAudio);
@@ -451,26 +449,23 @@ const AudioGuard = (function() {
 
                 // =================================================================
                 // 核心關鍵：全域點擊事件 Capture 攔截
-                // 確保「按了某個按鈕之後，全站 5 秒過後才能按下一個按鈕」
+                // 只要點了任何發音、單字卡或答題按鈕，全站 5 秒內禁止按下一個按鈕！
                 // =================================================================
                 document.addEventListener('click', (e) => {
-                    const targetBtn = e.target.closest('button, .audio-trigger, .speak-btn, [data-speak], .audio-btn');
-                    if (!targetBtn || !isAudioButton(targetBtn)) return;
+                    const targetBtn = e.target.closest('button, .audio-trigger, .speak-btn, [data-speak], .audio-btn, .choice-btn');
+                    if (!targetBtn || !isAudioOrQuizButton(targetBtn)) return;
 
                     // 若目前全域正在 5 秒冷卻中：
                     if (globalCooldownRemaining > 0) {
-                        // 徹底攔截阻止一切行為（包括行內 onclick 與其他監聽器）！
                         e.preventDefault();
                         e.stopImmediatePropagation();
-
-                        // 彈出頂部警示：告知還剩多少秒才能按下一個按鈕
                         showCooldownBlockedWarning(globalCooldownRemaining);
                         return false;
                     }
 
-                    // 尚未在冷卻中：允許此次點擊，並立即將全站鎖定 5 秒！
+                    // 尚未在冷卻中：立即啟動全站 5 秒冷卻鎖定！
                     startGlobalCooldown(targetBtn, DEFAULT_COOLDOWN_SECONDS);
-                }, true); // useCapture: true 是確保在任何行內 onclick 執行前完成攔截
+                }, true); // useCapture: true
             };
 
             if (document.readyState === 'loading') {

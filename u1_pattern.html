@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
@@ -1557,64 +1557,16 @@
             chatLog.scrollTop = chatLog.scrollHeight;
         }
 
-        // 使用瀏覽器內建英文語音，避免外部 TTS API / API Key 失效造成無聲。
+        // 使用 AudioGuard 課堂語音播放引擎，確保跨瀏覽器發音穩定
         function playTTS(text) {
-            if (!('speechSynthesis' in window)) {
-                alert('此瀏覽器不支援語音播放，請改用最新版 Chrome 或 Edge。');
-                return;
-            }
-            try {
-                speechSynthesis.cancel();
+            if (window.AudioGuard) {
+                AudioGuard.speak(text);
+            } else if ('speechSynthesis' in window) {
                 const utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = 'en-US';
-                utterance.rate = 0.9;
-                const voices = speechSynthesis.getVoices();
-                const englishVoice = voices.find(v => /^en(-|_)/i.test(v.lang));
-                if (englishVoice) utterance.voice = englishVoice;
-                speechSynthesis.speak(utterance);
-            } catch (error) {
-                console.error('TTS playback failed:', error);
+                window.speechSynthesis.speak(utterance);
             }
         }
-
-        // 全站按鈕冷卻：任一按鈕按下後，所有按鈕鎖定 5 秒，避免連續亂按。
-        (() => {
-            let coolingDown = false;
-            document.addEventListener('click', (event) => {
-                const button = event.target.closest('button');
-                if (!button || coolingDown) {
-                    if (coolingDown && button) event.preventDefault();
-                    return;
-                }
-                coolingDown = true;
-                const buttons = Array.from(document.querySelectorAll('button'));
-                const previousStates = buttons.map(btn => btn.disabled);
-                buttons.forEach(btn => {
-                    btn.disabled = true;
-                    btn.classList.add('opacity-50', 'cursor-not-allowed');
-                    btn.dataset.cooldownLabel = btn.innerHTML;
-                });
-                // 顯示冷卻倒數，不改動按鈕原本的文字內容
-                let remaining = 5;
-                const label = button.querySelector('[data-cooldown]');
-                const originalText = button.innerText;
-                button.setAttribute('aria-label', `${originalText}，冷卻中 5 秒`);
-                const interval = setInterval(() => {
-                    remaining--;
-                    button.setAttribute('aria-label', `${originalText}，冷卻中 ${remaining} 秒`);
-                    if (remaining <= 0) {
-                        clearInterval(interval);
-                        buttons.forEach((btn, i) => {
-                            btn.disabled = previousStates[i];
-                            btn.classList.remove('opacity-50', 'cursor-not-allowed');
-                            btn.removeAttribute('aria-label');
-                            delete btn.dataset.cooldownLabel;
-                        });
-                        coolingDown = false;
-                    }
-                }, 1000);
-            }, false);
-        })();
 
         function createWavBlob(pcm16, sampleRate) {
             const buffer = new ArrayBuffer(44 + pcm16.length * 2);

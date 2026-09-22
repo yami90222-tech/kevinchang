@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW" class="h-full">
 <head>
     <meta charset="UTF-8">
@@ -1007,60 +1007,6 @@
         };
     </script>
 
-
-    <!-- ?函??? 5 蝘?COOL DOWN嚗誑鈭辣憪晷?舀????????? -->
-    <script>
-    (() => {
-        const COOLDOWN_MS = 5000;
-        const cooldowns = new WeakMap();
-
-        document.addEventListener('click', (event) => {
-            const button = event.target.closest('button');
-            if (!button) return;
-
-            const now = Date.now();
-            const active = cooldowns.get(button);
-            if (active && active.until > now) {
-                event.preventDefault();
-                event.stopImmediatePropagation();
-                return;
-            }
-            if (button.disabled) return;
-
-            const state = {
-                until: now + COOLDOWN_MS,
-                originalHTML: button.innerHTML,
-                wasDisabled: button.disabled,
-                timer: null
-            };
-            cooldowns.set(button, state);
-            button.dataset.cooldownActive = 'true';
-            button.setAttribute('aria-live', 'polite');
-            button.classList.add('opacity-60', 'cursor-not-allowed');
-
-            // 撱嗅??嚗Ⅱ靽活暺??蝬????質甇?虜?瑁???            window.setTimeout(() => {
-                if (cooldowns.get(button) === state) button.disabled = true;
-            }, 0);
-
-            const refresh = () => {
-                const remaining = Math.max(0, Math.ceil((state.until - Date.now()) / 1000));
-                if (remaining > 0) {
-                    button.innerHTML = `COOL DOWN ${remaining}s`;
-                    return;
-                }
-                window.clearInterval(state.timer);
-                button.innerHTML = state.originalHTML;
-                button.disabled = state.wasDisabled;
-                button.classList.remove('opacity-60', 'cursor-not-allowed');
-                button.removeAttribute('data-cooldown-active');
-                button.removeAttribute('aria-live');
-                cooldowns.delete(button);
-            };
-            refresh();
-            state.timer = window.setInterval(refresh, 200);
-        }, true);
-    })();
-    </script>
-
 </body>
 </html>
+

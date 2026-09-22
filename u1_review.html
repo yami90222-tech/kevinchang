@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW" class="h-full">
 <head>
     <meta charset="UTF-8">
@@ -956,48 +956,7 @@
             renderQuiz();
         });
     </script>
-
-    <!-- 全站按鈕冷卻鎖定：任何按鈕按下後，所有按鈕鎖定 5 秒 -->
-    <script>
-    (() => {
-        const COOLDOWN_MS = 5000;
-        let coolingDown = false;
-        let cooldownTimer = null;
-        const originalDisabled = new WeakMap();
-
-        function lockAllButtons() {
-            document.querySelectorAll('button').forEach(button => {
-                if (!originalDisabled.has(button)) originalDisabled.set(button, button.disabled);
-                button.disabled = true;
-                button.setAttribute('aria-disabled', 'true');
-                button.classList.add('opacity-60', 'cursor-not-allowed');
-            });
-        }
-        function unlockButtons() {
-            document.querySelectorAll('button').forEach(button => {
-                button.disabled = originalDisabled.has(button) ? originalDisabled.get(button) : false;
-                button.removeAttribute('aria-disabled');
-                button.classList.remove('opacity-60', 'cursor-not-allowed');
-                originalDisabled.delete(button);
-            });
-            coolingDown = false;
-        }
-        document.addEventListener('click', event => {
-            const button = event.target.closest && event.target.closest('button');
-            if (!button) return;
-            if (coolingDown) {
-                event.preventDefault();
-                event.stopImmediatePropagation();
-                return;
-            }
-            coolingDown = true;
-            lockAllButtons();
-            clearTimeout(cooldownTimer);
-            cooldownTimer = setTimeout(unlockButtons, COOLDOWN_MS);
-        }, true);
-    })();
-    </script>
-
 </body>
 </html>
+
 

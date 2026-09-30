@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW" class="h-full">
 <head>
     <meta charset="UTF-8">
@@ -498,31 +498,15 @@
         // ==========================================
         // 1. Text-To-Speech (Web Speech API)
         // ==========================================
-        // 穩定版語音播放：避免連續 cancel/speak 導致部分瀏覽器無聲
-        let speechRequestId = 0;
         function speakText(text) {
-            if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
-                alert("目前瀏覽器不支援語音合成功能，請改用最新版 Chrome 或 Edge。");
-                return;
-            }
-            const requestId = ++speechRequestId;
-            const synth = window.speechSynthesis;
-            try {
-                synth.cancel();
-                const utterance = new SpeechSynthesisUtterance(String(text || '').trim());
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = 'en-US';
                 utterance.rate = 0.9;
-                utterance.pitch = 1;
-                utterance.onerror = (event) => console.warn('語音播放失敗：', event.error);
-                // cancel() 後稍作延遲再 speak，改善部分 Chrome/Edge 語音佇列卡住的情況
-                window.setTimeout(() => {
-                    if (requestId === speechRequestId && utterance.text) {
-                        try { synth.speak(utterance); }
-                        catch (error) { console.error('無法啟動語音：', error); }
-                    }
-                }, 120);
-            } catch (error) {
-                console.error('語音合成錯誤：', error);
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("您的瀏覽器不支援語音合成朗讀功能。");
             }
         }
 
@@ -958,5 +942,3 @@
     </script>
 </body>
 </html>
-
-

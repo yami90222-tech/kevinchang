@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>國中英語閱讀測驗互動講解 (第1回全解析)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .clue-highlight {
+            background-color: #fef08a; /* yellow-200 */
+            transition: background-color 0.3s ease;
+            border-bottom: 2px solid #ca8a04;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+        .clue-highlight.active {
+            background-color: #fde047; /* yellow-300 */
+            box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+    <header class="bg-indigo-600 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 sm:py-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div class="flex items-center space-x-3 w-full sm:w-auto justify-between sm:justify-start">
+                <a href="index.html" class="flex items-center gap-1.5 bg-indigo-700 hover:bg-indigo-800 text-white text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-xl border border-indigo-400/40 transition shadow-sm">
+                    <span>🏠</span>
+                    <span>回首頁</span>
+                </a>
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl sm:text-3xl">📚</span>
+                    <div>
+                        <h1 class="text-base sm:text-xl font-bold">英語 3800 閱讀測驗</h1>
+                        <p class="text-[11px] sm:text-xs text-indigo-200">第1回題組 (Q24 ~ Q43) ｜ 拔尖班互動解析</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2 flex-wrap justify-end gap-2 w-full sm:w-auto">
+                <!-- Font size control (Default 16px) -->
+                <div class="flex items-center space-x-1.5 bg-indigo-700/90 px-3 py-2 rounded-xl text-xs sm:text-sm shadow-inner">
+                    <span class="whitespace-nowrap font-medium">🔤 字體：</span>
+                    <button onclick="setFontSize('sm')" id="btn-fs-sm" class="px-2.5 py-1 rounded hover:bg-indigo-800 text-indigo-200 font-medium transition-all">14px</button>
+                    <button onclick="setFontSize('base')" id="btn-fs-base" class="px-2.5 py-1 rounded bg-indigo-900 text-white font-bold transition-all shadow">16px (預設)</button>
+                    <button onclick="setFontSize('lg')" id="btn-fs-lg" class="px-2.5 py-1 rounded hover:bg-indigo-800 text-indigo-200 font-medium transition-all">18px</button>
+                    <button onclick="setFontSize('xl')" id="btn-fs-xl" class="px-2.5 py-1 rounded hover:bg-indigo-800 text-indigo-200 font-medium transition-all">20px</button>
+                </div>
+                <div class="flex items-center space-x-2 bg-indigo-700/80 px-3 py-1.5 rounded-xl text-xs sm:text-sm shadow-inner">
+                    <span class="whitespace-nowrap font-medium">🎯 選擇題組：</span>
+                    <select id="passageSelector" class="bg-indigo-900 text-white font-medium rounded-lg px-2.5 py-1.5 outline-none cursor-pointer border border-indigo-500 text-xs sm:text-sm">
+                        <option value="p24_25">Q24-25: 耳朵拔河 (Ear Pull)</option>
+                        <option value="p26_27">Q26-27: 留言牆 (Wall of Notes)</option>
+                        <option value="p28_29">Q28-29: AI客服對話 (Fashen Maddy)</option>
+                        <option value="p30_31">Q30-31: 共享經濟 (Sharing Economy)</option>
+                        <option value="p32_34">Q32-34: 蟬的生命週期 (Cicadas)</option>
+                        <option value="p35_36">Q35-36: 問答與人物興趣</option>
+                        <option value="p37_39">Q37-39: 綠色葬禮 (Green Burials)</option>
+                        <option value="p40_43">Q40-43: David 藝術系面試對話</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-8 flex-grow w-full grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
+        
+        <!-- Left Column: Reading Passage & Vocabulary -->
+        <section class="lg:col-span-6 bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6 flex flex-col h-fit">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-3 sm:pb-4 mb-3 sm:mb-4 gap-2">
+                <h2 id="passageTitle" class="text-base sm:text-lg font-bold text-indigo-900 flex items-center gap-2">
+                    <span>📖</span> 閱讀文章原文
+                </h2>
+                <div class="flex items-center gap-2 flex-wrap">
+                    <span id="clueHint" class="text-[11px] sm:text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded font-medium animate-pulse">💡 點擊右側題目高亮線索</span>
+                    <span id="passageTag" class="text-[11px] sm:text-xs bg-indigo-50 text-indigo-600 font-semibold px-2.5 py-1 rounded-full">Q24 - Q25</span>
+                </div>
+            </div>
+            
+            <!-- Passage Chinese Toggle Button -->
+            <div class="mb-3">
+                <button onclick="togglePassageTranslation()" class="w-full sm:w-auto text-xs sm:text-sm bg-indigo-100 hover:bg-indigo-200 text-indigo-900 font-medium px-3.5 py-2.5 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-sm">
+                    <span>🌐</span> <span id="passageTransBtnText">顯示文章完整中文翻譯</span>
+                </button>
+            </div>
+
+            <!-- Passage Chinese Container -->
+            <div id="passageTranslationBox" class="hidden mb-4 p-3.5 sm:p-4 bg-indigo-50/70 border border-indigo-200 rounded-xl text-xs sm:text-sm text-indigo-950 space-y-2 leading-relaxed">
+                <p class="font-bold text-indigo-900 border-b border-indigo-200 pb-1">📝 文章完整中文對照：</p>
+                <div id="passageTranslationContent" class="space-y-2"></div>
+            </div>
+
+            <div id="passageContent" class="prose prose-slate max-w-none text-base leading-relaxed space-y-3 sm:space-y-4 text-slate-700 bg-slate-50/50 p-3.5 sm:p-4 rounded-xl border border-slate-100 mb-6 max-h-[350px] sm:max-h-[450px] overflow-y-auto">
+                <!-- Dynamically populated passage -->
+            </div>
+
+            <div class="mt-auto border-t pt-4">
+                <h3 class="font-bold text-slate-800 text-xs sm:text-sm mb-3 flex items-center gap-1.5">
+                    <span>💡</span> 核心單字與片語解析
+                </h3>
+                <div id="vocabList" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm"></div>
+            </div>
+        </section>
+
+        <!-- Right Column: Interactive Questions & AI Explanation -->
+        <section class="lg:col-span-6 flex flex-col gap-6">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6 flex flex-col">
+                <div class="flex justify-between items-center border-b pb-3 sm:pb-4 mb-4">
+                    <h2 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <span>✍️</span> 題組互動演練與線索指引
+                    </h2>
+                    <span id="questionCountTag" class="text-xs sm:text-sm bg-amber-50 text-amber-700 font-semibold px-2.5 py-1 rounded-full">共 2 題</span>
+                </div>
+
+                <div id="questionsContainer" class="space-y-6"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-6 text-center text-xs mt-auto px-4">
+        <p>國中英語 3800 應用彙編互動教學工具 ｜ 專為國中會考閱讀素養設計</p>
+    </footer>
+
+    <script>
+        const database = {
+            p24_25: {
+                title: "Q24-25: 耳朵拔河 (Ear Pull)",
+                tag: "Q24 - Q25",
+                passage: `
+                    <p class="font-bold text-slate-900">Is Your Ear Hard Enough? Let's Play "Ear Pull"!</p>
+                    <p>Qanulpit? (How are you?) We're students from Alaska. Yes, we're Inuit. We want to invite you to experience one of the fun games in our culture. That is: ear pull!</p>
+                    <p id="p-24"><strong>How do we play the ear pull game?</strong><br>
+                    First, two players sit on the ground, and their feet fix each other. Second, we put a rope on both players' ears. Then the game starts! <span data-clue="24" class="transition-colors">Players have to use the power of their body and ear to make the rope free of the other's ear. Or, until one of them can't bear it anymore and gives up.</span></p>
+                    <p id="p-25">Interesting, right? Ear pull is a common and popular game for us Inuit. <span data-clue="25" class="transition-colors">We live in a cold place, and the cold often makes our ears hurt. Welcome to play the game and experience our life in a cold place. If you win the ear pull, you show everyone that you are strong enough to bear the pain. We'll also prepare some drinks and cookies for you. Come and have fun with us!</span></p>
+                    <p><strong>Time:</strong> <span data-clue="25-time">16:00, 12/2</span><br><strong>Place:</strong> <span data-clue="25-place">Classroom 201</span></p>
+                `,
+                translation: [
+                    "你的耳朵夠硬嗎？來玩「耳朵拔河」吧！",
+                    "Qanulpit？（你好嗎？）我們是來自阿拉斯加的學生。是的，我們是因紐特人。我們想邀請您體驗我們文化中的一個趣味遊戲，那就是：耳朵拔河！",
+                    "我們如何玩耳朵拔河遊戲呢？首先，兩位選手坐在地上，他們的雙腳互相勾住。第二，我們把一根繩子套在兩位選手的耳朵上。接著遊戲就開始了！選手必須使用身體和耳朵的力量，把繩子從對方的耳朵上扯脫；或者直到其中一人再也受不了而放棄為止。",
+                    "很有趣對吧？耳朵拔河對我們因紐特人來說是一個常見且受歡迎的遊戲。我們住在寒冷的地方，寒冷經常讓我們的耳朵感到疼痛。歡迎來玩這個遊戲，體驗我們在寒冷地方的生活。如果你贏了耳朵拔河，你就向大家證明了你有足夠的力量來承受疼痛。我們也會為你準備一些飲料和餅乾。快來和我們一起同樂吧！",
+                    "時間：12月2日 16:00 ｜ 地點：201教室"
+                ],
+                vocab: [
+                    { word: "culture", meaning: "n. 文化" },
+                    { word: "bear", meaning: "v. 忍受；負擔" },
+                    { word: "common", meaning: "adj. 常見的、普遍的" },
+                    { word: "pain", meaning: "n. 疼痛" }
+                ],
+                questions: [
+                    {
+                        id: 24,
+                        q: "24. Who is in pain?",
+                        clueTarget: "24",
+                        options: [
+                            "The players in the ear pull game.",
+                            "The people who give cookies.",
+                            "The students from Alaska.",
+                            "The people who watch the game."
+                        ],
+                        translations: [
+                            "(A) 正在玩耳朵拔河的選手（正確：兩人用耳朵套繩子拉扯直到有人受不了放棄，因此正在承受疼痛）。",
+                            "(B) 提供餅乾的人。",
+                            "(C) 來自阿拉斯加的學生。",
+                            "(D) 觀看比賽的人。"
+                        ],
+                        correct: 0,
+                        explanation: "【線索指引】對應文中「until one of them can't bear it anymore and gives up」，兩人用耳朵套繩子拉扯直到有人受不了放棄，因此正在承受疼痛的是參賽玩家。"
+                    },
+                    {
+                        id: 25,
+                        q: "25. What can we NOT know from the reading?",
+                        clueTarget: "25",
+                        options: [
+                            "What day is the game?",
+                            "Why do they hold the game?",
+                            "How can people play the game?",
+                            "Where will they hold the game?"
+                        ],
+                        translations: [
+                            "(A) 活動是星期幾？（文章僅有日期 12/2，未提及星期幾，故選此項）",
+                            "(B) 他們為什麼舉辦這場遊戲？（體驗因紐特人因寒冷而生的生活與忍耐力）",
+                            "(C) 人們如何玩這個遊戲？（說明了耳朵拔河規則）",
+                            "(D) 他們將在哪裡舉辦遊戲？（Classroom 201）"
+                        ],
+                        correct: 0,
+                        explanation: "【線索指引】文章提到了時間 (12/2)、地點 (Classroom 201)、舉辦原因與規則，唯獨沒有說明是星期幾 (What day)，僅有日期 12/2。"
+                    }
+                ]
+            },
+            p26_27: {
+                title: "Q26-27: 留言牆 (Wall of Notes)",
+                tag: "Q26 - Q27",
+                passage: `
+                    <p class="font-bold text-slate-900">There is a wall of notes. Below are some of them.</p>
+                    <div class="space-y-3 bg-white p-3 rounded border text-sm">
+                        <p id="note-wang"><strong>Mr. Wang:</strong> Everything will be fine and you will get better soon. Please come back to school. We all miss you and your class! Sincerely, Your student, Betty</p>
+                        <hr>
+                        <p id="note-steve"><strong>Dear Steve:</strong> No more pain, No more worries. Please feel free to leave the world. I will take care of our little daughter. Your new life is going to start in another place. We will never forget you! Your wife, Lucy</p>
+                        <hr>
+                        <p id="note-stranger"><strong>Mr. Stranger:</strong> Thanks for saving me from the crazy woman's attack. Though I don't know you, I still have to say "Thank you." <span data-clue="26" class="transition-colors">When the cuts in your arms <u>heal</u>, please let me know.</span> I would be very happy for you. Phone number: 0955-***-*** Best wishes, Nina</p>
+                        <hr>
+                        <p id="note-lee"><strong>Miss Lee:</strong> You always give me hope. When I was in pain, you cheered me up. <span data-clue="27" class="transition-colors">I want to be a nurse like you.</span> Time to say good-bye now! I am going back home tomorrow. Wish you luck! Your sweet little girl, Wendy</p>
+                    </div>
+                `,
+                translation: [
+                    "這裡有一面留言牆。以下是其中幾則留言：",
+                    "【王老師】：一切都會好起來的，你很快就會康復。請回到學校來。我們大家都很想念你和你的課！真摯地，你的學生 Betty",
+                    "【親愛的 Steve】：不再有痛苦，不再有煩憂。請安心離開這個世界。我會照顧好我們的小女兒。你的新生活將在另一個地方展開。我們永遠不會忘記你！你的妻子 Lucy",
+                    "【陌生人先生】：謝謝你從那個瘋女人的攻擊中救了我。雖然我不認識你，但我還是要說「謝謝你」。當你手臂上的傷口癒合時，請讓我知道。我會為你感到非常開心。電話：0955-***-*** 獻上最誠摯的祝福，Nina",
+                    "【李小姐】：你總是給我希望。在我痛苦的時候，你為我打氣。我想成為像你一樣的護理師。現在是說再見的時候了！我明天就要回老家了。祝你好運！你貼心的小女孩 Wendy"
+                ],
+                vocab: [
+                    { word: "sincerely", meaning: "adv. 真誠地" },
+                    { word: "pain", meaning: "n. 疼痛、痛苦" },
+                    { word: "heal", meaning: "v. 癒合、痊癒" },
+                    { word: "attack", meaning: "n. 攻擊" }
+                ],
+                questions: [
+                    {
+                        id: 26,
+                        q: "26. What does the word <u>heal</u> mean?",
+                        clueTarget: "26",
+                        options: [
+                            "To save somebody.",
+                            "To become well again.",
+                            "To leave for another place.",
+                            "To feel happy for somebody."
+                        ],
+                        translations: [
+                            "(A) 拯救某人。",
+                            "(B) 恢復健康、痊癒（正確：對應手臂上的傷口癒合）。",
+                            "(C) 前往別處。",
+                            "(D) 為某人感到開心。"
+                        ],
+                        correct: 1,
+                        explanation: "【線索指引】對應 Nina 寫給救命恩人的紙條：「When the cuts in your arms heal (當手臂上的傷口癒合時)」，對應選項 (B) 恢復健康。"
+                    },
+                    {
+                        id: 27,
+                        q: "27. Which is true about the notes?",
+                        clueTarget: "27",
+                        options: [
+                            "Miss Lee is a nurse.",
+                            "Steve is Lucy's father.",
+                            "Nina attacked a woman.",
+                            "Mr. Wang is an engineer."
+                        ],
+                        translations: [
+                            "(A) 李小姐是一位護理師（正確：Wendy 說想成為像她一樣的護理師）。",
+                            "(B) 史蒂夫是露西的父親（史蒂夫是丈夫，露西是妻子）。",
+                            "(C) 妮娜攻擊了一名女子（妮娜是被瘋女人攻擊，由陌生人救）。",
+                            "(D) 王先生是一位工程師（文中為學生 Betty 寫給老師）。"
+                        ],
+                        correct: 0,
+                        explanation: "【線索指引】對應 Wendy 寫給 Miss Lee 的紙條：「I want to be a nurse like you (我想成為像你一樣的護理師)」，可知 Miss Lee 是護理師。"
+                    }
+                ]
+            },
+            p28_29: {
+                title: "Q28-29: AI客服對話 (Fashen)",
+                tag: "Q28 - Q29",
+                passage: `
+                    <p class="font-bold text-slate-900">Amber placed an order with Fashen, one of her favorite online stores, but she got the wrong items. Here is the talk between her and Maddy, the customer service AI of Fashen.</p>
+                    <div class="bg-white p-3 rounded border text-sm space-y-2">
+                        <p><strong>Maddy:</strong> Hello! How may I help you?</p>
+                        <p><strong>Amber:</strong> I got the wrong items.</p>
+                        <p><strong>Maddy:</strong> Oh no! We are so sorry for that. I will do my best to help you. <span data-clue="28" class="transition-colors">Please give me your order number.</span></p>
+                        <p><strong>Amber:</strong> #123456789.</p>
+                        <p><strong>Maddy:</strong> Thank you for the information. Let me check the order. It might take some time. (Forty seconds later.)</p>
+                        <p><strong>Amber:</strong> How come it is taking you so long?</p>
+                        <p><strong>Maddy:</strong> Maybe it's your Internet, and we also have trouble understanding your question. Can you give me more information about your question?</p>
+                        <p><strong>Amber:</strong> No way! I waited for you for so long.</p>
+                        <p><strong>Maddy:</strong> Maybe it's your Internet, or there might be something wrong with your phone or computer. Please try turning it off and on again.</p>
+                        <p><strong>Amber:</strong> There is nothing wrong with my phone.</p>
+                        <p><strong>Maddy:</strong> Did you try using the correct password?</p>
+                        <p><strong>Amber:</strong> What are you talking about? I want to speak to a real person.</p>
+                        <p><strong>Maddy:</strong> We understand you care about your order, and we are working on it. Please call our helpline if you need a quick help.</p>
+                        <p><strong>Amber:</strong> Quick help for the wrong items, okay?</p>
+                        <p><strong>Maddy:</strong> Okay. If you have any more questions or need further help, feel free to let me know. We're always here. Have a nice day!</p>
+                        <p><strong>Amber:</strong> A nice day? Maddy, your HELP really made me MAD!</p>
+                        <hr>
+                        <p id="clue-29"><strong>Amber's Email:</strong> <span data-clue="29" class="transition-colors">I waited for your AI for more than half a minute... she just kept telling me to check my Internet.</span></p>
+                    </div>
+                `,
+                translation: [
+                    "Amber 在她最喜歡的網路商店之一 Fashen 下了訂單，但她收到了錯誤的商品。以下是她與 Fashen 客服 AI Maddy 之間的對話及隨後發送的電子郵件：",
+                    "Maddy：您好！有什麼我可以幫您的嗎？",
+                    "Amber：我拿到錯誤的商品了。",
+                    "Maddy：噢不！我們對此感到非常抱歉。我會盡全力協助您。請提供您的訂單編號。",
+                    "Amber：#123456789。",
+                    "Maddy：感謝您提供資訊。讓我幫您查詢訂單。這可能需要一些時間。（四十秒後...）",
+                    "Amber：怎麼花這麼久時間？",
+                    "Maddy：可能是您的網路問題，而且我們很難理解您的問題。您可以提供更多關於問題的資訊嗎？",
+                    "Amber：不會吧！我等了你這麼久。",
+                    "Maddy：可能是您的網路，或者您的手機或電腦有問題。請嘗試關機後再重新開機。",
+                    "Amber：我的手機沒有任何問題。",
+                    "Maddy：您嘗試使用正確的密碼了嗎？",
+                    "Amber：你在胡說八道什麼？我要跟真人客服通話。",
+                    "Maddy：我們理解您很關心訂單，我們正在處理中。如果您需要快速協助，請撥打我們的服務專線。",
+                    "Amber：商品出錯還要什麼快速協助，好嗎？",
+                    "Maddy：好的。如果您還有其他問題或需要進一步協助，隨時讓我知道。我們隨時都在。祝您有美好的一天！",
+                    "Amber：美好的一天？Maddy，你的幫助真的把我氣瘋了！"
+                ],
+                vocab: [
+                    { word: "customer service AI", meaning: "n. 人工智慧客服" },
+                    { word: "information", meaning: "n. 資訊" },
+                    { word: "helpline", meaning: "n. 服務專線" },
+                    { word: "order number", meaning: "n. 訂單編號" }
+                ],
+                questions: [
+                    {
+                        id: 28,
+                        q: "28. What information does the customer service AI ask Amber to help with her problem?",
+                        clueTarget: "28",
+                        options: [
+                            "The item names.",
+                            "Her order number.",
+                            "Her phone number.",
+                            "The correct password."
+                        ],
+                        translations: [
+                            "(A) 商品名稱。",
+                            "(B) 她的訂單編號（正確：Maddy 要求請提供 order number）。",
+                            "(C) 她的電話號碼。",
+                            "(D) 正確的密碼。"
+                        ],
+                        correct: 1,
+                        explanation: "【線索指引】對話初期 Maddy 直接向 Amber 要求：「Please give me your order number. (#123456789)」。"
+                    },
+                    {
+                        id: 29,
+                        q: "29. Which of the following wasn't a fact (事實)?",
+                        clueTarget: "29",
+                        options: [
+                            "\"She always gave me the wrong information...\"",
+                            "\"... she just kept telling me to check my Internet.\"",
+                            "\"I felt so mad after talking to your customer service AI, Maddy.\"",
+                            "\"I waited for your AI for more than half a minute...\""
+                        ],
+                        translations: [
+                            "(A) 「她總是給我錯誤的資訊...」（正確答案：AI 只是鬼打牆叫她檢查網路，並非「總是」給錯資訊，非客觀事實）。",
+                            "(B) 「...她一直叫我去檢查網路。」（對話中重複多次，屬事實）。",
+                            "(C) 「跟客服 AI 談話後我感到非常生氣。」（信件主觀感受屬實）。",
+                            "(D) 「我等了 AI 超過半分鐘...」（對話顯示經過 40 秒，屬實）。"
+                        ],
+                        correct: 0,
+                        explanation: "【線索指引】信件中 Amber 說等待超過半分鐘（對話記錄顯示 40 秒），此為事實。選項 (A) AI 並非給予錯誤資訊而是鬼打牆，故 (A) 非客觀事實。"
+                    }
+                ]
+            },
+            p30_31: {
+                title: "Q30-31: 共享經濟 (Sharing Economy)",
+                tag: "Q30 - Q31",
+                passage: `
+                    <p class="font-bold text-slate-900">Every day, when we turn on the TV or surf the Internet, we can see lots of advertisements pop up. They are trying to lead us to do more shopping. Clearly, businessmen or shop owners want people to spend more although our homes are full of things, and we seldom put them to good use.</p>
+                    <p>However, a new type of shopping is beginning to change our way of buying and owning things. For example, you may need some tools to fix the pipe one day, but will you buy them if you know you may only use them once or twice in years? And do you really need to buy a giant suitcase for going abroad once or twice a year?</p>
+                    <p id="p-30">So, why don't we share these things with other people? We may also share the cost at the same time. This is why people come up with the idea of <strong>sharing economy</strong>. <span data-clue="30" class="transition-colors">From parking spaces to special skills, we can share a lot of things with others. What's more, sharing economy can not only help us save money but also give us a chance to make money though we are not the owner of a company or a shop. In the future, we can expect to own less and share more.</span></p>
+                    <p id="p-31">網頁平台範例：<span data-clue="31" class="transition-colors">Stylend (租衣)、TaskRabbit (技能勞務)、Garden Camping (花園露營)、Feed the Hungry One (免費捐贈物資)</span></p>
+                `,
+                translation: [
+                    "每天，當我們打開電視或瀏覽網路時，都可以看到大量廣告彈跳出來。它們試圖引導我們進行更多購物。顯然，商人或店主希望人們花更多錢，儘管我們的家中已經堆滿了東西，而我們很少妥善利用它們。",
+                    "然而，新型態的購物方式正開始改變我們購買與擁有物品的方式。例如，有一天你可能需要一些工具來修理水管，但如果你知道自己未來幾年可能只會用一兩次，你還會買它們嗎？你真的需要為了每年出國一、兩次而去買一個巨大的行李箱嗎？",
+                    "所以，我們為什麼不和其他人共享這些物品呢？我們同時也可以分攤成本。這就是為什麼人們會提出「共享經濟」的概念。從停車位到特殊技能，我們可以與他人共享許多東西。不僅如此，共享經濟不僅能幫我們省錢，還能給我們賺錢的機會，即使我們不是公司或商店的老闆。未來，我們可以期待擁有更少、分享更多。"
+                ],
+                vocab: [
+                    { word: "sharing economy", meaning: "n. 共享經濟" },
+                    { word: "advertisement", meaning: "n. 廣告" },
+                    { word: "suitcase", meaning: "n. 行李箱" },
+                    { word: "skill", meaning: "n. 技能、技巧" }
+                ],
+                questions: [
+                    {
+                        id: 30,
+                        q: "30. What can we know about sharing economy?",
+                        clueTarget: "30",
+                        options: [
+                            "Sharing economy means everything is free.",
+                            "Sharing economy is only good for shopkeepers.",
+                            "Sharing economy helps people to cut down on spending.",
+                            "Sharing economy makes people shop more and spend more."
+                        ],
+                        translations: [
+                            "(A) 共享經濟意味著每樣東西都是免費的（文中提到要 share the cost，並非全免費）。",
+                            "(B) 共享經濟只對店主有好處。",
+                            "(C) 共享經濟幫助人們減少開支（正確：share the cost 與 save money）。",
+                            "(D) 共享經濟讓人們買更多、花更多錢。"
+                        ],
+                        correct: 2,
+                        explanation: "【線索指引】共享經濟核心在於 share the cost 與 save money，幫助人們減少開支 (cut down on spending)。"
+                    },
+                    {
+                        id: 31,
+                        q: "31. Which website is NOT using the idea of sharing economy?",
+                        clueTarget: "31",
+                        options: [
+                            "Stylend",
+                            "TaskRabbit",
+                            "Garden Camping",
+                            "Feed the Hungry One"
+                        ],
+                        translations: [
+                            "(A) Stylend（衣服租賃共享）。",
+                            "(B) TaskRabbit（技能與勞務共享）。",
+                            "(C) Garden Camping（私人花園露營地共享）。",
+                            "(D) Feed the Hungry One（免費救濟與物資捐贈網站，非商業共享經濟，正確答案）。"
+                        ],
+                        correct: 3,
+                        explanation: "【線索指引】前三者為商業共享或互助平台，而 (D) 係免費捐贈物資給窮人的慈善救助網，非共享經濟商業模式。"
+                    }
+                ]
+            },
+            p32_34: {
+                title: "Q32-34: 蟬的生命週期 (Cicadas)",
+                tag: "Q32 - Q34",
+                passage: `
+                    <p class="font-bold text-slate-900">Though cicadas are small flying insects, they carry important lessons about growing stronger and enjoying life. They play a small but beautiful part in nature and tell us that even the simplest things, like their sounds on hot summer days, can have a special touch to the world around us. However, it takes years before this.</p>
+                    <p id="p-32-34">Cicadas experience three main parts in their lives: <strong>egg, nymph and adult</strong>. <span data-clue="32-34" class="transition-colors">Cicadas spend most of their lives as nymphs. The small insects do not have wings and live under the ground for years, feeding on the roots of the plants, and when growing up, they lose their old skin to become beautiful adult insects.</span></p>
+                    <p>After that, they fly around and sing happy songs. Cicadas' special songs make us understand that things change, just like the seasons of the year. However, the adult part of some cicadas lives is short. The flying insects in the sky enjoy short but wonderful moments in life and show us that every part of our life is important, even if it doesn't last long.</p>
+                `,
+                translation: [
+                    "雖然蟬是小型飛行昆蟲，但牠們蘊含了關於變得更強與享受生命的重大教訓。牠們在大自然中扮演著雖小卻美麗的角色，並告訴我們，即使是最簡單的事物（像是牠們在炎夏日子的鳴叫聲），也能對周遭的世界產生特別的觸動。然而，這需要經過多年的等待。",
+                    "蟬的生命經歷三個主要階段：卵、若蟲（幼蟲）和成蟲。蟬將生命中的大部分時間都作為若蟲度過。這種小昆蟲沒有翅膀，在地底下生活多年，以植物根部為食。長大後，牠們會脫掉舊皮成為美麗的成蟲。",
+                    "在那之後，牠們到處飛舞並高唱快樂的歌曲。蟬特殊的歌曲讓人們明白事物會不斷改變，就像一年四季的交替一樣。然而，某些蟬的成蟲生命非常短暫。空中的飛行昆蟲在生命中享受著短暫卻美妙的時刻，向我們展示生命的每個部分都很重要，即使它不長久。",
+                    "蟬就像我們大自然中的老師，教導我們在每一刻尋找快樂、透過改變尋找力量，並在生活的起伏中成長。所以，讓我們在夏日的魔法中聆聽並向蟬學習吧！"
+                ],
+                vocab: [
+                    { word: "cicada", meaning: "n. 蟬" },
+                    { word: "nymph", meaning: "n. 若蟲（幼蟲）" },
+                    { word: "adult", meaning: "n. 成蟲" },
+                    { word: "wing", meaning: "n. 翅膀" }
+                ],
+                questions: [
+                    {
+                        id: 32,
+                        q: "32. Who is most likely the writer of the reading?",
+                        clueTarget: "32-34",
+                        options: [
+                            "A teacher in a math class.",
+                            "A clerk in an art museum.",
+                            "A farmer on a vegetable farm.",
+                            "A reporter in a science program."
+                        ],
+                        translations: [
+                            "(A) 數學老師。",
+                            "(B) 美術館店員。",
+                            "(C) 菜農。",
+                            "(D) 科學節目記者（正確：文章探討昆蟲生態與人生哲理，屬自然科普報導）。"
+                        ],
+                        correct: 3,
+                        explanation: "【線索指引】文章科普介紹昆蟲（蟬）的生長週期與人生哲理，最可能出自自然科學節目記者。"
+                    },
+                    {
+                        id: 33,
+                        q: "33. What is a nymph?",
+                        clueTarget: "32-34",
+                        options: [
+                            "A young cicada without wings living underground.",
+                            "An adult insect flying in the sky.",
+                            "A small egg laid on plant roots.",
+                            "A beautiful song of summer days."
+                        ],
+                        translations: [
+                            "(A) 沒有翅膀且生活在地底下的年輕蟬/若蟲（正確：對應 nymph 特徵）。",
+                            "(B) 在空中飛翔的成蟲。",
+                            "(C) 產在植物根部的卵。",
+                            "(D) 夏日的優美歌曲。"
+                        ],
+                        correct: 0,
+                        explanation: "【線索指引】對應文中說明 nymph 特徵：do not have wings, live under the ground, feeding on plant roots。"
+                    },
+                    {
+                        id: 34,
+                        q: "34. What can we learn from the reading?",
+                        clueTarget: "32-34",
+                        options: [
+                            "The season in the reading is summer.",
+                            "Nymphs eat small eggs under the ground.",
+                            "Cicadas have their babies in the second part of their life.",
+                            "The long life of a cicada under the ground makes the most beautiful part of its life."
+                        ],
+                        translations: [
+                            "(A) 文中提到的季節是夏天（正確：文章提及 hot summer days 與夏日魔法）。",
+                            "(B) 若蟲在地底下吃小卵。",
+                            "(C) 蟬在生命的第二部分生寶寶。",
+                            "(D) 蟬在地底下的漫長生活構成了其生命中最美妙的部分。"
+                        ],
+                        correct: 0,
+                        explanation: "【線索指引】文中結語與內文提及 summer days 與夏日魔法，季節對應到夏天。"
+                    }
+                ]
+            },
+            p35_36: {
+                title: "Q35-36: 問答與人物興趣",
+                tag: "Q35 - Q36",
+                passage: `
+                    <p class="font-bold text-slate-900">Answer the question, and you may get a free gift!</p>
+                    <div id="p-35-36" class="space-y-3 bg-white p-3 rounded border text-sm">
+                        <p><span data-clue="35-36" class="transition-colors"><strong>Judy:</strong> When I am free, I like traveling to many places to try different foods... I also take photos of the foods and share them on the Net.</span></p>
+                        <hr>
+                        <p><span data-clue="35-36" class="transition-colors"><strong>Anne:</strong> I am Anne, a writer of children's books... In my free time, I volunteer to read stories to children in the library.</span></p>
+                        <hr>
+                        <p><span data-clue="35-36" class="transition-colors"><strong>Henry:</strong> My name is Henry... After work, I often play basketball with my teammates. I am on Wizards.</span></p>
+                        <hr>
+                        <p><span data-clue="35-36" class="transition-colors"><strong>Chris:</strong> I'm Chris. I am a computer engineer... When I don't work, I like watching movies.</span></p>
+                    </div>
+                `,
+                translation: [
+                    "【回答問題，您可能會獲得免費禮物！】",
+                    "Judy：我是 Judy。當我有空時，我喜歡到許多地方旅行以嘗試不同的食物。我想認識更多美味的料理並學著做。透過這種方式，我可以獲得靈感來做出更多菜餚。我也會拍下食物的照片並分享到網路上。",
+                    "Anne：嗨！我是 Anne，一位童書作家。我喜歡和孩子們在一起。我想多了解他們最喜歡的事物。在閒暇時間，我自願去圖書館為小朋友說故事。當他們在我的故事時間玩得開心時，我也感到很幸福。",
+                    "Henry：我的名字是 Henry。工作時間裡，我花很多時間和學生一起研討數學練習題。下班後，我經常和籃球隊友一起打籃球。我在 Wizards（巫師隊）。我真的很愛籃球，我的生活不能沒有它。",
+                    "Chris：我是 Chris。我是一名電腦工程師，每天工作很長時間。當我不工作時，我喜歡看電影。在我公司裡有二十多位像我一樣的電影愛好者。我們每週看一次電影，我們喜歡各種電影。"
+                ],
+                vocab: [
+                    { word: "volunteer", meaning: "v. / n. 當志工；自願" },
+                    { word: "teammate", meaning: "n. 隊友" },
+                    { word: "company", meaning: "n. 公司" },
+                    { word: "exercise", meaning: "n. 練習、運動" }
+                ],
+                questions: [
+                    {
+                        id: 35,
+                        q: "35. Which might the question be?",
+                        clueTarget: "35-36",
+                        options: [
+                            "What exercise do you like?",
+                            "How can you live a happy life?",
+                            "What do you do in your free time?",
+                            "What do you need for making great food?"
+                        ],
+                        translations: [
+                            "(A) 你喜歡什麼運動？（僅 Henry 提到打籃球，其他人無關）。",
+                            "(B) 如何過快樂的生活？",
+                            "(C) 你在閒暇時間做什麼？（正確：四人分別描述自己空閒時做的事）。",
+                            "(D) 做美食需要什麼？"
+                        ],
+                        correct: 2,
+                        explanation: "【線索指引】四位主角分別介紹了自己在閒暇時間（free time）所從事的興趣活動，故問句應為「你在閒暇時間做什麼？」。"
+                    },
+                    {
+                        id: 36,
+                        q: "36. In which sentence does <u>Wizards</u> have the same meaning as it in the reading?",
+                        clueTarget: "35-36",
+                        options: [
+                            "Many children love books about WIZARDS and their magic.",
+                            "The WIZARDS practiced hard to get ready for the new season.",
+                            "The WIZARDS opened their old books and read the spells out!",
+                            "They're computer WIZARDS; they can fix any problem in just minutes."
+                        ],
+                        translations: [
+                            "(A) 許多孩子喜歡關於巫師與魔法的書（魔法師）。",
+                            "(B) WIZARDS（巫師隊）努力練習以準備新賽季（正確：此處指球隊名稱）。",
+                            "(C) 巫師們打開舊書唸出咒語。",
+                            "(D) 他們是電腦高手（高手/達人）。"
+                        ],
+                        correct: 1,
+                        explanation: "【線索指引】Henry 提到自己隸屬 Wizards 籃球隊，選項 (B) 「The WIZARDS practiced hard...」中的 Wizards 也是指球隊實體訓練。"
+                    }
+                ]
+            },
+            p37_39: {
+                title: "Q37-39: 綠色葬禮 (Green Burials)",
+                tag: "Q37 - Q39",
+                passage: `
+                    <p class="font-bold text-slate-900">What can we do with people's bodies after they die? In the past, we burned them or placed them under the ground as a way of sending them to the next stage of their life. But today, some people start going green because they find it takes and costs much more to bury and burn the dead.</p>
+                    <p id="p-37-39">People practice green burials to show their love for the dead but don't want to take too much from the nature. There are some green burial choices, such as burying the dead at sea or placing them in a biodegradable box. However, both still give off CO2. Report has it that the greenest burial way is to leave the body in the open air and let the nature take its course.</p>
+                    <p>Here are some good points about green burials. <span data-clue="37-39" class="transition-colors">First, green burials take less work and cost much less. Second, the materials for green burials are greener, cheaper and more biodegradable.</span> Besides, dead people can get closer to the nature by lying around beautiful flowers, trees and even animals and don't have to stay in a small box. That is, this kind of burial is a final thank-you to Mother Nature after one passes away.</p>
+                `,
+                translation: [
+                    "人們死後，我們該如何處理他們的遺體？過去，我們將遺體火化或埋在地下，作為將他們送往人生下一階段的方式。但今天，有些人開始走向環保（綠色葬禮），因為他們發現傳統的土葬與火化花費更多的心力與金錢。",
+                    "人們實行綠色葬禮是為了表達對死者的愛，同時不想向大自然索取太多。綠色葬禮的選擇包括海葬或使用可生物降解的環保盒。然而，這兩者仍然會釋放二氧化碳。據報導，最環保的葬禮方式是將遺體置於露天環境中，讓大自然順其自然。",
+                    "以下是綠色葬禮的好處。首先，綠色葬禮花費更少的人力且成本低得多。其次，綠色葬禮的材料更環保、更便宜且更具生物降解性。此外，逝者可以透過躺在美麗的花朵、樹木甚至動物身邊而更親近大自然，而不必待在一個小盒子裡。也就是說，這種葬禮是人在過世後對大自然母親的最後感謝。"
+                ],
+                vocab: [
+                    { word: "burial", meaning: "n. 埋葬、葬禮" },
+                    { word: "biodegradable", meaning: "adj. 可生物降解的" },
+                    { word: "cost", meaning: "v. 花費" },
+                    { word: "material", meaning: "n. 材料" }
+                ],
+                questions: [
+                    {
+                        id: 37,
+                        q: "37. Which of the following questions can you NOT find the answer to in the reading?",
+                        clueTarget: "37-39",
+                        options: [
+                            "How good are the green burials?",
+                            "What did people do with the dead in the past?",
+                            "What materials were in use for the past burials?",
+                            "Why do people want to do with the dead in a greener way?"
+                        ],
+                        translations: [
+                            "(A) 綠色葬禮有多好？（文中列舉了省錢、環保等優點）。",
+                            "(B) 過去人們如何處理遺體？（文中提到火化與土葬）。",
+                            "(C) 過去葬禮使用的是什麼材料？（正確答案：文中未提及過去葬禮所用的確切材料）。",
+                            "(D) 為什麼人們想用更環保的方式處理遺體？"
+                        ],
+                        correct: 2,
+                        explanation: "【線索指引】文章雖提及過去火化或土葬，但並未詳細說明過去葬禮所使用的確切「材料 (materials)」，故選 (C)。"
+                    },
+                    {
+                        id: 38,
+                        q: "38. Which of the following is a good point of green burials in the reading?",
+                        clueTarget: "37-39",
+                        options: [
+                            "They don't cost people much.",
+                            "They will not give off CO2 at all.",
+                            "They can keep the dead in good shape.",
+                            "People visit the dead and enjoy being around the flowers."
+                        ],
+                        translations: [
+                            "(A) 他們不花人們太多錢（正確：cost much less）。",
+                            "(B) 他們完全不會釋放二氧化碳（文中提及兩者皆會釋放 CO2）。",
+                            "(C) 他們能保持死者完好體態。",
+                            "(D) 人們探望死者並享受花朵圍繞。"
+                        ],
+                        correct: 0,
+                        explanation: "【線索指引】文中明確指出綠色葬禮的好處：「green burials take less work and cost much less (花費少且省事)」。"
+                    },
+                    {
+                        id: 39,
+                        q: "39. Which of the following is NOT true?",
+                        clueTarget: "37-39",
+                        options: [
+                            "People in Taiwan are getting more into green burials.",
+                            "People show their love for nature even after they die.",
+                            "Burning and burying the dead will give off a lot of CO2.",
+                            "Letting the nature take its course means the dead body becomes part of the nature."
+                        ],
+                        translations: [
+                            "(A) 台灣人越來越迷戀綠色葬禮（正確答案：文章通篇未提及「台灣人」，屬無中生有）。",
+                            "(B) 人們在死後仍表現出對大自然的愛。",
+                            "(C) 火化與土葬死者會釋放大量 CO2。",
+                            "(D) 順其自然意味著遺體變成大自然的一部分。"
+                        ],
+                        correct: 0,
+                        explanation: "【線索指引】文章內容並未特別提及「台灣人」對綠色葬禮的風氣，選項 (A) 屬於無中生有。"
+                    }
+                ]
+            },
+            p40_43: {
+                title: "Q40-43: David 藝術系面試對話",
+                tag: "Q40 - Q43",
+                passage: `
+                    <p class="font-bold text-slate-900">David enters the room with a file in his hands. Three teachers are sitting on one side of the long table.</p>
+                    <div class="bg-white p-3 rounded border text-sm space-y-2" id="p-40-43">
+                        <p><strong>Teacher A:</strong> David Wang? Please take a seat.<br><strong>David:</strong> Thank you. This is my file.</p>
+                        <p><strong>Teacher B:</strong> You are from a pretty good high school. <span data-clue="40" class="transition-colors">[ 40 ]</span><br><strong>David:</strong> Well, I love art. Though I have to study hard, I still find some time to paint every day. Also, I heard that the Department of Art here is famous. So I would really love to study art here.</p>
+                        <p><strong>Teacher C:</strong> Are your parents fine with that?<br><strong>David:</strong> <span data-clue="41" class="transition-colors">[ 41 ]</span> Please turn to page 3 of my file and take a look.</p>
+                        <p><strong>Teacher A:</strong> Wow, your parents even let you <span data-clue="42" class="transition-colors">[ 42 ]</span> in foreign countries.<br><strong>David:</strong> Yes, and they spent a lot on the camps to help me get into the art school.</p>
+                        <p><strong>Teacher C:</strong> I can tell that you are good at painting. You got several prizes after <span data-clue="43" class="transition-colors">[ 43 ]</span>.<br><strong>David:</strong> Thank you.</p>
+                        <p><strong>Teacher B:</strong> OK, I think that's all for today. Thank you for coming.<br><strong>David:</strong> Thank you, too.</p>
+                        <hr>
+                        <p class="text-slate-500 text-[13px]"><strong>檔案履歷摘要：</strong><br>
+                        Age 5: Started to learn painting.<br>
+                        Age 9: Got second place at a national painting competition.<br>
+                        Age 12: Learned painting at a famous art school.<br>
+                        Age 15: Joined an art summer camp in France before going to high school.<br>
+                        Age 16: Joined an art summer camp in the USA.</p>
+                    </div>
+                `,
+                translation: [
+                    "（David 手中拿著檔案走進房間。三位老師坐在長桌的一側。）",
+                    "老師 A：David Wang？請坐。 ｜ David：謝謝。這是我的檔案。",
+                    "老師 B：你來自一所相當不錯的高中。[ 40 ] ｜ David：嗯，我熱愛藝術。雖然我必須努力讀書，但我每天還是能擠出一些時間畫畫...此外，我聽說貴校的藝術系很有名，所以我非常希望能在這裡學藝術。",
+                    "老師 C：你父母對此沒意見嗎？ ｜ David：[ 41 ] 請翻到我檔案的第 3 頁看一看。",
+                    "老師 A：哇，你的父母甚至讓你[ 42 ]在國外。 ｜ David：是的，他們在營隊上花了不少錢來幫助我進入藝術學校。",
+                    "老師 C：看得出來你很會畫畫。你在[ 43 ]之後拿了好幾個獎。 ｜ David：謝謝。",
+                    "老師 B：好的, 我想今天就到這裡。謝謝你來。 ｜ David：也謝謝您。"
+                ],
+                vocab: [
+                    { word: "file", meaning: "n. 文件夾、檔案" },
+                    { word: "competition", meaning: "n. 競賽、比賽" },
+                    { word: "department", meaning: "n. 系所、部門" },
+                    { word: "spend", meaning: "v. 花費（時間/金錢）" }
+                ],
+                questions: [
+                    {
+                        id: 40,
+                        q: "40. Teacher A: You are from a pretty good high school. [ 40 ]<br>David: Well, I love art. Though I have to study hard, I still find some time to paint...",
+                        clueTarget: "40",
+                        options: [
+                            "How well did you do on the big tests?",
+                            "How did you come to our school today?",
+                            "What do you think about your high school?",
+                            "Why do you want to study art at our school?"
+                        ],
+                        translations: [
+                            "(A) 你大考考得如何？",
+                            "(B) 你今天怎麼來我們學校的？",
+                            "(C) 你對你的高中覺得怎麼樣？",
+                            "(D) 為什麼你想來我們學校學藝術？（正確：David 接著回答「我非常想在這裡學藝術」）。"
+                        ],
+                        correct: 3,
+                        explanation: "【線索指引】David 回答時提到「I would really love to study art here. (我非常想在這裡學藝術)」，因此老師的問句應是詢問為什麼想來本校讀藝術系 (D)。"
+                    },
+                    {
+                        id: 41,
+                        q: "41. Teacher C: Are your parents fine with that?<br>David: [ 41 ] Please turn to page 3 of my file and take a look.",
+                        clueTarget: "41",
+                        options: [
+                            "Of course.",
+                            "I hope not.",
+                            "I don't know.",
+                            "Probably not."
+                        ],
+                        translations: [
+                            "(A) 當然（正確：父母非常支持，讓 David 去國外藝術夏令營）。",
+                            "(B) 我希望不要。",
+                            "(C) 我不知道。",
+                            "(D) 可能不會。"
+                        ],
+                        correct: 0,
+                        explanation: "【線索指引】老師問父母是否贊同，David 接著請老師翻到第 3 頁看他從小得獎與父母砸重金送他去美國、法國藝術夏令營的經歷，可知父母非常支持 (A)。"
+                    },
+                    {
+                        id: 42,
+                        q: "42. Teacher A: Wow, your parents even let you [ 42 ] in foreign countries.",
+                        clueTarget: "42",
+                        options: [
+                            "join art camps",
+                            "learn at the art school",
+                            "prepare for the interview",
+                            "study in a good high school"
+                        ],
+                        translations: [
+                            "(A) 參加藝術營隊（正確：對應履歷 15 歲法國、16 歲美國藝術夏令營）。",
+                            "(B) 在藝術學校學習。",
+                            "(C) 準備面試。",
+                            "(D) 在好高中讀書。"
+                        ],
+                        correct: 0,
+                        explanation: "【線索指引】根據 David 履歷記錄，他在 15 歲去法國、16 歲去美國參加 art summer camp (藝術夏令營)，故老師驚嘆父母讓他出國參加營隊 (A)。"
+                    },
+                    {
+                        id: 43,
+                        q: "43. Teacher C: I can tell that you are good at painting. You got several prizes after [ 43 ].",
+                        clueTarget: "43",
+                        options: [
+                            "you went to the USA",
+                            "you entered our school",
+                            "you were nine years old",
+                            "you were in junior high school"
+                        ],
+                        translations: [
+                            "(A) 你去了美國之後",
+                            "(B) 你進入我們學校之後",
+                            "(C) 你九歲的時候（正確：履歷記載 9 歲獲全國繪畫比賽第二名，之後陸續得獎）。",
+                            "(D) 你在國中時"
+                        ],
+                        correct: 2,
+                        explanation: "【線索指引】檢查 David 履歷時間軸：5歲學畫，9歲時（Age 9）在全國繪畫比賽獲得第二名（Got second place at a national painting competition），因此老師說他在九歲之後拿了好幾個獎 (C)。"
+                    }
+                ]
+            }
+        };
+
+        const selector = document.getElementById('passageSelector');
+        const passageTitle = document.getElementById('passageTitle');
+        const passageTag = document.getElementById('passageTag');
+        const passageContent = document.getElementById('passageContent');
+        const passageTranslationBox = document.getElementById('passageTranslationBox');
+        const passageTranslationContent = document.getElementById('passageTranslationContent');
+        const passageTransBtnText = document.getElementById('passageTransBtnText');
+        const vocabList = document.getElementById('vocabList');
+        const questionsContainer = document.getElementById('questionsContainer');
+        const questionCountTag = document.getElementById('questionCountTag');
+        const clueHint = document.getElementById('clueHint');
+
+        let currentFontSize = 'base';
+
+        window.setFontSize = function(size) {
+            currentFontSize = size;
+            ['sm', 'base', 'lg', 'xl'].forEach(s => {
+                const btn = document.getElementById(`btn-fs-${s}`);
+                if (s === size) {
+                    btn.className = "px-2.5 py-1 rounded bg-indigo-900 text-white font-bold transition-all shadow text-xs sm:text-sm";
+                    btn.textContent = s === 'sm' ? '14px' : s === 'base' ? '16px (預設)' : s === 'lg' ? '18px' : '20px';
+                } else {
+                    btn.className = "px-2.5 py-1 rounded hover:bg-indigo-800 text-indigo-200 font-medium transition-all text-xs sm:text-sm";
+                    btn.textContent = s === 'sm' ? '14px' : s === 'base' ? '16px' : s === 'lg' ? '18px' : '20px';
+                }
+            });
+            loadPassageData(selector.value);
+        };
+
+        function loadPassageData(key) {
+            const data = database[key];
+            if (!data) return;
+
+            passageTitle.innerHTML = `<span>📖</span> ${data.title}`;
+            passageTag.textContent = data.tag;
+            passageContent.innerHTML = data.passage;
+            
+            passageTranslationContent.innerHTML = data.translation.map(t => `<p>${t}</p>`).join('');
+            passageTranslationBox.classList.add('hidden');
+            passageTransBtnText.textContent = '顯示文章完整中文翻譯';
+
+            clueHint.classList.remove('hidden');
+
+            let pTextClass = "text-base";
+            let optTextClass = "text-sm sm:text-base";
+            let vocabTextClass = "text-xs sm:text-sm";
+
+            if (currentFontSize === 'sm') {
+                pTextClass = "text-sm";
+                optTextClass = "text-xs sm:text-sm";
+                vocabTextClass = "text-xs";
+            } else if (currentFontSize === 'base') {
+                pTextClass = "text-base";
+                optTextClass = "text-sm sm:text-base";
+                vocabTextClass = "text-xs sm:text-sm";
+            } else if (currentFontSize === 'lg') {
+                pTextClass = "text-lg";
+                optTextClass = "text-base sm:text-lg";
+                vocabTextClass = "text-sm sm:text-base";
+            } else if (currentFontSize === 'xl') {
+                pTextClass = "text-xl";
+                optTextClass = "text-lg sm:text-xl";
+                vocabTextClass = "text-base sm:text-lg";
+            }
+
+            passageContent.className = `prose prose-slate max-w-none ${pTextClass} leading-relaxed space-y-3 sm:space-y-4 text-slate-700 bg-slate-50/50 p-3.5 sm:p-4 rounded-xl border border-slate-100 mb-6 max-h-[350px] sm:max-h-[450px] overflow-y-auto`;
+
+            vocabList.innerHTML = data.vocab.map(v => `
+                <div class="bg-indigo-50/60 p-2.5 rounded-xl border border-indigo-100 flex flex-col ${vocabTextClass}">
+                    <span class="font-bold text-indigo-900">${v.word}</span>
+                    <span class="text-slate-600">${v.meaning}</span>
+                </div>
+            `).join('');
+
+            questionCountTag.textContent = `共 ${data.questions.length} 題`;
+            questionsContainer.innerHTML = data.questions.map((qObj) => `
+                <div class="bg-slate-50 p-3.5 sm:p-4 rounded-xl border border-slate-200 space-y-3 transition-all hover:shadow-md" onmouseenter="highlightClue('${qObj.clueTarget}', true)" onmouseleave="highlightClue('${qObj.clueTarget}', false)" onclick="highlightClue('${qObj.clueTarget}', true)">
+                    <div class="flex justify-between items-start gap-2">
+                        <p class="font-bold text-slate-900 ${optTextClass} cursor-pointer hover:text-indigo-600 flex items-start gap-1.5 leading-snug">
+                            <span class="mt-0.5">👉</span> <span>${qObj.q}</span>
+                        </p>
+                        <span class="text-[10px] sm:text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded font-bold shrink-0">🔍 點我看線索</span>
+                    </div>
+                    <div class="space-y-2">
+                        ${qObj.options.map((opt, optIdx) => `
+                            <button onclick="checkAnswer(${qObj.id}, ${optIdx}, ${qObj.correct}, this); event.stopPropagation();" 
+                                class="w-full text-left ${optTextClass} p-3 rounded-xl border transition-all bg-white hover:bg-slate-100 border-slate-200 flex items-center gap-2 active:scale-[0.99]">
+                                <span class="font-bold text-indigo-600 shrink-0">${String.fromCharCode(65 + optIdx)}.</span>
+                                <span class="flex-grow font-medium">${opt}</span>
+                            </button>
+                        `).join('')}
+                    </div>
+
+                    <div class="pt-1">
+                        <button onclick="toggleTranslation(${qObj.id}); event.stopPropagation();" class="w-full sm:w-auto text-xs sm:text-sm bg-indigo-100/80 hover:bg-indigo-200 text-indigo-800 font-medium px-3.5 py-2 rounded-lg transition-colors flex items-center justify-center gap-1.5">
+                            <span>🌐</span> <span id="trans-btn-text-${qObj.id}">顯示中文選項與解析提示</span>
+                        </button>
+                        <div id="translation-${qObj.id}" class="hidden mt-2 p-3 bg-indigo-50/70 border border-indigo-200 rounded-xl text-xs sm:text-sm text-indigo-950 space-y-1.5">
+                            <p class="font-bold text-indigo-900">📝 選項中文對照：</p>
+                            ${qObj.translations.map(t => `<p>${t}</p>`).join('')}
+                        </div>
+                    </div>
+
+                    <div id="explanation-${qObj.id}" class="hidden mt-3 p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs sm:text-sm text-emerald-900 space-y-1">
+                        <p class="font-bold flex items-center gap-1"><span>💡</span> 解題與線索解析：</p>
+                        <p class="leading-relaxed">${qObj.explanation}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        window.togglePassageTranslation = function() {
+            if (passageTranslationBox.classList.contains('hidden')) {
+                passageTranslationBox.classList.remove('hidden');
+                passageTransBtnText.textContent = '隱藏文章完整中文翻譯';
+            } else {
+                passageTranslationBox.classList.add('hidden');
+                passageTransBtnText.textContent = '顯示文章完整中文翻譯';
+            }
+        };
+
+        window.highlightClue = function(targetId, activate) {
+            const elements = passageContent.querySelectorAll(`[data-clue="${targetId}"]`);
+            elements.forEach(el => {
+                if (activate) {
+                    el.classList.add('clue-highlight', 'active');
+                } else {
+                    el.classList.remove('active');
+                    setTimeout(() => el.classList.remove('clue-highlight'), 500);
+                }
+            });
+        };
+
+        window.toggleTranslation = function(questionId) {
+            const transBox = document.getElementById(`translation-${questionId}`);
+            const btnText = document.getElementById(`trans-btn-text-${questionId}`);
+            if (transBox.classList.contains('hidden')) {
+                transBox.classList.remove('hidden');
+                btnText.textContent = '隱藏中文選項與解析提示';
+            } else {
+                transBox.classList.add('hidden');
+                btnText.textContent = '顯示中文選項與解析提示';
+            }
+        };
+
+        window.checkAnswer = function(questionId, selectedOpt, correctOpt, btnElement) {
+            const container = btnElement.parentElement;
+            const buttons = container.querySelectorAll('button');
+            
+            buttons.forEach((btn, idx) => {
+                btn.disabled = true;
+                btn.classList.remove('hover:bg-slate-100');
+                if (idx === correctOpt) {
+                    btn.classList.add('bg-emerald-100', 'border-emerald-500', 'font-semibold', 'text-emerald-900');
+                } else if (idx === selectedOpt && selectedOpt !== correctOpt) {
+                    btn.classList.add('bg-rose-100', 'border-rose-400', 'text-rose-900');
+                } else {
+                    btn.classList.add('opacity-50');
+                }
+            });
+
+            const expBox = document.getElementById(`explanation-${questionId}`);
+            if (expBox) {
+                expBox.classList.remove('hidden');
+            }
+        };
+
+        selector.addEventListener('change', (e) => {
+            loadPassageData(e.target.value);
+        });
+
+        loadPassageData('p24_25');
+    </script>
+</body>
+</html>

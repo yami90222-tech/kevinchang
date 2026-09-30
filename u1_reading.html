@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW" class="h-full">
 <head>
     <meta charset="UTF-8">
@@ -820,24 +820,15 @@
             document.getElementById('connectionFeedback').classList.remove('hidden');
         }
 
-        // Stable browser-native speech playback (no external API/key required)
+        // Web Speech API
         function speakText(text) {
-            if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
-                console.warn('此瀏覽器不支援語音朗讀功能。');
-                return;
-            }
-            try {
+            if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
-                const rateEl = document.getElementById('ttsSpeedSelect');
-                const rate = rateEl ? (parseFloat(rateEl.value) || 1.0) : 1.0;
-                const utterance = new SpeechSynthesisUtterance(String(text || '').trim());
-                utterance.lang = 'en-US';
-                utterance.rate = rate;
-                utterance.onerror = (event) => console.warn('語音播放未完成：', event.error || 'unknown');
-                // A short defer helps browsers reliably restart speech after cancel().
-                window.setTimeout(() => window.speechSynthesis.speak(utterance), 80);
-            } catch (error) {
-                console.error('語音播放錯誤：', error);
+                const rate = parseFloat(document.getElementById('ttsSpeedSelect').value) || 1.0;
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = 'en-US';
+                u.rate = rate;
+                window.speechSynthesis.speak(u);
             }
         }
 
@@ -1066,5 +1057,3 @@
     </script>
 </body>
 </html>
-
-

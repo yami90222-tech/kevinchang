@@ -822,14 +822,9 @@
 
         // Web Speech API
         function speakText(text) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const rate = parseFloat(document.getElementById('ttsSpeedSelect').value) || 1.0;
-                const u = new SpeechSynthesisUtterance(text);
-                u.lang = 'en-US';
-                u.rate = rate;
-                window.speechSynthesis.speak(u);
-            }
+            if (!window.AudioGuard) return;
+            const rate = parseFloat(document.getElementById('ttsSpeedSelect')?.value) || 1.0;
+            AudioGuard.speak(text, { lang: 'en-US', rate });
         }
 
         function speakSentence(el, text) {
@@ -884,15 +879,15 @@
                 sEl.classList.add('active-sentence');
 
                 const rate = parseFloat(document.getElementById('ttsSpeedSelect').value) || 1.0;
-                const u = new SpeechSynthesisUtterance(text);
-                u.lang = 'en-US';
-                u.rate = rate;
-                u.onend = () => {
-                    idx++;
-                    setTimeout(playNext, 300);
-                };
-                u.onerror = () => stopAudio();
-                window.speechSynthesis.speak(u);
+                AudioGuard.speak(text, {
+                    lang: 'en-US',
+                    rate,
+                    onEnd: () => {
+                        idx++;
+                        setTimeout(playNext, 300);
+                    },
+                    onError: () => stopAudio()
+                });
             }
             playNext();
         }

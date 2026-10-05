@@ -499,15 +499,8 @@
         // 1. Text-To-Speech (Web Speech API)
         // ==========================================
         function speakText(text) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'en-US';
-                utterance.rate = 0.9;
-                window.speechSynthesis.speak(utterance);
-            } else {
-                alert("您的瀏覽器不支援語音合成朗讀功能。");
-            }
+            if (!window.AudioGuard) return;
+            AudioGuard.speak(text, { lang: 'en-US', rate: 0.9 });
         }
 
         // ==========================================

@@ -1590,7 +1590,7 @@
 
                     const wavBlob = createWavBlob(pcm16, sampleRate);
                     const audio = new Audio(URL.createObjectURL(wavBlob));
-                    audio.play();
+                    audio.play().catch(() => fallbackBrowserTTS(text)).finally(() => setTimeout(() => URL.revokeObjectURL(audio.src), 1000));
                 } else {
                     fallbackBrowserTTS(text);
                 }
@@ -1633,10 +1633,8 @@
         }
 
         function fallbackBrowserTTS(text) {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'en-US';
-                speechSynthesis.speak(utterance);
+            if (window.AudioGuard) {
+                AudioGuard.speak(text, { lang: 'en-US', rate: 0.95 });
             }
         }
 

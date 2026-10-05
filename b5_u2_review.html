@@ -393,12 +393,8 @@
         }
 
         function speakText(text) {
-            if (!('speechSynthesis' in window)) return;
-            window.speechSynthesis.cancel();
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'en-US';
-            utterance.rate = 0.95;
-            window.speechSynthesis.speak(utterance);
+            if (!window.AudioGuard) return;
+            AudioGuard.speak(text, { lang: 'en-US', rate: 0.95 });
         }
 
         const examQuestions = [

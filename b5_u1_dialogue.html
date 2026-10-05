@@ -512,16 +512,12 @@
         let currentSeqIdx = 0;
 
         function speakText(text, callback = null) {
-            if (!speechSynth) return;
-            speechSynth.cancel();
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'en-US';
-            utterance.rate = ttsRate;
-            if (callback) {
-                utterance.onend = callback;
-                utterance.onerror = callback;
-            }
-            speechSynth.speak(utterance);
+            if (!window.AudioGuard) return;
+            AudioGuard.speak(text, {
+                lang: 'en-US',
+                rate: ttsRate,
+                onEnd: callback || undefined
+            });
         }
 
         function setTTSRate(rate, btn) {

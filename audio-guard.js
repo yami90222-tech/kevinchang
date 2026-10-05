@@ -93,8 +93,8 @@ const AudioGuard = (function() {
     function isAudioOrQuizButton(btn) {
         if (!btn || !(btn instanceof Element)) return false;
 
-        // 排除導覽列、頁籤分頁切換按鈕、AI 彈窗關閉按鈕、全篇朗讀控制鍵
-        if (btn.id === 'audioGuardBtn' || btn.id === 'audioFxBtn' || 
+        // AudioGuard 自己的控制鍵、頁籤、AI/全篇播放控制不應被 5 秒冷卻攔截。
+        if (btn.id === 'audioGuardBtn' || btn.id === 'audioFxBtn' ||
             btn.classList.contains('classroom-audio-btn') ||
             btn.classList.contains('no-cooldown') ||
             btn.classList.contains('tab-btn') ||
@@ -114,12 +114,25 @@ const AudioGuard = (function() {
         }
 
         const onclickStr = btn.getAttribute('onclick') || '';
-        // 包含 Pattern 的 playTTS, checkSentence, checkVerbCard, checkScenario, checkDropdown, sortItem, selectQuizAnswer, checkF1, checkExercise 等
-        return btn.classList.contains('audio-btn') || 
-               btn.classList.contains('speak-btn') || 
-               btn.hasAttribute('data-speak') ||
-               btn.classList.contains('choice-btn') ||
-               /speak|play|sound|audio|tts|check|quiz|answer|sort|card|verb|scenario|dropdown|f1|f2|exercise|fillin|pair|feed/i.test(onclickStr);
+
+        // 明確標記的發音按鈕。
+        const explicitAudio =
+            btn.classList.contains('audio-btn') ||
+            btn.classList.contains('speak-btn') ||
+            btn.hasAttribute('data-speak') ||
+            btn.classList.contains('audio-trigger');
+
+        // 明確的答題互動按鈕。避免原本用 /check|card|verb/ 的寬鬆判斷，
+        // 導致一般按鈕也被誤鎖。
+        const explicitQuiz =
+            btn.classList.contains('choice-btn') ||
+            /\b(?:checkF\d+|checkSentence|checkVerbCard|checkScenario|checkDropdown|checkExercise|selectQuizAnswer|sortItem|checkAnswer|checkQuizAnswer)\s*\(/i.test(onclickStr);
+
+        // 直接呼叫朗讀／音效 API 的按鈕。
+        const directAudio =
+            /\b(?:speakText|speakSentence|speakQuote|playTTS|playSound|playBeep|AudioGuard\.speak|AudioGuard\.playSFX)\s*\(/i.test(onclickStr);
+
+        return explicitAudio || explicitQuiz || directAudio;
     }
 
     // 搜尋頁面上所有發音與互動答題按鈕
@@ -401,33 +414,8 @@ const AudioGuard = (function() {
         },
 
         init() {
-            // 全域守護原生 speechSynthesis.speak：保證不被垃圾回收、自動喚醒、防止瀏覽器取消
-            if ('speechSynthesis' in window && !window.speechSynthesis._audioGuardPatched) {
-                const origSpeak = window.speechSynthesis.speak.bind(window.speechSynthesis);
-                window.speechSynthesis.speak = function(utterance) {
-                    if (currentMode === 'mute') return;
-
-                    window._activeUtterances = window._activeUtterances || [];
-                    window._activeUtterances.push(utterance);
-                    const cleanup = () => {
-                        const idx = window._activeUtterances.indexOf(utterance);
-                        if (idx > -1) window._activeUtterances.splice(idx, 1);
-                    };
-                    utterance.onend = cleanup;
-                    utterance.onerror = cleanup;
-
-                    // 確保語音引擎喚醒 (處理 Chrome/Edge 暫停與取消問題)
-                    setTimeout(() => {
-                        try {
-                            window.speechSynthesis.resume();
-                            origSpeak(utterance);
-                        } catch(e) {
-                            console.error('speechSynthesis speak error:', e);
-                        }
-                    }, 40);
-                };
-                window.speechSynthesis._audioGuardPatched = true;
-            }
+            // 所有需要朗讀的頁面函式都直接走 AudioGuard.speak()。
+            // 不再 monkey-patch 原生 speechSynthesis.speak，避免覆寫頁面自己的 onend/onerror callback。
 
             // 全域橋接 Pattern 頁面原生函數 (若頁面未定義則使用此實現)
             if (!window.playSound) {

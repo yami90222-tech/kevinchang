@@ -529,10 +529,7 @@
                 if (window.AudioGuard) {
                     AudioGuard.speak(`${verb.base}, ${verb.past}, ${verb.pp}`);
                 } else if ('speechSynthesis' in window) {
-                    const utterance = new SpeechSynthesisUtterance(`${verb.base}, ${verb.past}, ${verb.pp}`);
-                    utterance.lang = 'en-US';
-                    utterance.rate = 0.9;
-                    window.speechSynthesis.speak(utterance);
+                    AudioGuard.speak(`${verb.base}, ${verb.past}, ${verb.pp}`, { lang: 'en-US', rate: 0.9 });
                 }
             } else {
                 refreshDailyWarmup();

@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>國中英語(三) L2 拔尖班挑戰卷 - 互動解析網頁</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#075985',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- React & Babel CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-sky-100 selection:text-sky-700">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useMemo } = React;
+
+        // --- EXAM DATASET ---
+        const examData = {
+            title: "國中英語(三) 挑戰卷 (L.2)",
+            grade: "國二 (八年級) 上學期 拔尖班專用",
+            topics: ["連詞 because / so 句型與因果變換", "授受動詞與介系詞", "過去時態變化", "人權與國際議題（童婚、馬拉拉、缺水危機、公平貿易）"],
+            
+            // Section 1: Vocabulary
+            vocabulary: [
+                { id: 1, prompt: "Marco just bought a new c______er. He plays games on it all the time.", word: "computer", hint: "電腦", sentence: "Marco考完試後買了一台新電腦。", exp: "句意：Marco 剛買了一台新電腦，他一直用它玩遊戲。" },
+                { id: 2, prompt: "Jimmy: What h______ed to you?\nJane: I broke my leg on the way home.", word: "happened", hint: "發生 (過去式)", sentence: "What happened to you?", exp: "happen為不及物動詞，問句『發生什麼事了？』常用 What happened to you?" },
+                { id: 3, prompt: "Babies are always c______ous about everything around them.", word: "curious", hint: "好奇的", sentence: "be curious about...", exp: "be curious about 表示『對……感到好奇』。" },
+                { id: 4, prompt: "Take a g______ss. What's in the box?", word: "guess", hint: "猜測 (名詞)", sentence: "Take a guess.", exp: "Take a guess 為固定句型，意為『猜猜看』。" },
+                { id: 5, prompt: "There were too many cars. The little girl was s______d. She couldn't cross the street.", word: "scared", hint: "害怕的", sentence: "feel scared", exp: "scared 為形容詞『感到害怕的』，修飾人的情緒。" },
+                { id: 6, prompt: "Find a partner, and finish the work in p______rs.", word: "pairs", hint: "兩兩成對 (複數)", sentence: "in pairs", exp: "in pairs 為片語，意為『成對地；兩人一組地』。" },
+                { id: 7, prompt: "Dad shouldn't drive for more than three hours w______out taking a break.", word: "without", hint: "沒有/未... (介系詞)", sentence: "without + V-ing", exp: "without 為介系詞，後面接動名詞 taking。意為『沒有休息』。" },
+                { id: 8, prompt: "The baby is sleeping in her father's a______ms. Isn't it sweet?", word: "arms", hint: "手臂 (雙臂複數)", sentence: "in one's arms", exp: "in one's arms 指『在某人的懷抱中/雙臂裡』。" },
+                { id: 9, prompt: "I got a t______le grade on the math test.", word: "terrible", hint: "糟糕的/極壞的", sentence: "terrible grade", exp: "terrible 意為『糟糕的；可怕的』，修飾成績 (grade)。" },
+                { id: 10, prompt: "Did you e______er eat anything special?", word: "ever", hint: "曾經", sentence: "Did you ever...?", exp: "ever 常用於疑問句中，表示『曾經』。" }
+            ],
+
+            // Section 2: Multiple Choice
+            multipleChoice: [
+                {
+                    id: 1,
+                    question: "Mary had a bad cough and a headache, _____ she took some medicine.",
+                    options: ["(A) but", "(B) ✗", "(C) so", "(D) because"],
+                    answer: "C",
+                    explanation: "前半句是『原因』（咳嗽又頭痛），後半句是『結果』（吃藥）。故選連接詞 so（所以）。"
+                },
+                {
+                    id: 2,
+                    question: "Louis didn't have breakfast at home, _____ he is hungry now.",
+                    options: ["(A) because", "(B) after", "(C) but", "(D) so"],
+                    answer: "D",
+                    explanation: "前一句『沒有吃早餐』，後一句『現在很餓』，前後為因果關係，故用 so。"
+                },
+                {
+                    id: 3,
+                    question: "Aaron walked on crutches because he had an accident and _____ his leg.",
+                    options: ["(A) broke", "(B) break", "(C) breaking", "(D) breaks"],
+                    answer: "A",
+                    explanation: "由句中的 walked (過去式) 及 had (過去式) 可知全句述說過去事件，and 連接對等動詞，故使用動詞過去式 broke。"
+                },
+                {
+                    id: 4,
+                    question: "We shouldn't argue _____.",
+                    options: ["(A) still", "(B) more", "(C) anymore", "(D) one more"],
+                    answer: "C",
+                    explanation: "not... anymore 意為『再也不……；不再……』。全句意為：我們不應該再爭吵了。"
+                },
+                {
+                    id: 5,
+                    question: "Nancy read the special book and _____ it on the desk.",
+                    options: ["(A) put", "(B) puts", "(C) is putting", "(D) can put"],
+                    answer: "A",
+                    explanation: "read 在此處為過去式（發音 /red/，主詞 Nancy 三單但無加 s），and 連接過去式動詞 put（put-put-put 三態同形）。"
+                },
+                {
+                    id: 6,
+                    question: "The kid fell down, but _____ helped him.",
+                    options: ["(A) nobody", "(B) nothing", "(C) anybody", "(D) something"],
+                    answer: "A",
+                    explanation: "句意：小孩摔倒了，但『沒有人』幫他。nobody 表示『沒有人』。"
+                },
+                {
+                    id: 7,
+                    question: "Mike _____ new shoes last week.",
+                    options: ["(A) buy", "(B) buys", "(C) bought", "(D) is buying"],
+                    answer: "C",
+                    explanation: "時間副詞為 last week（上週），句意為過去發生的事實，故動詞 buy 須用過去式 bought。"
+                },
+                {
+                    id: 8,
+                    question: "Greg: How was the movie?\nZoe: Good! It had a happy _____.",
+                    options: ["(A) end", "(B) ending", "(C) story", "(D) circle"],
+                    answer: "B",
+                    explanation: "happy ending 意為『完美的結局』，ending 在此做名詞，指電影或故事的結局。"
+                },
+                {
+                    id: 9,
+                    question: "Emily: _____ didn't the girl go to school?\nDebby: She didn't go to school because she was sick.",
+                    options: ["(A) How", "(B) Where", "(C) Why", "(D) Who"],
+                    answer: "C",
+                    explanation: "答句用了 because（因為），表示回答原因，故問句須用疑問詞 Why（為什麼）來提問。"
+                },
+                {
+                    id: 10,
+                    question: "Sara sold her car _____ her friend.",
+                    options: ["(A) to", "(B) of", "(C) at", "(D) with"],
+                    answer: "A",
+                    explanation: "授受動詞 sell (sold) 表示『賣給某人』時，介系詞搭配 to。句型：sell sth to sb。"
+                },
+                {
+                    id: 11,
+                    question: "Olivia: Child marriage is happening in many countries. What can we do against it?\nBob: _____\n(*against 與...對抗)",
+                    options: [
+                        "(A) We can make money.",
+                        "(B) It's not happening now.",
+                        "(C) They have babies at young ages.",
+                        "(D) We can write letters to their countries and speak out."
+                    ],
+                    answer: "D",
+                    explanation: "針對『我們可以採取什麼對抗童婚問題？』，最適當的回答是 (D) 我們可以寫信給那些國家並勇敢發聲 (speak out)。"
+                },
+                {
+                    id: 12,
+                    question: "Betty: A young girl got married to a 40-year-old man and had her first baby at the age of 13.\nNeil: _____ That's too young.",
+                    options: [
+                        "(A) Where is her baby?",
+                        "(B) How is this possible?",
+                        "(C) Isn't her husband kind to her?",
+                        "(D) Does her husband always think of her?"
+                    ],
+                    answer: "B",
+                    explanation: "聽到 13 歲女孩嫁給 40 歲男人並生子，Neil 感到震驚與不可思議，最合適的社交回應為 How is this possible?（這怎麼可能？）"
+                }
+            ],
+
+            // Section 3: Sentence Transformation
+            sentenceRewrite: [
+                {
+                    id: 1,
+                    prompt: "The young mother could not go to school because her babies needed her.\n(用 so 改寫句子)",
+                    answer: "The young mother's babies needed her, so she could not go to school.",
+                    explanation: "because 表原因，so 表結果。改寫時須先敘述原因『寶寶需要她』，再加上 so 引導結果『她無法去上學』。注意代名詞主詞與名詞的呼應。"
+                },
+                {
+                    id: 2,
+                    prompt: "It is cold outside, so I wear a heavy jacket.\n(用過去式改寫句子)",
+                    answer: "It was cold outside, so I wore a heavy jacket.",
+                    explanation: "將現在式動詞 is 改為過去式 was；wear（穿）改為過去式 wore。"
+                }
+            ],
+
+            // Section 4: Translation
+            translation: [
+                {
+                    id: 1,
+                    chinese: "那位 12 歲的小女孩和一位 65 歲的男人結了婚，因為她的家庭需要錢。",
+                    english: "The twelve-year-old little girl got married to a sixty-five-year-old man because her family needed money.",
+                    keyPoints: ["got married to... (與...結婚)", "...-year-old 作形容詞加連字號不加 s", "because 連接原因句 (過去式 needed)"]
+                },
+                {
+                    id: 2,
+                    chinese: "Nick 因為摔斷一隻手臂，再也無法去工作。",
+                    english: "Nick couldn't go to work anymore because he broke his arm.",
+                    keyPoints: ["couldn't... anymore (再也無法...)", "break one's arm 過去式為 broke his arm", "because 連接原因子句"]
+                },
+                {
+                    id: 3,
+                    chinese: "數百萬計 18 歲以下的孩童需要我們的幫助。",
+                    english: "Millions of children under the age of eighteen need our help.",
+                    keyPoints: ["Millions of... (數以百萬計的)", "under the age of... (在...歲以下)", "need our help (需要我們的幫助)"]
+                }
+            ],
+
+            // Section 5: Cloze (Malala Story)
+            cloze: {
+                article: `At one time in Pakistan, girls couldn't go to school [1] because of the ruling Taliban. However, Malala [2] for girls' right to education. One day, she went to school [3] any other day. [4] her bus ride to school, two men in black masks [5] the bus and shot Malala in the head. Luckily, Malala didn't die.\n\nAfter that, more people knew her story. In 2014, she [6] the Nobel Peace Prize. During her speech at the UN, she shared simple but powerful words: "One child, one teacher, one book and one pen can change the world. Education is the only solution."`,
+                vocabularyNotes: [
+                    { word: "rule", def: "統治" },
+                    { word: "powerful", def: "強大的；有影響力的" },
+                    { word: "education", def: "教育" }
+                ],
+                questions: [
+                    { id: 1, options: ["(A) fight", "(B) fights", "(C) fought", "(D) can fight"], answer: "C", exp: "Malala 為爭取女孩受教權而『奮鬥』，文章為過去發生的歷史事實，動詞 fight 須用過去式 fought。" },
+                    { id: 2, options: ["(A) like", "(B) likes", "(C) liked", "(D) can like"], answer: "A", exp: "like 這裡作介系詞，意為『像……一樣』。like any other day 意為『像往常的任何一天一樣』。" },
+                    { id: 3, options: ["(A) Of", "(B) At", "(C) In", "(D) On"], answer: "D", exp: "在搭乘公車期間/在公車旅程中，表達特定的搭乘期間或平面交通時用介系詞 On her bus ride。" },
+                    { id: 4, options: ["(A) take", "(B) took", "(C) get on", "(D) got on"], answer: "D", exp: "蒙面男子『上了公車』， get on 表示上了大型交通工具，過去式為 got on。" },
+                    { id: 5, options: ["(A) win", "(B) wins", "(C) won", "(D) can win"], answer: "C", exp: "2014 年她『贏得』諾貝爾和平獎，過去發生的事情使用過去式 won (原形為 win)。" },
+                    { id: 6, options: ["(A) change", "(B) changes", "(C) changed", "(D) changing"], answer: "A", exp: "助動詞 can 後面必須接『原形動詞』 change。" }
+                ]
+            },
+
+            // Section 6: Reading Comprehension
+            readingComprehension: [
+                {
+                    title: "Part A: Water Crisis in South of Sahara Desert",
+                    passage: `783 million people live without clean water in the world. Of the 783 million people, 40% live south of the Sahara Desert. For people there, water is not just important; water is the key to a normal life.
+
+In South Sudan, Niger, Chad and Somalia, girls often spend about 6 hours every day getting water. Because of this, they can't go to school often, and they can't read very much. Without enough knowledge, the girls have few choices about jobs or marriages. Usually, the girls get married and have babies at a young age. Because they are so young, they can't take good care of their babies. The babies often die at a young age. Living babies suffer from a shortage of clean water, just like their mothers.`,
+                    questions: [
+                        {
+                            id: 1,
+                            question: "What is the main idea of the reading?",
+                            options: [
+                                "(A) Some girls in the south of the Sahara Desert save water for poor people.",
+                                "(B) Some girls in the south of the Sahara Desert spend 6 hours carrying water every day.",
+                                "(C) Some girls in the south of the Sahara Desert cannot read because they can't go to school.",
+                                "(D) Some girls in the south of the Sahara Desert can't have a good life because there isn't enough water."
+                            ],
+                            answer: "D",
+                            explanation: "全文主旨探討『因為缺乏乾淨水源，導致女孩無法就學、早婚、嬰兒夭折等連鎖問題，無法擁有好生活』，故選 (D)。"
+                        },
+                        {
+                            id: 2,
+                            question: "What is true from the reading?",
+                            options: [
+                                "(A) Boys in the south of the Sahara Desert have enough clean water.",
+                                "(B) Girls in the south of the Sahara Desert can't go to school.",
+                                "(C) Over 300 million people in the south of the Sahara Desert live without clean water.",
+                                "(D) 783 million people in the south of the Sahara Desert live without clean water."
+                            ],
+                            answer: "C",
+                            explanation: "全球有 783 百萬人缺水，其中 40% 住在撒哈拉以南。算式：783M × 0.4 = 313.2M (超過 300 million)，故 (C) 為正確選項。"
+                        }
+                    ]
+                },
+                {
+                    title: "Part B: Fair Trade Coffee & Child Labor Cycle",
+                    passage: `Coffee is a very popular drink, but did you know that the people who grow coffee, called coffee farmers, often don't get much money from selling it? In fact, they usually only get around 7-10% of the money made from selling coffee. That's not fair, right?
+
+To make matters worse, these farmers sometimes have to ask their own children to help them on the coffee farms. [ B ] It's sad because they miss out on getting a good education.
+
+When these children grow up, they don't have the skills or knowledge they need for better jobs. So, what happens? They become coffee farmers themselves, and the cycle continues. [ C ]
+
+We can't let this keep happening. [ A ] They deserve a chance to go to school and have a brighter future. Let's work together to make a difference.`,
+                    insertedSentenceOptions: [
+                        "(A) We need to take action and do something to help these children.",
+                        "(B) This means the kids have to stop going to school and work instead.",
+                        "(C) It's like a never-ending circle."
+                    ],
+                    questions: [
+                        {
+                            id: 3,
+                            question: "請根據文意，將句子代號 (A), (B), (C) 填入適當的空格中：",
+                            answersDetail: [
+                                "第一個空格 [ B ] 應填：(B) This means the kids have to stop going to school and work instead. (承接前面孩童被要求去咖啡園幫忙)",
+                                "第二個空格 [ C ] 應填：(C) It's like a never-ending circle. (承接前面講到的惡性循環)",
+                                "第三個空格 [ A ] 應填：(A) We need to take action and do something to help these children. (承接前面『我們不能讓這事繼續發生』，呼籲採取行動)"
+                            ],
+                            explanation: "考查前後文邏輯連結。第1空說明幫忙咖啡農代表無法上學；第2空說明長大又成為咖啡農，像停不下來的循環；第3空呼籲大家必須採取行動協助這些孩子。"
+                        }
+                    ]
+                }
+            ]
+        };
+
+        function App() {
+            const [activeTab, setActiveTab] = useState('vocab');
+            const [mode, setMode] = useState('study'); // 'study' or 'test'
+            const [userVocabInputs, setUserVocabInputs] = useState({});
+            const [userMcqAnswers, setUserMcqAnswers] = useState({});
+            const [userClozeAnswers, setUserClozeAnswers] = useState({});
+            const [userMcqSelection, setUserMcqSelection] = useState({});
+            const [showAllAnswers, setShowAllAnswers] = useState(false);
+            const [bookmarked, setBookmarked] = useState([]);
+
+            // Speech Synthesis helper
+            const speakText = (text) => {
+                if ('speechSynthesis' in window) {
+                    window.speechSynthesis.cancel();
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    utterance.lang = 'en-US';
+                    utterance.rate = 0.9;
+                    window.speechSynthesis.speak(utterance);
+                } else {
+                    alert('您的瀏覽器不支援語音朗讀功能');
+                }
+            };
+
+            const toggleBookmark = (id) => {
+                setBookmarked(prev => prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]);
+            };
+
+            // Calculate Score for Test Mode
+            const calculateScore = useMemo(() => {
+                let correctCount = 0;
+                let totalCount = 0;
+
+                // Vocab
+                examData.vocabulary.forEach(v => {
+                    totalCount++;
+                    if ((userVocabInputs[v.id] || '').trim().toLowerCase() === v.word.toLowerCase()) {
+                        correctCount++;
+                    }
+                });
+
+                // MCQ
+                examData.multipleChoice.forEach(m => {
+                    totalCount++;
+                    if (userMcqAnswers[m.id] === m.answer) {
+                        correctCount++;
+                    }
+                });
+
+                // Cloze
+                examData.cloze.questions.forEach(c => {
+                    totalCount++;
+                    if (userClozeAnswers[c.id] === c.answer) {
+                        correctCount++;
+                    }
+                });
+
+                const score = totalCount > 0 ? Math.round((correctCount / totalCount) * 100) : 0;
+                return { correctCount, totalCount, score };
+            }, [userVocabInputs, userMcqAnswers, userClozeAnswers]);
+
+            return (
+                <div className="min-h-screen flex flex-col">
+                    {}
+                    {/* Top Header */}
+                    <header className="bg-slate-900 text-white sticky top-0 z-50 shadow-md">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+                            <div className="flex items-center space-x-3">
+                                <span className="bg-sky-500 text-white p-2 rounded-lg text-lg font-bold">
+                                    <i className="fa-solid fa-graduation-cap"></i>
+                                </span>
+                                <div>
+                                    <h1 className="text-lg font-bold leading-tight">{examData.title}</h1>
+                                    <p className="text-xs text-sky-300 font-medium">{examData.grade}</p>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center space-x-3">
+                                {/* Mode Toggle */}
+                                <div className="bg-slate-800 p-1 rounded-xl flex items-center border border-slate-700">
+                                    <button 
+                                        onClick={() => setMode('study')}
+                                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${mode === 'study' ? 'bg-sky-500 text-white shadow' : 'text-slate-400 hover:text-white'}`}
+                                    >
+                                        <i className="fa-solid fa-book-open mr-1.5"></i>學習解析模式
+                                    </button>
+                                    <button 
+                                        onClick={() => setMode('test')}
+                                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${mode === 'test' ? 'bg-amber-500 text-white shadow' : 'text-slate-400 hover:text-white'}`}
+                                    >
+                                        <i className="fa-solid fa-pen-to-square mr-1.5"></i>實測挑戰模式
+                                    </button>
+                                </div>
+
+                                {mode === 'test' && (
+                                    <div className="hidden sm:flex items-center bg-slate-800 px-3 py-1.5 rounded-xl border border-amber-500/30">
+                                        <span className="text-xs text-slate-300 mr-2">預估得分:</span>
+                                        <span className="text-amber-400 font-extrabold text-sm">{calculateScore.score} 分</span>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Sub Header Focus Topics */}
+                    <section className="bg-sky-900 text-sky-100 py-3 border-b border-sky-800 text-xs">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center gap-2">
+                            <span className="font-bold bg-sky-700 text-sky-200 px-2 py-0.5 rounded text-[11px] uppercase tracking-wider">
+                                拔尖關鍵考點
+                            </span>
+                            {examData.topics.map((topic, index) => (
+                                <span key={index} className="bg-sky-800/80 px-2.5 py-1 rounded-full flex items-center gap-1.5">
+                                    <i className="fa-solid fa-check text-sky-400 text-[10px]"></i>
+                                    {topic}
+                                </span>
+                            ))}
+                        </div>
+                    </section>
+
+                    {}
+                    {/* Navigation Tabs */}
+                    <div className="bg-white border-b border-slate-200 sticky top-16 z-40 shadow-sm">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex overflow-x-auto custom-scrollbar">
+                            {[
+                                { id: 'overview', label: '總覽與重點解析', icon: 'fa-chart-pie' },
+                                { id: 'vocab', label: '一、文意字彙 (10題)', icon: 'fa-font' },
+                                { id: 'mcq', label: '二、綜合選擇 (12題)', icon: 'fa-list-check' },
+                                { id: 'sentence', label: '三、四、改寫與翻譯 (5題)', icon: 'fa-language' },
+                                { id: 'cloze', label: '五、克漏字 (馬拉拉)', icon: 'fa-file-lines' },
+                                { id: 'reading', label: '六、閱讀測驗 (全球議題)', icon: 'fa-book-bookmark' },
+                            ].map(tab => (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`flex items-center space-x-2 px-4 py-3.5 text-sm font-medium border-b-2 whitespace-nowrap transition-colors ${
+                                        activeTab === tab.id
+                                            ? 'border-sky-600 text-sky-600 bg-sky-50/50'
+                                            : 'border-transparent text-slate-600 hover:text-slate-900 hover:border-slate-300'
+                                    }`}
+                                >
+                                    <i className={`fa-solid ${tab.icon}`}></i>
+                                    <span>{tab.label}</span>
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Main Content Area */}
+                    <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                        
+                        {/* Global Toggle for Answer Reveal in Study Mode */}
+                        {mode === 'study' && (
+                            <div className="mb-6 flex justify-between items-center bg-sky-50 border border-sky-200 rounded-xl p-4">
+                                <div className="flex items-center gap-2">
+                                    <i className="fa-solid fa-lightbulb text-amber-500 text-lg"></i>
+                                    <span className="text-xs sm:text-sm font-medium text-slate-700">
+                                        學習模式提示：您可以逐題點擊「顯示解析」，或一鍵展開全卷解答觀看詳細思考路徑。
+                                    </span>
+                                </div>
+                                <button
+                                    onClick={() => setShowAllAnswers(!showAllAnswers)}
+                                    className="px-3.5 py-1.5 bg-sky-600 text-white rounded-lg text-xs font-semibold shadow hover:bg-sky-700 transition"
+                                >
+                                    {showAllAnswers ? '隱藏全卷答案' : '顯示全卷答案'}
+                                </button>
+                            </div>
+                        )}
+
+                        {/* TAB 0: OVERVIEW & GRAMMAR SUMMARY */}
+                        {activeTab === 'overview' && (
+                            <div className="space-y-6">
+                                <div className="bg-gradient-to-r from-sky-600 to-indigo-700 rounded-2xl p-6 text-white shadow-lg">
+                                    <h2 className="text-2xl font-bold mb-2">國二英語 L2 核心文法與拔尖解析</h2>
+                                    <p className="text-sky-100 text-sm max-w-3xl leading-relaxed">
+                                        本試卷特色在於結合高階句型運用與深度社會議題（馬拉拉爭取受教權、非洲水資源危機、公平貿易咖啡童工）。理解因為 (because) 與所以 (so) 的因果邏輯是本單元得分的核心關鍵！
+                                    </p>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    {/* Concept 1 */}
+                                    <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition">
+                                        <div className="flex items-center space-x-3 mb-3">
+                                            <span className="w-8 h-8 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center font-bold">1</span>
+                                            <h3 className="font-bold text-slate-800">因果連詞 because vs. so</h3>
+                                        </div>
+                                        <ul className="text-xs text-slate-600 space-y-2 leading-relaxed">
+                                            <li className="bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+                                                <strong className="text-sky-700">because (因為) 引導「原因」：</strong><br/>
+                                                <code className="text-indigo-600">S + V + because + 原因句.</code><br/>
+                                                例: She didn't go to school <b>because</b> she was sick.
+                                            </li>
+                                            <li className="bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+                                                <strong className="text-sky-700">so (所以) 引導「結果」：</strong><br/>
+                                                <code className="text-indigo-600">原因句, so + 結果句.</code><br/>
+                                                例: She was sick, <b>so</b> she didn't go to school.
+                                            </li>
+                                            <li className="text-amber-600 font-semibold bg-amber-50 p-2 rounded">
+                                                <i className="fa-solid fa-triangle-exclamation mr-1"></i>
+                                                絕對不可在同一個句子中同時使用 because 與 so！
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    {/* Concept 2 */}
+                                    <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition">
+                                        <div className="flex items-center space-x-3 mb-3">
+                                            <span className="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold">2</span>
+                                            <h3 className="font-bold text-slate-800">授受動詞 sell (賣) 的介系詞用法</h3>
+                                        </div>
+                                        <ul className="text-xs text-slate-600 space-y-2 leading-relaxed">
+                                            <li className="bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+                                                <strong className="text-indigo-700">授受動詞 + 物 + to + 人：</strong><br/>
+                                                Sara sold her car <b>to</b> her friend.<br/>
+                                                (動作方向性朝向對方，故介系詞用 <span className="underline font-bold text-indigo-600">to</span>)
+                                            </li>
+                                            <li className="bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+                                                <strong className="text-indigo-700">常見同類動詞：</strong> give, write, send, show 等皆搭配 to。
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    {/* Concept 3 */}
+                                    <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition">
+                                        <div className="flex items-center space-x-3 mb-3">
+                                            <span className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">3</span>
+                                            <h3 className="font-bold text-slate-800">複合形容詞 (年齡與數字表示)</h3>
+                                        </div>
+                                        <ul className="text-xs text-slate-600 space-y-2 leading-relaxed">
+                                            <li className="bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+                                                <strong className="text-emerald-700">連字號複合形容詞：</strong><br/>
+                                                twelve-year-old (12歲的) 放在名詞前修飾名詞，year <b>不加 s</b>。<br/>
+                                                例: a twelve-year-old girl
+                                            </li>
+                                            <li className="bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+                                                <strong className="text-emerald-700">數以百萬計：</strong><br/>
+                                                Millions of + 複數名詞<br/>
+                                                例: Millions of children need our help.
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    {/* Concept 4 */}
+                                    <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition">
+                                        <div className="flex items-center space-x-3 mb-3">
+                                            <span className="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center font-bold">4</span>
+                                            <h3 className="font-bold text-slate-800">情境溝通與跨領域人權文本</h3>
+                                        </div>
+                                        <p className="text-xs text-slate-600 leading-relaxed mb-2">
+                                            本單元文章涉及「聯合國永續發展目標 (SDGs)」，包含：優質教育 (SDG 4)、性別平等 (SDG 5) 與 消除貧窮 (SDG 1)。
+                                        </p>
+                                        <div className="bg-purple-50 p-3 rounded-lg text-xs text-purple-800">
+                                            <b>名言記憶：</b> "One child, one teacher, one book and one pen can change the world." — Malala Yousafzai
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* TAB 1: VOCABULARY */}
+                        {activeTab === 'vocab' && (
+                            <div className="space-y-4">
+                                <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+                                    <div>
+                                        <h2 className="text-lg font-bold text-slate-800">一、文意字彙 (每題 2 分，共 20 分)</h2>
+                                        <p className="text-xs text-slate-500">請根據句意填入正確英文單字，可以點擊喇叭朗讀例句。</p>
+                                    </div>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {examData.vocabulary.map(item => {
+                                        const userInput = userVocabInputs[item.id] || '';
+                                        const isCorrect = userInput.trim().toLowerCase() === item.word.toLowerCase();
+                                        const isRevealed = showAllAnswers || mode === 'study';
+
+                                        return (
+                                            <div key={item.id} className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between hover:border-sky-300 transition">
+                                                <div>
+                                                    <div className="flex justify-between items-start mb-2">
+                                                        <span className="w-6 h-6 rounded-full bg-sky-100 text-sky-700 font-bold text-xs flex items-center justify-center">
+                                                            {item.id}
+                                                        </span>
+                                                        <div className="flex items-center space-x-2">
+                                                            <button 
+                                                                onClick={() => speakText(item.word + '. ' + item.prompt.replace(/______/g, item.word))} 
+                                                                className="text-slate-400 hover:text-sky-600 p-1" 
+                                                                title="朗讀"
+                                                            >
+                                                                <i className="fa-solid fa-volume-high"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                    <p className="text-sm font-medium text-slate-800 mb-3 whitespace-pre-line leading-relaxed">
+                                                        {item.prompt}
+                                                    </p>
+
+                                                    <div className="text-xs text-slate-500 mb-2">
+                                                        提示中文：<span className="font-semibold text-slate-700">{item.hint}</span>
+                                                    </div>
+                                                </div>
+
+                                                <div className="mt-4 pt-3 border-t border-slate-100">
+                                                    <div className="flex items-center gap-2">
+                                                        <input
+                                                            type="text"
+                                                            placeholder="請輸入英文單字..."
+                                                            value={userInput}
+                                                            onChange={(e) => setUserVocabInputs({...userVocabInputs, [item.id]: e.target.value})}
+                                                            className={`flex-grow px-3 py-1.5 border text-sm rounded-lg outline-none transition ${
+                                                                mode === 'test' 
+                                                                    ? 'border-slate-300 focus:border-sky-500' 
+                                                                    : userInput.length === 0 
+                                                                        ? 'border-slate-300' 
+                                                                        : isCorrect 
+                                                                            ? 'border-emerald-500 bg-emerald-50 text-emerald-800' 
+                                                                            : 'border-rose-400 bg-rose-50 text-rose-800'
+                                                            }`}
+                                                        />
+                                                        {mode === 'test' && userInput && (
+                                                            <span className="text-xs font-bold px-2 py-1 rounded bg-slate-100">已填寫</span>
+                                                        )}
+                                                    </div>
+
+                                                    {isRevealed && (
+                                                        <div className="mt-3 bg-sky-50 p-3 rounded-lg border border-sky-100 text-xs text-slate-700 space-y-1">
+                                                            <div className="font-bold text-sky-800">
+                                                                解答：<span className="text-sky-600 underline font-mono text-sm">{item.word}</span>
+                                                            </div>
+                                                            <p className="text-slate-600">{item.exp}</p>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* TAB 2: MULTIPLE CHOICE */}
+                        {activeTab === 'mcq' && (
+                            <div className="space-y-4">
+                                <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                                    <h2 className="text-lg font-bold text-slate-800">二、綜合選擇 (每題 2 分，共 24 分)</h2>
+                                    <p className="text-xs text-slate-500">選出最適合句意的選項，包含文法連詞、過去式與情境對話。</p>
+                                </div>
+
+                                <div className="space-y-4">
+                                    {examData.multipleChoice.map(item => {
+                                        const selected = userMcqAnswers[item.id];
+                                        const isCorrect = selected === item.answer;
+                                        const isRevealed = showAllAnswers || mode === 'study';
+
+                                        return (
+                                            <div key={item.id} className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-sky-200 transition">
+                                                <div className="flex justify-between items-start mb-3">
+                                                    <div className="flex items-center space-x-2">
+                                                        <span className="w-6 h-6 rounded-full bg-slate-800 text-white text-xs font-bold flex items-center justify-center">
+                                                            {item.id}
+                                                        </span>
+                                                        <button 
+                                                            onClick={() => speakText(item.question)} 
+                                                            className="text-slate-400 hover:text-sky-600 p-1"
+                                                        >
+                                                            <i className="fa-solid fa-volume-high text-xs"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <p className="text-sm font-medium text-slate-800 mb-4 whitespace-pre-line leading-relaxed">
+                                                    {item.question}
+                                                </p>
+
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
+                                                    {item.options.map((opt, idx) => {
+                                                        const optCode = opt.charAt(1); // Extract A, B, C, D
+                                                        const isThisSelected = selected === optCode;
+
+                                                        let btnStyle = "bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100";
+                                                        if (isThisSelected) {
+                                                            if (mode === 'study') {
+                                                                btnStyle = optCode === item.answer 
+                                                                    ? "bg-emerald-100 border-emerald-500 text-emerald-800 font-bold" 
+                                                                    : "bg-rose-100 border-rose-400 text-rose-800 font-bold";
+                                                            } else {
+                                                                btnStyle = "bg-sky-500 text-white border-sky-600 font-bold";
+                                                            }
+                                                        } else if (isRevealed && optCode === item.answer) {
+                                                            btnStyle = "bg-emerald-50 border-emerald-400 text-emerald-700 font-bold";
+                                                        }
+
+                                                        return (
+                                                            <button
+                                                                key={idx}
+                                                                onClick={() => setUserMcqAnswers({...userMcqAnswers, [item.id]: optCode})}
+                                                                className={`px-4 py-2.5 rounded-lg border text-left text-xs sm:text-sm transition flex items-center justify-between ${btnStyle}`}
+                                                            >
+                                                                <span>{opt}</span>
+                                                                {isRevealed && optCode === item.answer && (
+                                                                    <i className="fa-solid fa-check text-emerald-600"></i>
+                                                                )}
+                                                            </button>
+                                                        );
+                                                    })}
+                                                </div>
+
+                                                {isRevealed && (
+                                                    <div className="bg-sky-50 p-3.5 rounded-lg border border-sky-100 text-xs text-slate-700">
+                                                        <span className="font-bold text-sky-800 mr-2">答案: ({item.answer})</span>
+                                                        <span>{item.explanation}</span>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* TAB 3: SENTENCE TRANSFORM & TRANSLATION */}
+                        {activeTab === 'sentence' && (
+                            <div className="space-y-6">
+                                {/* Section 3 */}
+                                <div className="space-y-4">
+                                    <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                                        <h2 className="text-lg font-bold text-slate-800">三、依提示作答 (每題 4 分，共 8 分)</h2>
+                                        <p className="text-xs text-slate-500">句型改寫與時態轉換練習。</p>
+                                    </div>
+
+                                    {examData.sentenceRewrite.map((item) => (
+                                        <div key={item.id} className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                                            <div className="flex items-center space-x-2">
+                                                <span className="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center">
+                                                    {item.id}
+                                                </span>
+                                                <span className="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-md">
+                                                    句型練習
+                                                </span>
+                                            </div>
+
+                                            <p className="text-sm font-medium text-slate-800 whitespace-pre-line leading-relaxed">
+                                                {item.prompt}
+                                            </p>
+
+                                            <div className="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                                                <div className="text-xs font-bold text-slate-700 mb-1">參考答案：</div>
+                                                <p className="text-sm font-mono text-sky-800 font-semibold">{item.answer}</p>
+                                                <div className="mt-2 text-xs text-slate-500 border-t border-slate-200 pt-2">
+                                                    <strong>拔尖解題關鍵：</strong> {item.explanation}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {/* Section 4 */}
+                                <div className="space-y-4">
+                                    <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                                        <h2 className="text-lg font-bold text-slate-800">四、翻譯 (每題 5 分，共 15 分)</h2>
+                                        <p className="text-xs text-slate-500">包含人權議題、過去式動詞變化與連詞綜合翻譯。</p>
+                                    </div>
+
+                                    {examData.translation.map((item, idx) => (
+                                        <div key={idx} className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                                            <div className="flex items-center space-x-2">
+                                                <span className="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center">
+                                                    {idx + 1}
+                                                </span>
+                                                <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md">
+                                                    中譯英
+                                                </span>
+                                                <button 
+                                                    onClick={() => speakText(item.english)}
+                                                    className="text-slate-400 hover:text-sky-600 text-xs p-1"
+                                                >
+                                                    <i className="fa-solid fa-volume-high mr-1"></i>朗讀英文
+                                                </button>
+                                            </div>
+
+                                            <p className="text-sm font-semibold text-slate-800">
+                                                {item.chinese}
+                                            </p>
+
+                                            <div className="bg-emerald-50/60 p-4 rounded-lg border border-emerald-100 space-y-2">
+                                                <div>
+                                                    <span className="text-xs font-bold text-emerald-800">標準譯文：</span>
+                                                    <p className="text-sm font-medium text-emerald-950 leading-relaxed font-sans mt-0.5">
+                                                        {item.english}
+                                                    </p>
+                                                </div>
+
+                                                <div className="pt-2 border-t border-emerald-200/50">
+                                                    <span className="text-xs font-bold text-slate-600">評分重點與核心單字：</span>
+                                                    <div className="flex flex-wrap gap-1.5 mt-1">
+                                                        {item.keyPoints.map((kp, kIdx) => (
+                                                            <span key={kIdx} className="bg-white text-slate-700 text-xs px-2 py-0.5 rounded border border-emerald-200 font-medium">
+                                                                ✓ {kp}
+                                                            </span>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* TAB 4: CLOZE (MALALA STORY) */}
+                        {activeTab === 'cloze' && (
+                            <div className="space-y-4">
+                                <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                                    <h2 className="text-lg font-bold text-slate-800">五、克漏字 (每題 3 分，共 18 分)</h2>
+                                    <p className="text-xs text-slate-500">馬拉拉 (Malala Yousafzai) 為女性教育權抗爭的故事。</p>
+                                </div>
+
+                                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                                    {/* Article Panel */}
+                                    <div className="lg:col-span-7 bg-white p-6 rounded-xl border border-slate-200 shadow-sm leading-relaxed space-y-4">
+                                        <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                                            <span className="text-xs font-bold uppercase tracking-wider text-sky-600 bg-sky-50 px-2.5 py-1 rounded">
+                                                文章閱讀
+                                            </span>
+                                            <button 
+                                                onClick={() => speakText(examData.cloze.article.replace(/\[\d+\]/g, ''))}
+                                                className="text-xs text-sky-600 hover:text-sky-800 flex items-center gap-1 font-medium"
+                                            >
+                                                <i className="fa-solid fa-circle-play"></i>
+                                                朗讀全文
+                                            </button>
+                                        </div>
+
+                                        <p className="text-sm text-slate-800 whitespace-pre-line leading-loose">
+                                            At one time in Pakistan, girls couldn't go to school <span className="bg-amber-100 text-amber-900 px-2 py-0.5 rounded font-bold">because of</span> the ruling Taliban. However, Malala <span className="inline-block bg-sky-100 text-sky-800 px-2 py-0.5 rounded font-bold">[1]</span> for girls' right to education. One day, she went to school <span className="inline-block bg-sky-100 text-sky-800 px-2 py-0.5 rounded font-bold">[2]</span> any other day. <span className="inline-block bg-sky-100 text-sky-800 px-2 py-0.5 rounded font-bold">[3]</span> her bus ride to school, two men in black masks <span className="inline-block bg-sky-100 text-sky-800 px-2 py-0.5 rounded font-bold">[4]</span> the bus and shot Malala in the head. Luckily, Malala didn't die.
+                                            {"\n\n"}
+                                            After that, more people knew her story. In 2014, she <span className="inline-block bg-sky-100 text-sky-800 px-2 py-0.5 rounded font-bold">[5]</span> the Nobel Peace Prize. During her speech at the UN, she shared simple but powerful words: "One child, one teacher, one book and one pen can <span className="inline-block bg-sky-100 text-sky-800 px-2 py-0.5 rounded font-bold">[6]</span> the world. Education is the only solution."
+                                        </p>
+
+                                        {/* Vocabulary Box */}
+                                        <div className="mt-4 pt-3 border-t border-slate-100 bg-slate-50 p-3 rounded-lg">
+                                            <div className="text-xs font-bold text-slate-700 mb-1">文章單字小字典：</div>
+                                            <div className="flex flex-wrap gap-2 text-xs">
+                                                {examData.cloze.vocabularyNotes.map((v, i) => (
+                                                    <span key={i} className="bg-white px-2 py-1 rounded border border-slate-200">
+                                                        <b>{v.word}</b>: {v.def}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Questions Panel */}
+                                    <div className="lg:col-span-5 space-y-3">
+                                        {examData.cloze.questions.map((q, qIdx) => {
+                                            const selected = userClozeAnswers[q.id];
+                                            const isRevealed = showAllAnswers || mode === 'study';
+
+                                            return (
+                                                <div key={q.id} className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                                                    <div className="flex justify-between items-center">
+                                                        <span className="text-xs font-bold bg-slate-800 text-white w-5 h-5 rounded-full flex items-center justify-center">
+                                                            {q.id}
+                                                        </span>
+                                                        {isRevealed && (
+                                                            <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">
+                                                                解答: ({q.answer})
+                                                            </span>
+                                                        )}
+                                                    </div>
+
+                                                    <div className="grid grid-cols-2 gap-1.5">
+                                                        {q.options.map((opt, oIdx) => {
+                                                            const optCode = opt.charAt(1);
+                                                            const isSelected = selected === optCode;
+                                                            let btnStyle = "bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100";
+                                                            
+                                                            if (isSelected) {
+                                                                btnStyle = mode === 'study'
+                                                                    ? optCode === q.answer ? "bg-emerald-100 border-emerald-500 font-bold" : "bg-rose-100 border-rose-400 font-bold"
+                                                                    : "bg-sky-500 text-white font-bold";
+                                                            } else if (isRevealed && optCode === q.answer) {
+                                                                btnStyle = "bg-emerald-50 border-emerald-400 font-bold text-emerald-800";
+                                                            }
+
+                                                            return (
+                                                                <button
+                                                                    key={oIdx}
+                                                                    onClick={() => setUserClozeAnswers({...userClozeAnswers, [q.id]: optCode})}
+                                                                    className={`px-2.5 py-1.5 rounded text-xs border text-left transition ${btnStyle}`}
+                                                                >
+                                                                    {opt}
+                                                                </button>
+                                                            );
+                                                        })}
+                                                    </div>
+
+                                                    {isRevealed && (
+                                                        <p className="text-[11px] text-slate-600 bg-sky-50 p-2 rounded mt-1 border border-sky-100">
+                                                            {q.exp}
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* TAB 5: READING COMPREHENSION */}
+                        {activeTab === 'reading' && (
+                            <div className="space-y-6">
+                                <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                                    <h2 className="text-lg font-bold text-slate-800">六、閱讀測驗 (每題 3 分，共 15 分)</h2>
+                                    <p className="text-xs text-slate-500">探討撒哈拉缺水危機與公平貿易咖啡童工惡性循環。</p>
+                                </div>
+
+                                {/* Article A */}
+                                <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                                    <h3 className="font-bold text-slate-800 text-base border-b border-slate-100 pb-2">
+                                        {examData.readingComprehension[0].title}
+                                    </h3>
+                                    <p className="text-xs sm:text-sm text-slate-700 leading-relaxed whitespace-pre-line bg-slate-50 p-4 rounded-xl">
+                                        {examData.readingComprehension[0].passage}
+                                    </p>
+
+                                    <div className="space-y-4 pt-2">
+                                        {examData.readingComprehension[0].questions.map((q) => (
+                                            <div key={q.id} className="border-t border-slate-100 pt-3">
+                                                <p className="text-xs sm:text-sm font-semibold text-slate-800 mb-2">
+                                                    {q.id}. {q.question}
+                                                </p>
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-2">
+                                                    {q.options.map((opt, oIdx) => (
+                                                        <div key={oIdx} className="bg-slate-50 p-2 rounded text-xs text-slate-700 border border-slate-200">
+                                                            {opt}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                                <div className="bg-emerald-50 p-2.5 rounded-lg border border-emerald-100 text-xs text-emerald-900">
+                                                    <strong>解答: ({q.answer})</strong> — {q.explanation}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Article B */}
+                                <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                                    <h3 className="font-bold text-slate-800 text-base border-b border-slate-100 pb-2">
+                                        {examData.readingComprehension[1].title}
+                                    </h3>
+                                    <p className="text-xs sm:text-sm text-slate-700 leading-relaxed whitespace-pre-line bg-slate-50 p-4 rounded-xl">
+                                        {examData.readingComprehension[1].passage}
+                                    </p>
+
+                                    <div className="bg-sky-50 p-3 rounded-lg border border-sky-100">
+                                        <div className="text-xs font-bold text-sky-800 mb-1">待填入的句子選項：</div>
+                                        <ul className="text-xs text-slate-700 space-y-1">
+                                            {examData.readingComprehension[1].insertedSentenceOptions.map((s, idx) => (
+                                                <li key={idx} className="font-medium">{s}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+
+                                    <div className="border-t border-slate-100 pt-3 space-y-2">
+                                        <p className="text-xs sm:text-sm font-semibold text-slate-800">
+                                            {examData.readingComprehension[1].questions[0].question}
+                                        </p>
+                                        <div className="bg-emerald-50 p-3.5 rounded-lg border border-emerald-100 space-y-1.5 text-xs text-emerald-900">
+                                            {examData.readingComprehension[1].questions[0].answersDetail.map((ans, aIdx) => (
+                                                <div key={aIdx} className="flex items-start space-x-1.5">
+                                                    <i className="fa-solid fa-check text-emerald-600 mt-0.5"></i>
+                                                    <span>{ans}</span>
+                                                </div>
+                                            ))}
+                                            <div className="pt-2 text-slate-600 border-t border-emerald-200/50 mt-2">
+                                                <strong>解析邏輯：</strong> {examData.readingComprehension[1].questions[0].explanation}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </main>
+
+                    {}
+                    {/* Footer */}
+                    <footer className="bg-slate-900 text-slate-400 text-xs py-6 mt-12 border-t border-slate-800">
+                        <div className="max-w-7xl mx-auto px-4 text-center space-y-2">
+                            <p className="font-medium text-slate-300">國中英語(三) 挑戰卷 (L.2) 互動式教學解析系統</p>
+                            <p className="text-slate-500">設計宗旨：協助八年級學生理解因果連接詞 (because/so) 應用與人權全球議題閱讀解析。</p>
+                        </div>
+                    </footer>
+                </div>
+            );
+        }
+
+        // Render the App
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>

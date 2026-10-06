@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九年級拔尖班｜英語 3800 第2回閱讀解析</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & ReactDOM CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Nunito:wght@400;600;700;800&display=swap');
+        body {
+            font-family: 'Nunito', 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useMemo } = React;
+
+        // Complete Dataset for Questions 1 to 43
+        const questionsData = [
+            // PART 1: Single Questions 1-22
+            {
+                id: 1,
+                part: "第一部分：單題",
+                page: 23,
+                type: "single",
+                question: "Look at the picture. Mrs. Wang always finishes eating _____ first for breakfast.",
+                options: [
+                    { key: "A", text: "(A) a banana" },
+                    { key: "B", text: "(B) an egg" },
+                    { key: "C", text: "(C) soup" },
+                    { key: "D", text: "(D) toast" }
+                ],
+                answer: "C",
+                explanation: "【圖片理解】圖片中 Mrs. Wang 手持湯匙正在喝湯，故選 (C) soup。",
+                tag: "單字理解 / 看圖作答"
+            },
+            {
+                id: 2,
+                part: "第一部分：單題",
+                page: 23,
+                type: "single",
+                question: "The bakery is famous for its chocolate cake. There are many different sizes and shapes for people to _____ from.",
+                options: [
+                    { key: "A", text: "(A) carry" },
+                    { key: "B", text: "(B) choose" },
+                    { key: "C", text: "(C) count" },
+                    { key: "D", text: "(D) cover" }
+                ],
+                answer: "B",
+                explanation: "【字義】choose from 意為「從……中選擇」。句意：這家麵包店以巧克力蛋糕聞名，有許多不同尺寸和形狀供人們選擇。",
+                tag: "單字動詞"
+            },
+            {
+                id: 3,
+                part: "第一部分：單題",
+                page: 23,
+                type: "single",
+                question: "It is very cold and rainy in my city in winter. I can't _____ the terrible weather, so I usually take a trip to warmer places and enjoy the sun there.",
+                options: [
+                    { key: "A", text: "(A) agree" },
+                    { key: "B", text: "(B) break" },
+                    { key: "C", text: "(C) stand" },
+                    { key: "D", text: "(D) touch" }
+                ],
+                answer: "C",
+                explanation: "【字義與片語】can't stand 意為「無法忍受」。句意：我居住的城市冬天既冷又常下雨，我無法忍受這樣糟糕的天氣，所以常去溫暖的地方旅行享受陽光。",
+                tag: "情境片語"
+            },
+            {
+                id: 4,
+                part: "第一部分：單題",
+                page: 23,
+                type: "single",
+                question: "My sister usually studies at home, but _____ she goes to the library with her classmates.",
+                options: [
+                    { key: "A", text: "(A) often" },
+                    { key: "B", text: "(B) sometimes" },
+                    { key: "C", text: "(C) seldom" },
+                    { key: "D", text: "(D) never" }
+                ],
+                answer: "B",
+                explanation: "【頻率副詞】前句提到通常(usually)在家，後句用轉折詞 but 搭配 sometimes (有時候) 表對比。",
+                tag: "頻率副詞"
+            },
+            {
+                id: 5,
+                part: "第一部分：單題",
+                page: 23,
+                type: "single",
+                question: "Kelly is leaving school in June, but she is still not _____ about her future job. Will she be an office worker, or will she run her own shop?",
+                options: [
+                    { key: "A", text: "(A) afraid" },
+                    { key: "B", text: "(B) sure" },
+                    { key: "C", text: "(C) correct" },
+                    { key: "D", text: "(D) possible" }
+                ],
+                answer: "B",
+                explanation: "【形容詞】be not sure about 意為「對……還不確定」。後句提到她猶豫要做上班族還是自己開店。",
+                tag: "形容詞與片語"
+            },
+            {
+                id: 6,
+                part: "第一部分：單題",
+                page: 23,
+                type: "single",
+                question: "To get the best _____ of some item, she'll spend a lot of time surfing through several online shops for the lowest price.",
+                options: [
+                    { key: "A", text: "(A) deal" },
+                    { key: "B", text: "(B) experience" },
+                    { key: "C", text: "(C) level" },
+                    { key: "D", text: "(D) report" }
+                ],
+                answer: "A",
+                explanation: "【名詞】get the best deal 意為「獲得最划算的價格/交易」。句意：為了拿到商品最划算優惠的價格，她會花很多時間瀏覽多家網購平台比較最低價。",
+                tag: "實用生活詞彙"
+            },
+            {
+                id: 7,
+                part: "第一部分：單題",
+                page: 23,
+                type: "single",
+                question: "Eric went swimming every morning last year, but he _____ now.",
+                options: [
+                    { key: "A", text: "(A) isn't" },
+                    { key: "B", text: "(B) wasn't" },
+                    { key: "C", text: "(C) doesn't" },
+                    { key: "D", text: "(D) don't" }
+                ],
+                answer: "C",
+                explanation: "【時態對比與助動詞】前半句為過去式簡單動詞 went，後半句指「現在不去了」，現在式第三人稱單數使用助動詞否定 doesn't (swim)。",
+                tag: "文法與助動詞"
+            },
+            {
+                id: 8,
+                part: "第一部分：單題",
+                page: 23,
+                type: "single",
+                question: "When the _____ asked the actress some questions about her family during the interview, she just smiled and didn't say anything.",
+                options: [
+                    { key: "A", text: "(A) dentist" },
+                    { key: "B", text: "(B) engineer" },
+                    { key: "C", text: "(C) reporter" },
+                    { key: "D", text: "(D) soldier" }
+                ],
+                answer: "C",
+                explanation: "【職業名詞】在採訪 (interview) 中提問女演員的人為「記者」(reporter)。",
+                tag: "職業單字"
+            },
+            {
+                id: 9,
+                part: "第一部分：單題",
+                page: 24,
+                type: "single",
+                question: "Jerry: Look! There's something strange in the _____. Winnie: Oh, that's why everyone on the bridge is looking up.",
+                options: [
+                    { key: "A", text: "(A) car" },
+                    { key: "B", text: "(B) garden" },
+                    { key: "C", text: "(C) lake" },
+                    { key: "D", text: "(D) sky" }
+                ],
+                answer: "D",
+                explanation: "【名詞與情境】Winnie 提到橋上的人都在「往上看」(looking up)，可推斷奇特物體在「天空」(sky) 中。",
+                tag: "情境推論"
+            },
+            {
+                id: 10,
+                part: "第一部分：單題",
+                page: 24,
+                type: "single",
+                question: "Sandy likes wearing clothes of many _____. Her brother always says she is just like a walking rainbow.",
+                options: [
+                    { key: "A", text: "(A) colors" },
+                    { key: "B", text: "(B) pictures" },
+                    { key: "C", text: "(C) prices" },
+                    { key: "D", text: "(D) sizes" }
+                ],
+                answer: "A",
+                explanation: "【名詞】後面形容她像「會走的彩虹」(walking rainbow)，代表衣服充滿各種「顏色」(colors)。",
+                tag: "形容喻名詞"
+            },
+            {
+                id: 11,
+                part: "第一部分：單題",
+                page: 24,
+                type: "single",
+                question: "Mr. Wang plans to take his family to go on a picnic this weekend. He wants to find a good place. Where can he find one?",
+                options: [
+                    { key: "A", text: "(A) 5 Best Places for Picnics | Fun Holiday" },
+                    { key: "B", text: "(B) No Picnics Here | BAC News" },
+                    { key: "C", text: "(C) Shops for Picnics | Shop Shop" },
+                    { key: "D", text: "(D) Gigi Restaurant | Food Love" }
+                ],
+                answer: "A",
+                explanation: "【網路搜尋結果理解】Mr. Wang 想要找「野餐的好去處」，搜尋結果 (A)「5個最佳野餐地點」最符需求。(B)不能野餐，(C)野餐用品店，(D)餐廳。",
+                tag: "圖表與搜尋理解"
+            },
+            {
+                id: 12,
+                part: "第一部分：單題",
+                page: 24,
+                type: "single",
+                question: "The kind clerk told me I could go to the _____ in their town. The building itself is an art work, and there are lots of old and new books.",
+                options: [
+                    { key: "A", text: "(A) art museum" },
+                    { key: "B", text: "(B) hospital" },
+                    { key: "C", text: "(C) library" },
+                    { key: "D", text: "(D) police station" }
+                ],
+                answer: "C",
+                explanation: "【場所名詞】提到裡面有很多新舊「書籍」(books)，故為「圖書館」(library)。",
+                tag: "地點單字"
+            },
+            {
+                id: 13,
+                part: "第一部分：單題",
+                page: 24,
+                type: "single",
+                question: "Judy: Why does your uncle know the island so well? Lisa: Oh, that's because he _____ there for many years until my aunt died.",
+                options: [
+                    { key: "A", text: "(A) lives" },
+                    { key: "B", text: "(B) lived" },
+                    { key: "C", text: "(C) is living" },
+                    { key: "D", text: "(D) would live" }
+                ],
+                answer: "B",
+                explanation: "【時態】叔叔居住在那裡直到嬸嬸去世為止，屬於過去發生的歷史事實與過去一段時間，故使用過去簡單式 lived。",
+                tag: "過去簡單式"
+            },
+            {
+                id: 14,
+                part: "第一部分：單題",
+                page: 24,
+                type: "single",
+                question: "Mrs. Lin: You didn't spell the word correctly. Diane: Oh no! I should _____ it _____ in the dictionary.",
+                options: [
+                    { key: "A", text: "(A) look; up" },
+                    { key: "B", text: "(B) make; up" },
+                    { key: "C", text: "(C) show; up" },
+                    { key: "D", text: "(D) clean; up" }
+                ],
+                answer: "A",
+                explanation: "【動詞片語】look up a word in the dictionary 意為「在字典中查單字」。代名詞 it 放在動詞 look 與介系詞 up 中間。",
+                tag: "可分式動詞片語"
+            },
+            {
+                id: 15,
+                part: "第一部分：單題",
+                page: 24,
+                type: "single",
+                question: "Grandma's cat loves lying _____ that paper box. She rests her head on the side of it and her body on the floor.",
+                options: [
+                    { key: "A", text: "(A) in" },
+                    { key: "B", text: "(B) on" },
+                    { key: "C", text: "(C) by" },
+                    { key: "D", text: "(D) under" }
+                ],
+                answer: "A",
+                explanation: "【介系詞】頭靠在邊緣、身體躺在裡面，故用介系詞 in that paper box (在紙箱裡)。",
+                tag: "空間介系詞"
+            },
+            {
+                id: 16,
+                part: "第一部分：單題",
+                page: 24,
+                type: "single",
+                question: "Ben said he would study Japanese for one hour every day. _____ he really kept his words. Now he speaks like a Japanese.",
+                options: [
+                    { key: "A", text: "(A) or" },
+                    { key: "B", text: "(B) and" },
+                    { key: "C", text: "(C) but" },
+                    { key: "D", text: "(D) then" }
+                ],
+                answer: "B",
+                explanation: "【對等連接詞】前後文為順承關係，表示「而且」(and) 他真的守信承諾。",
+                tag: "連接詞"
+            },
+            {
+                id: 17,
+                part: "第一部分：單題",
+                page: 24,
+                type: "single",
+                question: "The sheep are cute and friendly. Let's go get some grass to feed _____.",
+                options: [
+                    { key: "A", text: "(A) it" },
+                    { key: "B", text: "(B) its" },
+                    { key: "C", text: "(C) them" },
+                    { key: "D", text: "(D) they" }
+                ],
+                answer: "C",
+                explanation: "【代名詞受格】The sheep 此處由動詞 are 可知為複數，受詞位置用複數代名詞受格 them。",
+                tag: "代名詞"
+            },
+            {
+                id: 18,
+                part: "第一部分：單題",
+                page: 24,
+                type: "single",
+                question: "Everyone was surprised to see that Mr. Brown could run so fast at his _____. He is already over seventy years old.",
+                options: [
+                    { key: "A", text: "(A) age" },
+                    { key: "B", text: "(B) level" },
+                    { key: "C", text: "(C) size" },
+                    { key: "D", text: "(D) time" }
+                ],
+                answer: "A",
+                explanation: "【名詞片語】at one's age 意為「在某人的年齡/歲數」。後半句補充他已經高齡七十多歲。",
+                tag: "生活名詞"
+            },
+            {
+                id: 19,
+                part: "第一部分：單題",
+                page: 24,
+                type: "single",
+                question: "Meg didn't understand the meaning of 'spell' in the reading: 'The heavy rain could spell trouble for their farms.' What does 'spell' mean here?",
+                options: [
+                    { key: "A", text: "(A) To say special words to show magic power." },
+                    { key: "B", text: "(B) To make something bad happen in the future." },
+                    { key: "C", text: "(C) To say the letters of the word in the correct order." },
+                    { key: "D", text: "(D) To do something for other people to allow them to rest." }
+                ],
+                answer: "B",
+                explanation: "【字義理解與一字多義】在此處 spell trouble 代表「招致、帶來未來的麻煩/壞事」，故選 (B)。",
+                tag: "一字多義推論"
+            },
+            {
+                id: 20,
+                part: "第一部分：單題",
+                page: 24,
+                type: "single",
+                question: "You are the _____ one to point out my mistake. All the others said I did a good job.",
+                options: [
+                    { key: "A", text: "(A) first" },
+                    { key: "B", text: "(B) second" },
+                    { key: "C", text: "(C) third" },
+                    { key: "D", text: "(D) last" }
+                ],
+                answer: "A",
+                explanation: "【序數】其他人都誇獎我做得好，因此你是「第一個」(first) 指出我錯誤的人。",
+                tag: "序數應用"
+            },
+            {
+                id: 21,
+                part: "第一部分：單題",
+                page: 24,
+                type: "single",
+                question: "Arnold: How often do you play online games? Austin: _____ and only on weekends. My parents don't allow it during the week.",
+                options: [
+                    { key: "A", text: "(A) Right now" },
+                    { key: "B", text: "(B) Twice a week" },
+                    { key: "C", text: "(C) In an hour" },
+                    { key: "D", text: "(D) For three days" }
+                ],
+                answer: "B",
+                explanation: "【頻率提問回應】How often 詢問頻率，回答 Twice a week (一週兩次) 且僅在週末。",
+                tag: "對話問答"
+            },
+            {
+                id: 22,
+                part: "第一部分：單題",
+                page: 24,
+                type: "single",
+                question: "Mina: Oh, no! My computer doesn't work! What can I do? Sean: Don't worry. I _____ fix it. Let me check.",
+                options: [
+                    { key: "A", text: "(A) do" },
+                    { key: "B", text: "(B) can" },
+                    { key: "C", text: "(C) should" },
+                    { key: "D", text: "(D) must" }
+                ],
+                answer: "B",
+                explanation: "【情態助動詞】can 表「能力/能夠」。Sean 安撫 Mina 表示自己「能夠」修理電腦。",
+                tag: "情態助動詞"
+            },
+
+            // PART 2: Reading Sets 23-43
+            {
+                id: 23,
+                part: "第二部分：題組 (23~25)",
+                page: 25,
+                type: "group",
+                passageId: "p_bistro",
+                question: "Patty and her classmates want to get a Christmas gift from Bistro PAPA. When should they call to make the reservation?",
+                options: [
+                    { key: "A", text: "(A) November 28th" },
+                    { key: "B", text: "(B) December 9th" },
+                    { key: "C", text: "(C) December 11th" },
+                    { key: "D", text: "(D) December 20th" }
+                ],
+                answer: "B",
+                explanation: "【細節推論】海報標示：提早兩週（14天）預約可獲得價值500元的聖誕禮物。平安夜為12月24日，倒推兩週最晚須於12月10日前預約。預約自12月1日開放，故選項中 (B) December 9th 符合規定。",
+                tag: "閱讀理解與日期計算"
+            },
+            {
+                id: 24,
+                part: "第二部分：題組 (23~25)",
+                page: 25,
+                type: "group",
+                passageId: "p_bistro",
+                question: "How much does each of them pay when they finish the Christmas meal in Bistro PAPA?",
+                options: [
+                    { key: "A", text: "(A) NT$1,450" },
+                    { key: "B", text: "(B) NT$1,485" },
+                    { key: "C", text: "(C) NT$1,500" },
+                    { key: "D", text: "(D) NT$1,650" }
+                ],
+                answer: "B",
+                explanation: "【餐費折扣計算】每人餐費為 NT$1,500 + 10% 服務費 = NT$1,650。Patty 與 4 位同學共 5 人用餐（滿4人以上整桌享9折優惠），因此每人實付 1,650 × 0.9 = NT$1,485。",
+                tag: "生活數學與折扣"
+            },
+            {
+                id: 25,
+                part: "第二部分：題組 (23~25)",
+                page: 25,
+                type: "group",
+                passageId: "p_bistro",
+                question: "If Patty and her classmates want to have the Christmas meal and enjoy some music at the same time, what time should they have the meal?",
+                options: [
+                    { key: "A", text: "(A) 17:00" },
+                    { key: "B", text: "(B) 17:30" },
+                    { key: "C", text: "(C) 19:00" },
+                    { key: "D", text: "(D) 19:30" }
+                ],
+                answer: "C",
+                explanation: "【時間匹配】海報載明現場樂團表演於 19:00 開始，用餐時間約需 1.5 小時，因此預約 19:00 用餐可以在用餐同時享受音樂。",
+                tag: "時間與行程規劃"
+            },
+
+            {
+                id: 26,
+                part: "第二部分：題組 (26~28)",
+                page: 26,
+                type: "group",
+                passageId: "p_einstein",
+                question: "What class may they have in the comics?",
+                options: [
+                    { key: "A", text: "(A) An art class" },
+                    { key: "B", text: "(B) A history class" },
+                    { key: "C", text: "(C) A science class" },
+                    { key: "D", text: "(D) An English class" }
+                ],
+                answer: "C",
+                explanation: "【主旨推論】第8格老師提到要學習愛因斯坦大腦中的理論(theories)並演練數學算式，可推知為自然科學課(Science class)。",
+                tag: "漫畫脈絡理解"
+            },
+            {
+                id: 27,
+                part: "第二部分：題組 (26~28)",
+                page: 26,
+                type: "group",
+                passageId: "p_einstein",
+                question: "Which of the following may the missing part of the comic 7 be?",
+                options: [
+                    { key: "A", text: "(A) Einstein wearing shorts and funny shoes" },
+                    { key: "B", text: "(B) Einstein writing on a blackboard" },
+                    { key: "C", text: "(C) Einstein giving a public speech" },
+                    { key: "D", text: "(D) Einstein eating at a restaurant" }
+                ],
+                answer: "A",
+                explanation: "【圖片與文意連貫】第6格說明愛因斯坦常穿舊衣、短褲甚至妻子的鞋子；第7格說明為了對他表示尊重(respect)，照片只展示上半身。因此缺少的框7下半身應畫出他穿著古怪鞋褲的景象(A)。",
+                tag: "上下文與圖片推論"
+            },
+            {
+                id: 28,
+                part: "第二部分：題組 (26~28)",
+                page: 26,
+                type: "group",
+                passageId: "p_einstein",
+                question: "What can we NOT learn about Einstein from the comics?",
+                options: [
+                    { key: "A", text: "(A) He was pretty smart." },
+                    { key: "B", text: "(B) People respect him a lot." },
+                    { key: "C", text: "(C) He might seldom buy new clothes." },
+                    { key: "D", text: "(D) He always tried to look handsome in public." }
+                ],
+                answer: "D",
+                explanation: "【細節反向判斷】漫畫第5格提到 Einstein didn't really care about his look（他不太在乎外表），因此 (D)「他總是試圖在公開場合看起來英俊」為錯誤選項。",
+                tag: "文章反向理解"
+            },
+
+            {
+                id: 29,
+                part: "第二部分：題組 (29~31)",
+                page: 28,
+                type: "group",
+                passageId: "p_pets",
+                question: "Which picture best shows the reading above?",
+                options: [
+                    { key: "A", text: "(A) Chart A (Dogs decreasing, Cats peaking in 2023)" },
+                    { key: "B", text: "(B) Chart B (Both Dogs & Cats growing: Dogs ~1.48m, Cats ~1.31m)" },
+                    { key: "C", text: "(C) Chart C (Dogs & Cats decreasing in 2024)" },
+                    { key: "D", text: "(D) Chart D (Cats decreasing after 2023)" }
+                ],
+                answer: "B",
+                explanation: "【圖表比對】內文提及 2023 年寵物狗約 1.48 million，寵物貓約 1.31 million，且數量「持續成長」(the number of them keeps growing)，符合圖表 (B) 兩條曲線皆呈上升趨勢的走勢。",
+                tag: "圖文轉化"
+            },
+            {
+                id: 30,
+                part: "第二部分：題組 (29~31)",
+                page: 28,
+                type: "group",
+                passageId: "p_pets",
+                question: "ABC Radio is coming back. Who is probably the host?",
+                options: [
+                    { key: "A", text: "(A) '...Speaking of age, cats are about the same as dogs. A two-month-old cat is like a child at the age of 3...'" },
+                    { key: "B", text: "(B) '...Amy is a cat. She is five years old. Sadly, her owner died last week...'" },
+                    { key: "C", text: "(C) '...Here is a new restaurant. There are lots of lovely cats at this restaurant...'" },
+                    { key: "D", text: "(D) '...There will be a running race. You need to run with your dogs...'" }
+                ],
+                answer: "A",
+                explanation: "【廣播承接語】廣播結尾問到『那麼貓呢？我們下週談。ABC電台即將回來。』因此接續講述「談到年齡，貓跟狗差不多...」(A) 最吻合主持人語調與主題。",
+                tag: "脈絡承接推論"
+            },
+            {
+                id: 31,
+                part: "第二部分：題組 (29~31)",
+                page: 28,
+                type: "group",
+                passageId: "p_pets",
+                question: "What is the correct order in the reading?\na. The reason for people to keep pets.\nb. The age of pet animals.\nc. The number of family pets.",
+                options: [
+                    { key: "A", text: "(A) a -> b -> c" },
+                    { key: "B", text: "(B) c -> a -> b" },
+                    { key: "C", text: "(C) c -> b -> a" },
+                    { key: "D", text: "(D) b -> c -> a" }
+                ],
+                answer: "B",
+                explanation: "【段落結構排序】第一段先提出台灣養寵物的「數量統計」(c)，接著闡述人們「養寵物的原因/好處」(a)，第二段則探討寵物的「年齡與壽命發展」(b)，正確順序為 c -> a -> b。",
+                tag: "文章結構邏輯"
+            },
+
+            {
+                id: 32,
+                part: "第二部分：題組 (32~34)",
+                page: 29,
+                type: "group",
+                passageId: "p_chat",
+                question: "What is jet lag?",
+                options: [
+                    { key: "A", text: "(A) The heat difference between two cities." },
+                    { key: "B", text: "(B) The cost difference between two things." },
+                    { key: "C", text: "(C) The time difference between two places." },
+                    { key: "D", text: "(D) The height difference between two people." }
+                ],
+                answer: "C",
+                explanation: "【字義與上下文推論】對話中提到 Danny 打瞌睡，Tina 問是不是在克服 jet lag，接著討論台北與 Danny 城市的「18小時時差」(time difference)，可推知 jet lag 為時差引起的疲倦反應。",
+                tag: "上下文詞義推論"
+            },
+            {
+                id: 33,
+                part: "第二部分：題組 (32~34)",
+                page: 29,
+                type: "group",
+                passageId: "p_chat",
+                question: "What does 'it' refer to in the talk?",
+                options: [
+                    { key: "A", text: "(A) Japan." },
+                    { key: "B", text: "(B) The drink." },
+                    { key: "C", text: "(C) The supermarket." },
+                    { key: "D", text: "(D) The kind of cookie." }
+                ],
+                answer: "C",
+                explanation: "【代名詞指稱】Alice 說：'buy some drinks at the new supermarket. I heard it comes from Japan.' 這裡的 it 指代前面剛提到的「新超市」(supermarket)。",
+                tag: "代名詞指稱理解"
+            },
+            {
+                id: 34,
+                part: "第二部分：題組 (32~34)",
+                page: 29,
+                type: "group",
+                passageId: "p_chat",
+                question: "Which is NOT true?",
+                options: [
+                    { key: "A", text: "(A) It is 9 p.m. in Taipei now." },
+                    { key: "B", text: "(B) Danny may not live in Taiwan." },
+                    { key: "C", text: "(C) Alice bought the Japanese cookies before." },
+                    { key: "D", text: "(D) Sunny had bad experiences about the Japanese cookies." }
+                ],
+                answer: "D",
+                explanation: "【細節比對】Sunny 說這種餅乾配茶或咖啡很棒，會讓人不自覺吃光光，表示非常喜歡，並非有糟糕經驗，故 (D) 敘述不正確。",
+                tag: "細節核對"
+            },
+
+            {
+                id: 35,
+                part: "第二部分：題組 (35~37)",
+                page: 30,
+                type: "group",
+                passageId: "p_bakery",
+                question: "What can we know about DC Bakery?",
+                options: [
+                    { key: "A", text: "(A) They also sell coffee." },
+                    { key: "B", text: "(B) People can enjoy their bread in it." },
+                    { key: "C", text: "(C) There are only three items in the bakery." },
+                    { key: "D", text: "(D) People can shop there on Friday morning." }
+                ],
+                answer: "A",
+                explanation: "【訊息檢索】顧客評論提及：'Their black coffee and salt butter roll are my favorite.' 證明麵包店亦有販售黑咖啡。其餘選項：外帶店(Take-away)無法內用；菜單提及 fruit bread，故不只三種商品；營業時間為下午1點至7點，週五早上不營業。",
+                tag: "圖表綜合理解"
+            },
+            {
+                id: 36,
+                part: "第二部分：題組 (35~37)",
+                page: 30,
+                type: "group",
+                passageId: "p_bakery",
+                question: "Henry goes to DC Bakery on December 5th. He gets four apple pies. What else can he buy to get a free chocolate cookie?",
+                options: [
+                    { key: "A", text: "(A) Two apple pies." },
+                    { key: "B", text: "(B) Two salt butter rolls." },
+                    { key: "C", text: "(C) One salt butter roll and one ham sandwich." },
+                    { key: "D", text: "(D) One salt butter roll and two ham sandwiches." }
+                ],
+                answer: "D",
+                explanation: "【消費金額與優惠計算】優惠活動：12/1~12/23 蘋果派買一送一，消費滿 $200 贈巧克力餅乾。蘋果派每個 $50，買4個實付2個的錢 ($100)，距離滿額還差超過 $100。選項(D) 買1個鹽可頌($40) + 2個火腿三明治($40×2=$80) = $120，總金額達到 $100+$120=$220，超過 $200 滿額門檻。",
+                tag: "複合應用計算"
+            },
+            {
+                id: 37,
+                part: "第二部分：題組 (35~37)",
+                page: 30,
+                type: "group",
+                passageId: "p_bakery",
+                question: "Allen is at DX Market. He plans to go to DC Bakery next. How can he get there?",
+                options: [
+                    { key: "A", text: "(A) Go straight on Bird Road for one block. It is on the left." },
+                    { key: "B", text: "(B) Go straight on Lion Road and turn right on Cat Road. It is on the left." },
+                    { key: "C", text: "(C) Go straight on Lion Road and turn left on Fox Road. It is on the right." },
+                    { key: "D", text: "(D) Go straight on Cat Road and turn right on Fox Road. It is on the right." }
+                ],
+                answer: "B",
+                explanation: "【地圖指引】觀察地圖，從 DX Market (位於 Lion Road 與 Fox Road 交叉口) 出發，沿 Lion Road 直走，右轉進入 Cat Road，DC Bakery 位於 Cat Road 的左手邊。",
+                tag: "地圖路徑判讀"
+            },
+
+            {
+                id: 38,
+                part: "第二部分：題組 (38~40)",
+                page: 32,
+                type: "group",
+                passageId: "p_lunch",
+                question: "What can we know from the dialogue?",
+                options: [
+                    { key: "A", text: "(A) Tina had a fight with John." },
+                    { key: "B", text: "(B) Amy wants to eat pork rice." },
+                    { key: "C", text: "(C) Amy, John and Tina work together." },
+                    { key: "D", text: "(D) John is going to order meals for Tina." }
+                ],
+                answer: "C",
+                explanation: "【人物關係推論】Tina 提到 'across from our company'（在我們公司對面）且大家互相協助訂午餐，可推知 Amy, John 與 Tina 三人為同事關係。",
+                tag: "對話訊息整合"
+            },
+            {
+                id: 39,
+                part: "第二部分：題組 (38~40)",
+                page: 32,
+                type: "group",
+                passageId: "p_lunch",
+                question: "What does 'I got beef with Ken' mean in the reading?",
+                options: [
+                    { key: "A", text: "(A) Ken wasn't hungry at all." },
+                    { key: "B", text: "(B) Ken did more work than Tina." },
+                    { key: "C", text: "(C) Tina didn't get along with Ken." },
+                    { key: "D", text: "(D) Tina liked beef, but Ken didn't." }
+                ],
+                answer: "C",
+                explanation: "【俚語理解】'have beef with someone' 為口語俚語，意為「與某人有過節、不合」。後文 Amy 回覆「難怪從上個月起就沒看過你們說話」，印證兩人關係不合。",
+                tag: "英語俚語推論"
+            },
+            {
+                id: 40,
+                part: "第二部分：題組 (38~40)",
+                page: 32,
+                type: "group",
+                passageId: "p_lunch",
+                question: "Which is probably Tina's lunch?",
+                options: [
+                    { key: "A", text: "(A) Curry rice" },
+                    { key: "B", text: "(B) Pork ramen" },
+                    { key: "C", text: "(C) Beef noodles" },
+                    { key: "D", text: "(D) Chicken salad" }
+                ],
+                answer: "B",
+                explanation: "【細節對應】John 提議要吃日式餐廳的『豬肉拉麵 (pork ramen)』，Tina 回覆『Sounds great!』（聽起來太棒了！），因此 Tina 的午餐也是豬肉拉麵。",
+                tag: "對話細節匹配"
+            },
+
+            {
+                id: 41,
+                part: "第二部分：題組 (41~43)",
+                page: 33,
+                type: "group",
+                passageId: "p_frog",
+                question: "Jimmy liked to walk around his house every day because he could always _____.",
+                options: [
+                    { key: "A", text: "(A) help his parents with their work" },
+                    { key: "B", text: "(B) find something new and interesting" },
+                    { key: "C", text: "(C) look for a better place for a new life" },
+                    { key: "D", text: "(D) see everything around for the first time" }
+                ],
+                answer: "B",
+                explanation: "【克漏字選填】第一句描述 Jimmy 是一個愛玩的(fun-loving)男孩，因此他每天四處走動是因為總能「發現新鮮有趣的事物」(find something new and interesting)。",
+                tag: "克漏字與文意"
+            },
+            {
+                id: 42,
+                part: "第二部分：題組 (41~43)",
+                page: 33,
+                type: "group",
+                passageId: "p_frog",
+                question: "Jimmy didn't believe her words at first, but he still _____ the frog and put it into his pocket.",
+                options: [
+                    { key: "A", text: "(A) woke up" },
+                    { key: "B", text: "(B) picked up" },
+                    { key: "C", text: "(C) took care of" },
+                    { key: "D", text: "(D) watched out for" }
+                ],
+                answer: "B",
+                explanation: "【動詞片語】把青蛙放進口袋前，動作應該是「抓起/撿起」(picked up) 青蛙。",
+                tag: "動詞片語克漏字"
+            },
+            {
+                id: 43,
+                part: "第二部分：題組 (41~43)",
+                page: 33,
+                type: "group",
+                passageId: "p_frog",
+                question: "'Hey, _____ I said I am a pretty girl. If you kiss me, I can change back and become your girlfriend!'",
+                options: [
+                    { key: "A", text: "(A) didn't you hear me?" },
+                    { key: "B", text: "(B) don't you love me?" },
+                    { key: "C", text: "(C) are you busy with your work?" },
+                    { key: "D", text: "(D) why did you want to talk to me?" }
+                ],
+                answer: "A",
+                explanation: "【對話語境】青蛙看到 Jimmy 只是默默抓起牠放口袋繼續走，並沒有親牠，因此焦急提醒『你沒聽見我說的話嗎？』(didn't you hear me?)。",
+                tag: "情境對話克漏字"
+            }
+        ];
+
+        // Reading Passages Database
+        const readingPassages = {
+            p_bistro: {
+                title: "Bistro PAPA 聖誕大餐宣傳單 (第 23~25 題)",
+                content: `
+                    <div class="bg-amber-50 p-4 rounded-xl border border-amber-200">
+                        <div class="text-center border-b pb-3 mb-3 border-amber-300">
+                            <h3 class="text-2xl font-bold text-red-700">🎄 Bistro PAPA Christmas Meal 🎄</h3>
+                            <p class="text-sm text-gray-600">Homemade bread | Fruit salad | Chicken soup | Steak | Pumpkin pie | Apple juice</p>
+                            <p class="text-lg font-bold text-amber-800 mt-1">NT$1,500 + 10% / person</p>
+                        </div>
+                        <ul class="space-y-2 text-sm text-gray-700 list-disc list-inside">
+                            <li><strong>Free French fries</strong> for people wearing a Santa hat</li>
+                            <li><strong>10% off</strong> for a table of 4 people and more</li>
+                            <li><strong>Free Christmas gifts (worth NT$500)</strong> for people making a reservation two weeks earlier</li>
+                            <li><strong>30-minute live band show</strong> at 19:00</li>
+                        </ul>
+                        <div class="mt-3 pt-3 border-t border-amber-200 text-xs text-gray-500">
+                            <p>• Christmas meal reservation starts from December 1st.</p>
+                            <p>• A Christmas meal lasts about 1.5 hours.</p>
+                            <p>• Open hours: 11:00-14:30 / 17:30-22:00 | Tel: (02)253-6980</p>
+                        </div>
+                    </div>
+                `
+            },
+            p_einstein: {
+                title: "愛因斯坦課堂四格漫畫 (第 26~28 題)",
+                content: `
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-200 space-y-3">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                            <div class="p-3 bg-white rounded-lg shadow-sm">
+                                <span class="font-bold text-blue-600">Scene 1-4:</span> Mr. White starts a new lesson with Einstein's photo. Eric says Einstein was smart and liked to make funny faces.
+                            </div>
+                            <div class="p-3 bg-white rounded-lg shadow-sm">
+                                <span class="font-bold text-blue-600">Scene 5-6:</span> Mr. White asks why photos only show Einstein's upper body. In fact, Einstein wore old clothes, funny shorts, and even his wife's shoes because they were comfortable.
+                            </div>
+                            <div class="p-3 bg-white rounded-lg shadow-sm">
+                                <span class="font-bold text-blue-600">Scene 7:</span> To show respect to him, photographers only took photos of his upper body!
+                            </div>
+                            <div class="p-3 bg-white rounded-lg shadow-sm">
+                                <span class="font-bold text-blue-600">Scene 8:</span> Teacher asks class to turn to page 41 to learn theories and do math exercises.
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            p_pets: {
+                title: "台灣寵物飼養統計與廣播 (第 29~31 題)",
+                content: `
+                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200 space-y-3 text-sm text-gray-800">
+                        <p>In Taiwan, around 28.3% of families keep a pet in 2023. That is, one out of every three or four families has a pet. Of these pets, there are about 1.48 million pet dogs and 1.31 million pet cats. Also, the number of them keeps growing.</p>
+                        <p>Because keeping a child is not easy, raising pet dogs or cats is becoming more and more popular...</p>
+                        <p>Although keeping pets does us good, these pet animals can only live for 12 to 15 years on average. Take dogs for example. When a dog is one month old, it is just like a one-year-old baby. When it reaches 7-8 years old, it acts like a man in his forties. At 12 years old, dogs are very OLD and walk slowly!</p>
+                        <div class="p-2 bg-emerald-100 rounded text-xs font-semibold text-emerald-800">
+                            📻 ABC Radio: "Then what about cats? We will talk about it next week. See you!"
+                        </div>
+                    </div>
+                `
+            },
+            p_chat: {
+                title: "大學老友聊天與日本超市購物 (第 32~34 題)",
+                content: `
+                    <div class="bg-purple-50 p-4 rounded-xl border border-purple-200 text-sm space-y-2">
+                        <p><strong>Danny:</strong> I need to walk around and buy something to drink, or I will nod off.</p>
+                        <p><strong>Tina:</strong> You are getting over jet lag, aren't you? What time is it now in your city?</p>
+                        <p><strong>Danny:</strong> 3 a.m. (There is an 18-hour time difference between Taipei and my city.)</p>
+                        <p><strong>Alice:</strong> Let's go downstairs to the new Japanese supermarket... Look! These Japanese cookies are on sale (NT$290 before).</p>
+                        <p><strong>Sunny:</strong> They pair coffee and tea well. You won't notice until you eat them up all!</p>
+                    </div>
+                `
+            },
+            p_bakery: {
+                title: "DC Bakery 麵包店資訊與評價 (第 35~37 題)",
+                content: `
+                    <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 text-sm space-y-2">
+                        <div class="flex justify-between items-center border-b pb-2">
+                            <span class="font-bold text-amber-900 text-lg">🥐 DC Bakery</span>
+                            <span class="text-xs bg-amber-200 text-amber-800 px-2 py-0.5 rounded">No. 20, Cat Road, Zoo City</span>
+                        </div>
+                        <p><strong>Hours:</strong> Tue-Sun 1 p.m.-7 p.m. (Closed on Monday) | <strong>Take-away only</strong></p>
+                        <p><strong>Menu:</strong> Salt butter roll ($40), Apple pie ($50), Ham sandwich ($40)</p>
+                        <p><strong>Christmas Sale (12/1-12/23):</strong> Buy 1 apple pie get 1 free! Spend >$200 to get a free chocolate cookie!</p>
+                        <p class="text-xs text-gray-600"><strong>Customer Review:</strong> "Their black coffee and salt butter roll are my favorite."</p>
+                    </div>
+                `
+            },
+            p_lunch: {
+                title: "辦公室訂午餐聊天紀錄 (第 38~40 題)",
+                content: `
+                    <div class="bg-sky-50 p-4 rounded-xl border border-sky-200 text-sm space-y-2">
+                        <p><strong>Tina:</strong> Good morning. It's my turn to order lunch for everyone (before 10:30 a.m.). A new Japanese restaurant across from our company opened yesterday!</p>
+                        <p><strong>John:</strong> Wonderful! I would like to try the pork ramen there.</p>
+                        <p><strong>Tina:</strong> Sounds great!</p>
+                        <p><strong>Amy:</strong> Curry rice, thanks. Is Ken coming? Do we need to ask him?</p>
+                        <p><strong>John:</strong> Amy, stop asking Tina about Ken, OK?</p>
+                        <p><strong>Tina:</strong> To be honest, <u>I got beef with Ken</u>.</p>
+                        <p><strong>Amy:</strong> Oh! That's why I haven't seen you both talking since last month.</p>
+                    </div>
+                `
+            },
+            p_frog: {
+                title: "Jimmy 與會說話的青蛙 (第 41~43 題)",
+                content: `
+                    <div class="bg-green-50 p-4 rounded-xl border border-green-200 text-sm space-y-2 text-gray-800">
+                        <p>Jimmy was a seven-year-old fun-loving boy living on a farm. He liked to walk around because he could always <strong>[41] find something new and interesting</strong>.</p>
+                        <p>One day, he met a talking frog claiming to be a princess under a spell. She asked for a kiss to turn back into a pretty girl and be his girlfriend.</p>
+                        <p>Jimmy didn't believe her, but he still <strong>[42] picked up</strong> the frog and put it into his pocket. When the frog complained: "Hey, <strong>[43] didn't you hear me?</strong> I could be your girlfriend!", Jimmy stopped and said: "At my age, I think I want a talking frog more than a girlfriend!"</p>
+                    </div>
+                `
+            }
+        };
+
+        function App() {
+            const [activeTab, setActiveTab] = useState('quiz'); // quiz, study, passages, mistake
+            const [filterPart, setFilterPart] = useState('all'); // all, single, group
+            const [userAnswers, setUserAnswers] = useState({});
+            const [bookmarks, setBookmarks] = useState([]);
+            const [showResults, setShowResults] = useState(false);
+            const [searchQuery, setSearchQuery] = useState('');
+
+            // TTS Speech Synthesis
+            const speakText = (text) => {
+                if ('speechSynthesis' in window) {
+                    window.speechSynthesis.cancel();
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    utterance.lang = 'en-US';
+                    utterance.rate = 0.9;
+                    window.speechSynthesis.speak(utterance);
+                } else {
+                    alert('您的瀏覽器不支援語音合成功能');
+                }
+            };
+
+            const toggleBookmark = (id) => {
+                if (bookmarks.includes(id)) {
+                    setBookmarks(bookmarks.filter(b => b !== id));
+                } else {
+                    setBookmarks([...bookmarks, id]);
+                }
+            };
+
+            const handleSelectOption = (questionId, optionKey) => {
+                setUserAnswers(prev => ({
+                    ...prev,
+                    [questionId]: optionKey
+                }));
+            };
+
+            // Calculate Score
+            const calculateScore = useMemo(() => {
+                let correctCount = 0;
+                questionsData.forEach(q => {
+                    if (userAnswers[q.id] === q.answer) {
+                        correctCount++;
+                    }
+                });
+                const percentage = Math.round((correctCount / questionsData.length) * 100);
+                
+                // Grades mapping
+                let grade = "C";
+                if (percentage >= 98) grade = "A++ (精熟)";
+                else if (percentage >= 96) grade = "A+ (精熟)";
+                else if (percentage >= 90) grade = "A (精熟)";
+                else if (percentage >= 82) grade = "B++ (基礎)";
+                else if (percentage >= 69) grade = "B+ (基礎)";
+                else if (percentage >= 36) grade = "B (基礎)";
+                else grade = "C (待加強)";
+
+                return { correctCount, percentage, grade };
+            }, [userAnswers]);
+
+            // Filtered Questions
+            const filteredQuestions = useMemo(() => {
+                return questionsData.filter(q => {
+                    const matchesPart = filterPart === 'all' ? true :
+                                        filterPart === 'single' ? q.type === 'single' : q.type === 'group';
+                    const matchesSearch = searchQuery === '' || 
+                                         q.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                         q.explanation.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                         q.tag.toLowerCase().includes(searchQuery.toLowerCase());
+                    return matchesPart && matchesSearch;
+                });
+            }, [filterPart, searchQuery]);
+
+            return (
+                <div className="min-h-screen flex flex-col">
+                    {/* Header Banner */}
+                    <header className="bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-600 text-white shadow-lg">
+                        <div className="max-w-6xl mx-auto px-4 py-6">
+                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                <div>
+                                    <span className="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-semibold mb-2 backdrop-blur-sm">
+                                        九年級拔尖班 • 英語 3800 第 2 回閱讀解析
+                                    </span>
+                                    <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
+                                        英語閱讀 互動式學習網站
+                                    </h1>
+                                    <p className="text-indigo-100 text-sm mt-1">
+                                        完整收錄 1~43 題閱讀單題與閱讀題組解析・即時測驗與複習錯題
+                                    </p>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <a
+                                        href="index.html"
+                                        className="px-4 py-2 bg-white text-indigo-700 hover:bg-indigo-50 rounded-lg text-xs font-bold transition flex items-center gap-2 shadow-sm"
+                                    >
+                                        <i className="fa-solid fa-house"></i> 回首頁
+                                    </a>
+                                    <button 
+                                        onClick={() => { setUserAnswers({}); setShowResults(false); }}
+                                        className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-xs font-bold transition flex items-center gap-2 border border-white/20"
+                                    >
+                                        <i className="fa-solid fa-rotate-left"></i> 重置所有答案
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Navigation Tabs */}
+                        <div className="max-w-6xl mx-auto px-4 flex overflow-x-auto gap-2 pt-2 custom-scrollbar">
+                            <button
+                                onClick={() => setActiveTab('quiz')}
+                                className={`px-5 py-3 font-bold text-sm rounded-t-xl transition flex items-center gap-2 whitespace-nowrap ${
+                                    activeTab === 'quiz' 
+                                        ? 'bg-fuchsia-50 text-indigo-900 shadow' 
+                                        : 'text-indigo-100 hover:bg-white/10'
+                                }`}
+                            >
+                                <i className="fa-solid fa-pen-to-square"></i> 🎯 互動測驗模式
+                            </button>
+                            <button
+                                onClick={() => setActiveTab('study')}
+                                className={`px-5 py-3 font-bold text-sm rounded-t-xl transition flex items-center gap-2 whitespace-nowrap ${
+                                    activeTab === 'study' 
+                                        ? 'bg-fuchsia-50 text-indigo-900 shadow' 
+                                        : 'text-indigo-100 hover:bg-white/10'
+                                }`}
+                            >
+                                <i className="fa-solid fa-book-open"></i> 📚 逐題詳細解析
+                            </button>
+                            <button
+                                onClick={() => setActiveTab('passages')}
+                                className={`px-5 py-3 font-bold text-sm rounded-t-xl transition flex items-center gap-2 whitespace-nowrap ${
+                                    activeTab === 'passages' 
+                                        ? 'bg-fuchsia-50 text-indigo-900 shadow' 
+                                        : 'text-indigo-100 hover:bg-white/10'
+                                }`}
+                            >
+                                <i className="fa-solid fa-newspaper"></i> 📖 閱讀文章總覽
+                            </button>
+                            <button
+                                onClick={() => setActiveTab('mistake')}
+                                className={`px-5 py-3 font-bold text-sm rounded-t-xl transition flex items-center gap-2 whitespace-nowrap ${
+                                    activeTab === 'mistake' 
+                                        ? 'bg-fuchsia-50 text-indigo-900 shadow' 
+                                        : 'text-indigo-100 hover:bg-white/10'
+                                }`}
+                            >
+                                <i className="fa-solid fa-bookmark"></i> ⭐ 收藏與錯題本 ({bookmarks.length})
+                            </button>
+                        </div>
+                    </header>
+
+                    {/* Main Content Area */}
+                    <main className="max-w-6xl mx-auto px-4 py-8 flex-grow w-full">
+                        {/* Control Bar: Filter & Search */}
+                        <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-200 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto">
+                                <button
+                                    onClick={() => setFilterPart('all')}
+                                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition whitespace-nowrap ${
+                                        filterPart === 'all' ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                                    }`}
+                                >
+                                    全部題目 (1-43)
+                                </button>
+                                <button
+                                    onClick={() => setFilterPart('single')}
+                                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition whitespace-nowrap ${
+                                        filterPart === 'single' ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                                    }`}
+                                >
+                                    第一部分：單題 (1-22)
+                                </button>
+                                <button
+                                    onClick={() => setFilterPart('group')}
+                                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition whitespace-nowrap ${
+                                        filterPart === 'group' ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                                    }`}
+                                >
+                                    第二部分：題組 (23-43)
+                                </button>
+                            </div>
+
+                            {/* Search Input */}
+                            <div className="relative w-full sm:w-64">
+                                <i className="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                                <input
+                                    type="text"
+                                    placeholder="搜尋題目、解析關鍵字..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    className="w-full pl-9 pr-4 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                />
+                            </div>
+                        </div>
+
+                        {/* QUIZ MODE */}
+                        {activeTab === 'quiz' && (
+                            <div className="space-y-6">
+                                {/* Scoreboard Bar */}
+                                <div className="bg-gradient-to-r from-slate-900 to-indigo-950 text-white p-6 rounded-2xl shadow-md flex flex-col md:flex-row items-center justify-between gap-6">
+                                    <div>
+                                        <h2 className="text-xl font-bold flex items-center gap-2">
+                                            <i className="fa-solid fa-chart-line text-yellow-400"></i> 答題進度與成績統計
+                                        </h2>
+                                        <p className="text-slate-300 text-xs mt-1">
+                                            已回答: <span className="font-bold text-white">{Object.keys(userAnswers).length}</span> / {questionsData.length} 題
+                                        </p>
+                                    </div>
+
+                                    {showResults ? (
+                                        <div className="flex items-center gap-6 bg-white/10 p-4 rounded-xl border border-white/10">
+                                            <div className="text-center">
+                                                <div className="text-xs text-slate-300">答對題數</div>
+                                                <div className="text-2xl font-black text-emerald-400">{calculateScore.correctCount} / 43</div>
+                                            </div>
+                                            <div className="h-8 w-px bg-white/20"></div>
+                                            <div className="text-center">
+                                                <div className="text-xs text-slate-300">正確率</div>
+                                                <div className="text-2xl font-black text-amber-300">{calculateScore.percentage}%</div>
+                                            </div>
+                                            <div className="h-8 w-px bg-white/20"></div>
+                                            <div className="text-center">
+                                                <div className="text-xs text-slate-300">評定等級</div>
+                                                <div className="text-xl font-extrabold text-pink-300">{calculateScore.grade}</div>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <button
+                                            onClick={() => setShowResults(true)}
+                                            className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold text-sm rounded-xl shadow-lg transition transform hover:-translate-y-0.5"
+                                        >
+                                            <i className="fa-solid fa-paper-plane mr-2"></i> 交卷並檢視成績解析
+                                        </button>
+                                    )}
+                                </div>
+
+                                {/* Question List */}
+                                <div className="space-y-6">
+                                    {filteredQuestions.map((q) => {
+                                        const isAnswered = userAnswers[q.id] !== undefined;
+                                        const isCorrect = userAnswers[q.id] === q.answer;
+                                        const isBookmarked = bookmarks.includes(q.id);
+
+                                        return (
+                                            <div key={q.id} className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                                                {/* Card Header */}
+                                                <div className="bg-slate-50 border-b border-slate-200 px-6 py-3 flex items-center justify-between">
+                                                    <div className="flex items-center gap-3">
+                                                        <span className="w-8 h-8 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm">
+                                                            {q.id}
+                                                        </span>
+                                                        <div>
+                                                            <span className="text-xs font-bold text-indigo-700 mr-2">{q.part}</span>
+                                                            <span className="text-xs text-slate-500">頁碼: p.{q.page}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center gap-2">
+                                                        <span className="text-xs bg-slate-200 text-slate-700 px-2.5 py-1 rounded-full font-medium">
+                                                            {q.tag}
+                                                        </span>
+                                                        <button
+                                                            onClick={() => toggleBookmark(q.id)}
+                                                            className={`p-2 rounded-full transition ${isBookmarked ? 'text-amber-500 bg-amber-50' : 'text-slate-400 hover:bg-slate-100'}`}
+                                                            title="收藏此題"
+                                                        >
+                                                            <i className={`fa-${isBookmarked ? 'solid' : 'regular'} fa-bookmark text-lg`}></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                {/* Card Body */}
+                                                <div className="p-6">
+                                                    {/* Passage Reference Box if Group Question */}
+                                                    {q.type === 'group' && readingPassages[q.passageId] && (
+                                                        <div className="mb-4">
+                                                            <details className="bg-slate-50 rounded-xl border border-slate-200 p-3">
+                                                                <summary className="font-bold text-xs text-indigo-700 cursor-pointer flex items-center gap-2">
+                                                                    <i className="fa-solid fa-file-lines"></i> 點擊展開/收合題組文章對照 ({readingPassages[q.passageId].title})
+                                                                </summary>
+                                                                <div 
+                                                                    className="mt-3 text-xs leading-relaxed"
+                                                                    dangerouslySetInnerHTML={{ __html: readingPassages[q.passageId].content }}
+                                                                />
+                                                            </details>
+                                                        </div>
+                                                    )}
+
+                                                    {/* Question Prompt */}
+                                                    <div className="flex items-start justify-between gap-4 mb-4">
+                                                        <h3 className="text-base font-bold text-slate-800 leading-relaxed">
+                                                            {q.question}
+                                                        </h3>
+                                                        <button
+                                                            onClick={() => speakText(q.question)}
+                                                            className="text-slate-400 hover:text-indigo-600 transition p-1"
+                                                            title="朗讀英文題目"
+                                                        >
+                                                            <i className="fa-solid fa-volume-high text-lg"></i>
+                                                        </button>
+                                                    </div>
+
+                                                    {/* Options */}
+                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+                                                        {q.options.map((opt) => {
+                                                            const isSelected = userAnswers[q.id] === opt.key;
+                                                            let optionStyle = "border-slate-200 bg-slate-50 hover:bg-indigo-50/50 hover:border-indigo-300 text-slate-700";
+
+                                                            if (isSelected) {
+                                                                optionStyle = "border-indigo-600 bg-indigo-50 text-indigo-900 font-bold shadow-sm";
+                                                            }
+
+                                                            if (showResults) {
+                                                                if (opt.key === q.answer) {
+                                                                    optionStyle = "border-emerald-500 bg-emerald-50 text-emerald-900 font-bold ring-2 ring-emerald-400";
+                                                                } else if (isSelected && !isCorrect) {
+                                                                    optionStyle = "border-rose-500 bg-rose-50 text-rose-900 font-bold";
+                                                                }
+                                                            }
+
+                                                            return (
+                                                                <button
+                                                                    key={opt.key}
+                                                                    onClick={() => handleSelectOption(q.id, opt.key)}
+                                                                    className={`p-3.5 rounded-xl border text-left text-sm transition flex items-center justify-between ${optionStyle}`}
+                                                                >
+                                                                    <span>{opt.text}</span>
+                                                                    {showResults && opt.key === q.answer && (
+                                                                        <i className="fa-solid fa-circle-check text-emerald-600 text-lg"></i>
+                                                                    )}
+                                                                    {showResults && isSelected && !isCorrect && opt.key !== q.answer && (
+                                                                        <i className="fa-solid fa-circle-xmark text-rose-500 text-lg"></i>
+                                                                    )}
+                                                                </button>
+                                                            );
+                                                        })}
+                                                    </div>
+
+                                                    {/* Explanation Accordion (Visible if submitted or manually toggled) */}
+                                                    {showResults && (
+                                                        <div className="mt-4 p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs space-y-2">
+                                                            <div className="flex items-center justify-between text-amber-900 font-bold border-b border-amber-200 pb-2">
+                                                                <span><i className="fa-solid fa-lightbulb text-amber-600 mr-1"></i> 正確答案：( {q.answer} )</span>
+                                                                <span className={isCorrect ? "text-emerald-700 font-bold" : "text-rose-600 font-bold"}>
+                                                                    {isCorrect ? "答對了！" : `你的選擇: ${userAnswers[q.id] || "未作答"}`}
+                                                                </span>
+                                                            </div>
+                                                            <p className="text-slate-700 leading-relaxed font-medium pt-1">
+                                                                {q.explanation}
+                                                            </p>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* STUDY & EXPLANATIONS MODE */}
+                        {activeTab === 'study' && (
+                            <div className="space-y-6">
+                                <div className="bg-indigo-50 border border-indigo-200 p-4 rounded-xl text-indigo-900 text-xs leading-relaxed">
+                                    <i className="fa-solid fa-circle-info text-indigo-600 mr-2 text-sm"></i>
+                                    <strong>學習模式提示：</strong>此處收錄 1~43 題的完整題目、解答關鍵詞與詳盡中文解析，並提供單字語音朗讀，適合課後複習。
+                                </div>
+
+                                <div className="space-y-4">
+                                    {filteredQuestions.map((q) => (
+                                        <div key={q.id} className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                                            <div className="flex items-center justify-between border-b pb-3 mb-3">
+                                                <div className="flex items-center gap-2">
+                                                    <span className="bg-indigo-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">
+                                                        第 {q.id} 題
+                                                    </span>
+                                                    <span className="text-xs font-bold text-slate-500">{q.part} (p.{q.page})</span>
+                                                </div>
+                                                <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+                                                    正確答案: ({q.answer})
+                                                </span>
+                                            </div>
+
+                                            <div className="mb-3 flex items-start justify-between">
+                                                <p className="text-sm font-bold text-slate-800 leading-relaxed">
+                                                    {q.question}
+                                                </p>
+                                                <button 
+                                                    onClick={() => speakText(q.question)}
+                                                    className="text-indigo-600 hover:text-indigo-800 text-xs font-bold flex items-center gap-1 ml-2 whitespace-nowrap"
+                                                >
+                                                    <i className="fa-solid fa-volume-high"></i> 朗讀
+                                                </button>
+                                            </div>
+
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-4 text-xs">
+                                                {q.options.map(opt => (
+                                                    <div 
+                                                        key={opt.key}
+                                                        className={`p-2.5 rounded-lg border ${
+                                                            opt.key === q.answer 
+                                                                ? 'bg-emerald-50 border-emerald-300 font-bold text-emerald-900' 
+                                                                : 'bg-slate-50 border-slate-200 text-slate-600'
+                                                        }`}
+                                                    >
+                                                        {opt.text}
+                                                    </div>
+                                                ))}
+                                            </div>
+
+                                            <div className="bg-amber-50/80 border border-amber-200 p-3 rounded-xl text-xs text-slate-700 leading-relaxed">
+                                                <strong className="text-amber-900 block mb-1">💡 詳盡中文解析：</strong>
+                                                {q.explanation}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* READING PASSAGES LIBRARY */}
+                        {activeTab === 'passages' && (
+                            <div className="space-y-6">
+                                <div className="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-emerald-900 text-xs">
+                                    <i className="fa-solid fa-book text-emerald-600 mr-2"></i>
+                                    <strong>閱讀文章庫：</strong>包含第二部分（第 23~43 題）的 7 大主題完整文章與圖表重現，方便對照閱讀訓練。
+                                </div>
+
+                                <div className="grid grid-cols-1 gap-6">
+                                    {Object.keys(readingPassages).map((key) => {
+                                        const p = readingPassages[key];
+                                        return (
+                                            <div key={key} className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-3">
+                                                <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2 border-b pb-3">
+                                                    <i className="fa-solid fa-file-text text-indigo-600"></i> {p.title}
+                                                </h3>
+                                                <div 
+                                                    className="leading-relaxed"
+                                                    dangerouslySetInnerHTML={{ __html: p.content }}
+                                                />
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* MISTAKE NOTEBOOK & BOOKMARKS */}
+                        {activeTab === 'mistake' && (
+                            <div className="space-y-6">
+                                <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl text-amber-900 text-xs">
+                                    <i className="fa-solid fa-star text-amber-600 mr-2"></i>
+                                    <strong>錯題與收藏本：</strong>您已手動收藏了 <strong>{bookmarks.length}</strong> 道題目。可在練習時隨時點擊書籤圖示加入。
+                                </div>
+
+                                {bookmarks.length === 0 ? (
+                                    <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center text-slate-400 space-y-3">
+                                        <i className="fa-regular fa-bookmark text-4xl"></i>
+                                        <p className="text-sm">目前還沒有收藏任何題目喔！在測驗或解析模式中點擊書籤即可收藏。</p>
+                                    </div>
+                                ) : (
+                                    <div className="space-y-4">
+                                        {questionsData.filter(q => bookmarks.includes(q.id)).map(q => (
+                                            <div key={q.id} className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                                                <div className="flex items-center justify-between border-b pb-2 mb-3">
+                                                    <span className="font-bold text-sm text-indigo-700">第 {q.id} 題 ({q.part})</span>
+                                                    <button 
+                                                        onClick={() => toggleBookmark(q.id)}
+                                                        className="text-xs text-rose-600 hover:underline flex items-center gap-1"
+                                                    >
+                                                        <i className="fa-solid fa-trash"></i> 移除收藏
+                                                    </button>
+                                                </div>
+                                                <p className="text-sm font-bold text-slate-800 mb-3">{q.question}</p>
+                                                <div className="bg-amber-50 p-3 rounded-xl text-xs text-slate-700">
+                                                    <strong>解答與解析:</strong> ({q.answer}) - {q.explanation}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </main>
+
+                    {/* Footer */}
+                    <footer className="bg-slate-900 text-slate-400 py-6 text-center text-xs border-t border-slate-800">
+                        <div className="max-w-6xl mx-auto px-4 space-y-2">
+                            <p>第 2 回 國中英語閱讀試題 (頁 23~33) 互動式學習系統</p>
+                            <p className="text-slate-500">提供完整 1-43 題測驗、成績評估、英文朗讀與解析庫</p>
+                        </div>
+                    </footer>
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>

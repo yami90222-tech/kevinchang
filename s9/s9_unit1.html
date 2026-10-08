@@ -1,0 +1,776 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 1 He Feels Sick - 國中英語互動學習網</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        fredoka: ['Fredoka', 'sans-serif'],
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fffbe8',
+                            100: '#fff3c2',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                        },
+                        funBlue: '#3b82f6',
+                        funGreen: '#10b981',
+                        funPurple: '#8b5cf6',
+                        funRose: '#f43f5e'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; }
+        .font-en { font-family: 'Fredoka', cursive; }
+        .card-flip-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .card-flipped .card-flip-inner {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            backface-visibility: hidden;
+        }
+        .card-back {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-800 flex flex-col">
+
+    <!-- Navbar Header -->
+    <header class="bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center">
+            <div class="flex items-center space-x-3 mb-2 sm:mb-0">
+                <a href="../index.html" class="bg-white/20 hover:bg-white hover:text-amber-600 text-white font-bold px-3 py-2 rounded-2xl border border-white/30 shadow-sm transition flex items-center gap-1.5 text-xs sm:text-sm backdrop-blur-sm active:scale-95" title="返回學習基地首頁">
+                    <i class="fa-solid fa-house"></i>
+                    <span>回首頁</span>
+                </a>
+                <span class="bg-white text-amber-600 rounded-2xl p-2.5 font-bold shadow-md text-xl">
+                    <i class="fa-solid font-en text-2xl fa-heart-pulse"></i>
+                </span>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-bold font-en tracking-wide">Unit 1: He Feels Sick</h1>
+                    <p class="text-xs text-amber-100">九年級英語 學生學習扶助互動網頁</p>
+                </div>
+            </div>
+            
+            <nav class="flex flex-wrap gap-1 bg-white/20 p-1.5 rounded-2xl backdrop-blur-md">
+                <button onclick="switchTab('vocab')" id="tab-vocab" class="nav-btn active-tab px-3 py-1.5 rounded-xl text-sm font-medium transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-spell-check"></i> 核心單字與句型
+                </button>
+                <button onclick="switchTab('dialogue')" id="tab-dialogue" class="nav-btn px-3 py-1.5 rounded-xl text-sm font-medium transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-comments"></i> 課文情境動畫
+                </button>
+                <button onclick="switchTab('practice')" id="tab-practice" class="nav-btn px-3 py-1.5 rounded-xl text-sm font-medium transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-pen-to-square"></i> 句型與時態練習
+                </button>
+                <button onclick="switchTab('game')" id="tab-game" class="nav-btn px-3 py-1.5 rounded-xl text-sm font-medium transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-gamepad"></i> 翻牌對對碰遊戲
+                </button>
+                <button onclick="switchTab('ai-tutor')" id="tab-ai-tutor" class="nav-btn px-3 py-1.5 rounded-xl text-sm font-medium transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-robot"></i> AI 口語對話夥伴
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 py-6 flex-grow w-full">
+
+        <!-- ================= TAB 1: VOCABULARY & GRAMMAR ================= -->
+        <section id="section-vocab" class="tab-content block space-y-8">
+            <!-- Linking Verb Explanation Banner -->
+            <div class="bg-amber-50 border-2 border-amber-200 rounded-3xl p-6 shadow-sm">
+                <div class="flex items-start gap-4">
+                    <div class="bg-amber-500 text-white p-3 rounded-2xl text-2xl hidden sm:block">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-amber-900 mb-2 font-en">Grammar Focus: 連綴動詞 (Linking Verbs)</h2>
+                        <p class="text-slate-700 leading-relaxed mb-3">
+                            連綴動詞用來表達「感覺、聽起來、聞起來、嚐起來、看起來」，後面直接接<strong>形容詞 (Adjective)</strong>！
+                        </p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 font-en text-sm">
+                            <div class="bg-white p-2.5 rounded-xl border border-amber-200 text-center font-semibold text-amber-800">
+                                feel (感覺)
+                            </div>
+                            <div class="bg-white p-2.5 rounded-xl border border-amber-200 text-center font-semibold text-amber-800">
+                                smell (聞起來)
+                            </div>
+                            <div class="bg-white p-2.5 rounded-xl border border-amber-200 text-center font-semibold text-amber-800">
+                                taste (嚐起來)
+                            </div>
+                            <div class="bg-white p-2.5 rounded-xl border border-amber-200 text-center font-semibold text-amber-800">
+                                look (看起來)
+                            </div>
+                        </div>
+                        <div class="mt-3 text-xs bg-amber-100 text-amber-900 p-2.5 rounded-xl font-mono">
+                            💡 句型：<strong>Subject + Linking Verb + Adjective</strong> (例如: He feels sick. / The ice cream tastes good.)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vocabulary Flashcards Grid -->
+            <div>
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-book-open text-amber-500"></i> 本單元核心單字卡 (Target Words)
+                    </h3>
+                    <button onclick="speakAllVocab()" class="text-sm bg-amber-500 hover:bg-amber-600 text-white px-3 py-1.5 rounded-xl font-medium transition shadow-sm flex items-center gap-1.5">
+                        <i class="fa-solid fa-volume-high"></i> 播放全部單字
+                    </button>
+                </div>
+                <div id="vocab-cards-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <!-- Dynamic Vocab Cards populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 2: DIALOGUE & STORY ================= -->
+        <section id="section-dialogue" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800 font-en">Let's Talk - Story Context</h2>
+                        <p class="text-slate-500 text-sm">點擊按鈕聽語音發音，可切換中文翻譯與分場景觀看</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button onclick="toggleChineseTranslation()" id="btn-toggle-zh" class="px-3.5 py-2 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 text-sm font-medium transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-language"></i> 顯示/隱藏中文翻譯
+                        </button>
+                        <button onclick="playFullDialogue()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium transition flex items-center gap-1.5 shadow-sm">
+                            <i class="fa-solid fa-circle-play"></i> 順序朗讀全部對話
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Scene Selector Tabs -->
+                <div class="flex border-b border-slate-200 mb-6 gap-2">
+                    <button onclick="switchScene(1)" id="scene-tab-1" class="scene-tab px-4 py-2 text-sm font-bold border-b-2 border-amber-500 text-amber-600">
+                        情境一：冰淇淋店前 (At Ice Cream Shop)
+                    </button>
+                    <button onclick="switchScene(2)" id="scene-tab-2" class="scene-tab px-4 py-2 text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-700">
+                        情境二：David 家中 (David's Home)
+                    </button>
+                    <button onclick="switchScene(3)" id="scene-tab-3" class="scene-tab px-4 py-2 text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-700">
+                        情境三：醫院探病 (In the Hospital)
+                    </button>
+                </div>
+
+                <!-- Scene Display Box -->
+                <div id="scene-content" class="space-y-4 min-h-[300px]">
+                    <!-- Dynamic Dialogue Lines populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 3: PRACTICE (EXERCISES I & II) ================= -->
+        <section id="section-practice" class="tab-content hidden space-y-8">
+            <!-- Practice I -->
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-6">
+                <div class="border-b pb-4">
+                    <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded-lg">Let's Practice I</span>
+                    <h2 class="text-xl font-bold text-slate-800 mt-2">第一部分：Jack 的病情變化 (How do you feel now?)</h2>
+                    <p class="text-slate-500 text-sm">請選出正確的動詞與形容詞，填入問答句中。</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="practice1-container">
+                    <!-- Dynamic Practice 1 Cards -->
+                </div>
+            </div>
+
+            <!-- Practice II -->
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-6">
+                <div class="border-b pb-4">
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded-lg">Let's Practice II</span>
+                    <h2 class="text-xl font-bold text-slate-800 mt-2">第二部分：Jack 吃冰淇淋的故事與時態練習</h2>
+                    <p class="text-slate-500 text-sm">注意：包含現在式 (feels/smells)、過去式 (felt/smelled/tasted) 與未來式 (will never)!</p>
+                </div>
+
+                <div class="space-y-4" id="practice2-container">
+                    <!-- Dynamic Practice 2 Questions -->
+                </div>
+
+                <div class="flex justify-end pt-4">
+                    <button onclick="checkPracticeAnswers()" class="px-6 py-3 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-bold transition shadow-md flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check"></i> 提交答案並核對成績
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 4: MEMORY MATCHING GAME ================= -->
+        <section id="section-game" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                    <div>
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-lg">Let's Go Fishing!</span>
+                        <h2 class="text-2xl font-bold text-slate-800 mt-1">記憶翻牌遊戲：圖片與句子配對</h2>
+                        <p class="text-slate-500 text-sm">點擊卡片翻面，將情境圖卡與英文句子成功配對！</p>
+                    </div>
+                    <div class="flex items-center gap-4 bg-slate-100 p-3 rounded-2xl">
+                        <div class="text-center px-2">
+                            <p class="text-xs text-slate-500">配對成功</p>
+                            <p id="game-score" class="text-xl font-bold text-emerald-600 font-en">0 / 6</p>
+                        </div>
+                        <div class="text-center px-2 border-l border-slate-300">
+                            <p class="text-xs text-slate-500">翻牌次數</p>
+                            <p id="game-moves" class="text-xl font-bold text-indigo-600 font-en">0</p>
+                        </div>
+                        <button onclick="resetGame()" class="ml-2 px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-sm font-semibold transition">
+                            <i class="fa-solid fa-rotate-right"></i> 重來
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Game Cards Grid -->
+                <div id="game-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 min-h-[400px]">
+                    <!-- Dynamically Generated Game Cards -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 5: AI CONVERSATION TUTOR ================= -->
+        <section id="section-ai-tutor" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 pb-4 border-b">
+                    <div>
+                        <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-1 rounded-lg">Gemini AI Tutor</span>
+                        <h2 class="text-2xl font-bold text-slate-800 mt-1">AI 英文對話夥伴 (English Speaking Partner)</h2>
+                        <p class="text-slate-500 text-sm">用連綴動詞與 AI 角色 (Sally 或 Mom) 練習 "How do you feel?" 的口語對話！</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <label for="ai-role-select" class="text-sm font-medium text-slate-700">選擇 AI 扮演角色：</label>
+                        <select id="ai-role-select" class="border border-slate-300 rounded-xl px-3 py-1.5 text-sm font-semibold bg-white text-slate-800">
+                            <option value="Sally">Sally (好朋友)</option>
+                            <option value="Mom">Mom (關心的媽媽)</option>
+                            <option value="Doctor">Doctor (親切的醫生)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Chat Box -->
+                <div id="chat-box" class="h-96 border border-slate-200 rounded-2xl p-4 overflow-y-auto space-y-3 bg-slate-50/50 mb-4">
+                    <div class="flex items-start gap-3">
+                        <div class="bg-purple-500 text-white rounded-full w-9 h-9 flex items-center justify-center font-bold text-sm shadow">
+                            AI
+                        </div>
+                        <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-slate-200 max-w-[80%] text-slate-800 text-sm">
+                            <p class="font-bold text-purple-600 mb-1 font-en">AI Sally</p>
+                            Hello Jack! How do you feel now? Do you feel better today?
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Input Controls -->
+                <div class="flex gap-2">
+                    <input type="text" id="chat-input" placeholder="輸入英文，例如: I feel much better, thank you..." class="flex-grow border border-slate-300 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    <button onclick="sendChatMessage()" class="bg-purple-600 hover:bg-purple-700 text-white px-5 py-3 rounded-2xl font-bold transition flex items-center gap-2 shadow">
+                        <span>發送</span>
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="flex justify-between items-center mt-2 text-xs text-slate-400">
+                    <span>💡 提示詞範例: "I don't feel well.", "The sandwich smells good!", "I feel happy."</span>
+                    <button onclick="clearChat()" class="hover:text-slate-600 underline">清空對話紀錄</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-6 border-t border-slate-800 mt-12 text-center text-xs">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p>九年級英語 學生學習扶助教材 Unit 1: He Feels Sick (教育部編訂版)</p>
+            <a href="../index.html" class="inline-flex items-center gap-1.5 font-bold text-amber-400 hover:text-amber-300 bg-slate-800 hover:bg-slate-700 px-3.5 py-1.5 rounded-xl border border-slate-700 transition">
+                <i class="fa-solid fa-house text-amber-400"></i> 返回學習基地首頁
+            </a>
+            <p class="text-slate-500">著作權屬教育部國民及學前教育署所有 CC BY-NC-SA 4.0</p>
+        </div>
+    </footer>
+
+    <script>
+        // Core Vocabulary Data from textbook
+        const vocabData = [
+            { word: "sick", pos: "adj.", zh: "生病的", sentence: "He feels sick after eating ice cream.", icon: "fa-temperature-arrow-up", color: "rose" },
+            { word: "feel", pos: "v.", zh: "感覺", sentence: "How do you feel right now?", icon: "fa-heart-pulse", color: "amber" },
+            { word: "smell", pos: "v.", zh: "聞起來", sentence: "The pizza smells great!", icon: "fa-wind", color: "indigo" },
+            { word: "taste", pos: "v.", zh: "嚐起來", sentence: "The sandwich tastes delicious.", icon: "fa-utensils", color: "emerald" },
+            { word: "ice cream", pos: "n.", zh: "冰淇淋", sentence: "Eating cold ice cream made him sick.", icon: "fa-ice-cream", color: "pink" },
+            { word: "cheese", pos: "n.", zh: "起司/乳酪", sentence: "I brought a cheese sandwich for you.", icon: "fa-cheese", color: "yellow" },
+            { word: "tomato", pos: "n.", zh: "番茄", sentence: "She likes fresh tomato sandwiches.", icon: "fa-apple-whole", color: "red" },
+            { word: "lucky", pos: "adj.", zh: "幸運的", sentence: "David feels lucky to have good friends.", icon: "fa-clover", color: "green" },
+            { word: "tired", pos: "adj.", zh: "累的/疲倦的", sentence: "Sometimes David feels tired.", icon: "fa-bed", color: "purple" },
+            { word: "better", pos: "adj.", zh: "比較好的", sentence: "I hope you feel better soon.", icon: "fa-face-smile", color: "teal" },
+            { word: "fine", pos: "adj.", zh: "美好的/健康的", sentence: "I feel fine today, thanks!", icon: "fa-thumbs-up", color: "blue" },
+            { word: "never", pos: "adv.", zh: "從不", sentence: "He will never eat ice cream again.", icon: "fa-ban", color: "slate" }
+        ];
+
+        // Dialogue Data (Let's Talk Scenes)
+        const dialogueScenes = {
+            1: {
+                title: "Scene 1: At the Ice Cream Shop (冰淇淋店前)",
+                bg: "bg-amber-50/50",
+                lines: [
+                    { speaker: "Sally", text: "Look! The ice cream is so cheap today! Let's buy some!", zh: "看！今天的冰淇淋好便宜喔！我們買一些吧！", avatar: "👩" },
+                    { speaker: "David", text: "Well... I usually don't eat ice cream.", zh: "嗯... 我通常是不吃冰淇淋的。", avatar: "👦" },
+                    { speaker: "Sally", text: "Come on! Just one bite! It tastes sweet and good!", zh: "來嘛！就吃一口！它嚐起來又甜又好吃！", avatar: "👩" },
+                    { speaker: "David", text: "Okay, just one bite...", zh: "好吧，就吃一口...", avatar: "👦" }
+                ]
+            },
+            2: {
+                title: "Scene 2: At David's House (David 家中)",
+                bg: "bg-rose-50/50",
+                lines: [
+                    { speaker: "Mom", text: "David, how do you feel now?", zh: "David，你現在感覺怎麼樣？", avatar: "👩‍🦱" },
+                    { speaker: "David", text: "I feel sick, Mom. My stomach hurts.", zh: "媽媽，我覺得很不舒服，我肚子痛。", avatar: "👦" },
+                    { speaker: "Mom", text: "You ate ice cream, didn't you? Never eat ice cream again!", zh: "你吃冰淇淋了對不對？以後絕對不可以再吃冰淇淋了！", avatar: "👩‍🦱" },
+                    { speaker: "David", text: "I'm sorry, Mom. I won't do it again.", zh: "對不起，媽媽。我再也不敢了。", avatar: "👦" }
+                ]
+            },
+            3: {
+                title: "Scene 3: In the Hospital (醫院探病)",
+                bg: "bg-emerald-50/50",
+                lines: [
+                    { speaker: "Sally", text: "Hi David! How do you feel today?", zh: "嗨 David！你今天感覺怎麼樣？", avatar: "👩" },
+                    { speaker: "David", text: "I feel better, but sometimes I still feel tired.", zh: "我覺得比較好了，但有時候還是覺得有點累。", avatar: "👦" },
+                    { speaker: "Sally", text: "I made a cheese tomato sandwich for you. Smell it!", zh: "我做了一個起司番茄三明治給你。聞聞看！", avatar: "👩" },
+                    { speaker: "David", text: "Wow, it smells good and tastes delicious! I'm so lucky to have you as a friend.", zh: "哇，聞起來好香，嚐起來也好好吃！有你這個朋友我真幸運。", avatar: "👦" }
+                ]
+            }
+        };
+
+        // Practice I Question Data
+        const practice1Data = [
+            { id: 1, question: "Mom: How do you feel now?\nJack: I feel ____.", target: "sick", options: ["sick", "happy", "fine"], avatar: "🤢" },
+            { id: 2, question: "Mom: How do you feel now?\nJack: I feel ____.", target: "tired", options: ["tired", "hungry", "great"], avatar: "🥱" },
+            { id: 3, question: "Sally: How do you feel now?\nJack: I don't feel ____.", target: "well", options: ["well", "sick", "bad"], avatar: "🤒" },
+            { id: 4, question: "Sally: How do you feel now?\nJack: I feel ____.", target: "better", options: ["better", "sick", "angry"], avatar: "🙂" },
+            { id: 5, question: "Willy: How do you feel now?\nJack: I feel ____.", target: "great", options: ["great", "tired", "sad"], avatar: "😃" },
+            { id: 6, question: "Willy: How do you feel now?\nJack: I feel ____.", target: "happy", options: ["happy", "sick", "cold"], avatar: "🥳" }
+        ];
+
+        // Practice II Question Data
+        const practice2Data = [
+            { id: 1, text: "Mary: How did Jack feel after the game?", question: "Willy: He ____ hot. He wanted ice cream.", ans: "felt", hint: "提示：過去式 (feel)" },
+            { id: 2, text: "Mary: How did the ice cream smell?", question: "Willy: It ____ good/great.", ans: "smelled", hint: "提示：過去式 (smell)" },
+            { id: 3, text: "Mary: How did the ice cream taste?", question: "Willy: It ____ good/great.", ans: "tasted", hint: "提示：過去式 (taste)" },
+            { id: 4, text: "Mary: How does Jack feel now?", question: "Willy: He ____ sick.", ans: "feels", hint: "提示：第三人稱單數現在式 (feel)" },
+            { id: 5, text: "Mary: Will Jack eat ice cream again?", question: "Willy: No, he will ____ eat ice cream again.", ans: "never", hint: "提示：表達「從不」" }
+        ];
+
+        // Memory Game Pairs (Cards Data)
+        const gamePairs = [
+            { id: 1, type: "img", content: "🤢 生病肚子痛", matchId: 1, text: "He feels sick." },
+            { id: 1, type: "text", content: "He feels sick.", matchId: 1, text: "He feels sick." },
+            { id: 2, type: "img", content: "🥪 香噴噴三明治", matchId: 2, text: "It smells good." },
+            { id: 2, type: "text", content: "It smells good.", matchId: 2, text: "It smells good." },
+            { id: 3, type: "img", content: "🍦 甜美冰淇淋", matchId: 3, text: "It tastes sweet." },
+            { id: 3, type: "text", content: "It tastes sweet.", matchId: 3, text: "It tastes sweet." },
+            { id: 4, type: "img", content: "🥱 感到累與倦疲", matchId: 4, text: "She looks tired." },
+            { id: 4, type: "text", content: "She looks tired.", matchId: 4, text: "She looks tired." },
+            { id: 5, type: "img", content: "😃 精神充沛高興", matchId: 5, text: "He feels happy." },
+            { id: 5, type: "text", content: "He feels happy.", matchId: 5, text: "He feels happy." },
+            { id: 6, type: "img", content: "🥵 打球完覺得熱", matchId: 6, text: "He feels hot." },
+            { id: 6, type: "text", content: "He feels hot.", matchId: 6, text: "He feels hot." }
+        ];
+
+        // State variables
+        let currentScene = 1;
+        let showChinese = true;
+        let flippedCards = [];
+        let matchedCount = 0;
+        let movesCount = 0;
+        let isGameBusy = false;
+
+        window.onload = function() {
+            renderVocabCards();
+            renderDialogueScene(1);
+            renderPracticeI();
+            renderPracticeII();
+            initGame();
+        };
+
+        // Navigation Tab Switcher
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('bg-white', 'text-amber-800', 'shadow'));
+            
+            document.getElementById(`section-${tabName}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-${tabName}`);
+            activeBtn.classList.add('bg-white', 'text-amber-800', 'shadow');
+        }
+
+        function renderVocabCards() {
+            const container = document.getElementById('vocab-cards-container');
+            container.innerHTML = vocabData.map(v => `
+                <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 hover:shadow-md transition flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-bold font-en px-2 py-0.5 rounded-md bg-${v.color}-100 text-${v.color}-700">${v.pos}</span>
+                            <button onclick="speakText('${v.word}')" class="text-slate-400 hover:text-amber-500 transition text-lg">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
+                        </div>
+                        <h4 class="text-xl font-bold font-en text-slate-800 mb-1">${v.word}</h4>
+                        <p class="text-sm font-semibold text-slate-600 mb-2">${v.zh}</p>
+                        <p class="text-xs text-slate-500 font-en italic bg-slate-50 p-2 rounded-xl border border-slate-100">
+                            "${v.sentence}"
+                        </p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Web Speech API Pronunciation
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Stop current speech
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("您的瀏覽器不支援語音發音功能。");
+            }
+        }
+
+        function speakAllVocab() {
+            const words = vocabData.map(v => v.word).join(', ');
+            speakText("Unit 1 vocabulary: " + words);
+        }
+
+        function renderDialogueScene(sceneNum) {
+            currentScene = sceneNum;
+            const scene = dialogueScenes[sceneNum];
+            const container = document.getElementById('scene-content');
+
+            // Update Tab styles
+            for (let i = 1; i <= 3; i++) {
+                const tab = document.getElementById(`scene-tab-${i}`);
+                if (i === sceneNum) {
+                    tab.className = "scene-tab px-4 py-2 text-sm font-bold border-b-2 border-amber-500 text-amber-600";
+                } else {
+                    tab.className = "scene-tab px-4 py-2 text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-700";
+                }
+            }
+
+            container.innerHTML = `
+                <div class="${scene.bg} p-4 rounded-2xl border border-slate-200 mb-4">
+                    <h3 class="font-bold text-slate-800 font-en text-lg">${scene.title}</h3>
+                </div>
+                <div class="space-y-3">
+                    ${scene.lines.map((line, idx) => `
+                        <div class="flex items-start gap-3 p-3 rounded-2xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200">
+                            <div class="text-2xl select-none">${line.avatar}</div>
+                            <div class="flex-grow">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold font-en text-slate-800 text-sm">${line.speaker}</span>
+                                    <button onclick="speakText('${line.text.replace(/'/g, "\\'")}')" class="text-xs text-amber-600 hover:text-amber-700">
+                                        <i class="fa-solid fa-volume-high"></i>
+                                    </button>
+                                </div>
+                                <p class="text-base text-slate-800 font-en font-medium mt-0.5">${line.text}</p>
+                                <p class="dialogue-zh text-sm text-slate-500 mt-1 ${showChinese ? '' : 'hidden'}">${line.zh}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function switchScene(num) {
+            renderDialogueScene(num);
+        }
+
+        function toggleChineseTranslation() {
+            showChinese = !showChinese;
+            document.querySelectorAll('.dialogue-zh').forEach(el => {
+                if (showChinese) el.classList.remove('hidden');
+                else el.classList.add('hidden');
+            });
+        }
+
+        function playFullDialogue() {
+            const lines = dialogueScenes[currentScene].lines.map(l => l.text);
+            let idx = 0;
+            function playNext() {
+                if (idx < lines.length) {
+                    const utterance = new SpeechSynthesisUtterance(lines[idx]);
+                    utterance.lang = 'en-US';
+                    utterance.rate = 0.85;
+                    utterance.onend = () => {
+                        idx++;
+                        playNext();
+                    };
+                    window.speechSynthesis.speak(utterance);
+                }
+            }
+            window.speechSynthesis.cancel();
+            playNext();
+        }
+
+        function renderPracticeI() {
+            const container = document.getElementById('practice1-container');
+            container.innerHTML = practice1Data.map(q => `
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex items-start gap-3">
+                    <div class="text-3xl">${q.avatar}</div>
+                    <div class="flex-grow space-y-2">
+                        <p class="text-sm font-en font-semibold text-slate-700 whitespace-pre-line">${q.question}</p>
+                        <div class="flex items-center gap-2">
+                            <select id="p1-ans-${q.id}" class="border border-slate-300 rounded-xl px-3 py-1.5 text-sm font-en font-bold bg-white focus:ring-2 focus:ring-amber-500">
+                                <option value="">-- 請選擇答案 --</option>
+                                ${q.options.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+                            </select>
+                            <span id="p1-feedback-${q.id}" class="text-sm font-bold"></span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderPracticeII() {
+            const container = document.getElementById('practice2-container');
+            container.innerHTML = practice2Data.map(q => `
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2">
+                    <p class="text-sm font-en font-semibold text-indigo-900">${q.text}</p>
+                    <div class="flex flex-wrap items-center gap-2 text-sm font-en">
+                        <span>${q.question.split('____')[0]}</span>
+                        <input type="text" id="p2-ans-${q.id}" class="border border-slate-300 rounded-xl px-3 py-1 text-sm font-bold w-32 focus:ring-2 focus:ring-indigo-500" placeholder="填入時態動詞">
+                        <span>${q.question.split('____')[1] || ''}</span>
+                        <span id="p2-feedback-${q.id}" class="text-sm font-bold ml-2"></span>
+                    </div>
+                    <p class="text-xs text-slate-400">${q.hint}</p>
+                </div>
+            `).join('');
+        }
+
+        function checkPracticeAnswers() {
+            let totalCorrect = 0;
+            let totalQuestions = practice1Data.length + practice2Data.length;
+
+            // Check Practice I
+            practice1Data.forEach(q => {
+                const userVal = document.getElementById(`p1-ans-${q.id}`).value;
+                const feedback = document.getElementById(`p1-feedback-${q.id}`);
+                if (userVal === q.target) {
+                    feedback.innerHTML = '<span class="text-emerald-600"><i class="fa-solid fa-circle-check"></i> 正確!</span>';
+                    totalCorrect++;
+                } else {
+                    feedback.innerHTML = `<span class="text-rose-500"><i class="fa-solid fa-circle-xmark"></i> 錯誤 (解答: ${q.target})</span>`;
+                }
+            });
+
+            // Check Practice II
+            practice2Data.forEach(q => {
+                const userVal = document.getElementById(`p2-ans-${q.id}`).value.trim().toLowerCase();
+                const feedback = document.getElementById(`p2-feedback-${q.id}`);
+                if (userVal === q.ans.toLowerCase()) {
+                    feedback.innerHTML = '<span class="text-emerald-600"><i class="fa-solid fa-circle-check"></i> 正確!</span>';
+                    totalCorrect++;
+                } else {
+                    feedback.innerHTML = `<span class="text-rose-500"><i class="fa-solid fa-circle-xmark"></i> 錯誤 (解答: ${q.ans})</span>`;
+                }
+            });
+
+            alert(`批改完成！您共答對 ${totalCorrect} / ${totalQuestions} 題！`);
+        }
+
+        function shuffle(array) {
+            return array.sort(() => Math.random() - 0.5);
+        }
+
+        function initGame() {
+            const grid = document.getElementById('game-grid');
+            const shuffledCards = shuffle([...gamePairs]);
+            flippedCards = [];
+            matchedCount = 0;
+            movesCount = 0;
+            document.getElementById('game-score').innerText = `0 / 6`;
+            document.getElementById('game-moves').innerText = `0`;
+
+            grid.innerHTML = shuffledCards.map((card, idx) => `
+                <div onclick="flipCard(${idx}, ${card.matchId}, '${card.text.replace(/'/g, "\\'")}')" id="card-${idx}" class="card-item cursor-pointer h-32 relative rounded-2xl shadow-sm border border-slate-200 transition transform hover:-translate-y-1">
+                    <div class="card-flip-inner w-full h-full">
+                        <div class="card-front absolute inset-0 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center text-white text-3xl font-bold shadow-inner">
+                            <i class="fa-solid fa-question"></i>
+                        </div>
+                        <div class="card-back absolute inset-0 bg-white rounded-2xl p-3 flex flex-col items-center justify-center text-center border-2 border-emerald-400">
+                            <p class="font-bold text-slate-800 text-sm font-en">${card.content}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function flipCard(index, matchId, text) {
+            if (isGameBusy) return;
+            const cardEl = document.getElementById(`card-${index}`);
+            if (cardEl.classList.contains('card-flipped') || cardEl.classList.contains('matched')) return;
+
+            cardEl.classList.add('card-flipped');
+            speakText(text);
+            flippedCards.push({ index, matchId, cardEl });
+
+            if (flippedCards.length === 2) {
+                movesCount++;
+                document.getElementById('game-moves').innerText = movesCount;
+                checkGameMatch();
+            }
+        }
+
+        function checkGameMatch() {
+            const [c1, c2] = flippedCards;
+            isGameBusy = true;
+
+            if (c1.matchId === c2.matchId && c1.index !== c2.index) {
+                setTimeout(() => {
+                    c1.cardEl.classList.add('matched', 'opacity-50');
+                    c2.cardEl.classList.add('matched', 'opacity-50');
+                    matchedCount++;
+                    document.getElementById('game-score').innerText = `${matchedCount} / 6`;
+                    flippedCards = [];
+                    isGameBusy = false;
+
+                    if (matchedCount === 6) {
+                        setTimeout(() => alert(`🎉 恭喜完成翻牌遊戲！總共使用了 ${movesCount} 次翻牌！`), 300);
+                    }
+                }, 600);
+            } else {
+                setTimeout(() => {
+                    c1.cardEl.classList.remove('card-flipped');
+                    c2.cardEl.classList.remove('card-flipped');
+                    flippedCards = [];
+                    isGameBusy = false;
+                }, 1000);
+            }
+        }
+
+        function resetGame() {
+            initGame();
+        }
+
+        async function sendChatMessage() {
+            const inputEl = document.getElementById('chat-input');
+            const message = inputEl.value.trim();
+            if (!message) return;
+
+            const chatBox = document.getElementById('chat-box');
+            const role = document.getElementById('ai-role-select').value;
+
+            // Append User Message
+            chatBox.innerHTML += `
+                <div class="flex items-start gap-3 justify-end">
+                    <div class="bg-indigo-600 text-white p-3.5 rounded-2xl shadow-sm max-w-[80%] text-sm font-en">
+                        ${message}
+                    </div>
+                </div>
+            `;
+            inputEl.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // Placeholder loading indicator
+            const loadingId = 'loading-' + Date.now();
+            chatBox.innerHTML += `
+                <div id="${loadingId}" class="flex items-start gap-3">
+                    <div class="bg-purple-500 text-white rounded-full w-9 h-9 flex items-center justify-center font-bold text-sm">AI</div>
+                    <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-slate-200 text-slate-400 text-sm font-en animate-pulse">
+                        Thinking...
+                    </div>
+                </div>
+            `;
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            try {
+                // Gemini API Call
+                const systemPrompt = `You are playing the role of ${role} in an English learning dialogue based on Grade 9 English Unit 1 "He Feels Sick". Use simple English suitable for junior high school students. Emphasize linking verbs like feel, smell, taste, look and state adjectives like sick, fine, better, tired, happy. Keep responses concise (1-2 sentences).`;
+                
+                const apiKey = ""; // Canvas runtime automatically supplies the API key
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: message }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] }
+                    })
+                });
+
+                const data = await response.json();
+                const aiReply = data.candidates?.[0]?.content?.parts?.[0]?.text || `I see! Remember to eat well and rest if you feel sick!`;
+
+                // Remove loading
+                document.getElementById(loadingId)?.remove();
+
+                // Append AI Response
+                chatBox.innerHTML += `
+                    <div class="flex items-start gap-3">
+                        <div class="bg-purple-500 text-white rounded-full w-9 h-9 flex items-center justify-center font-bold text-sm shadow">
+                            AI
+                        </div>
+                        <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-slate-200 max-w-[80%] text-slate-800 text-sm">
+                            <p class="font-bold text-purple-600 mb-1 font-en">AI ${role}</p>
+                            <p class="font-en">${aiReply}</p>
+                            <button onclick="speakText('${aiReply.replace(/'/g, "\\'")}')" class="mt-1 text-xs text-purple-600 hover:underline flex items-center gap-1">
+                                <i class="fa-solid fa-volume-high"></i> 播放語音
+                            </button>
+                        </div>
+                    </div>
+                `;
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+                // Auto speak reply
+                speakText(aiReply);
+
+            } catch (err) {
+                console.error(err);
+                document.getElementById(loadingId)?.remove();
+                chatBox.innerHTML += `
+                    <div class="flex items-start gap-3">
+                        <div class="bg-purple-500 text-white rounded-full w-9 h-9 flex items-center justify-center font-bold text-sm">AI</div>
+                        <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-slate-200 text-slate-800 text-sm font-en">
+                            That sounds interesting! How do you feel right now?
+                        </div>
+                    </div>
+                `;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+
+        function clearChat() {
+            document.getElementById('chat-box').innerHTML = `
+                <div class="flex items-start gap-3">
+                    <div class="bg-purple-500 text-white rounded-full w-9 h-9 flex items-center justify-center font-bold text-sm shadow">
+                        AI
+                    </div>
+                    <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-slate-200 max-w-[80%] text-slate-800 text-sm">
+                        <p class="font-bold text-purple-600 mb-1 font-en">AI Sally</p>
+                        Hello Jack! How do you feel now? Do you feel better today?
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

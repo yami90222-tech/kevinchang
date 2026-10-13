@@ -1,0 +1,2018 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>八年級英語(三) 第一次段考進階(R1) 拔尖班互動解析與實戰系統</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Canvas Confetti for full score celebrations -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              200: '#bae0fd',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#075985',
+              800: '#0c4a6e',
+              900: '#082f49',
+            },
+            amberAccent: '#f59e0b',
+            emeraldAccent: '#10b981',
+            roseAccent: '#f43f5e',
+            violetAccent: '#8b5cf6'
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '"Noto Sans TC"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif;
+      scroll-behavior: smooth;
+    }
+    .paper-texture {
+      background-image: radial-gradient(rgba(2, 132, 199, 0.04) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+    .glow-tag {
+      box-shadow: 0 0 15px rgba(2, 132, 199, 0.25);
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Print styling */
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      body {
+        background: white !important;
+        color: black !important;
+        font-size: 12pt;
+      }
+      .print-page {
+        page-break-after: always;
+      }
+      .explanation-box {
+        border: 1px solid #ddd !important;
+        background: #fafafa !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased paper-texture min-h-screen flex flex-col">
+
+  <!-- TOP ANNOUNCEMENT / HEADER -->
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        
+        <!-- Brand & Title -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <a href="../index.html" title="返回學習基地首頁" class="bg-slate-900 hover:bg-sky-600 text-white px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl shadow-xs transition flex items-center gap-1.5 text-xs sm:text-sm font-bold border border-slate-700 flex-shrink-0">
+            <i data-lucide="home" class="w-4 h-4 text-sky-400"></i>
+            <span>回首頁</span>
+          </a>
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-tr from-sky-600 via-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-md shadow-sky-500/20 flex-shrink-0">
+            <i data-lucide="award" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-amber-100 text-amber-800 border border-amber-200">
+                八年級英語(三) 拔尖班
+              </span>
+              <span class="text-xs text-slate-500 font-medium hidden sm:inline">康軒/翰林/南一複習進階 R1</span>
+            </div>
+            <h1 class="text-base sm:text-xl font-black text-slate-900 tracking-tight flex items-center gap-1.5">
+              第一次段考複習卷・全方位互動解析系統
+            </h1>
+          </div>
+        </div>
+
+        <!-- Controls: Mode Switch & Tools -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <!-- Mode Switch Toggle -->
+          <div class="bg-slate-100 p-1 rounded-xl flex items-center border border-slate-200">
+            <button id="btn-mode-review" onclick="setAppMode('review')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all shadow-xs bg-white text-sky-700">
+              <i data-lucide="book-open" class="w-4 h-4"></i>
+              <span>精闢解析模式</span>
+            </button>
+            <button id="btn-mode-quiz" onclick="setAppMode('quiz')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all text-slate-600 hover:text-slate-900">
+              <i data-lucide="pencil-line" class="w-4 h-4"></i>
+              <span>實戰模擬測驗</span>
+            </button>
+          </div>
+
+          <!-- Quick Actions -->
+          <button onclick="toggleKeyGrammarModal()" title="查看段考 5 大核心考點" class="p-2 sm:px-3 sm:py-2 text-slate-600 hover:text-sky-600 hover:bg-sky-50 rounded-xl transition border border-slate-200 flex items-center gap-1.5 text-xs sm:text-sm font-medium">
+            <i data-lucide="zap" class="w-4 h-4 text-amber-500"></i>
+            <span class="hidden md:inline">考點攻略</span>
+          </button>
+
+          <button onclick="window.print()" title="列印或另存 PDF" class="p-2 sm:px-3 sm:py-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition border border-slate-200 flex items-center gap-1.5 text-xs sm:text-sm font-medium">
+            <i data-lucide="printer" class="w-4 h-4"></i>
+            <span class="hidden md:inline">列印考卷</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Navigation Bar for Sections -->
+    <div class="bg-slate-50/90 border-t border-slate-200/60 overflow-x-auto no-scrollbar">
+      <div class="max-w-7xl mx-auto px-4 flex items-center gap-2 py-2 text-xs font-semibold whitespace-nowrap">
+        <span class="text-slate-400 uppercase tracking-wider flex items-center gap-1">
+          <i data-lucide="layers" class="w-3.5 h-3.5"></i> 大題導航:
+        </span>
+        <a href="#sec-vocab" class="px-2.5 py-1 rounded-md text-slate-700 hover:bg-sky-100 hover:text-sky-800 transition">一、文意字彙 (10題)</a>
+        <a href="#sec-grammar" class="px-2.5 py-1 rounded-md text-slate-700 hover:bg-sky-100 hover:text-sky-800 transition">二、語法選擇 (10題)</a>
+        <a href="#sec-sentence" class="px-2.5 py-1 rounded-md text-slate-700 hover:bg-sky-100 hover:text-sky-800 transition">三、依提示作答 (3題)</a>
+        <a href="#sec-translation" class="px-2.5 py-1 rounded-md text-slate-700 hover:bg-sky-100 hover:text-sky-800 transition">四、翻譯 (3題)</a>
+        <a href="#sec-cloze" class="px-2.5 py-1 rounded-md text-slate-700 hover:bg-sky-100 hover:text-sky-800 transition">五、克漏字測驗 (5題)</a>
+        <a href="#sec-reading" class="px-2.5 py-1 rounded-md text-slate-700 hover:bg-sky-100 hover:text-sky-800 transition">六、閱讀測驗 (5題)</a>
+        <a href="#sec-cheatsheet" class="px-2.5 py-1 rounded-md text-amber-700 bg-amber-50 hover:bg-amber-100 transition flex items-center gap-1">
+          <i data-lucide="sparkles" class="w-3 h-3 text-amber-500"></i> 拔尖考點精粹
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- QUIZ MODE FLOATING SCORE BAR (Visible only in Quiz Mode) -->
+  <div id="quiz-floating-panel" class="hidden sticky top-28 z-40 bg-slate-900 text-white shadow-xl py-2.5 px-4 rounded-2xl max-w-4xl mx-auto my-3 border border-slate-700 animate-fade-in flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-1.5">
+        <span class="text-xs text-slate-400">目前實測得分:</span>
+        <span id="quiz-current-score" class="text-2xl font-black text-amber-400 font-mono">0</span>
+        <span class="text-xs text-slate-400 font-medium">/ 100 分</span>
+      </div>
+      <div class="h-4 w-px bg-slate-700 hidden sm:block"></div>
+      <div class="text-xs text-slate-300 hidden sm:flex items-center gap-2">
+        <span>已作答: <b id="quiz-answered-count" class="text-sky-400">0</b> / 36</span>
+        <span>答對: <b id="quiz-correct-count" class="text-emerald-400">0</b></span>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <button onclick="checkAllQuizAnswers()" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition flex items-center gap-1 shadow-sm">
+        <i data-lucide="check-check" class="w-3.5 h-3.5"></i>
+        <span>一鍵交卷評分</span>
+      </button>
+      <button onclick="resetQuiz()" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium transition flex items-center gap-1 border border-slate-700">
+        <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+        <span>重置清空</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 space-y-10">
+
+    <!-- HERO / OVERVIEW CARD -->
+    <div class="bg-gradient-to-br from-white via-sky-50/50 to-indigo-50/40 rounded-3xl p-6 sm:p-8 border border-sky-100 shadow-sm relative overflow-hidden">
+      <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-sky-200/30 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div class="space-y-3 max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-sky-800 text-xs font-bold tracking-wide">
+            <span class="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
+            國中英語(三) 八年級上學期第一次段考複習・進階進度 R1
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-snug">
+            拔尖專屬・段考高分突破與考點完全解析
+          </h2>
+          <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+            本複習卷整合了<strong>一般動詞過去式不規則變化</strong>、<strong>因果連接詞 because / so 的單用規則</strong>、<strong>情緒與介系詞搭配 (with joy, without, remind of)</strong>、<strong>Wh-問句造句</strong>，以及<strong>跨國童工議題與圖表數據閱讀素養</strong>。提供「互動實戰」與「名師精解」雙向切換！
+          </p>
+          <div class="flex flex-wrap gap-2 pt-1 text-xs">
+            <span class="px-2.5 py-1 bg-white rounded-lg border border-slate-200 font-semibold text-slate-700 flex items-center gap-1 shadow-2xs">
+              <i data-lucide="check" class="w-3.5 h-3.5 text-sky-600"></i> 試卷總分: 100 分
+            </span>
+            <span class="px-2.5 py-1 bg-white rounded-lg border border-slate-200 font-semibold text-slate-700 flex items-center gap-1 shadow-2xs">
+              <i data-lucide="award" class="w-3.5 h-3.5 text-amber-500"></i> 六大題型全收錄
+            </span>
+            <span class="px-2.5 py-1 bg-white rounded-lg border border-slate-200 font-semibold text-slate-700 flex items-center gap-1 shadow-2xs">
+              <i data-lucide="volume-2" class="w-3.5 h-3.5 text-purple-500"></i> 點擊單字與句子即時朗讀
+            </span>
+            <span class="px-2.5 py-1 bg-white rounded-lg border border-slate-200 font-semibold text-slate-700 flex items-center gap-1 shadow-2xs">
+              <i data-lucide="alert-triangle" class="w-3.5 h-3.5 text-rose-500"></i> 拔尖常見陷阱點剖析
+            </span>
+          </div>
+        </div>
+
+        <!-- Quick Score / Stats Card -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm w-full lg:w-72 flex-shrink-0">
+          <div class="flex items-center justify-between text-xs font-semibold text-slate-500 mb-2">
+            <span>題型分布結構</span>
+            <span>滿分 100</span>
+          </div>
+          <div class="space-y-2 text-xs">
+            <div class="flex justify-between items-center py-1 border-b border-slate-100">
+              <span class="text-slate-700">一、文意字彙 (10題)</span>
+              <span class="font-bold text-sky-700">20 分</span>
+            </div>
+            <div class="flex justify-between items-center py-1 border-b border-slate-100">
+              <span class="text-slate-700">二、語法選擇 (10題)</span>
+              <span class="font-bold text-sky-700">20 分</span>
+            </div>
+            <div class="flex justify-between items-center py-1 border-b border-slate-100">
+              <span class="text-slate-700">三、依提示作答 (3題)</span>
+              <span class="font-bold text-sky-700">15 分</span>
+            </div>
+            <div class="flex justify-between items-center py-1 border-b border-slate-100">
+              <span class="text-slate-700">四、翻譯題 (3題)</span>
+              <span class="font-bold text-sky-700">15 分</span>
+            </div>
+            <div class="flex justify-between items-center py-1 border-b border-slate-100">
+              <span class="text-slate-700">五、克漏字測驗 (5題)</span>
+              <span class="font-bold text-sky-700">10 分</span>
+            </div>
+            <div class="flex justify-between items-center py-1">
+              <span class="text-slate-700">六、閱讀素養題 (5題)</span>
+              <span class="font-bold text-sky-700">20 分</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SECTION 1: 文意字彙 (20分) -->
+    <!-- ========================================== -->
+    <section id="sec-vocab" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-lg">
+            I
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-slate-950 flex items-center gap-2">
+              一、文意字彙
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">每題 2 分，共 20 分</span>
+            </h3>
+            <p class="text-xs text-slate-500">考驗詞彙拼字、詞性轉換、過去式動詞與首字母大小寫規則</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <button onclick="revealSection('vocab')" class="px-3 py-1.5 rounded-lg bg-sky-50 text-sky-700 hover:bg-sky-100 font-semibold transition flex items-center gap-1 border border-sky-200">
+            <i data-lucide="eye" class="w-3.5 h-3.5"></i> 顯示本大題全部解答
+          </button>
+        </div>
+      </div>
+
+      <!-- Vocab Items List -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="vocab-container">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 2: 語法選擇 (20分) -->
+    <!-- ========================================== -->
+    <section id="sec-grammar" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-lg">
+            II
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-slate-950 flex items-center gap-2">
+              二、語法選擇
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">每題 2 分，共 20 分</span>
+            </h3>
+            <p class="text-xs text-slate-500">八年級核心時態、因果連接詞 because/so 禁忌、動詞三單與不規則變化</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <button onclick="revealSection('grammar')" class="px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100 font-semibold transition flex items-center gap-1 border border-indigo-200">
+            <i data-lucide="eye" class="w-3.5 h-3.5"></i> 顯示本大題全部解答
+          </button>
+        </div>
+      </div>
+
+      <!-- Grammar Questions List -->
+      <div class="space-y-4" id="grammar-container">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 3: 依提示作答 (15分) -->
+    <!-- ========================================== -->
+    <section id="sec-sentence" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-lg">
+            III
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-slate-950 flex items-center gap-2">
+              三、依提示作答
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">每題 5 分，共 15 分</span>
+            </h3>
+            <p class="text-xs text-slate-500">句型改寫、because / so 對調邏輯、and 並列雙動詞時態一致性、Wh- 問句</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <button onclick="revealSection('sentence')" class="px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 font-semibold transition flex items-center gap-1 border border-emerald-200">
+            <i data-lucide="eye" class="w-3.5 h-3.5"></i> 顯示本大題全部解答
+          </button>
+        </div>
+      </div>
+
+      <div class="space-y-5" id="sentence-container">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 4: 翻譯 (15分) -->
+    <!-- ========================================== -->
+    <section id="sec-translation" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-lg">
+            IV
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-slate-950 flex items-center gap-2">
+              四、翻譯題
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">每題 5 分，共 15 分</span>
+            </h3>
+            <p class="text-xs text-slate-500">採分點拆解：專有名詞大寫、介系詞搭配 (with joy)、情態動詞過去式 (couldn't)、固定片語 (have no choice)</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <button onclick="revealSection('translation')" class="px-3 py-1.5 rounded-lg bg-purple-50 text-purple-700 hover:bg-purple-100 font-semibold transition flex items-center gap-1 border border-purple-200">
+            <i data-lucide="eye" class="w-3.5 h-3.5"></i> 顯示本大題全部解答
+          </button>
+        </div>
+      </div>
+
+      <div class="space-y-5" id="translation-container">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 5: 克漏字測驗 (10分) -->
+    <!-- ========================================== -->
+    <section id="sec-cloze" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-lg">
+            V
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-slate-950 flex items-center gap-2">
+              五、克漏字測驗
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">每題 2 分，共 10 分</span>
+            </h3>
+            <p class="text-xs text-slate-500">閱讀短文《可可夜總會 Coco》劇情摘要與語法時態搭配</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <button onclick="speakText(document.getElementById('cloze-passage-text').innerText)" class="px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 font-medium transition flex items-center gap-1 border border-slate-300">
+            <i data-lucide="volume-2" class="w-3.5 h-3.5 text-sky-600"></i> 朗讀短文
+          </button>
+          <button onclick="revealSection('cloze')" class="px-3 py-1.5 rounded-lg bg-amber-50 text-amber-700 hover:bg-amber-100 font-semibold transition flex items-center gap-1 border border-amber-200">
+            <i data-lucide="eye" class="w-3.5 h-3.5"></i> 顯示本大題全部解答
+          </button>
+        </div>
+      </div>
+
+      <!-- Cloze Passage Card -->
+      <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/90 leading-relaxed text-slate-800 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+          <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+            <i data-lucide="film" class="w-4 h-4 text-amber-600"></i>
+            短文脈絡：電影《Coco》（可可夜總會）故事大綱
+          </div>
+          <span class="text-xs text-slate-500">※ 故事敘述通常以「現在簡單式」維持生動感</span>
+        </div>
+
+        <div id="cloze-passage-text" class="text-sm sm:text-base leading-loose font-serif text-slate-800">
+          Did you ever see the movie <span class="font-bold text-amber-800">Coco</span>? Coco is a movie about a young boy with a dream. This boy’s name is Miguel. Coco is his great-grandmother’s name. The movie 
+          <span class="inline-block px-2 py-0.5 bg-amber-100 text-amber-900 rounded font-sans font-bold border border-amber-300">1. [starts]</span> with Miguel’s music dream. But, his family members 
+          <span class="inline-block px-2 py-0.5 bg-amber-100 text-amber-900 rounded font-sans font-bold border border-amber-300">2. [say]</span> “No way!” to his music dream 
+          <span class="inline-block px-2 py-0.5 bg-amber-100 text-amber-900 rounded font-sans font-bold border border-amber-300">3. [because]</span> music reminds them of Miguel’s dead great-great-grandfather. Miguel falls into the world of dead people on the Day of the Dead.<br><br>
+          He meets a lot of his dead relatives there. He meets his great-great-grandma, Imelda. He also meets a dead singer, Hector. With Hector’s help, Miguel meets his favorite singer, Ernesto. Miguel 
+          <span class="inline-block px-2 py-0.5 bg-amber-100 text-amber-900 rounded font-sans font-bold border border-amber-300">4. [finds]</span> out two things: first, Hector is his great-great-grandfather; second, Ernesto killed Hector for Hector’s beautiful songs.<br><br>
+          Miguel goes back to the living world and sings to his great-grandma, Coco. This song reminds Coco 
+          <span class="inline-block px-2 py-0.5 bg-amber-100 text-amber-900 rounded font-sans font-bold border border-amber-300">5. [of]</span> her father, Hector. He is dead, but he lives on the memories of his relatives.
+        </div>
+
+        <!-- Vocabulary hint tags -->
+        <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-200 text-xs">
+          <span class="font-semibold text-slate-600">卷末生詞輔助:</span>
+          <span class="bg-white px-2 py-0.5 rounded border border-slate-200 text-slate-700">dream 夢想</span>
+          <span class="bg-white px-2 py-0.5 rounded border border-slate-200 text-slate-700">kill 殺害</span>
+          <span class="bg-white px-2 py-0.5 rounded border border-slate-200 text-slate-700">song 歌</span>
+          <span class="bg-white px-2 py-0.5 rounded border border-slate-200 text-slate-700">living 活著的</span>
+          <span class="bg-white px-2 py-0.5 rounded border border-slate-200 text-slate-700">live 活著</span>
+        </div>
+      </div>
+
+      <!-- Cloze Questions 1-5 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="cloze-questions-container">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 6: 閱讀測驗 (20分) -->
+    <!-- ========================================== -->
+    <section id="sec-reading" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-8">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-lg">
+            VI
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-slate-950 flex items-center gap-2">
+              六、閱讀測驗
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">每題 4 分，共 20 分</span>
+            </h3>
+            <p class="text-xs text-slate-500">Part 1 圖表跨域判讀 (結婚與再婚平均年齡) ＋ Part 2 社會關懷素養題 (西非可可豆童工)</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <button onclick="revealSection('reading')" class="px-3 py-1.5 rounded-lg bg-rose-50 text-rose-700 hover:bg-rose-100 font-semibold transition flex items-center gap-1 border border-rose-200">
+            <i data-lucide="eye" class="w-3.5 h-3.5"></i> 顯示本大題全部解答
+          </button>
+        </div>
+      </div>
+
+      <!-- PART 1: 圖表分析 -->
+      <div class="space-y-4">
+        <div class="flex items-center gap-2 text-base font-bold text-slate-800">
+          <span class="px-2.5 py-0.5 rounded bg-sky-100 text-sky-800 text-xs">篇章 1</span>
+          五國初婚與再婚平均年齡統計圖表
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <!-- Text and Table Box -->
+          <div class="lg:col-span-6 bg-slate-50 rounded-2xl p-5 border border-slate-200 text-sm space-y-3">
+            <p class="text-slate-700 leading-relaxed">
+              Here is a chart about the average age of people’s first and second marriages in Country A, B, C, D and E. On average, women get married earlier than men in all countries.
+            </p>
+
+            <!-- Table -->
+            <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-2xs">
+              <table class="min-w-full divide-y divide-slate-200 text-center text-xs">
+                <thead>
+                  <tr class="bg-slate-100 text-slate-600 font-bold">
+                    <th rowspan="2" class="py-2.5 px-3 border-r border-slate-200">國家</th>
+                    <th colspan="2" class="py-1 px-3 border-r border-slate-200 bg-sky-50 text-sky-800">初婚 (first marriage)</th>
+                    <th colspan="2" class="py-1 px-3 bg-purple-50 text-purple-800">再婚 (remarry)</th>
+                  </tr>
+                  <tr class="bg-slate-50 text-slate-500 font-semibold border-t border-slate-200">
+                    <th class="py-1 px-2 border-r border-slate-200">男性 (men)</th>
+                    <th class="py-1 px-2 border-r border-slate-200">女性 (women)</th>
+                    <th class="py-1 px-2 border-r border-slate-200">男性 (men)</th>
+                    <th class="py-1 px-2">女性 (women)</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 font-mono text-slate-700">
+                  <tr class="hover:bg-slate-50">
+                    <td class="py-2 px-3 font-sans font-bold text-slate-900 border-r border-slate-200">Country A</td>
+                    <td class="py-2 px-2 border-r border-slate-200">23.7</td>
+                    <td class="py-2 px-2 border-r border-slate-200">22.6</td>
+                    <td class="py-2 px-2 border-r border-slate-200">35.5</td>
+                    <td class="py-2 px-2">30.7</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="py-2 px-3 font-sans font-bold text-slate-900 border-r border-slate-200">Country B</td>
+                    <td class="py-2 px-2 border-r border-slate-200">26.6</td>
+                    <td class="py-2 px-2 border-r border-slate-200">20.3</td>
+                    <td class="py-2 px-2 border-r border-slate-200">41.4</td>
+                    <td class="py-2 px-2">34.2</td>
+                  </tr>
+                  <tr class="hover:bg-amber-50/50 bg-amber-50/20">
+                    <td class="py-2 px-3 font-sans font-bold text-amber-900 border-r border-slate-200 flex items-center justify-center gap-1">
+                      <span>Country C</span>
+                      <span class="text-3xs px-1 rounded bg-amber-200 text-amber-800">Q2</span>
+                    </td>
+                    <td class="py-2 px-2 font-bold text-amber-800 border-r border-slate-200">29.0</td>
+                    <td class="py-2 px-2 border-r border-slate-200">23.8</td>
+                    <td class="py-2 px-2 border-r border-slate-200">39.2</td>
+                    <td class="py-2 px-2">34.5</td>
+                  </tr>
+                  <tr class="hover:bg-sky-50/50 bg-sky-50/20">
+                    <td class="py-2 px-3 font-sans font-bold text-sky-900 border-r border-slate-200 flex items-center justify-center gap-1">
+                      <span>Country D</span>
+                      <span class="text-3xs px-1 rounded bg-sky-200 text-sky-800">Q1</span>
+                    </td>
+                    <td class="py-2 px-2 font-bold text-sky-800 border-r border-slate-200">32.5</td>
+                    <td class="py-2 px-2 font-bold text-sky-800 border-r border-slate-200">30.2</td>
+                    <td class="py-2 px-2 border-r border-slate-200">45.5</td>
+                    <td class="py-2 px-2">35.1</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="py-2 px-3 font-sans font-bold text-slate-900 border-r border-slate-200">Country E</td>
+                    <td class="py-2 px-2 border-r border-slate-200">35.4</td>
+                    <td class="py-2 px-2 border-r border-slate-200">32.6</td>
+                    <td class="py-2 px-2 border-r border-slate-200">49.2</td>
+                    <td class="py-2 px-2">40.3</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Notes -->
+            <div class="flex flex-wrap gap-2 text-xs text-slate-500 pt-1">
+              <span>chart 圖表</span> • <span>average 平均</span> • <span>earlier than 早於</span> • <span>remarry 再婚</span>
+            </div>
+          </div>
+
+          <!-- Questions 1 & 2 -->
+          <div class="lg:col-span-6 space-y-4" id="reading-part1-container">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <!-- PART 2: 素養題 - 西非童工與巧克力 -->
+      <div class="space-y-4 pt-6 border-t border-slate-200">
+        <div class="flex items-center gap-2 text-base font-bold text-slate-800">
+          <span class="px-2.5 py-0.5 rounded bg-rose-100 text-rose-800 text-xs font-bold">篇章 2 素養題</span>
+          The Bitter Truth Behind Sweet Chocolate (甜美巧克力背後的苦澀真相)
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <!-- Reading Text -->
+          <div class="lg:col-span-6 bg-slate-50 rounded-2xl p-5 border border-slate-200 text-sm space-y-4 leading-relaxed">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+              <span class="text-xs font-bold text-slate-600 flex items-center gap-1.5">
+                <i data-lucide="globe" class="w-4 h-4 text-sky-600"></i>
+                國際社會關懷・人權與勞動素養
+              </span>
+              <button onclick="speakText(document.getElementById('cocoa-article-text').innerText)" class="text-xs text-sky-600 hover:text-sky-800 flex items-center gap-1 font-semibold">
+                <i data-lucide="volume-2" class="w-3.5 h-3.5"></i> 朗讀本篇短文
+              </button>
+            </div>
+
+            <div id="cocoa-article-text" class="text-slate-800 space-y-3 font-serif">
+              <p>
+                The life of children in Taiwan is very different from that in West Africa. Children in Taiwan go to school around eight o’clock in the morning and go home after school on weekdays. Back at home, they may watch TV, and enjoy some delicious snacks like chocolate. But, where does the sweet chocolate come from? It comes from cocoa beans in West Africa.
+              </p>
+              <p>
+                There are many small cocoa bean farms in West Africa, and 70% of cocoa beans in the world come from West Africa. There is much work at cocoa bean farms, and farmers are always in need of workers. In Africa, 
+                <mark class="bg-rose-100 text-rose-900 px-1 rounded font-sans font-bold">human traffickers</mark> 
+                take kids away without telling their parents. Then, they sell these children. These poor children are only nine to thirteen years old. They work 14 hours a day and seven days a week. They pick the cocoa fruit from the cocoa trees and carry very heavy cocoa fruit. Also, the farmers often hit them. They cannot fall down or cry. Life on the farm is hard. What do you think about your favorite chocolate now?
+              </p>
+            </div>
+
+            <div class="flex flex-wrap gap-2 text-xs text-slate-500 pt-2 border-t border-slate-200">
+              <span class="bg-white px-2 py-0.5 rounded border border-slate-200">West Africa 西非</span>
+              <span class="bg-white px-2 py-0.5 rounded border border-slate-200">cocoa bean 可可豆</span>
+              <span class="bg-white px-2 py-0.5 rounded border border-slate-200">worker 工人</span>
+              <span class="bg-white px-2 py-0.5 rounded border border-slate-200">mainly 主要地</span>
+              <span class="bg-white px-2 py-0.5 rounded border border-slate-200">according to 根據</span>
+            </div>
+          </div>
+
+          <!-- Questions 3, 4, 5 -->
+          <div class="lg:col-span-6 space-y-4" id="reading-part2-container">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 7: 拔尖考點精粹與防陷阱手冊 -->
+    <!-- ========================================== -->
+    <section id="sec-cheatsheet" class="bg-gradient-to-br from-slate-900 via-sky-950 to-indigo-950 text-white rounded-3xl p-6 sm:p-10 border border-slate-800 shadow-xl space-y-8">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-2xl bg-amber-400 text-slate-950 flex items-center justify-center font-black text-xl shadow-lg shadow-amber-400/20">
+          <i data-lucide="sparkles" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-400/20 text-amber-300 border border-amber-400/30">
+            名師考前大補帖
+          </span>
+          <h3 class="text-2xl font-black tracking-tight text-white mt-1">
+            拔尖班第一次段考「必中」五大核心文法盲點
+          </h3>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Trap 1 -->
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-3 hover:border-amber-400/40 transition">
+          <div class="flex items-center gap-2 text-amber-400 font-bold text-sm">
+            <span class="w-6 h-6 rounded-full bg-amber-400/20 flex items-center justify-center text-xs">1</span>
+            Because 與 So 絕不可同時出現！
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            中文常習慣說「因為...所以...」，但在英文文法中，because 與 so 都是<strong>連接詞 (Conjunctions)</strong>。連接兩個句子<strong>只能有一個連接詞</strong>！
+          </p>
+          <div class="bg-black/30 p-2.5 rounded-xl font-mono text-xs space-y-1">
+            <div class="text-rose-400">❌ Because she was ill, so she rested.</div>
+            <div class="text-emerald-400">✔️ Because she was ill, she rested.</div>
+            <div class="text-emerald-400">✔️ She was ill, so she rested.</div>
+          </div>
+        </div>
+
+        <!-- Trap 2 -->
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-3 hover:border-sky-400/40 transition">
+          <div class="flex items-center gap-2 text-sky-400 font-bold text-sm">
+            <span class="w-6 h-6 rounded-full bg-sky-400/20 flex items-center justify-center text-xs">2</span>
+            過去式動詞四大變化魔鬼細節
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            改寫題目加入 yesterday 時，必須徹底檢查所有動詞：
+          </p>
+          <ul class="text-xs text-slate-300 space-y-1 list-disc list-inside">
+            <li><strong>短母音+單子音雙寫</strong>：jog ➜ jogged, stop ➜ stopped</li>
+            <li><strong>子音+y 去y加ied</strong>：study ➜ studied, cry ➜ cried</li>
+            <li><strong>不規則變化</strong>：break ➜ broke, become ➜ became, ride ➜ rode</li>
+            <li><strong>並列雙動詞</strong>：Becky <span class="text-sky-300 font-bold">rode</span> and <span class="text-sky-300 font-bold">jogged</span> (不可只改一個！)</li>
+          </ul>
+        </div>
+
+        <!-- Trap 3 -->
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-3 hover:border-emerald-400/40 transition">
+          <div class="flex items-center gap-2 text-emerald-400 font-bold text-sm">
+            <span class="w-6 h-6 rounded-full bg-emerald-400/20 flex items-center justify-center text-xs">3</span>
+            頻率副詞時態判斷法 (Seldom / Always)
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            頻率副詞本身<strong>不等於</strong>只有現在簡單式！
+          </p>
+          <div class="bg-black/30 p-2.5 rounded-xl text-xs space-y-1 font-mono">
+            <div>• Betty <b class="text-sky-300">seldom shares</b> (現在習慣，第三人稱單數加 s)</div>
+            <div>• Dad <b class="text-emerald-300">always jumped</b> rope <span class="text-amber-300">two years ago</span> (過去時間副詞決定過去式)</div>
+          </div>
+        </div>
+
+        <!-- Trap 4 -->
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-3 hover:border-purple-400/40 transition">
+          <div class="flex items-center gap-2 text-purple-400 font-bold text-sm">
+            <span class="w-6 h-6 rounded-full bg-purple-400/20 flex items-center justify-center text-xs">4</span>
+            段考高分片語搭配詞 (Collocations)
+          </div>
+          <ul class="text-xs text-slate-300 space-y-1.5">
+            <li><span class="text-purple-300 font-bold">remind A of B</span>：使 A 想起 B (克漏字第5題必考)</li>
+            <li><span class="text-purple-300 font-bold">with joy</span>：用喜悅的心情 (介系詞用 with)</li>
+            <li><span class="text-purple-300 font-bold">without a word</span>：不發一語 (介系詞 without + 名詞)</li>
+            <li><span class="text-purple-300 font-bold">have no choice</span>：毫無選擇 (過去式 had no choice)</li>
+          </ul>
+        </div>
+
+        <!-- Trap 5 -->
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-3 hover:border-rose-400/40 transition">
+          <div class="flex items-center gap-2 text-rose-400 font-bold text-sm">
+            <span class="w-6 h-6 rounded-full bg-rose-400/20 flex items-center justify-center text-xs">5</span>
+            依畫線處造原問句 (Wh-問句造法)
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            三大步驟不漏分：
+          </p>
+          <div class="bg-black/30 p-2.5 rounded-xl text-xs space-y-1">
+            <div>1. 判定畫線為地點 ➜ 疑問詞寫 <code class="text-amber-300">Where</code></div>
+            <div>2. 原動詞為 helped (過去式) ➜ 補上助動詞 <code class="text-sky-300">did</code></div>
+            <div>3. 動詞回歸原形 ➜ helped 改回 <code class="text-emerald-300">help</code></div>
+            <div class="text-emerald-400 pt-1 font-mono font-bold">Where did Jay help the young woman?</div>
+          </div>
+        </div>
+
+        <!-- Bonus 6 -->
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-3 hover:border-amber-400/40 transition">
+          <div class="flex items-center gap-2 text-amber-300 font-bold text-sm">
+            <span class="w-6 h-6 rounded-full bg-amber-400/20 flex items-center justify-center text-xs">★</span>
+            素養圖表與長文答題技巧
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            圖表先抓男女欄位與「初婚」vs「再婚」，注意題目關鍵字 <strong>around the age of</strong> 為四捨五入約數；閱讀題 weekdays 轉換為 Monday to Friday。
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- KEY GRAMMAR MODAL POPUP -->
+  <div id="grammar-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">
+            <i data-lucide="zap" class="w-4 h-4"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900">八年級第一次段考・核心文法快查</h3>
+        </div>
+        <button onclick="toggleKeyGrammarModal()" class="p-1 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="space-y-4 text-xs sm:text-sm text-slate-700 leading-relaxed">
+        <div class="p-3 bg-sky-50 rounded-xl border border-sky-100">
+          <b class="text-sky-900">📌 1. 連接詞因果關係</b>
+          <p class="mt-1 text-slate-600">Because S + V, S + V. = S + V, so S + V.（Because放句首時中間要逗號；so前面要逗號；兩者不可同時使用）</p>
+        </div>
+        <div class="p-3 bg-amber-50 rounded-xl border border-amber-100">
+          <b class="text-amber-900">📌 2. 過去簡單式動詞規則變化</b>
+          <p class="mt-1 text-slate-600">一般動詞加 -ed；字尾有 e 加 -d；子音+y去y加 -ied (study->studied, cry->cried)；短母音+單子音雙寫字尾加 -ed (jog->jogged, plan->planned)。</p>
+        </div>
+        <div class="p-3 bg-purple-50 rounded-xl border border-purple-100">
+          <b class="text-purple-900">📌 3. 本課重點不規則動詞</b>
+          <p class="mt-1 font-mono text-xs text-purple-950 font-bold">
+            break -> broke | become -> became | sell -> sold | ride -> rode | take -> took | see -> saw | fall -> fell
+          </p>
+        </div>
+        <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-100">
+          <b class="text-emerald-900">📌 4. 關鍵句型與片語</b>
+          <p class="mt-1 text-slate-600">
+            • What happened to sb.? (某人發生什麼事？)<br>
+            • remind sb. of sth./sb. (使某人想起...)<br>
+            • without + 名詞/Ving (沒有.../不發一語)<br>
+            • have no choice (別無選擇)
+          </p>
+        </div>
+      </div>
+
+      <div class="text-right">
+        <button onclick="toggleKeyGrammarModal()" class="px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800">
+          了解並關閉
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-slate-200 mt-16 py-8 text-center text-xs text-slate-500 space-y-2">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <a href="../index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-sky-50 text-slate-700 hover:text-sky-700 font-bold border border-slate-200 transition">
+          <i data-lucide="home" class="w-3.5 h-3.5 text-sky-600"></i>
+          <span>返回學習基地首頁</span>
+        </a>
+        <span class="font-bold text-slate-800">國中英語(三) 八年級拔尖班第一次段考複習</span>
+        <span class="hidden sm:inline">• 雙模式智慧解析</span>
+      </div>
+      <div>
+        搭配教材：國中英語第三冊 Unit 1 - Review 1
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT DATA & INTERACTIVITY SCRIPT -->
+  <script>
+    // ==========================================
+    // EXAM DATA DEFINITION
+    // ==========================================
+
+    const examData = {
+      vocab: [
+        {
+          id: 'v1',
+          num: 1,
+          word: "Children’s",
+          stem: "People in Taiwan celebrate Ch____n’s Day on April 4th.",
+          prefix: "Ch",
+          suffix: "n’s",
+          fullAns: "Children’s",
+          translation: "台灣人在4月4日慶祝兒童節。",
+          points: 2,
+          explanation: "【專有名詞與複數不規則所有格】child（單數）複數為 children，所有格需在字尾加 's 變成 children's。為專有名詞節慶，字首 C 必須大寫！",
+          pitfall: "學生極容易忘記加所有格 's 或是誤拼為 Childs'。"
+        },
+        {
+          id: 'v2',
+          num: 2,
+          word: "computer",
+          stem: "Dad works on his c____r at home. He doesn’t go to the office.",
+          prefix: "c",
+          suffix: "r",
+          fullAns: "computer",
+          translation: "爸爸在家用他的電腦工作。他沒有去辦公室。",
+          points: 2,
+          explanation: "【名詞辨析】work on his computer 指在電腦前工作。後句提示 he doesn't go to the office（不去辦公室），推論是在家使用電腦辦公。",
+          pitfall: "注意字尾為 -er，不要誤拼成 -or。"
+        },
+        {
+          id: 'v3',
+          num: 3,
+          word: "broke",
+          stem: "Danny b____ke his arm in the game. Poor Danny!",
+          prefix: "b",
+          suffix: "ke",
+          fullAns: "broke",
+          translation: "Danny 在比賽中摔斷了他的手臂。可憐的 Danny！",
+          points: 2,
+          explanation: "【動詞時態：不規則過去式】break one's arm 意為「摔斷手臂」。事情發生在比賽中，使用過去式 broke（break ➜ broke ➜ broken）。",
+          pitfall: "很多學生看見 b__ke 會寫原形 break，但注意題目中已給 b 與 ke，中間填 ro，且比賽已經發生，必須為過去式！"
+        },
+        {
+          id: 'v4',
+          num: 4,
+          word: "flowers",
+          stem: "Lillian planted her favorite f____rs in her garden.",
+          prefix: "f",
+          suffix: "rs",
+          fullAns: "flowers",
+          translation: "Lillian 在她的花園裡種了她最喜歡的花。",
+          points: 2,
+          explanation: "【可數名詞複數形】在花園種植(plant)，字首 f 字尾 rs，填入 flower 的複數形 flowers。",
+          pitfall: "題目字尾已有 rs，所以單詞本體為 flowers (flower + s)。"
+        },
+        {
+          id: 'v5',
+          num: 5,
+          word: "became",
+          stem: "Ella b____me a famous actress at 25. She was very hard-working.",
+          prefix: "b",
+          suffix: "me",
+          fullAns: "became",
+          translation: "Ella 在25歲時成為了一位知名女演員。她非常努力。",
+          points: 2,
+          explanation: "【不規則過去式】become 的過去式為 became。時間副詞 at 25 與後文 was 均表明過去時態。",
+          pitfall: "常因拼字粗心而寫成現在式 become，此處必須注意過去式 a 字母。"
+        },
+        {
+          id: 'v6',
+          num: 6,
+          word: "scared",
+          stem: "Fiona saw a snake on the sofa. She was s____d.",
+          prefix: "s",
+          suffix: "d",
+          fullAns: "scared",
+          translation: "Fiona 在沙發上看到一條蛇。她嚇壞了。",
+          points: 2,
+          explanation: "【情緒形容詞】看到蛇感到害怕，be scared（感到害怕的）。主詞為人 Fiona，搭配形容詞 scared。",
+          pitfall: "不要誤拼為 scary（令人害怕的），此處主詞是人，故為受影響的 scared。"
+        },
+        {
+          id: 'v7',
+          num: 7,
+          word: "test",
+          stem: "The math t____t is difficult. Only Jimmy passed this time.",
+          prefix: "t",
+          suffix: "t",
+          fullAns: "test",
+          translation: "這場數學測驗很難。這次只有 Jimmy 通過。",
+          points: 2,
+          explanation: "【名詞】math test 數學測驗。後句 passed（通過）是強烈線索。",
+          pitfall: "部分同學可能想到 exam，但依據字首 t、字尾 t，只能填 test。"
+        },
+        {
+          id: 'v8',
+          num: 8,
+          word: "candles",
+          stem: "The kid made a wish and blew out the c____les on the cake.",
+          prefix: "c",
+          suffix: "les",
+          fullAns: "candles",
+          translation: "這孩子許了願並吹熄了蛋糕上的蠟燭。",
+          points: 2,
+          explanation: "【生活慣用語與名詞複數】blow out the candles 意為「吹熄蠟燭」。生日蛋糕上的蠟燭通常為複數 candles。",
+          pitfall: "注意字尾為 -les，不可漏掉 d 字母（candle -> candles）。"
+        },
+        {
+          id: 'v9',
+          num: 9,
+          word: "relatives",
+          stem: "All my r____ves came back to Taiwan for New Year.",
+          prefix: "r",
+          suffix: "ves",
+          fullAns: "relatives",
+          translation: "我所有的親戚都在新年回到了台灣。",
+          points: 2,
+          explanation: "【名詞複數】relative（親戚），前面有 All my 修飾，使用複數形 relatives。字尾給予 ves 提示。",
+          pitfall: "注意 relative 的拼法：r-e-l-a-t-i-v-e-s。"
+        },
+        {
+          id: 'v10',
+          num: 10,
+          word: "candy",
+          stem: "Hey kids! Don’t eat too much c____y.",
+          prefix: "c",
+          suffix: "y",
+          fullAns: "candy",
+          translation: "嘿孩子們！不要吃太多糖果。",
+          points: 2,
+          explanation: "【不可數名詞】too much 修飾不可數名詞，糖果作為整體名詞時不可數，故填 candy。",
+          pitfall: "因為前面是 too much，絕對不可填複數 candies！這是八年級高頻考點。"
+        }
+      ],
+
+      grammar: [
+        {
+          id: 'g1',
+          num: 1,
+          question: "Betty seldom ________ her story with people ________ she is shy.",
+          options: [
+            "(A) shared; because",
+            "(B) shared; so",
+            "(C) shares; because",
+            "(D) shares; so"
+          ],
+          ans: "C",
+          points: 2,
+          translation: "Betty 很少與人分享她的故事，因為她很害羞。",
+          explanation: "【頻率副詞時態 ＋ 因果連接詞】<br>1. 頻率副詞 seldom（很少）表示現階段的生活習慣或個性特質，應使用現在簡單式。主詞 Betty 為第三人稱單數，動詞 share 需加 s 變成 <b>shares</b>。<br>2. 後句「she is shy（她害羞）」是「很少分享」的原因，因此用表原因的從屬連接詞 <b>because</b> 引導。",
+          wrongOptions: {
+            A: "shared 是過去式，seldom 描述平日習慣應用現在式。",
+            B: "shared 時態錯誤，且 so 是引導結果，前後因果顛倒。",
+            D: "so 引導結果，語意變成「所以她害羞」，邏輯錯誤。"
+          }
+        },
+        {
+          id: 'g2',
+          num: 2,
+          question: "My father always jumped rope in the morning ________. He lost 20 kg that year.",
+          options: [
+            "(A) now",
+            "(B) this morning",
+            "(C) next year",
+            "(D) two years ago"
+          ],
+          ans: "D",
+          points: 2,
+          translation: "我父親兩年前總是在早上跳繩。他那一年減掉了20公斤。",
+          explanation: "【過去時間副詞判斷】<br>句子動詞為 <b>jumped</b>（過去式），後文又有補充「He lost 20 kg that year.（那一年他瘦了20公斤）」，表示這是一段發生在過去的特定經歷，四個選項中只有 (D) <b>two years ago</b>（兩年前）是明確的過去時間副詞。",
+          wrongOptions: {
+            A: "now 表示現在，需搭配現在式或現在進行式。",
+            B: "this morning 雖可搭過去式，但與後文 that year（那一年）矛盾。",
+            C: "next year 為未來時間，不可搭配 jumped 過去式。"
+          }
+        },
+        {
+          id: 'g3',
+          num: 3,
+          question: "Benson: Where ________ you yesterday?<br>Teddy: We ________ a trip to the Chimei Museum.",
+          options: [
+            "(A) was; took",
+            "(B) was; take",
+            "(C) were; take",
+            "(D) were; took"
+          ],
+          ans: "D",
+          points: 2,
+          translation: "Benson：你們昨天去哪裡了？<br>Teddy：我們去奇美博物館旅行了。",
+          explanation: "【Be動詞與一般動詞過去式】<br>1. 問句有時間副詞 <b>yesterday</b>，主詞為第二人稱 <b>you</b>，其過去式 Be 動詞一律為 <b>were</b>（不可用 was）。<br>2. 答句回答昨天的活動，take a trip 的動詞 take 過去式為不規則變化 <b>took</b>。",
+          wrongOptions: {
+            A: "主詞 you 搭配的 be 動詞過去式是 were，不能用 was。",
+            B: "was 錯誤，且答句 take 漏改為過去式 took。",
+            C: "答句敘述昨日行程，一般動詞必須用過去式 took，不可用原形 take。"
+          }
+        },
+        {
+          id: 'g4',
+          num: 4,
+          question: "What ________ to Zoe? ________ is she so sad?",
+          options: [
+            "(A) happen; Why",
+            "(B) happen; How",
+            "(C) happened; Why",
+            "(D) happened; How"
+          ],
+          ans: "C",
+          points: 2,
+          translation: "Zoe 發生了什麼事？她為什麼這麼難過？",
+          explanation: "【常用句型與疑問詞】<br>1. 慣用語「某人發生了什麼事」通常為已發生的事，慣用過去式 <b>What happened to sb.?</b>。<br>2. 第二句詢問她如此悲傷的「原因」，疑問詞選 <b>Why</b>（為什麼）。",
+          wrongOptions: {
+            A: "happen 需用過去式 happened，且主詞若為第三人稱即使現在式也需加 s。",
+            B: "happen 時態錯誤，How 是詢問方式或狀態，與句意不合。",
+            D: "How is she so sad 語意不通順，應問 Why is she so sad（她為何這麼難過）。"
+          }
+        },
+        {
+          id: 'g5',
+          num: 5,
+          question: "Oliver is angry with us. He walked out of the classroom ________ a word.",
+          options: [
+            "(A) after",
+            "(B) along",
+            "(C) without",
+            "(D) through"
+          ],
+          ans: "C",
+          points: 2,
+          translation: "Oliver 在生我們的氣。他一句話也沒說就走出了教室。",
+          explanation: "【介系詞慣用語】<br>片語 <b>without a word</b> 意為「不發一語、一句話也沒說」。介系詞 <b>without</b> 表「沒有、未...」。前句提到他在生氣，符合負氣不說話走人的情境。",
+          wrongOptions: {
+            A: "after a word 語意不符邏輯。",
+            B: "along 表「沿著」，例如 along the river。",
+            D: "through 表「穿過、通過」，例如 through the door。"
+          }
+        },
+        {
+          id: 'g6',
+          num: 6,
+          question: "I just ________ my homework. I can play games now!",
+          options: [
+            "(A) finish",
+            "(B) finished",
+            "(C) finishes",
+            "(D) am finishing"
+          ],
+          ans: "B",
+          points: 2,
+          translation: "我剛剛完成了作業。我現在可以玩遊戲了！",
+          explanation: "【副詞 just 的時態應用】<br>副詞 <b>just</b> 作為「剛才、方才」解釋時，修飾已經完成的動作，搭配<b>過去簡單式</b> <b>finished</b>。後句「I can play games now!」印證作業已經寫完。",
+          wrongOptions: {
+            A: "現在簡單式 finish 表習慣，無法表達「剛剛才完成」的意思。",
+            C: "主詞是 I，不能加 -es，且時態不符。",
+            D: "am finishing（正在完成中）若作業還在寫，現在就不能玩遊戲。"
+          }
+        },
+        {
+          id: 'g7',
+          num: 7,
+          question: "________ Lydia’s house is far from school, ________ she gets up early.",
+          options: [
+            "(A) Because; so",
+            "(B) So; ×",
+            "(C) Because; and",
+            "(D) Because; ×"
+          ],
+          ans: "D",
+          points: 2,
+          translation: "因為 Lydia 的家離學校很遠，她起得很早。",
+          explanation: "【拔尖天王級陷阱題：Because 與 so 的不可兼存性】<br>中文口語常講「因為...所以...」，但在英文文法中，because 是從屬連接詞，so 是對等連接詞，<b>連接兩個子句時只能用一個連接詞！</b>絕不可同時出現 Because... so...。<br>因此句首使用 Because，主要子句前不可再加任何連接詞（選 ×）。",
+          wrongOptions: {
+            A: "嚴重大忌！英文中 because 和 so 絕對不能出現在同一個句子裡！",
+            B: "So 不能放在句首連接原因子句，so 是引導結果。",
+            C: "and 是對等連接詞，與 because 並用文法錯誤。"
+          }
+        },
+        {
+          id: 'g8',
+          num: 8,
+          question: "Judy ________ a lot last year.",
+          options: [
+            "(A) jog",
+            "(B) jogs",
+            "(C) jogged",
+            "(D) is jogging"
+          ],
+          ans: "C",
+          points: 2,
+          translation: "Judy 去年慢跑了很多次。",
+          explanation: "【短母音加單子音之過去式雙寫字尾】<br>時間副詞為 <b>last year</b>（去年），動詞必須用過去式。jog 屬於「單一短母音 (o) + 單一子音 (g)」，形成過去式時必須<b>重複字尾 g 再加 ed</b>，即 <b>jogged</b>。",
+          wrongOptions: {
+            A: "原形動詞不可用於過去時間 last year。",
+            B: "現在式單數動詞，無法與 last year 連用。",
+            D: "現在進行式，表當下正在進行，無法與 last year 連用。"
+          }
+        },
+        {
+          id: 'g9',
+          num: 9,
+          question: "Alex ________ in the library last Thursday.",
+          options: [
+            "(A) study",
+            "(B) studies",
+            "(C) is studying",
+            "(D) studied"
+          ],
+          ans: "D",
+          points: 2,
+          translation: "Alex 上週四在圖書館研讀。",
+          explanation: "【子音+y的過去式去y加ied】<br>時間副詞為 <b>last Thursday</b>（上週四），表示過去事實。動詞 study 字尾為「子音 (d) + y」，改為過去式時需<b>去 y 改 ied</b>，即 <b>studied</b>。",
+          wrongOptions: {
+            A: "原形動詞，時態不符。",
+            B: "現在簡單式，時態不符。",
+            C: "現在進行式，時態不符。"
+          }
+        },
+        {
+          id: 'g10',
+          num: 10,
+          question: "The baby ________ every night, ________ I can’t sleep well.",
+          options: [
+            "(A) cries; so",
+            "(B) cries; because",
+            "(C) cried; because",
+            "(D) cried; ×"
+          ],
+          ans: "A",
+          points: 2,
+          translation: "這嬰兒每天晚上都在哭，所以我睡不好。",
+          explanation: "【現在簡單式三單規則 ＋ 因果連接詞】<br>1. 時間副詞為 <b>every night</b>（每晚），表示規律習慣，用現在簡單式。主詞 The baby 為單數，動詞 cry 去 y 加 ies 變成 <b>cries</b>。<br>2. 前半句「嬰兒在哭」是原因，後半句「我睡不好」是結果，引導結果需用對等連接詞 <b>so</b>（因此）。",
+          wrongOptions: {
+            B: "because 是引導原因，填入會使句子變成「嬰兒哭是因為我睡不好」，因果邏輯倒置。",
+            C: "cried 過去式與 every night 習慣時態矛盾，且 because 邏輯錯誤。",
+            D: "若無連接詞，兩個完整子句以逗號直接連接會犯 Run-on sentence 錯誤。"
+          }
+        }
+      ],
+
+      sentence: [
+        {
+          id: 's1',
+          num: 1,
+          prompt: "Andy went to work by car because it was rainy today. （改為 ...so...）",
+          standardAns: "It was rainy today, so Andy went to work by car.",
+          points: 5,
+          grammarFocus: "because 句型 ⇄ so 句型的對調互換",
+          analysis: "原句結構為「結果 (Andy went to work by car) + because + 原因 (it was rainy today)」。改用 so 時，句型公式為「<b>原因, so + 結果</b>」。<br>• 注意：so 前方必須有<b>逗號 (,)</b>。<br>• 注意：句首 It 首字母必須大寫，後方 Andy 專有名詞維持大寫。"
+        },
+        {
+          id: 's2',
+          num: 2,
+          prompt: "Becky rides a bike and jogs in the park. （加入 yesterday 改寫句子）",
+          standardAns: "Becky rode a bike and jogged in the park yesterday.",
+          points: 5,
+          grammarFocus: "過去簡單式：and 對等連接詞雙動詞時態一致",
+          analysis: "加入 yesterday 後整句時態轉為過去簡單式。句中有兩個由 and 連接的動作：<br>1. rides ➜ 轉為不規則過去式 <b>rode</b>。<br>2. jogs ➜ 轉為重複字尾的過去式 <b>jogged</b>。<br>⚠️ 拔尖警示：段考此題最常見失分就是只改了前面 rode，後面忘記改 jogged！"
+        },
+        {
+          id: 's3',
+          num: 3,
+          prompt: "Jay helped the young woman <u>in front of the bank</u>. （依畫線部分造原問句）",
+          standardAns: "Where did Jay help the young woman?",
+          points: 5,
+          grammarFocus: "Wh-疑問詞造句法（地點疑問詞 Where ＋ 助動詞 did ＋ 原形動詞）",
+          analysis: "拆解三步驟：<br>1. 畫線部分為地點介系詞片語「in front of the bank」，疑問詞使用 <b>Where</b>。<br>2. 原句動詞 helped 是過去式一般動詞，造原問句需藉助過去式助動詞 <b>did</b>。<br>3. 助動詞 did 後方動詞必須<b>還原為原形動詞 help</b>。<br>記得最後打問號 (<b>?</b>)。"
+        }
+      ],
+
+      translation: [
+        {
+          id: 't1',
+          num: 1,
+          chinese: "人們用喜悅的心情慶祝亡靈節（the Day of the Dead）。",
+          standardAns: "People celebrate the Day of the Dead with joy.",
+          points: 5,
+          rubric: [
+            "主詞與動詞：People celebrate（現在式習慣/節慶） [2分]",
+            "受詞專有名詞：the Day of the Dead（注意首字母大寫與定冠詞） [1.5分]",
+            "介系詞片語：with joy（用喜悅的心情） [1.5分]"
+          ],
+          tips: "「用...的心情」英文介系詞用 with；joy 為名詞，不可寫成 with happy。"
+        },
+        {
+          id: 't2',
+          num: 2,
+          chinese: "因為她成為一位母親，所以她無法上學了。（Because...）",
+          standardAns: "Because she became a mother, she couldn’t go to school.",
+          altAns: "Because she became a mother, she could not go to school.",
+          points: 5,
+          rubric: [
+            "連接詞與原因子句：Because she became a mother（become 過去式 became） [2分]",
+            "逗號隔開兩子句，且**絕對不可出現 so** [1分]",
+            "主要子句：she couldn’t go to school（can't 過去式 couldn't） [2分]"
+          ],
+          tips: "拔尖警示：千千萬萬不能寫 Because... so...！另外注意時態為過去式（became、couldn't）。"
+        },
+        {
+          id: 't3',
+          num: 3,
+          chinese: "他賣掉了他的車子因為他很窮。他沒有任何選擇。",
+          standardAns: "He sold his car because he was very poor. He had no choice.",
+          altAns: "He sold his car because he was poor. He didn't have any choice.",
+          points: 5,
+          rubric: [
+            "前半句過去式：He sold his car（sell 過去式 sold） [1.5分]",
+            "原因子句：because he was very poor（過去式 be 動詞 was） [1.5分]",
+            "後半句固定片語：He had no choice.（have no choice 過去式 had） [2分]"
+          ],
+          tips: "留意不規則動詞變化：sell ➜ sold；have ➜ had。片語 have no choice（別無選擇）是國中進階極常考片語。"
+        }
+      ],
+
+      cloze: [
+        {
+          num: 1,
+          question: "The movie 1. with Miguel’s music dream.",
+          options: ["(A) start", "(B) starts", "(C) started", "(D) starting"],
+          ans: "B",
+          points: 2,
+          analysis: "介紹電影、小說等故事大綱時，英文習慣使用「現在簡單式」維持故事的臨場感。主詞 The movie 為第三人稱單數，動詞需加 s 變成 <b>starts</b>。"
+        },
+        {
+          num: 2,
+          question: "But, his family members 2. “No way!” to his music dream...",
+          options: ["(A) say", "(B) says", "(C) said", "(D) saying"],
+          ans: "A",
+          points: 2,
+          analysis: "承接前文以現在簡單式敘述劇情。主詞 his family members 為複數名詞，現在式動詞使用原形 <b>say</b>。"
+        },
+        {
+          num: 3,
+          question: "...to his music dream 3. music reminds them of Miguel’s dead great-great-grandfather.",
+          options: ["(A) ×", "(B) so", "(C) and", "(D) because"],
+          ans: "D",
+          points: 2,
+          analysis: "後方「音樂讓他們想起過世的曾曾祖父」是家人堅決反對的「原因」，引導原因副詞子句需用連接詞 <b>because</b>。"
+        },
+        {
+          num: 4,
+          question: "Miguel 4. out two things: first, Hector is his great-great-grandfather; second, Ernesto killed Hector...",
+          options: ["(A) find", "(B) finds", "(C) found", "(D) finding"],
+          ans: "B",
+          points: 2,
+          analysis: "全篇故事概要統一維持現在簡單式。主詞 Miguel 為第三人稱單數，動詞 find 加 s 變成 <b>finds</b>（片語 find out 意為「查明、發現」）。"
+        },
+        {
+          num: 5,
+          question: "This song reminds Coco 5. her father, Hector.",
+          options: ["(A) of", "(B) at", "(C) by", "(D) with"],
+          ans: "A",
+          points: 2,
+          analysis: "【國高中核心必備片語】<b>remind sb. of sth./sb.</b> 意為「使某人想起某事或某人」，固定搭配介系詞 <b>of</b>！本題是段考極具鑑別度的必考題。"
+        }
+      ],
+
+      reading: [
+        {
+          num: 1,
+          part: 1,
+          question: "Which is true about the chart?",
+          options: [
+            "(A) In Country A, men get married at around the age of 26 and women at around the age of 20.",
+            "(B) In Country B, men remarry at around the age of 35 and women at around the age of 30.",
+            "(C) In Country D, men get married at around the age of 32 and women at around the age of 30.",
+            "(D) In Country E, men remarry at around the age of 35 and women at around the age of 32."
+          ],
+          ans: "C",
+          points: 4,
+          analysis: "【圖表數據查核】<br>查閱 Country D：男性初婚年齡為 <b>32.5</b>（約 32-33 歲），女性初婚年齡為 <b>30.2</b>（約 30 歲）。選項 (C) 描述完全吻合！<br>其他選項勘誤：<br>• (A) A國男性初婚23.7，女性22.6，非26與20。<br>• (B) B國男性再婚41.4，女性34.2。<br>• (D) E國男性再婚49.2，女性40.3。"
+        },
+        {
+          num: 2,
+          part: 1,
+          question: "What is true about marriage in Country C?",
+          options: [
+            "(A) Men remarry at around 35 on average.",
+            "(B) Women get married at around 30 on average.",
+            "(C) Women remarry at around 40 on average.",
+            "(D) Men get married at around 30 on average."
+          ],
+          ans: "D",
+          points: 4,
+          analysis: "【特定國家數據鎖定】<br>鎖定 Country C：<br>• 男性初婚 (first marriage): <b>29.0</b> ➜ 約 30 歲 (around 30 on average)，故 (D) 正確。<br>• (A) 男性再婚為 39.2，非 35。<br>• (B) 女性初婚為 23.8，非 30。<br>• (C) 女性再婚為 34.5，非 40。"
+        },
+        {
+          num: 3,
+          part: 2,
+          question: "What is the reading mainly about?",
+          options: [
+            "(A) The farmers don’t look after the chocolate trees.",
+            "(B) The children in West Africa cannot fall down or cry.",
+            "(C) The chocolate we enjoy comes with hard work and terrible lives of children in West Africa.",
+            "(D) The chocolate in our hands comes from cocoa beans in West Africa."
+          ],
+          ans: "C",
+          points: 4,
+          analysis: "【主旨大意題 (Main Idea)】<br>整篇文章對比台灣孩子幸福地享用巧克力，與西非童工遭受拐賣、每天辛苦工作14小時、挨打虐待的殘酷現實。作者旨在讓讀者了解「我們享受的甜美巧克力背後是西非兒童的苦役與悲慘生活」。(D) 僅點出原料來源，未包含文章核心童工議題。"
+        },
+        {
+          num: 4,
+          part: 2,
+          question: "How is the life of children in Taiwan according to the reading?",
+          options: [
+            "(A) Children in Taiwan can make chocolate at home.",
+            "(B) Children in Taiwan go to school seven days a week.",
+            "(C) Parents in Taiwan make money from their children.",
+            "(D) Children in Taiwan go to school from Monday to Friday."
+          ],
+          ans: "D",
+          points: 4,
+          analysis: "【細節定位與詞彙轉換】<br>文章第一段提到：\"Children in Taiwan go to school around eight o’clock in the morning and go home after school on <b>weekdays</b>.\"<br>單字 <b>weekdays</b> 意指「平日、工作日」，即從週一至週五（<b>from Monday to Friday</b>），故選 (D)。"
+        },
+        {
+          num: 5,
+          part: 2,
+          question: "What do “human traffickers” do?",
+          options: [
+            "(A) They make money from selling kids.",
+            "(B) They pick cocoa fruit with children.",
+            "(C) They take the children home after work.",
+            "(D) They work with the kids and their parents."
+          ],
+          ans: "A",
+          points: 4,
+          analysis: "【語境推論生詞意】<br>第二段明確說明：\"human traffickers take kids away without telling their parents. Then, <b>they sell these children</b>.\"<br>在未告知父母的情況下帶走小孩並將其販賣換取金錢，因此 human traffickers（人口販子）的行為就是 <b>They make money from selling kids</b> (靠販賣兒童賺錢)。"
+        }
+      ]
+    };
+
+    // ==========================================
+    // APPLICATION STATE
+    // ==========================================
+    let currentMode = 'review'; // 'review' or 'quiz'
+    let userAnswers = {};
+    let bookmarkedIds = new Set();
+
+    // ==========================================
+    // INITIALIZATION & RENDER
+    // ==========================================
+    window.addEventListener('DOMContentLoaded', () => {
+      renderAllSections();
+      lucide.createIcons();
+    });
+
+    function setAppMode(mode) {
+      currentMode = mode;
+      const reviewBtn = document.getElementById('btn-mode-review');
+      const quizBtn = document.getElementById('btn-mode-quiz');
+      const floatingPanel = document.getElementById('quiz-floating-panel');
+
+      if (mode === 'review') {
+        reviewBtn.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all shadow-xs bg-white text-sky-700";
+        quizBtn.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all text-slate-600 hover:text-slate-900";
+        floatingPanel.classList.add('hidden');
+      } else {
+        quizBtn.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all shadow-xs bg-sky-700 text-white";
+        reviewBtn.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all text-slate-600 hover:text-slate-900";
+        floatingPanel.classList.remove('hidden');
+      }
+      renderAllSections();
+      updateQuizStats();
+      lucide.createIcons();
+    }
+
+    // Toggle Modal
+    function toggleKeyGrammarModal() {
+      const modal = document.getElementById('grammar-modal');
+      modal.classList.toggle('hidden');
+    }
+
+    // Text to Speech
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); // stop previous
+        // clean text
+        const clean = text.replace(/\[.*?\]/g, '').replace(/[\(\)]/g, '');
+        const utterance = new SpeechSynthesisUtterance(clean);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert('您的瀏覽器不支援語音合成朗讀功能');
+      }
+    }
+
+    // ==========================================
+    // RENDER FUNCTIONS
+    // ==========================================
+
+    function renderAllSections() {
+      renderVocabSection();
+      renderGrammarSection();
+      renderSentenceSection();
+      renderTranslationSection();
+      renderClozeSection();
+      renderReadingSection();
+    }
+
+    // 1. 文意字彙
+    function renderVocabSection() {
+      const container = document.getElementById('vocab-container');
+      container.innerHTML = examData.vocab.map(item => {
+        const isRevealed = userAnswers[`vocab_revealed_${item.id}`] || currentMode === 'review';
+        const userVal = userAnswers[`vocab_${item.id}`] || '';
+        const isCorrect = userVal.trim().toLowerCase() === item.word.toLowerCase();
+
+        return `
+          <div class="p-4 rounded-2xl border ${isRevealed ? 'border-sky-100 bg-sky-50/20' : 'border-slate-200 bg-white'} hover:shadow-xs transition space-y-3">
+            <div class="flex items-start justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-sky-100 text-sky-800 text-xs font-bold flex items-center justify-center font-mono">
+                  ${item.num}
+                </span>
+                <span class="text-xs font-semibold text-slate-500">2 分</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button onclick="speakText('${item.word}')" title="朗讀單字" class="p-1 rounded-md text-slate-400 hover:text-sky-600 hover:bg-sky-50">
+                  <i data-lucide="volume-2" class="w-4 h-4"></i>
+                </button>
+                <button onclick="toggleItemReveal('vocab_${item.id}')" title="查看答案與解析" class="p-1 rounded-md text-slate-400 hover:text-amber-600 hover:bg-amber-50">
+                  <i data-lucide="${isRevealed ? 'eye-off' : 'eye'}" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Stem -->
+            <div class="text-sm font-medium text-slate-800 leading-relaxed">
+              ${item.stem}
+            </div>
+
+            <!-- Interactive Input / Display -->
+            <div class="pt-1 flex items-center gap-2">
+              <div class="relative flex-1">
+                <input type="text" 
+                  id="input-vocab-${item.id}"
+                  value="${userVal}"
+                  placeholder="請拼出單字 (例: ${item.word})"
+                  oninput="handleVocabInput('${item.id}', this.value)"
+                  class="w-full text-sm font-mono px-3 py-2 rounded-xl border ${userVal ? (isCorrect ? 'border-emerald-400 bg-emerald-50/30' : 'border-rose-400 bg-rose-50/30') : 'border-slate-200'} focus:outline-hidden focus:ring-2 focus:ring-sky-500"
+                />
+              </div>
+              ${isRevealed ? `
+                <div class="px-3 py-1.5 rounded-xl bg-sky-600 text-white font-mono font-bold text-xs sm:text-sm shadow-xs flex items-center gap-1">
+                  <span>${item.word}</span>
+                </div>
+              ` : `
+                <button onclick="checkSingleVocab('${item.id}')" class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-sky-50 hover:text-sky-600 text-slate-600 text-xs font-bold transition">
+                  核對
+                </button>
+              `}
+            </div>
+
+            <!-- Explanation Box -->
+            ${isRevealed ? `
+              <div class="explanation-box p-3 rounded-xl bg-white border border-sky-100 text-xs space-y-2 mt-2">
+                <div class="flex items-center gap-1.5 text-sky-800 font-bold">
+                  <i data-lucide="info" class="w-3.5 h-3.5"></i>
+                  <span>中文翻譯：${item.translation}</span>
+                </div>
+                <div class="text-slate-600 leading-relaxed">${item.explanation}</div>
+                <div class="p-2 rounded-lg bg-amber-50 border border-amber-200/60 text-amber-900 flex items-start gap-1.5">
+                  <i data-lucide="alert-circle" class="w-3.5 h-3.5 text-amber-600 mt-0.5 flex-shrink-0"></i>
+                  <span><strong>拔尖警示：</strong>${item.pitfall}</span>
+                </div>
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 2. 語法選擇
+    function renderGrammarSection() {
+      const container = document.getElementById('grammar-container');
+      container.innerHTML = examData.grammar.map(item => {
+        const isRevealed = userAnswers[`grammar_revealed_${item.id}`] || currentMode === 'review';
+        const userChoice = userAnswers[`grammar_${item.id}`] || '';
+        const isCorrect = userChoice === item.ans;
+
+        return `
+          <div class="p-4 sm:p-5 rounded-2xl border ${isRevealed ? 'border-indigo-100 bg-indigo-50/10' : 'border-slate-200 bg-white'} space-y-4 hover:shadow-xs transition">
+            <div class="flex items-start justify-between gap-3">
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-indigo-100 text-indigo-800 text-xs font-bold flex items-center justify-center font-mono">
+                  ${item.num}
+                </span>
+                <span class="text-xs font-semibold text-slate-500">2 分</span>
+                ${isRevealed ? `
+                  <span class="px-2 py-0.5 rounded font-mono font-bold text-xs ${isCorrect ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' : 'bg-rose-100 text-rose-800 border border-rose-300'}">
+                    正確答案: (${item.ans})
+                  </span>
+                ` : ''}
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button onclick="speakText('${item.question.replace(/<[^>]*>?/gm, '').replace(/_+/g, 'blank')}')" title="朗讀題目" class="p-1 rounded-md text-slate-400 hover:text-indigo-600 hover:bg-indigo-50">
+                  <i data-lucide="volume-2" class="w-4 h-4"></i>
+                </button>
+                <button onclick="toggleItemReveal('grammar_${item.id}')" title="查看答案與解析" class="p-1 rounded-md text-slate-400 hover:text-amber-600 hover:bg-amber-50">
+                  <i data-lucide="${isRevealed ? 'eye-off' : 'eye'}" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Question Stem -->
+            <div class="text-sm sm:text-base font-semibold text-slate-900 leading-relaxed">
+              ${item.question}
+            </div>
+
+            <!-- Options Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              ${item.options.map(opt => {
+                const optLetter = opt.charAt(1); // 'A', 'B', 'C', 'D'
+                const isSelected = userChoice === optLetter;
+                let optBtnStyle = "border-slate-200 bg-white hover:bg-slate-50 text-slate-700";
+
+                if (isSelected) {
+                  optBtnStyle = isRevealed 
+                    ? (optLetter === item.ans ? "border-emerald-500 bg-emerald-50 text-emerald-900 font-bold ring-2 ring-emerald-500" : "border-rose-500 bg-rose-50 text-rose-900 font-bold ring-2 ring-rose-500")
+                    : "border-indigo-600 bg-indigo-50 text-indigo-900 font-bold ring-2 ring-indigo-500";
+                } else if (isRevealed && optLetter === item.ans) {
+                  optBtnStyle = "border-emerald-500 bg-emerald-50/70 text-emerald-900 font-bold";
+                }
+
+                return `
+                  <button onclick="selectGrammarOption('${item.id}', '${optLetter}')" class="p-3 text-left rounded-xl border text-xs sm:text-sm transition flex items-center justify-between ${optBtnStyle}">
+                    <span>${opt}</span>
+                    ${isRevealed && optLetter === item.ans ? `<i data-lucide="check" class="w-4 h-4 text-emerald-600"></i>` : ''}
+                    ${isRevealed && isSelected && optLetter !== item.ans ? `<i data-lucide="x" class="w-4 h-4 text-rose-600"></i>` : ''}
+                  </button>
+                `;
+              }).join('')}
+            </div>
+
+            <!-- Detailed Explanation Box -->
+            ${isRevealed ? `
+              <div class="explanation-box p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-2 mt-2">
+                <div class="text-slate-600 font-medium"><b>中譯：</b>${item.translation}</div>
+                <div class="text-slate-700 leading-relaxed">${item.explanation}</div>
+                <div class="pt-2 border-t border-slate-200 space-y-1 text-slate-500">
+                  <div class="font-bold text-slate-700">選項錯因解析：</div>
+                  ${Object.entries(item.wrongOptions).map(([key, reason]) => `
+                    <div><b class="text-rose-600">(${key})</b> ${reason}</div>
+                  `).join('')}
+                </div>
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 3. 依提示作答
+    function renderSentenceSection() {
+      const container = document.getElementById('sentence-container');
+      container.innerHTML = examData.sentence.map(item => {
+        const isRevealed = userAnswers[`sentence_revealed_${item.id}`] || currentMode === 'review';
+        const userVal = userAnswers[`sentence_${item.id}`] || '';
+
+        return `
+          <div class="p-4 sm:p-5 rounded-2xl border ${isRevealed ? 'border-emerald-100 bg-emerald-50/10' : 'border-slate-200 bg-white'} space-y-3 hover:shadow-xs transition">
+            <div class="flex items-start justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-800 text-xs font-bold flex items-center justify-center font-mono">
+                  ${item.num}
+                </span>
+                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                  5 分
+                </span>
+                <span class="text-xs text-slate-500">${item.grammarFocus}</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button onclick="toggleItemReveal('sentence_${item.id}')" title="查看答案與解析" class="p-1 rounded-md text-slate-400 hover:text-amber-600 hover:bg-amber-50">
+                  <i data-lucide="${isRevealed ? 'eye-off' : 'eye'}" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Prompt -->
+            <div class="text-sm sm:text-base font-semibold text-slate-900 leading-relaxed">
+              ${item.prompt}
+            </div>
+
+            <!-- Student text input -->
+            <div class="space-y-2">
+              <textarea 
+                rows="2"
+                placeholder="在此輸入您的改寫句子..."
+                oninput="handleSentenceInput('${item.id}', this.value)"
+                class="w-full text-xs sm:text-sm font-mono px-3 py-2 rounded-xl border border-slate-200 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 bg-slate-50/50"
+              >${userVal}</textarea>
+            </div>
+
+            <!-- Standard Answer & Rubric -->
+            ${isRevealed ? `
+              <div class="explanation-box p-4 rounded-xl bg-white border border-emerald-200 text-xs space-y-2.5">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-emerald-900 flex items-center gap-1.5">
+                    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
+                    標準解答：
+                  </span>
+                  <button onclick="speakText('${item.standardAns}')" class="text-sky-600 hover:text-sky-800 flex items-center gap-1 font-semibold">
+                    <i data-lucide="volume-2" class="w-3.5 h-3.5"></i> 朗讀
+                  </button>
+                </div>
+                <div class="p-2.5 rounded-lg bg-emerald-50 font-mono text-emerald-900 font-bold text-sm">
+                  ${item.standardAns}
+                </div>
+                <div class="text-slate-600 leading-relaxed">
+                  ${item.analysis}
+                </div>
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 4. 翻譯
+    function renderTranslationSection() {
+      const container = document.getElementById('translation-container');
+      container.innerHTML = examData.translation.map(item => {
+        const isRevealed = userAnswers[`translation_revealed_${item.id}`] || currentMode === 'review';
+        const userVal = userAnswers[`translation_${item.id}`] || '';
+
+        return `
+          <div class="p-4 sm:p-5 rounded-2xl border ${isRevealed ? 'border-purple-100 bg-purple-50/10' : 'border-slate-200 bg-white'} space-y-3 hover:shadow-xs transition">
+            <div class="flex items-start justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-purple-100 text-purple-800 text-xs font-bold flex items-center justify-center font-mono">
+                  ${item.num}
+                </span>
+                <span class="text-xs font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200">
+                  5 分
+                </span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button onclick="toggleItemReveal('translation_${item.id}')" title="查看答案與解析" class="p-1 rounded-md text-slate-400 hover:text-amber-600 hover:bg-amber-50">
+                  <i data-lucide="${isRevealed ? 'eye-off' : 'eye'}" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Chinese Stem -->
+            <div class="text-sm sm:text-base font-bold text-slate-900 leading-relaxed">
+              ${item.chinese}
+            </div>
+
+            <!-- Student Input -->
+            <div class="space-y-2">
+              <textarea 
+                rows="2"
+                placeholder="在此練習輸入英文翻譯句子..."
+                oninput="handleTranslationInput('${item.id}', this.value)"
+                class="w-full text-xs sm:text-sm font-mono px-3 py-2 rounded-xl border border-slate-200 focus:outline-hidden focus:ring-2 focus:ring-purple-500 bg-slate-50/50"
+              >${userVal}</textarea>
+            </div>
+
+            <!-- Solution & Rubric -->
+            ${isRevealed ? `
+              <div class="explanation-box p-4 rounded-xl bg-white border border-purple-200 text-xs space-y-2.5">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-purple-900 flex items-center gap-1.5">
+                    <i data-lucide="check-circle" class="w-4 h-4 text-purple-600"></i>
+                    參考標準翻譯：
+                  </span>
+                  <button onclick="speakText('${item.standardAns}')" class="text-sky-600 hover:text-sky-800 flex items-center gap-1 font-semibold">
+                    <i data-lucide="volume-2" class="w-3.5 h-3.5"></i> 朗讀
+                  </button>
+                </div>
+                <div class="p-2.5 rounded-lg bg-purple-50 font-mono text-purple-950 font-bold text-sm">
+                  ${item.standardAns}
+                </div>
+                <div class="space-y-1 text-slate-600">
+                  <span class="font-bold text-slate-800">採分拆解與評分點：</span>
+                  <ul class="list-disc list-inside space-y-1 text-slate-700">
+                    ${item.rubric.map(r => `<li>${r}</li>`).join('')}
+                  </ul>
+                </div>
+                <div class="p-2 rounded-lg bg-amber-50 border border-amber-200/60 text-amber-900 flex items-start gap-1.5">
+                  <i data-lucide="alert-circle" class="w-3.5 h-3.5 text-amber-600 mt-0.5 flex-shrink-0"></i>
+                  <span><strong>名師溫馨叮嚀：</strong>${item.tips}</span>
+                </div>
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 5. 克漏字
+    function renderClozeSection() {
+      const container = document.getElementById('cloze-questions-container');
+      container.innerHTML = examData.cloze.map(item => {
+        const isRevealed = userAnswers[`cloze_revealed_${item.num}`] || currentMode === 'review';
+        const userChoice = userAnswers[`cloze_${item.num}`] || '';
+        const isCorrect = userChoice === item.ans;
+
+        return `
+          <div class="p-4 rounded-2xl border ${isRevealed ? 'border-amber-100 bg-amber-50/10' : 'border-slate-200 bg-white'} space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-amber-100 text-amber-800 text-xs font-bold flex items-center justify-center font-mono">
+                  ${item.num}
+                </span>
+                <span class="text-xs font-semibold text-slate-500">2 分</span>
+              </div>
+              <button onclick="toggleItemReveal('cloze_${item.num}')" title="查看答案與解析" class="p-1 rounded-md text-slate-400 hover:text-amber-600">
+                <i data-lucide="${isRevealed ? 'eye-off' : 'eye'}" class="w-4 h-4"></i>
+              </button>
+            </div>
+
+            <!-- Options -->
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              ${item.options.map(opt => {
+                const optLetter = opt.charAt(1);
+                const isSelected = userChoice === optLetter;
+                let style = "border-slate-200 bg-white hover:bg-slate-50 text-slate-700";
+
+                if (isSelected) {
+                  style = isRevealed
+                    ? (optLetter === item.ans ? "border-emerald-500 bg-emerald-50 text-emerald-900 font-bold" : "border-rose-500 bg-rose-50 text-rose-900 font-bold")
+                    : "border-amber-500 bg-amber-50 text-amber-900 font-bold ring-2 ring-amber-400";
+                } else if (isRevealed && optLetter === item.ans) {
+                  style = "border-emerald-500 bg-emerald-50 text-emerald-900 font-bold";
+                }
+
+                return `
+                  <button onclick="selectClozeOption(${item.num}, '${optLetter}')" class="p-2 text-left rounded-xl border transition ${style}">
+                    ${opt}
+                  </button>
+                `;
+              }).join('')}
+            </div>
+
+            <!-- Explanation -->
+            ${isRevealed ? `
+              <div class="explanation-box p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-1">
+                <div class="font-bold text-amber-800">答案：(${item.ans})</div>
+                <div class="text-slate-600 leading-relaxed">${item.analysis}</div>
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 6. 閱讀測驗
+    function renderReadingSection() {
+      // Part 1: Chart (Q1, Q2)
+      const p1Container = document.getElementById('reading-part1-container');
+      const p1Items = examData.reading.filter(q => q.part === 1);
+      p1Container.innerHTML = p1Items.map(item => renderReadingCard(item)).join('');
+
+      // Part 2: Cocoa (Q3, Q4, Q5)
+      const p2Container = document.getElementById('reading-part2-container');
+      const p2Items = examData.reading.filter(q => q.part === 2);
+      p2Container.innerHTML = p2Items.map(item => renderReadingCard(item)).join('');
+    }
+
+    function renderReadingCard(item) {
+      const isRevealed = userAnswers[`reading_revealed_${item.num}`] || currentMode === 'review';
+      const userChoice = userAnswers[`reading_${item.num}`] || '';
+      const isCorrect = userChoice === item.ans;
+
+      return `
+        <div class="p-4 rounded-2xl border ${isRevealed ? 'border-rose-100 bg-rose-50/10' : 'border-slate-200 bg-white'} space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-lg bg-rose-100 text-rose-800 text-xs font-bold flex items-center justify-center font-mono">
+                ${item.num}
+              </span>
+              <span class="text-xs font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200">
+                4 分
+              </span>
+              ${isRevealed ? `
+                <span class="font-mono text-xs font-bold ${isCorrect ? 'text-emerald-700' : 'text-rose-700'}">
+                  答案: (${item.ans})
+                </span>
+              ` : ''}
+            </div>
+            <button onclick="toggleItemReveal('reading_${item.num}')" title="查看答案與解析" class="p-1 rounded-md text-slate-400 hover:text-amber-600">
+              <i data-lucide="${isRevealed ? 'eye-off' : 'eye'}" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <div class="text-xs sm:text-sm font-semibold text-slate-900 leading-relaxed">
+            ${item.question}
+          </div>
+
+          <div class="space-y-1.5">
+            ${item.options.map(opt => {
+              const optLetter = opt.charAt(1);
+              const isSelected = userChoice === optLetter;
+              let style = "border-slate-200 bg-white hover:bg-slate-50 text-slate-700";
+
+              if (isSelected) {
+                style = isRevealed
+                  ? (optLetter === item.ans ? "border-emerald-500 bg-emerald-50 text-emerald-900 font-bold" : "border-rose-500 bg-rose-50 text-rose-900 font-bold")
+                  : "border-rose-500 bg-rose-50 text-rose-900 font-bold ring-2 ring-rose-400";
+              } else if (isRevealed && optLetter === item.ans) {
+                style = "border-emerald-500 bg-emerald-50 text-emerald-900 font-bold";
+              }
+
+              return `
+                <button onclick="selectReadingOption(${item.num}, '${optLetter}')" class="w-full p-2.5 text-left rounded-xl border text-xs leading-relaxed transition ${style}">
+                  ${opt}
+                </button>
+              `;
+            }).join('')}
+          </div>
+
+          ${isRevealed ? `
+            <div class="explanation-box p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-1.5">
+              <div class="text-slate-700 leading-relaxed">${item.analysis}</div>
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    // ==========================================
+    // INTERACTION HANDLERS
+    // ==========================================
+
+    function toggleItemReveal(key) {
+      userAnswers[`${key}_revealed`] = !userAnswers[`${key}_revealed`];
+      renderAllSections();
+      lucide.createIcons();
+    }
+
+    function revealSection(sec) {
+      if (sec === 'vocab') {
+        examData.vocab.forEach(v => userAnswers[`vocab_revealed_${v.id}`] = true);
+      } else if (sec === 'grammar') {
+        examData.grammar.forEach(g => userAnswers[`grammar_revealed_${g.id}`] = true);
+      } else if (sec === 'sentence') {
+        examData.sentence.forEach(s => userAnswers[`sentence_revealed_${s.id}`] = true);
+      } else if (sec === 'translation') {
+        examData.translation.forEach(t => userAnswers[`translation_revealed_${t.id}`] = true);
+      } else if (sec === 'cloze') {
+        examData.cloze.forEach(c => userAnswers[`cloze_revealed_${c.num}`] = true);
+      } else if (sec === 'reading') {
+        examData.reading.forEach(r => userAnswers[`reading_revealed_${r.num}`] = true);
+      }
+      renderAllSections();
+      lucide.createIcons();
+    }
+
+    function handleVocabInput(id, val) {
+      userAnswers[`vocab_${id}`] = val;
+      updateQuizStats();
+    }
+
+    function checkSingleVocab(id) {
+      userAnswers[`vocab_revealed_${id}`] = true;
+      renderVocabSection();
+      lucide.createIcons();
+    }
+
+    function selectGrammarOption(id, opt) {
+      userAnswers[`grammar_${id}`] = opt;
+      updateQuizStats();
+      renderGrammarSection();
+      lucide.createIcons();
+    }
+
+    function handleSentenceInput(id, val) {
+      userAnswers[`sentence_${id}`] = val;
+      updateQuizStats();
+    }
+
+    function handleTranslationInput(id, val) {
+      userAnswers[`translation_${id}`] = val;
+      updateQuizStats();
+    }
+
+    function selectClozeOption(num, opt) {
+      userAnswers[`cloze_${num}`] = opt;
+      updateQuizStats();
+      renderClozeSection();
+      lucide.createIcons();
+    }
+
+    function selectReadingOption(num, opt) {
+      userAnswers[`reading_${num}`] = opt;
+      updateQuizStats();
+      renderReadingSection();
+      lucide.createIcons();
+    }
+
+    // ==========================================
+    // QUIZ SCORING & LOGIC
+    // ==========================================
+
+    function updateQuizStats() {
+      let totalQuestions = 10 + 10 + 3 + 3 + 5 + 5; // 36 questions
+      let answeredCount = 0;
+      let score = 0;
+      let correctCount = 0;
+
+      // 1. Vocab (20 pts)
+      examData.vocab.forEach(v => {
+        const ans = userAnswers[`vocab_${v.id}`];
+        if (ans && ans.trim()) {
+          answeredCount++;
+          if (ans.trim().toLowerCase() === v.word.toLowerCase()) {
+            score += v.points;
+            correctCount++;
+          }
+        }
+      });
+
+      // 2. Grammar (20 pts)
+      examData.grammar.forEach(g => {
+        const choice = userAnswers[`grammar_${g.id}`];
+        if (choice) {
+          answeredCount++;
+          if (choice === g.ans) {
+            score += g.points;
+            correctCount++;
+          }
+        }
+      });
+
+      // 3. Sentence (15 pts) - check non-empty
+      examData.sentence.forEach(s => {
+        const val = userAnswers[`sentence_${s.id}`];
+        if (val && val.trim()) {
+          answeredCount++;
+          // auto-credit if exactly matches standard (loose ignore case and trailing period)
+          const cleanUser = val.trim().replace(/\.+$/, '').toLowerCase();
+          const cleanStd = s.standardAns.trim().replace(/\.+$/, '').toLowerCase();
+          if (cleanUser === cleanStd) {
+            score += s.points;
+            correctCount++;
+          }
+        }
+      });
+
+      // 4. Translation (15 pts)
+      examData.translation.forEach(t => {
+        const val = userAnswers[`translation_${t.id}`];
+        if (val && val.trim()) {
+          answeredCount++;
+          const cleanUser = val.trim().replace(/\.+$/, '').toLowerCase();
+          const cleanStd = t.standardAns.trim().replace(/\.+$/, '').toLowerCase();
+          if (cleanUser === cleanStd) {
+            score += t.points;
+            correctCount++;
+          }
+        }
+      });
+
+      // 5. Cloze (10 pts)
+      examData.cloze.forEach(c => {
+        const choice = userAnswers[`cloze_${c.num}`];
+        if (choice) {
+          answeredCount++;
+          if (choice === c.ans) {
+            score += c.points;
+            correctCount++;
+          }
+        }
+      });
+
+      // 6. Reading (20 pts)
+      examData.reading.forEach(r => {
+        const choice = userAnswers[`reading_${r.num}`];
+        if (choice) {
+          answeredCount++;
+          if (choice === r.ans) {
+            score += r.points;
+            correctCount++;
+          }
+        }
+      });
+
+      const scoreEl = document.getElementById('quiz-current-score');
+      const ansEl = document.getElementById('quiz-answered-count');
+      const corEl = document.getElementById('quiz-correct-count');
+
+      if (scoreEl) scoreEl.innerText = score;
+      if (ansEl) ansEl.innerText = answeredCount;
+      if (corEl) corEl.innerText = correctCount;
+
+      return { score, answeredCount, correctCount, totalQuestions };
+    }
+
+    function checkAllQuizAnswers() {
+      // Reveal everything
+      revealSection('vocab');
+      revealSection('grammar');
+      revealSection('sentence');
+      revealSection('translation');
+      revealSection('cloze');
+      revealSection('reading');
+
+      const stats = updateQuizStats();
+
+      // Confetti if high score
+      if (stats.score >= 80 && typeof confetti === 'function') {
+        confetti({
+          particleCount: 120,
+          spread: 80,
+          origin: { y: 0.6 }
+        });
+      }
+
+      alert(`評分完成！\n您共作答 ${stats.answeredCount} 題，答對 ${stats.correctCount} 題。\n自動核算客觀選擇與填空得分為：${stats.score} 分！\n（手寫改寫與翻譯題請依據標準解答給分標準對照自我批改）`);
+    }
+
+    function resetQuiz() {
+      if (confirm('確定要清空所有的作答紀錄並重置測驗嗎？')) {
+        userAnswers = {};
+        renderAllSections();
+        updateQuizStats();
+        lucide.createIcons();
+      }
+    }
+  </script>
+</body>
+</html>

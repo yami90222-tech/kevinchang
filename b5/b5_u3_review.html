@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 3 綜合總複習：The Soldier Was Saved by a Dog & Animal Heroes - 實戰大會考</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#075985',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 翻牌動畫效果 */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center space-x-3">
+                <a href="../index.html" class="p-2 sm:px-3 sm:py-1.5 bg-slate-100 hover:bg-amber-500 hover:text-slate-950 text-slate-700 rounded-xl transition flex items-center gap-1.5 font-bold text-xs sm:text-sm border border-slate-200 shadow-sm" title="返回學習首頁">
+                    <i class="fa-solid fa-house text-amber-500"></i>
+                    <span class="hidden sm:inline">學習首頁</span>
+                </a>
+                <div class="bg-amber-500 text-slate-950 p-2.5 rounded-xl shadow-md">
+                    <i class="fa-solid fa-trophy text-lg"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-[10px] bg-amber-100 text-amber-900 font-bold px-1.5 py-0.5 rounded border border-amber-200">翰林 3上 B5U3</span>
+                        <span class="text-xs text-slate-400 hidden sm:inline">單元整合大會考</span>
+                    </div>
+                    <h1 class="font-bold text-base sm:text-lg text-slate-900 leading-tight">Unit 3 綜合總複習</h1>
+                </div>
+            </div>
+
+            <!-- Sister module pills -->
+            <div class="hidden lg:flex items-center space-x-1 bg-slate-100 p-1 rounded-xl text-xs font-semibold text-slate-600">
+                <a href="b5_u3_dialogue.html" class="px-2.5 py-1 rounded-lg hover:text-slate-900 transition">💬 對話</a>
+                <a href="b5_u3_pattern.html" class="px-2.5 py-1 rounded-lg hover:text-slate-900 transition">⚡ 句型</a>
+                <a href="b5_u3_reading.html" class="px-2.5 py-1 rounded-lg hover:text-slate-900 transition">📚 閱讀</a>
+                <span class="px-2.5 py-1 rounded-lg bg-amber-500 text-slate-950 font-bold shadow-sm">🏆 複習</span>
+            </div>
+            
+            <nav class="flex items-center space-x-1 sm:space-x-1.5 text-xs sm:text-sm font-medium">
+                <button onclick="switchTab('vocab')" id="tab-vocab" class="nav-btn px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg transition-all text-brand-600 bg-brand-50 font-semibold">
+                    <i class="fa-solid fa-book-bookmark mr-1"></i>核心單字
+                </button>
+                <button onclick="switchTab('grammar')" id="tab-grammar" class="nav-btn px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg transition-all text-slate-600 hover:bg-slate-100">
+                    <i class="fa-solid fa-code-branch mr-1"></i>文法重點
+                </button>
+                <button onclick="switchTab('reading')" id="tab-reading" class="nav-btn px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg transition-all text-slate-600 hover:bg-slate-100">
+                    <i class="fa-solid fa-newspaper mr-1"></i>課文理解
+                </button>
+                <button onclick="switchTab('quiz')" id="tab-quiz" class="nav-btn px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg transition-all text-slate-600 hover:bg-slate-100">
+                    <i class="fa-solid fa-pen-to-square mr-1"></i>實戰測驗
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-6">
+
+        <section id="sec-vocab" class="space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-font text-brand-500"></i> 單字與短語卡片 (Flashcards)
+                        </h2>
+                        <p class="text-sm text-slate-500 mt-1">點擊卡片可翻面查看中文釋義與例句，點擊喇叭可聽發音。</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="filterVocab('all')" class="vocab-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full bg-brand-500 text-white">全部</button>
+                        <button onclick="filterVocab('hero')" class="vocab-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200">英雄故事</button>
+                        <button onclick="filterVocab('accident')" class="vocab-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200">意外與求助</button>
+                    </div>
+                </div>
+
+                <!-- 單字卡片容器 -->
+                <div id="vocab-cards-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- 卡片將由 JS 動態生成 -->
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-grammar" class="hidden space-y-6">
+            <!-- 觀念一：單元核心・被動語態 (Passive Voice) -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                    <span class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 font-bold flex items-center justify-center">1</span>
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-800">單元核心文法：被動語態 (Passive Voice)</h2>
+                        <p class="text-xs text-slate-500">主詞為「接受動作的對象」，強調客觀事實或動作執行者未知/不言而喻時使用</p>
+                    </div>
+                </div>
+                
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-xl text-sm text-blue-950 mb-4 space-y-1">
+                    <div><strong>被動語態核心公式：</strong> <code class="bg-white px-2 py-0.5 rounded font-bold text-blue-700">主詞 + be動詞 (am/is/are/was/were) + 過去分詞 p.p. (+ by 動作執行者)</code></div>
+                    <div class="text-xs text-blue-800">💡 助動詞被動：<code class="bg-white px-1.5 py-0.5 rounded font-mono">can / should / will / must + be + p.p.</code></div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-4 text-sm">
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+                        <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">肯定句 (Affirmative)</span>
+                        <h4 class="font-bold text-slate-800">過去式與現在式被動</h4>
+                        <p class="text-xs text-slate-600">
+                            • The soldier <strong>was saved</strong> by a puppy.<br>
+                            • Important notes <strong>were delivered</strong> by Cher Ami.<br>
+                            • English <strong>is spoken</strong> worldwide.
+                        </p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+                        <span class="text-xs font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded">否定與疑問 (Negative & Qs)</span>
+                        <h4 class="font-bold text-slate-800">be動詞後加 not / be 移至句首</h4>
+                        <p class="text-xs text-slate-600">
+                            • The notes <strong>weren't written</strong> by my parents.<br>
+                            • <strong>Was</strong> the puppy saved by the soldiers?<br>
+                            • Who <strong>was</strong> the letter written by?
+                        </p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+                        <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">助動詞被動 (Modals)</span>
+                        <h4 class="font-bold text-slate-800">助動詞 + be + p.p.</h4>
+                        <p class="text-xs text-slate-600">
+                            • The injured dog <strong>can be cured</strong>.<br>
+                            • Plastic bags <strong>shouldn't be used</strong>.<br>
+                            • The game <strong>will be finished</strong> in ten seconds.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 觀念二：過去進行式 (Past Continuous) 與 When / While -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                    <span class="w-8 h-8 rounded-lg bg-brand-100 text-brand-600 font-bold flex items-center justify-center">2</span>
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-800">情境時態：過去進行式 (Past Continuous) 與 When / While</h2>
+                        <p class="text-xs text-slate-500">課文敘述過去事件背景與突發事件交互發生</p>
+                    </div>
+                </div>
+                
+                <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-xl text-sm text-amber-900 mb-4">
+                    <strong>基本句型：</strong> S + WAS / WERE + V-ing<br>
+                    <strong>表達重點：</strong> 表示過去「某個特定時間點」正在進行的動作，或是長時間動作（While）被突發短動作（When）在中途打斷。
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4 text-sm">
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <h3 class="font-bold text-brand-600 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-clock-rotate-left"></i> when + 過去簡單式 (突發短動作)
+                        </h3>
+                        <p class="text-slate-600 mb-2">當發生突發性、短時間的動作時使用，主要子句通常用過去進行式。</p>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200 font-mono text-xs text-slate-700">
+                            Mr. Barr <strong>was crossing</strong> a bridge <u>when</u> a plane <strong>dropped</strong> a bomb.
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <h3 class="font-bold text-brand-600 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-spinner"></i> while + 過去進行式 (持續背景動作)
+                        </h3>
+                        <p class="text-slate-600 mb-2">當連接長時間持續進行的背景動作時使用。</p>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200 font-mono text-xs text-slate-700">
+                            <u>While</u> Cher Ami <strong>was flying</strong> across the danger zone, it <strong>got</strong> hurt.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 觀念三：常見片語與句型表達 -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                    <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 font-bold flex items-center justify-center">3</span>
+                    <h2 class="text-xl font-bold text-slate-800">重要課文句型與關懷建言片語</h2>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+                        <div class="font-bold text-slate-800 mb-1">get + 受傷/狀態形容詞</div>
+                        <p class="text-slate-600 text-xs mb-2">表示狀態轉變（受傷、迷路、害怕等）</p>
+                        <ul class="list-disc list-inside text-xs text-slate-700 space-y-1">
+                            <li>get hurt (受傷)</li>
+                            <li>get lost (迷路)</li>
+                            <li>get scared (感到害怕)</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+                        <div class="font-bold text-slate-800 mb-1">In the middle of ...</div>
+                        <p class="text-slate-600 text-xs mb-2">在……的中間/中央</p>
+                        <p class="text-xs text-slate-700 font-mono">He stood in the middle of the road.</p>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+                        <div class="font-bold text-slate-800 mb-1">That way / This way...</div>
+                        <p class="text-slate-600 text-xs mb-2">「這樣一來……」表目的與結果</p>
+                        <p class="text-xs text-slate-700 font-mono">Carry a note. That way, people can help you.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-reading" class="hidden space-y-6">
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Dialogue 摘要 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 text-brand-600 font-bold mb-3">
+                            <i class="fa-solid fa-comments text-lg"></i>
+                            <h2 class="text-xl font-bold text-slate-800">Dialogue 課文對話對照</h2>
+                        </div>
+                        <p class="text-xs text-slate-500 mb-4">故事圍繞 Zac、Jamie 以及老戰士 Mr. Barr 的故事。</p>
+                        
+                        <div class="space-y-3 text-sm">
+                            <div class="p-3 bg-slate-50 rounded-xl">
+                                <span class="font-bold text-amber-700 text-xs block">Mr. Barr 的戰爭回憶：</span>
+                                <p class="text-slate-700 text-xs mt-1">在一場夜襲中被炸彈炸傷，當時是一隻小狗發出叫聲引人注意救了他。</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl">
+                                <span class="font-bold text-red-700 text-xs block">Mr. Barr 發生車禍：</span>
+                                <p class="text-slate-700 text-xs mt-1">因為記憶力變差，走入車陣並站在路中央 (middle of the road)，導致司機煞車不及撞上。</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl">
+                                <span class="font-bold text-emerald-700 text-xs block">Zac & Jamie 的關心與建議：</span>
+                                <p class="text-slate-700 text-xs mt-1">建議 Mr. Barr 隨身攜帶寫有長照中心地址的紙條 (carry a note)，這樣迷路時別人才能幫忙。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reading 摘要 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 text-brand-600 font-bold mb-3">
+                            <i class="fa-solid fa-shield-dog text-lg"></i>
+                            <h2 class="text-xl font-bold text-slate-800">Reading 動物英雄故事</h2>
+                        </div>
+                        <p class="text-xs text-slate-500 mb-4">歷史上的動物英雄與現代動物英雄的貢獻。</p>
+
+                        <div class="space-y-3 text-sm">
+                            <div class="p-3 bg-blue-50 rounded-xl border border-blue-100">
+                                <div class="font-bold text-blue-800 text-xs flex justify-between">
+                                    <span>信鴿 Cher Ami (Bird)</span>
+                                    <span class="text-blue-600 font-normal">歷史英雄</span>
+                                </div>
+                                <p class="text-slate-600 text-xs mt-1">在戰爭中飛越危險區域傳送求救紙條 (deliver a note)，成功解救士兵。</p>
+                            </div>
+                            <div class="p-3 bg-amber-50 rounded-xl border border-amber-100">
+                                <div class="font-bold text-amber-800 text-xs flex justify-between">
+                                    <span>軍犬 Stubby (Dog)</span>
+                                    <span class="text-amber-600 font-normal">歷史英雄</span>
+                                </div>
+                                <p class="text-slate-600 text-xs mt-1">注意到毒氣攻擊並狂吠警示士兵，讓大家有時間戴上防毒面具。</p>
+                            </div>
+                            <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-100">
+                                <div class="font-bold text-emerald-800 text-xs flex justify-between">
+                                    <span>現代動物英雄 (Modern Heroes)</span>
+                                    <span class="text-emerald-600 font-normal">多元角色</span>
+                                </div>
+                                <p class="text-slate-600 text-xs mt-1">抓壞人 (catch bad guys)、搜救、醫院陪伴病患帶來歡樂、家寵陪伴主人。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-quiz" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 max-w-3xl mx-auto">
+                <div class="flex justify-between items-center mb-6 border-b border-slate-100 pb-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-800">Unit 3 綜合測驗挑戰</h2>
+                        <p class="text-xs text-slate-500 mt-0.5">測試你對單字、文法與課文內容的理解程度！</p>
+                    </div>
+                    <div class="text-right">
+                        <span id="quiz-score" class="text-2xl font-black text-brand-600">0</span>
+                        <span class="text-xs text-slate-400 block">總得分</span>
+                    </div>
+                </div>
+
+                <div id="quiz-container" class="space-y-6">
+                    <!-- 測驗題目將由 JS 動態渲染 -->
+                </div>
+
+                <div id="quiz-result" class="hidden text-center py-8 space-y-4">
+                    <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800">測驗完成！</h3>
+                    <p id="quiz-summary-text" class="text-slate-600 text-sm">你的得分是 0 分</p>
+                    <button onclick="resetQuiz()" class="px-6 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-xl text-sm transition-all shadow-md">
+                        重新測驗
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Unit Flow Navigation -->
+        <div class="mt-12 pt-6 border-t border-slate-200">
+            <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-2xl p-6 shadow-lg flex flex-col md:flex-row items-center justify-between gap-4">
+                <div>
+                    <span class="text-xs text-brand-400 font-bold uppercase tracking-wider"><i class="fa-solid fa-route mr-1"></i> 單元學習完整回顧</span>
+                    <h3 class="text-lg font-bold text-white mt-1">恭喜完成 Unit 3 全部學習單元！</h3>
+                    <p class="text-xs text-slate-300 mt-0.5">可點選切換回課文對話、句型攻略、閱讀理解，或返回全冊學習基地首頁</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-2">
+                    <a href="b5_u3_dialogue.html" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl text-xs sm:text-sm transition flex items-center gap-1.5 border border-slate-700">
+                        <i class="fa-solid fa-comments"></i>
+                        <span>課文對話</span>
+                    </a>
+                    <a href="b5_u3_pattern.html" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl text-xs sm:text-sm transition flex items-center gap-1.5 border border-slate-700">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span>句型焦點</span>
+                    </a>
+                    <a href="b5_u3_reading.html" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl text-xs sm:text-sm transition flex items-center gap-1.5 border border-slate-700">
+                        <i class="fa-solid fa-book-open"></i>
+                        <span>閱讀理解</span>
+                    </a>
+                    <a href="../index.html" class="px-4 py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black rounded-xl text-xs sm:text-sm transition flex items-center gap-1.5 shadow-lg">
+                        <i class="fa-solid fa-house"></i>
+                        <span>返回學習基地首頁 🏠</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-4 mt-auto">
+        <div class="max-w-6xl mx-auto px-4 text-center text-xs text-slate-500">
+            國中英語 3上 Unit 3 數位學習複習網頁 &copy; 2026 | 設計用於學生課後複習與自主學習
+        </div>
+    </footer>
+
+    <script>
+        // 1. 單字資料庫
+        const vocabData = [
+            { en: "attack", zh: "攻擊；襲擊", tag: "accident", ex: "The city was under attack during the war." },
+            { en: "bomb", zh: "炸彈", tag: "accident", ex: "A plane dropped a bomb and blew up the bridge." },
+            { en: "scared", zh: "感到害怕的", tag: "accident", ex: "He got scared when he lost his way." },
+            { en: "traffic", zh: "交通；車流", tag: "accident", ex: "Mr. Barr walked into traffic yesterday." },
+            { en: "note", zh: "便條；筆記", tag: "hero", ex: "He should carry a note with his address." },
+            { en: "deliver", zh: "遞送；傳送", tag: "hero", ex: "The pigeon flew across the dangerous area to deliver a note." },
+            { en: "mask", zh: "面具；口罩", tag: "hero", ex: "Thanks to Stubby, the soldiers had time to put on their masks." },
+            { en: "cheer up", zh: "使振作起來", tag: "hero", ex: "Dogs can visit the sick and cheer them up." },
+            { en: "in need", zh: "需要幫助的", tag: "hero", ex: "Animal heroes bring joy and help people in need." }
+        ];
+
+        // 2. 測驗題目資料庫（擴充為 10 題，全方位涵蓋被動語態、時態、單字與閱讀理解）
+        const quizQuestions = [
+            {
+                q: "Mr. Barr was crossing a bridge ______ a plane dropped a bomb nearby.",
+                options: ["while", "when", "because", "before"],
+                answer: 1,
+                explain: "當突發短暫的過去動作（dropped a bomb）打破正在持續的動作時，連接詞使用 when。"
+            },
+            {
+                q: "While Cher Ami ______ across the dangerous area, the soldiers were praying for it.",
+                options: ["flew", "is flying", "was flying", "flies"],
+                answer: 2,
+                explain: "while 連接過去持續進行的動作，因此使用過去進行式 (was flying)。"
+            },
+            {
+                q: "The soldier ______ by a smart and brave dog during the war.",
+                options: ["saved", "was saved", "is saving", "was saving"],
+                answer: 1,
+                explain: "主詞 the soldier 是「被拯救」，過去簡單式的被動語態公式為「was/were + p.p.」，故選 was saved。"
+            },
+            {
+                q: "Thanks to the dog Stubby, soldiers had time to put on their ______ during a gas attack.",
+                options: ["wallets", "pockets", "masks", "notes"],
+                answer: 2,
+                explain: "Stubby 在毒氣攻擊（gas attack）時狂吠示警，使士兵有時間戴上防毒面具 (masks)。"
+            },
+            {
+                q: "Zac suggested that Mr. Barr should carry a ______ in his wallet so people can help him.",
+                options: ["bomb", "mask", "note", "puppy"],
+                answer: 2,
+                explain: "Zac 建議 Mr. Barr 隨身攜帶寫有地址與聯絡電話的「便條 (note)」，以免走失時無法求助。"
+            },
+            {
+                q: "Many delicious dishes ______ by Chef Lin for the guests yesterday evening.",
+                options: ["were cooked", "are cooked", "cooked", "have cooked"],
+                answer: 0,
+                explain: "時間是 yesterday evening（過去時間），且主詞 Many delicious dishes 是複數並「被煮」，故用 were cooked。"
+            },
+            {
+                q: "The sick people in the hospital can ______ up by friendly therapy dogs.",
+                options: ["cheer", "cheered", "be cheered", "are cheered"],
+                answer: 2,
+                explain: "情態助動詞的被動語態公式為「助動詞 (can) + be + p.p.」，故選 be cheered。"
+            },
+            {
+                q: "Why did Mr. Barr get hurt in the traffic accident?",
+                options: [
+                    "He was driving too fast on the street.",
+                    "He forgot his way back to the senior center and walked into traffic.",
+                    "He was trying to save a wounded soldier.",
+                    "A plane dropped a bomb on his car."
+                ],
+                answer: 1,
+                explain: "對話中提到 Mr. Barr 忘記回安養中心的路而感到驚慌，走入車流並站在馬路中央才發生意外受傷。"
+            },
+            {
+                q: "The enemy's bridge ______ by the soldiers with bombs to stop their attack.",
+                options: ["blew up", "was blown up", "is blown up", "was blowing up"],
+                answer: 1,
+                explain: "橋樑是「被炸毀」，blow 的過去分詞為 blown，過去被動語態為 was blown up。"
+            },
+            {
+                q: "What is the main idea of the reading passage 'Animal Heroes'?",
+                options: [
+                    "Only military dogs and carrier pigeons can be called heroes.",
+                    "Animals in the wild are very dangerous to human beings.",
+                    "Animal heroes come in different shapes and sizes, bringing joy and help to people in need.",
+                    "Every family must train their dog to catch bad guys."
+                ],
+                answer: 2,
+                explain: "課文總結說明：動物英雄有各種身型與樣貌，無論是戰場傳信、搜救、醫院陪伴還是家庭寵物，都是帶給人們溫暖與協助的英雄。"
+            }
+        ];
+
+        let currentQuizIndex = 0;
+        let score = 0;
+        let answeredQuestions = new Set();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderVocabCards('all');
+            renderQuiz();
+        });
+
+        function switchTab(tabName) {
+            const tabs = ['vocab', 'grammar', 'reading', 'quiz'];
+            tabs.forEach(t => {
+                document.getElementById(`sec-${t}`).classList.add('hidden');
+                const btn = document.getElementById(`tab-${t}`);
+                btn.classList.remove('bg-brand-50', 'text-brand-600', 'font-semibold');
+                btn.classList.add('text-slate-600');
+            });
+
+            document.getElementById(`sec-${tabName}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-${tabName}`);
+            activeBtn.classList.add('bg-brand-50', 'text-brand-600', 'font-semibold');
+            activeBtn.classList.remove('text-slate-600');
+        }
+
+        function renderVocabCards(filter) {
+            const container = document.getElementById('vocab-cards-container');
+            container.innerHTML = '';
+
+            const filteredData = filter === 'all' ? vocabData : vocabData.filter(v => v.tag === filter);
+
+            filteredData.forEach((item, idx) => {
+                const card = document.createElement('div');
+                card.className = "perspective-1000 h-48 cursor-pointer";
+                card.innerHTML = `
+                    <div id="card-inner-${idx}" class="card-inner relative w-full h-full duration-500 transform-style-3d bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                        <!-- 正面 -->
+                        <div class="absolute inset-0 w-full h-full backface-hidden p-5 flex flex-col justify-between rounded-xl bg-white">
+                            <div class="flex justify-between items-start">
+                                <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-500">${item.tag === 'hero' ? '英雄/求助' : '意外事件'}</span>
+                                <button onclick="speakText(event, '${item.en}')" class="text-slate-400 hover:text-brand-500 p-1">
+                                    <i class="fa-solid fa-volume-high"></i>
+                                </button>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="text-2xl font-bold text-slate-800">${item.en}</h3>
+                            </div>
+                            <p class="text-xs text-center text-slate-400">點擊翻面看釋義</p>
+                        </div>
+                        <!-- 背面 -->
+                        <div class="absolute inset-0 w-full h-full backface-hidden rotate-y-180 p-5 flex flex-col justify-between rounded-xl bg-brand-600 text-white">
+                            <div>
+                                <h4 class="text-lg font-bold">${item.zh}</h4>
+                                <p class="text-xs mt-2 text-brand-100 italic">"${item.ex}"</p>
+                            </div>
+                            <p class="text-xs text-right text-brand-200">點擊翻回</p>
+                        </div>
+                    </div>
+                `;
+
+                card.addEventListener('click', (e) => {
+                    // 若點擊的是發音按鈕則不翻牌
+                    if (e.target.closest('button')) return;
+                    const inner = card.querySelector('.card-inner');
+                    inner.classList.toggle('rotate-y-180');
+                });
+
+                container.appendChild(card);
+            });
+        }
+
+        function filterVocab(tag) {
+            document.querySelectorAll('.vocab-filter-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-500', 'text-white');
+                btn.classList.add('bg-slate-100', 'text-slate-600');
+            });
+            event.target.classList.remove('bg-slate-100', 'text-slate-600');
+            event.target.classList.add('bg-brand-500', 'text-white');
+
+            renderVocabCards(tag);
+        }
+
+        function speakText(event, text) {
+            event.stopPropagation();
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            quizQuestions.forEach((q, idx) => {
+                const qBox = document.createElement('div');
+                qBox.className = "p-5 rounded-xl border border-slate-200 bg-slate-50 space-y-3";
+                qBox.id = `quiz-q-${idx}`;
+
+                let optionsHTML = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHTML += `
+                        <button onclick="checkAnswer(${idx}, ${optIdx})" class="quiz-opt-${idx} w-full text-left p-3 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 text-sm transition-all flex items-center justify-between">
+                            <span>${String.fromCharCode(65 + optIdx)}. ${opt}</span>
+                            <i class="fa-solid fa-circle-check opacity-0 opt-icon"></i>
+                        </button>
+                    `;
+                });
+
+                qBox.innerHTML = `
+                    <div class="font-bold text-slate-800 text-sm flex gap-2">
+                        <span class="text-brand-600">${idx + 1}.</span>
+                        <span>${q.q}</span>
+                    </div>
+                    <div class="space-y-2">${optionsHTML}</div>
+                    <div id="quiz-explain-${idx}" class="hidden p-3 bg-white rounded-lg text-xs text-slate-600 border border-slate-200">
+                        <strong>解析：</strong> ${q.explain}
+                    </div>
+                `;
+
+                container.appendChild(qBox);
+            });
+        }
+
+        function checkAnswer(qIdx, selectedOpt) {
+            if (answeredQuestions.has(qIdx)) return;
+            answeredQuestions.add(qIdx);
+
+            const q = quizQuestions[qIdx];
+            const buttons = document.querySelectorAll(`.quiz-opt-${qIdx}`);
+            const explainBox = document.getElementById(`quiz-explain-${qIdx}`);
+
+            buttons.forEach((btn, idx) => {
+                btn.disabled = true;
+                if (idx === q.answer) {
+                    btn.classList.remove('bg-white', 'border-slate-200');
+                    btn.classList.add('bg-emerald-50', 'border-emerald-500', 'text-emerald-800', 'font-semibold');
+                    btn.querySelector('.opt-icon').classList.remove('opacity-0');
+                    btn.querySelector('.opt-icon').classList.add('text-emerald-500');
+                }
+                if (idx === selectedOpt && selectedOpt !== q.answer) {
+                    btn.classList.remove('bg-white', 'border-slate-200');
+                    btn.classList.add('bg-red-50', 'border-red-400', 'text-red-700');
+                }
+            });
+
+            if (selectedOpt === q.answer) {
+                score += 10;
+                document.getElementById('quiz-score').innerText = score;
+            }
+
+            explainBox.classList.remove('hidden');
+
+            if (answeredQuestions.size === quizQuestions.length) {
+                setTimeout(() => {
+                    document.getElementById('quiz-container').classList.add('hidden');
+                    document.getElementById('quiz-result').classList.remove('hidden');
+                    document.getElementById('quiz-summary-text').innerText = `恭喜完成！你的總得分為 ${score} 分 (共 ${quizQuestions.length * 10} 分)`;
+                }, 1000);
+            }
+        }
+
+        function resetQuiz() {
+            score = 0;
+            answeredQuestions.clear();
+            document.getElementById('quiz-score').innerText = '0';
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('quiz-result').classList.add('hidden');
+            renderQuiz();
+        }
+    </script>
+</body>
+</html>

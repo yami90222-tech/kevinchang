@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>國中英語 3上 Unit 3 Dialogue 數位互動電子書</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
+                        textbook: ['Comic Neue', 'Inter', 'Noto Sans TC', 'sans-serif'],
+                    },
+                    colors: {
+                        publisher: {
+                            blue: '#0081cc',
+                            red: '#e53935',
+                            pink: '#ec407a',
+                            green: '#2e7d32',
+                            bg: '#f3f4f6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        .tab-btn.active {
+            background-color: #0081cc;
+            color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 129, 204, 0.4);
+        }
+        
+        /* Textbook Page Layout Simulation */
+        .textbook-page {
+            background-color: #ffffff;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+            border-radius: 1rem;
+            position: relative;
+        }
+
+        .grammar-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #0081cc;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            vertical-align: middle;
+            margin: 0 2px;
+            transition: all 0.2s;
+        }
+        .grammar-badge:hover {
+            transform: scale(1.15);
+            background-color: #0369a1;
+        }
+
+        .speakable:hover {
+            background-color: #f0f9ff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .speaking-highlight {
+            background-color: #fef08a !important;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+    </style>
+</head>
+<body class="bg-slate-200 text-slate-800 font-sans h-screen flex flex-col md:flex-row overflow-hidden">
+
+    <!-- Mobile Header -->
+    <header class="md:hidden bg-slate-900 text-white p-3.5 flex justify-between items-center z-20 shadow-md flex-shrink-0 sticky top-0">
+        <div class="flex items-center space-x-2">
+            <a href="../index.html" class="p-2 bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-amber-300 rounded-xl transition flex items-center gap-1 text-xs font-bold" title="返回學習首頁">
+                <i class="fa-solid fa-house"></i>
+                <span>首頁</span>
+            </a>
+            <div class="flex items-center space-x-1.5 pl-1">
+                <i class="fa-solid fa-book-open text-sky-400 text-base"></i>
+                <span class="font-bold text-sm">Unit 3 對話篇</span>
+            </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <a href="b5_u3_pattern.html" class="text-xs bg-slate-800 hover:bg-sky-600 px-2.5 py-1.5 rounded-lg text-slate-200 transition">句型 <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+            <button id="mobile-menu-btn" class="text-slate-300 hover:text-white focus:outline-none p-1.5">
+                <i class="fa-solid fa-bars text-lg"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="bg-slate-900 text-slate-300 w-full max-h-[50vh] md:max-h-none md:h-screen md:w-64 flex-shrink-0 flex flex-col justify-between overflow-y-auto hidden md:flex transition-all duration-300 z-10">
+        <div>
+            <!-- Top Home Portal Link & Brand -->
+            <div class="p-4 border-b border-slate-800 space-y-3">
+                <a href="../index.html" class="flex items-center justify-between w-full p-2.5 bg-slate-800/90 hover:bg-amber-500 hover:text-slate-950 text-amber-300 rounded-xl transition font-bold text-xs shadow-sm group">
+                    <span class="flex items-center gap-2">
+                        <i class="fa-solid fa-house text-sm"></i>
+                        <span>返回學習基地首頁</span>
+                    </span>
+                    <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+
+                <div class="flex items-center space-x-3 pt-1">
+                    <div class="bg-sky-500 text-white p-2.5 rounded-xl shadow-lg shadow-sky-500/30 flex items-center justify-center">
+                        <i class="fa-solid fa-chalkboard-user text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="text-[10px] bg-sky-500/20 text-sky-300 font-bold px-1.5 py-0.5 rounded border border-sky-500/30">B5 U3</span>
+                            <span class="text-xs text-slate-400">翰林國中英語</span>
+                        </div>
+                        <h1 class="font-bold text-white leading-tight text-sm">Dialogue 互動電子書</h1>
+                    </div>
+                </div>
+
+                <!-- Unit Sister Module Quick Jump -->
+                <div class="grid grid-cols-4 gap-1 pt-1 text-[11px] font-bold text-center">
+                    <span class="py-1.5 bg-sky-600 text-white rounded-lg shadow-sm">對話</span>
+                    <a href="b5_u3_pattern.html" class="py-1.5 bg-slate-800 hover:bg-purple-600 hover:text-white text-slate-300 rounded-lg transition" title="前往句型篇">句型</a>
+                    <a href="b5_u3_reading.html" class="py-1.5 bg-slate-800 hover:bg-emerald-600 hover:text-white text-slate-300 rounded-lg transition" title="前往閱讀篇">閱讀</a>
+                    <a href="b5_u3_review.html" class="py-1.5 bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-300 rounded-lg transition" title="前往總複習">複習</a>
+                </div>
+            </div>
+
+            <!-- Nav Links -->
+            <nav class="p-4 space-y-1.5 text-sm font-medium">
+                <button onclick="switchTab('page56')" id="nav-page56" class="tab-btn active w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all text-slate-300 hover:bg-slate-800">
+                    <i class="fa-solid fa-book-open-reader w-5 text-center"></i>
+                    <span>課本 p.56 (Dialogue 1)</span>
+                </button>
+                <button onclick="switchTab('page57')" id="nav-page57" class="tab-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all text-slate-300 hover:bg-slate-800">
+                    <i class="fa-solid fa-book-open-reader w-5 text-center"></i>
+                    <span>課本 p.57 (Dialogue 2)</span>
+                </button>
+                <button onclick="switchTab('prelistening')" id="nav-prelistening" class="tab-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all text-slate-300 hover:bg-slate-800">
+                    <i class="fa-solid fa-headset w-5 text-center"></i>
+                    <span>Pre-Listening 圖片預測/提問</span>
+                </button>
+                <button onclick="switchTab('grammar')" id="nav-grammar" class="tab-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all text-slate-300 hover:bg-slate-800">
+                    <i class="fa-solid fa-list-ol w-5 text-center"></i>
+                    <span>課文句型點撥 (1~9)</span>
+                </button>
+                <button onclick="switchTab('vocab')" id="nav-vocab" class="tab-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all text-slate-300 hover:bg-slate-800">
+                    <i class="fa-solid fa-font w-5 text-center"></i>
+                    <span>應用/認識字彙 & 樂齡補充</span>
+                </button>
+                <button onclick="switchTab('tf-quiz')" id="nav-tf-quiz" class="tab-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all text-slate-300 hover:bg-slate-800">
+                    <i class="fa-solid fa-pen-to-square w-5 text-center"></i>
+                    <span>p.58 聽力測驗 (T / F)</span>
+                </button>
+                <button onclick="switchTab('goals')" id="nav-goals" class="tab-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all text-slate-300 hover:bg-slate-800">
+                    <i class="fa-solid fa-bullseye w-5 text-center"></i>
+                    <span>教學目標與情境介紹</span>
+                </button>
+            </nav>
+        </div>
+
+        <div class="p-4 border-t border-slate-800 text-xs text-slate-500">
+            <p><i class="fa-solid fa-circle-check mr-1 text-emerald-400"></i> 教科書畫面精準對照版</p>
+            <p class="mt-1">Grade 3 English Unit 3 Full Module</p>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 min-h-0 min-w-0 bg-slate-200 overflow-y-auto overscroll-contain p-3 md:p-6">
+
+        <!-- ================= PAGE 56 SECTION ================= -->
+        <section id="tab-page56" class="tab-content space-y-4">
+            <!-- Toolbar Simulated from Book Interface -->
+            <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center space-x-2">
+                    <span class="bg-sky-600 text-white px-2.5 py-1 rounded-lg text-sm font-bold">p.56</span>
+                    <h2 class="font-bold text-slate-800 text-lg">Dialogue: War Stories</h2>
+                </div>
+                <!-- Simulated Textbook Buttons -->
+                <div class="flex flex-wrap items-center gap-1.5 text-xs font-semibold">
+                    <button onclick="playPart1Audio()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition flex items-center space-x-1">
+                        <i class="fa-solid fa-play text-xs text-sky-400"></i>
+                        <span>全文朗讀</span>
+                    </button>
+                    <button onclick="toggleChineseTranslation()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition flex items-center space-x-1">
+                        <i class="fa-solid fa-language text-amber-400"></i>
+                        <span>翻譯對照</span>
+                    </button>
+                    <button onclick="switchTab('prelistening')" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-500 text-white rounded-lg transition">
+                        延伸提問
+                    </button>
+                    <button onclick="switchTab('grammar')" class="px-3 py-1.5 bg-sky-600 hover:bg-sky-500 text-white rounded-lg transition">
+                        文法解析
+                    </button>
+                </div>
+            </div>
+
+            <!-- Page 56 Electronic Page View -->
+            <div class="textbook-page p-6 md:p-8 space-y-6">
+                <!-- Page Header Elements -->
+                <div class="flex items-start justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-sky-600 text-white font-extrabold text-2xl px-4 py-1 rounded-2xl tracking-wide shadow-sm">
+                            Dialogue
+                        </div>
+                    </div>
+                    <div class="text-right text-xs text-slate-400">
+                        <span class="inline-block bg-slate-100 px-2 py-1 rounded">CD2: 1-2</span>
+                    </div>
+                </div>
+
+                <!-- Part A & B Headers -->
+                <div class="space-y-2 text-sm md:text-base font-semibold text-slate-700">
+                    <div class="flex items-center space-x-2">
+                        <span class="bg-sky-600 text-white rounded-full w-6 h-6 flex items-center justify-center font-bold text-xs flex-shrink-0">A</span>
+                        <p><strong>Look and predict.</strong> 觀察圖片並預測可能聽到的內容。</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="bg-sky-600 text-white rounded-full w-6 h-6 flex items-center justify-center font-bold text-xs flex-shrink-0">B</span>
+                        <p><strong>Listen and share.</strong> 聽CD，並和同學分享聽到的內容大意。</p>
+                    </div>
+                </div>
+
+                <!-- Scene Prompt -->
+                <div class="p-3 bg-slate-50 rounded-lg text-slate-600 text-sm italic border-l-4 border-sky-500 font-textbook">
+                    (Zac and Jamie are volunteering at a senior center.) / （柴克和潔米在樂齡中心當志工。）
+                </div>
+
+                <!-- Dialogue Body Script -->
+                <div class="space-y-4 font-textbook text-base md:text-lg text-slate-800 leading-relaxed">
+                    <!-- Line 1 -->
+                    <div class="dialogue-block p-2 rounded hover:bg-sky-50/50 transition">
+                        <div class="flex items-start space-x-2">
+                            <span class="font-bold text-indigo-700 w-20 flex-shrink-0 speakable" onclick="speakText('Jamie')">Jamie:</span>
+                            <div class="flex-1">
+                                Hi, Mr. Barr. Zac and I <span class="speakable" onclick="speakText('had a good time listening to your war stories last week')">had a good time listening to your war stories last week</span>
+                                <span class="grammar-badge" onclick="scrollToGrammar(1)">1</span>. 
+                                <span class="speakable" onclick="speakText('Could you tell us more?')">Could you tell us more?</span>
+                            </div>
+                        </div>
+                        <div class="zh-trans text-sm text-slate-500 mt-1 pl-20 hidden">
+                            潔米：嗨，巴爾先生。上週我和柴克聽了你的戰爭故事，聽得很愉快。你可以跟我們多講一些嗎？
+                        </div>
+                    </div>
+
+                    <!-- Line 2 -->
+                    <div class="dialogue-block p-2 rounded hover:bg-sky-50/50 transition">
+                        <div class="flex items-start space-x-2">
+                            <span class="font-bold text-amber-800 w-20 flex-shrink-0 speakable" onclick="speakText('Mr. Barr')">Mr. Barr:</span>
+                            <div class="flex-1">
+                                <span class="font-bold text-slate-900 speakable" onclick="speakText('With pleasure.')">With pleasure.</span>
+                                <span class="grammar-badge" onclick="scrollToGrammar(2)">2</span>
+                                <span class="speakable" onclick="speakText('See my right leg?')">See my right leg?</span>
+                                <span class="speakable" onclick="speakText('It was hurt during an attack one night.')">It <strong>was hurt</strong> during an <strong>attack</strong> one night.</span>
+                                <span class="grammar-badge" onclick="scrollToGrammar(3)">3</span>
+                                <span class="speakable" onclick="speakText('I also lost three toes on my left foot that night.')">I also lost three <strong>toes</strong> on my left foot that night.</span>
+                            </div>
+                        </div>
+                        <div class="zh-trans text-sm text-slate-500 mt-1 pl-20 hidden">
+                            巴爾先生：我很樂意。有看到我的右腿嗎？它是在一次夜襲中受傷的。那天晚上我也失去了左腳的三根腳趾頭。
+                        </div>
+                    </div>
+
+                    <!-- Line 3 -->
+                    <div class="dialogue-block p-2 rounded hover:bg-sky-50/50 transition">
+                        <div class="flex items-start space-x-2">
+                            <span class="font-bold text-emerald-700 w-20 flex-shrink-0 speakable" onclick="speakText('Zac')">Zac:</span>
+                            <div class="flex-1">
+                                <span class="speakable" onclick="speakText('How did you get hurt?')">How did you <strong>get hurt</strong>?</span>
+                                <span class="inline-block bg-sky-100 text-sky-800 text-xs px-2 py-0.5 rounded ml-1 border border-sky-200">
+                                    <i class="fa-solid fa-circle-info mr-1"></i>「人＋ get/be hurt」表「某人受傷（害）」。
+                                </span>
+                            </div>
+                        </div>
+                        <div class="zh-trans text-sm text-slate-500 mt-1 pl-20 hidden">
+                            柴克：你是怎麼受傷的？
+                        </div>
+                    </div>
+
+                    <!-- Line 4 -->
+                    <div class="dialogue-block p-2 rounded hover:bg-sky-50/50 transition">
+                        <div class="flex items-start space-x-2">
+                            <span class="font-bold text-amber-800 w-20 flex-shrink-0 speakable" onclick="speakText('Mr. Barr')">Mr. Barr:</span>
+                            <div class="flex-1">
+                                <span class="speakable" onclick="speakText('I was crossing a bridge when a plane dropped a bomb nearby.')">I was crossing a <strong>bridge</strong> when a plane <strong>dropped</strong> a bomb nearby.</span>
+                                <span class="speakable" onclick="speakText('It blew up, and the smoke filled the air.')">It <strong>blew up</strong>, and the <strong>smoke</strong> filled the air.</span>
+                                <span class="speakable" onclick="speakText('I was badly hurt and couldn\'t move.')">I was badly hurt and couldn't move.</span>
+                            </div>
+                        </div>
+                        <div class="zh-trans text-sm text-slate-500 mt-1 pl-20 hidden">
+                            巴爾先生：我正在過橋，當時一架飛機在附近投下了一枚炸彈。它爆炸了，煙霧瀰漫在空氣中。我受了重傷，無法行動。
+                        </div>
+                    </div>
+
+                    <!-- Line 5 -->
+                    <div class="dialogue-block p-2 rounded hover:bg-sky-50/50 transition">
+                        <div class="flex items-start space-x-2">
+                            <span class="font-bold text-indigo-700 w-20 flex-shrink-0 speakable" onclick="speakText('Jamie')">Jamie:</span>
+                            <div class="flex-1">
+                                <span class="speakable" onclick="speakText('Oh no! Who saved you?')">Oh no! Who saved you?</span>
+                            </div>
+                        </div>
+                        <div class="zh-trans text-sm text-slate-500 mt-1 pl-20 hidden">
+                            潔米：哇！是誰救了你？
+                        </div>
+                    </div>
+
+                    <!-- Line 6 -->
+                    <div class="dialogue-block p-2 rounded hover:bg-sky-50/50 transition">
+                        <div class="flex items-start space-x-2">
+                            <span class="font-bold text-amber-800 w-20 flex-shrink-0 speakable" onclick="speakText('Mr. Barr')">Mr. Barr:</span>
+                            <div class="flex-1">
+                                <span class="speakable" onclick="speakText('A puppy. It saw me lying on the ground and began to bark.')">A <strong>puppy</strong>. It saw me lying on the ground and began to bark.</span>
+                                <span class="speakable" onclick="speakText('The sound led other soldiers to me.')">The sound led other soldiers to me.</span>
+                            </div>
+                        </div>
+                        <div class="zh-trans text-sm text-slate-500 mt-1 pl-20 hidden">
+                            巴爾先生：一隻小狗。牠看到我躺在地上，然後開始吠叫。牠的聲音將其他士兵引到了我這裡。
+                        </div>
+                    </div>
+
+                    <!-- Line 7 -->
+                    <div class="dialogue-block p-2 rounded hover:bg-sky-50/50 transition">
+                        <div class="flex items-start space-x-2">
+                            <span class="font-bold text-emerald-700 w-20 flex-shrink-0 speakable" onclick="speakText('Zac')">Zac:</span>
+                            <div class="flex-1">
+                                <span class="speakable" onclick="speakText('You were saved by a dog!')">You <strong>were saved by</strong> a dog!</span>
+                                <span class="grammar-badge" onclick="scrollToGrammar(4)">4</span>
+                            </div>
+                        </div>
+                        <div class="zh-trans text-sm text-slate-500 mt-1 pl-20 hidden">
+                            柴克：你被一隻狗拯救了！
+                        </div>
+                    </div>
+
+                    <!-- Line 8 -->
+                    <div class="dialogue-block p-2 rounded hover:bg-sky-50/50 transition">
+                        <div class="flex items-start space-x-2">
+                            <span class="font-bold text-amber-800 w-20 flex-shrink-0 speakable" onclick="speakText('Mr. Barr')">Mr. Barr:</span>
+                            <div class="flex-1">
+                                <span class="speakable" onclick="speakText('The story was even reported in a newspaper.')">The story <strong>was even reported</strong> in a newspaper.</span>
+                                <span class="grammar-badge" onclick="scrollToGrammar(5)">5</span>
+                            </div>
+                        </div>
+                        <div class="zh-trans text-sm text-slate-500 mt-1 pl-20 hidden">
+                            巴爾先生：這個故事甚至被報紙報導。
+                        </div>
+                    </div>
+
+                    <!-- Line 9 -->
+                    <div class="dialogue-block p-2 rounded hover:bg-sky-50/50 transition">
+                        <div class="flex items-start space-x-2">
+                            <span class="font-bold text-indigo-700 w-20 flex-shrink-0 speakable" onclick="speakText('Jamie')">Jamie:</span>
+                            <div class="flex-1">
+                                <span class="speakable" onclick="speakText('What a great story!')">What a great story!</span>
+                                <span class="grammar-badge" onclick="scrollToGrammar(6)">6</span>
+                            </div>
+                        </div>
+                        <div class="zh-trans text-sm text-slate-500 mt-1 pl-20 hidden">
+                            潔米：多麼棒的故事！
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page Illustration Graphic Simulation -->
+                <div class="mt-8 pt-6 border-t border-slate-100 bg-amber-50/60 p-4 rounded-xl border border-amber-200/60 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div class="space-y-1 text-center md:text-left">
+                        <h4 class="font-bold text-amber-900 text-sm"><i class="fa-solid fa-newspaper mr-1"></i> Newspaper Scene Context</h4>
+                        <p class="text-xs text-amber-800">Mr. Barr's rescue by the brave puppy was featured in the local news!</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-white p-2 rounded-lg shadow-sm border border-slate-200 text-center">
+                            <i class="fa-solid fa-dog text-2xl text-amber-600 mb-1"></i>
+                            <p class="text-[10px] text-slate-500 font-bold">Hero Puppy</p>
+                        </div>
+                        <div class="bg-white p-2 rounded-lg shadow-sm border border-slate-200 text-center">
+                            <i class="fa-solid fa-plane-slash text-2xl text-rose-500 mb-1"></i>
+                            <p class="text-[10px] text-slate-500 font-bold">War Attack</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page Footer Number -->
+                <div class="flex justify-between items-center text-xs text-slate-400 border-t border-slate-100 pt-3">
+                    <span class="font-bold">56 | Unit 3</span>
+                    <button onclick="switchTab('page57')" class="text-sky-600 font-bold hover:underline flex items-center space-x-1">
+                        <span>前往 p.57</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 57 SECTION ================= -->
+        <section id="tab-page57" class="tab-content space-y-4 hidden">
+            <!-- Toolbar Simulated from Book Interface -->
+            <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center space-x-2">
+                    <span class="bg-sky-600 text-white px-2.5 py-1 rounded-lg text-sm font-bold">p.57</span>
+                    <h2 class="font-bold text-slate-800 text-lg">Dialogue: Accident & Hospital</h2>
+                </div>
+                <!-- Simulated Textbook Buttons -->
+                <div class="flex flex-wrap items-center gap-1.5 text-xs font-semibold">
+                    <button onclick="playPart2Audio()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition flex items-center space-x-1">
+                        <i class="fa-solid fa-play text-xs text-sky-400"></i>
+                        <span>全文朗讀</span>
+                    </button>
+                    <button onclick="toggleChineseTranslation()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition flex items-center space-x-1">
+                        <i class="fa-solid fa-language text-amber-400"></i>
+                        <span>翻譯對照</span>
+                    </button>
+                    <button onclick="switchTab('vocab')" class="px-3 py-1.5 bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition">
+                        應用/認識字彙
+                    </button>
+                    <button onclick="switchTab('grammar')" class="px-3 py-1.5 bg-sky-600 hover:bg-sky-500 text-white rounded-lg transition">
+                        文法解析
+                    </button>
+                </div>
+            </div>
+
+            <!-- Page 57 Electronic Page View -->
+            <div class="textbook-page p-6 md:p-8 space-y-6">
+                <!-- CD Track Badge -->
+                <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+                    <span class="bg-slate-100 text-slate-600 text-xs font-bold px-2.5 py-1 rounded">CD2: 3-4</span>
+                    <span class="text-xs text-slate-400">The Next Day at Senior Center</span>
+                </div>
+
+                <!-- Scene Prompt -->
+                <div class="p-3 bg-slate-50 rounded-lg text-slate-600 text-sm italic border-l-4 border-rose-500 font-textbook">
+                    (The next day, Zac and Jamie can't find Mr. Barr at the center.) / （隔天，柴克和潔米在樂齡中心找不到巴爾先生。）
+                </div>
+
+                <!-- Dialogue Body Script Part 2 -->
+                <div class="space-y-4 font-textbook text-base md:text-lg text-slate-800 leading-relaxed">
+                    <!-- Line 10 -->
+                    <div class="dialogue-block p-2 rounded hover:bg-sky-50/50 transition">
+                        <div class="flex items-start space-x-2">
+                            <span class="font-bold text-indigo-700 w-20 flex-shrink-0 speakable" onclick="speakText('Jamie')">Jamie:</span>
+                            <div class="flex-1">
+                                <span class="speakable" onclick="speakText('Excuse me, Ms. Lee. Where\'s Mr. Barr?')">Excuse me, Ms. Lee. Where's Mr. Barr?</span>
+                            </div>
+                        </div>
+                        <div class="zh-trans text-sm text-slate-500 mt-1 pl-20 hidden">
+                            潔米：不好意思，李小姐。請問巴爾先生在哪裡？
+                        </div>
+                    </div>
+
+                    <!-- Line 11 -->
+                    <div class="dialogue-block p-2 rounded hover:bg-sky-50/50 transition">
+                        <div class="flex items-start space-x-2">
+                            <span class="font-bold text-purple-700 w-20 flex-shrink-0 speakable" onclick="speakText('Ms. Lee')">Ms. Lee:</span>
+                            <div class="flex-1">
+                                <span class="speakable" onclick="speakText('He\'s in the hospital. He was hit by a car yesterday.')">He's in the hospital. He <strong>was hit by</strong> a car yesterday.</span>
+                            </div>
+                        </div>
+                        <div class="zh-trans text-sm text-slate-500 mt-1 pl-20 hidden">
+                            李小姐：他在醫院。昨天他被一輛車撞到了。
+                        </div>
+                    </div>
+
+                    <!-- Line 12 -->
+                    <div class="dialogue-block p-2 rounded hover:bg-sky-50/50 transition">
+                        <div class="flex items-start space-x-2">
+                            <span class="font-bold text-indigo-700 w-20 flex-shrink-0 speakable" onclick="speakText('Jamie')">Jamie:</span>
+                            <div class="flex-1">
+                                <span class="speakable" onclick="speakText('How did it happen?')">How did it happen?</span>
+                            </div>
+                        </div>
+                        <div class="zh-trans text-sm text-slate-500 mt-1 pl-20 hidden">
+                            潔米：那是如何發生的？
+                        </div>
+                    </div>
+
+                    <!-- Line 13 -->
+                    <div class="dialogue-block p-2 rounded hover:bg-sky-50/50 transition">
+                        <div class="flex items-start space-x-2">
+                            <span class="font-bold text-purple-700 w-20 flex-shrink-0 speakable" onclick="speakText('Ms. Lee')">Ms. Lee:</span>
+                            <div class="flex-1">
+                                <span class="speakable" onclick="speakText('Mr. Barr suddenly walked into traffic and stood in the middle of the road.')">Mr. Barr suddenly <strong>walked into traffic</strong> and stood in the <strong>middle</strong> of the road.</span>
+                                <span class="grammar-badge" onclick="scrollToGrammar(7)">7</span>
+                                <span class="speakable" onclick="speakText('The driver couldn\'t stop the car in time.')">The driver couldn't stop the car <strong>in time</strong>.</span>
+                            </div>
+                        </div>
+                        <div class="zh-trans text-sm text-slate-500 mt-1 pl-20 hidden">
+                            李小姐：巴爾先生突然走到車陣中，並站在路中央。駕駛沒來得及煞住車子。
+                        </div>
+                    </div>
+
+                    <!-- Line 14 -->
+                    <div class="dialogue-block p-2 rounded hover:bg-sky-50/50 transition">
+                        <div class="flex items-start space-x-2">
+                            <span class="font-bold text-emerald-700 w-20 flex-shrink-0 speakable" onclick="speakText('Zac')">Zac:</span>
+                            <div class="flex-1">
+                                <span class="speakable" onclick="speakText('Why did he do that?')">Why did he do that?</span>
+                            </div>
+                        </div>
+                        <div class="zh-trans text-sm text-slate-500 mt-1 pl-20 hidden">
+                            柴克：他為什麼要那麼做？
+                        </div>
+                    </div>
+
+                    <!-- Line 15 -->
+                    <div class="dialogue-block p-2 rounded hover:bg-sky-50/50 transition">
+                        <div class="flex items-start space-x-2">
+                            <span class="font-bold text-purple-700 w-20 flex-shrink-0 speakable" onclick="speakText('Ms. Lee')">Ms. Lee:</span>
+                            <div class="flex-1">
+                                <span class="speakable" onclick="speakText('I guess he forgot the way to our center and got scared.')">I guess he forgot the way to our center and got scared.</span>
+                                <span class="grammar-badge" onclick="scrollToGrammar(8)">8</span>
+                                <span class="speakable" onclick="speakText('He has problems remembering things, so he gets lost often.')">He <strong>has problems remembering</strong> things, so he gets lost often.</span>
+                                <span class="grammar-badge" onclick="scrollToGrammar(9)">9</span>
+                            </div>
+                        </div>
+                        <div class="zh-trans text-sm text-slate-500 mt-1 pl-20 hidden">
+                            李小姐：我猜他是忘了到我們中心的路而感到害怕。他記事情有困難，所以他常常迷路。
+                        </div>
+                    </div>
+
+                    <!-- Line 16 -->
+                    <div class="dialogue-block p-2 rounded hover:bg-sky-50/50 transition">
+                        <div class="flex items-start space-x-2">
+                            <span class="font-bold text-emerald-700 w-20 flex-shrink-0 speakable" onclick="speakText('Zac')">Zac:</span>
+                            <div class="flex-1">
+                                <span class="speakable" onclick="speakText('I\'m worried about him. Maybe he should carry a note with the center\'s address in his wallet or pocket.')">I'm worried about him. Maybe he should <strong>carry</strong> a <strong>note</strong> with the center's <strong>address</strong> in his <strong>wallet</strong> or <strong>pocket</strong>.</span>
+                            </div>
+                        </div>
+                        <div class="zh-trans text-sm text-slate-500 mt-1 pl-20 hidden">
+                            柴克：我很擔心他。或許他應該在錢包或口袋攜帶一張有中心地址的紙條。
+                        </div>
+                    </div>
+
+                    <!-- Line 17 -->
+                    <div class="dialogue-block p-2 rounded hover:bg-sky-50/50 transition">
+                        <div class="flex items-start space-x-2">
+                            <span class="font-bold text-purple-700 w-20 flex-shrink-0 speakable" onclick="speakText('Ms. Lee')">Ms. Lee:</span>
+                            <div class="flex-1">
+                                <span class="speakable" onclick="speakText('Good idea.')">Good idea.</span>
+                                <span class="font-bold text-sky-700 speakable" onclick="speakText('That way, people can help him find his way home.')">That way, people can help him find his way home.</span>
+                                <span class="inline-block bg-sky-100 text-sky-800 text-xs px-2 py-0.5 rounded ml-1 border border-sky-200">
+                                    <i class="fa-solid fa-circle-info mr-1"></i>That way → this/that way 表「如此一來；那樣一來」。
+                                </span>
+                            </div>
+                        </div>
+                        <div class="zh-trans text-sm text-slate-500 mt-1 pl-20 hidden">
+                            李小姐：好主意。那樣一來，人們就可以幫他找到回家的路。
+                        </div>
+                    </div>
+
+                    <!-- Line 18 -->
+                    <div class="dialogue-block p-2 rounded hover:bg-sky-50/50 transition">
+                        <div class="flex items-start space-x-2">
+                            <span class="font-bold text-indigo-700 w-20 flex-shrink-0 speakable" onclick="speakText('Jamie')">Jamie:</span>
+                            <div class="flex-1">
+                                <span class="speakable" onclick="speakText('I pray it won\'t happen again.')">I <strong>pray</strong> it won't happen again.</span>
+                            </div>
+                        </div>
+                        <div class="zh-trans text-sm text-slate-500 mt-1 pl-20 hidden">
+                            潔米：我祈禱這不會再發生了。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vocabulary Quick Summary Box on p.57 Bottom -->
+                <div class="mt-6 p-4 bg-sky-50 rounded-2xl border border-sky-200 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-sky-600 text-white font-bold text-xs px-3 py-1 rounded-full">應用字彙 CD2: 5</span>
+                        <button onclick="switchTab('vocab')" class="text-xs text-sky-700 font-bold hover:underline">觀看完整單字表 →</button>
+                    </div>
+                    <p class="text-xs md:text-sm text-slate-700 leading-relaxed font-medium">
+                        <strong>senior center</strong> 樂齡中心 | <strong>pleasure</strong> 愉快；榮幸 | <strong>attack</strong> 攻擊 | <strong>toe</strong> 腳趾 | <strong>bridge</strong> 橋 | <strong>drop</strong> （使）落下 | <strong>smoke</strong> 煙霧 | <strong>puppy</strong> 幼犬 | <strong>middle</strong> 中間 | <strong>carry</strong> 攜帶 | <strong>note</strong> 紙條 | <strong>wallet</strong> 錢包 | <strong>pocket</strong> 口袋 | <strong>pray</strong> 祈求；祈禱 | <strong>blow up</strong> 爆炸 | <strong>lie</strong> 躺（分詞 lying） | <strong>in time</strong> 及時
+                    </p>
+                    <p class="text-xs text-slate-500 pt-1 border-t border-sky-200/60">
+                        • <strong>認識字彙</strong>：volunteer 志工 | war 戰爭 | bomb 炸彈 | bark 狗吠 | address 地址
+                    </p>
+                </div>
+
+                <!-- Page Footer Number -->
+                <div class="flex justify-between items-center text-xs text-slate-400 border-t border-slate-100 pt-3">
+                    <button onclick="switchTab('page56')" class="text-sky-600 font-bold hover:underline flex items-center space-x-1">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>返回 p.56</span>
+                    </button>
+                    <span class="font-bold">Unit 3 | 57</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PRE-LISTENING QUESTIONS ================= -->
+        <section id="tab-prelistening" class="tab-content space-y-6 hidden">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+                <div class="flex items-center space-x-2 text-sky-600 font-bold text-sm">
+                    <i class="fa-solid fa-headphones text-lg"></i>
+                    <span>插頁補充 (Pre-Listening & Comprehension Questions)</span>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-800">課本圖片預測與聽後思考提問 (完整 10 題)</h2>
+                <p class="text-slate-500 text-sm">點擊問題卡片即可切換展開顯示參考答案。</p>
+            </div>
+
+            <!-- Pre-listening 5 Questions -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <h3 class="font-bold text-slate-800 border-b pb-3 border-slate-100 flex items-center justify-between">
+                    <span><i class="fa-solid fa-image text-sky-500 mr-2"></i> p.56-57 圖片觀察與預測提問 (Look & Predict)</span>
+                    <span class="text-xs bg-sky-100 text-sky-800 font-bold px-2.5 py-0.5 rounded-full">插頁 1 ~ 5 題</span>
+                </h3>
+
+                <div class="space-y-3">
+                    <!-- Q1 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 hover:bg-slate-100/80 transition cursor-pointer" onclick="toggleAnswer('p1')">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-slate-800 text-sm md:text-base">1. Look at the picture on page 56. What's happening to the city?</span>
+                            <i id="p1-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs"></i>
+                        </div>
+                        <div id="p1-ans" class="hidden mt-3 pt-3 border-t border-slate-200 text-sm text-sky-900 bg-sky-50/80 p-3 rounded-lg">
+                            <i class="fa-solid fa-circle-check mr-1.5 text-sky-600"></i><strong>參考答案：</strong> It's under attack.
+                        </div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 hover:bg-slate-100/80 transition cursor-pointer" onclick="toggleAnswer('p2')">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-slate-800 text-sm md:text-base">2. What's wrong with the soldier?</span>
+                            <i id="p2-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs"></i>
+                        </div>
+                        <div id="p2-ans" class="hidden mt-3 pt-3 border-t border-slate-200 text-sm text-sky-900 bg-sky-50/80 p-3 rounded-lg">
+                            <i class="fa-solid fa-circle-check mr-1.5 text-sky-600"></i><strong>參考答案：</strong> He's hurt.
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 hover:bg-slate-100/80 transition cursor-pointer" onclick="toggleAnswer('p3')">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-slate-800 text-sm md:text-base">3. Look at the picture on page 57. Where is the old man?</span>
+                            <i id="p3-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs"></i>
+                        </div>
+                        <div id="p3-ans" class="hidden mt-3 pt-3 border-t border-slate-200 text-sm text-sky-900 bg-sky-50/80 p-3 rounded-lg">
+                            <i class="fa-solid fa-circle-check mr-1.5 text-sky-600"></i><strong>參考答案：</strong> He's in the middle of the road.
+                        </div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 hover:bg-slate-100/80 transition cursor-pointer" onclick="toggleAnswer('p4')">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-slate-800 text-sm md:text-base">4. What's wrong with him?</span>
+                            <i id="p4-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs"></i>
+                        </div>
+                        <div id="p4-ans" class="hidden mt-3 pt-3 border-t border-slate-200 text-sm text-sky-900 bg-sky-50/80 p-3 rounded-lg">
+                            <i class="fa-solid fa-circle-check mr-1.5 text-sky-600"></i><strong>參考答案：</strong> He might be lost.
+                        </div>
+                    </div>
+
+                    <!-- Q5 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 hover:bg-slate-100/80 transition cursor-pointer" onclick="toggleAnswer('p5')">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-slate-800 text-sm md:text-base">5. If you saw a man like him in the middle of the road, what would you do?</span>
+                            <i id="p5-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs"></i>
+                        </div>
+                        <div id="p5-ans" class="hidden mt-3 pt-3 border-t border-slate-200 text-sm text-sky-900 bg-sky-50/80 p-3 rounded-lg">
+                            <i class="fa-solid fa-circle-check mr-1.5 text-sky-600"></i><strong>參考答案：</strong> I would wave to stop the cars and help the man get back to the sidewalk.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dialogue Comprehension 5 Questions -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <h3 class="font-bold text-slate-800 border-b pb-3 border-slate-100 flex items-center justify-between">
+                    <span><i class="fa-solid fa-clipboard-question text-emerald-600 mr-2"></i> 對話理解深度思考問答 (Comprehension Questions)</span>
+                    <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2.5 py-0.5 rounded-full">插頁 1 ~ 5 題</span>
+                </h3>
+
+                <div class="space-y-3">
+                    <!-- C1 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 hover:bg-slate-100/80 transition cursor-pointer" onclick="toggleAnswer('c1')">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-slate-800 text-sm md:text-base">1. How did Mr. Barr lose three toes?</span>
+                            <i id="c1-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs"></i>
+                        </div>
+                        <div id="c1-ans" class="hidden mt-3 pt-3 border-t border-slate-200 text-sm text-emerald-900 bg-emerald-50/80 p-3 rounded-lg">
+                            <i class="fa-solid fa-circle-check mr-1.5 text-emerald-600"></i><strong>參考答案：</strong> A bomb blew up near him during an attack.
+                        </div>
+                    </div>
+
+                    <!-- C2 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 hover:bg-slate-100/80 transition cursor-pointer" onclick="toggleAnswer('c2')">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-slate-800 text-sm md:text-base">2. How did a puppy save Mr. Barr's life?</span>
+                            <i id="c2-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs"></i>
+                        </div>
+                        <div id="c2-ans" class="hidden mt-3 pt-3 border-t border-slate-200 text-sm text-emerald-900 bg-emerald-50/80 p-3 rounded-lg">
+                            <i class="fa-solid fa-circle-check mr-1.5 text-emerald-600"></i><strong>參考答案：</strong> It led other soldiers to him by barking.
+                        </div>
+                    </div>
+
+                    <!-- C3 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 hover:bg-slate-100/80 transition cursor-pointer" onclick="toggleAnswer('c3')">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-slate-800 text-sm md:text-base">3. In the second dialogue, why can't Zac and Jamie find Mr. Barr at the senior center?</span>
+                            <i id="c3-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs"></i>
+                        </div>
+                        <div id="c3-ans" class="hidden mt-3 pt-3 border-t border-slate-200 text-sm text-emerald-900 bg-emerald-50/80 p-3 rounded-lg">
+                            <i class="fa-solid fa-circle-check mr-1.5 text-emerald-600"></i><strong>參考答案：</strong> He's in the hospital.
+                        </div>
+                    </div>
+
+                    <!-- C4 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 hover:bg-slate-100/80 transition cursor-pointer" onclick="toggleAnswer('c4')">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-slate-800 text-sm md:text-base">4. Why does Zac think Mr. Barr should carry a note with him?</span>
+                            <i id="c4-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs"></i>
+                        </div>
+                        <div id="c4-ans" class="hidden mt-3 pt-3 border-t border-slate-200 text-sm text-emerald-900 bg-emerald-50/80 p-3 rounded-lg">
+                            <i class="fa-solid fa-circle-check mr-1.5 text-emerald-600"></i><strong>參考答案：</strong> This way, people can help him find his way back to the senior center when he gets lost.
+                        </div>
+                    </div>
+
+                    <!-- C5 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 hover:bg-slate-100/80 transition cursor-pointer" onclick="toggleAnswer('c5')">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-slate-800 text-sm md:text-base">5. Why does Jamie say "I pray it won't happen again"?</span>
+                            <i id="c5-icon" class="fa-solid fa-chevron-down text-slate-400 text-xs"></i>
+                        </div>
+                        <div id="c5-ans" class="hidden mt-3 pt-3 border-t border-slate-200 text-sm text-emerald-900 bg-emerald-50/80 p-3 rounded-lg">
+                            <i class="fa-solid fa-circle-check mr-1.5 text-emerald-600"></i><strong>參考答案：</strong> She doesn't want Mr. Barr to get lost or hurt again.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= GRAMMAR BREAKDOWN (1~9) ================= -->
+        <section id="tab-grammar" class="tab-content space-y-6 hidden">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <h2 class="text-2xl font-bold text-slate-800">課文句型點撥與詳細文法解析 (完整 1 ~ 9 標號)</h2>
+                <p class="text-slate-500 text-sm mt-1">完整收錄對話課文標註之 1 至 9 點文法點撥及相關例句。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Point 1 -->
+                <div id="grammar-1" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2 hover:border-sky-400 transition">
+                    <span class="bg-sky-600 text-white font-bold text-xs px-2.5 py-1 rounded-md">1. have a good time + V-ing</span>
+                    <h3 class="font-bold text-slate-800 text-sm md:text-base">Zac and I had a good time listening to your war stories last week.</h3>
+                    <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+                        • <strong class="text-sky-700">have a good time＋V-ing</strong> 表「做某事很愉快」，good 也可換其他形容詞，如 hard、difficult、bad。<br>
+                        • <em>例句：</em> Jane had a hard time taking care of her kids by herself.（珍獨自照顧她的小孩很辛苦。）
+                    </p>
+                </div>
+
+                <!-- Point 2 -->
+                <div id="grammar-2" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2 hover:border-sky-400 transition">
+                    <span class="bg-sky-600 text-white font-bold text-xs px-2.5 py-1 rounded-md">2. With pleasure.</span>
+                    <h3 class="font-bold text-slate-800 text-sm md:text-base">With pleasure.</h3>
+                    <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+                        • 表「我很樂意。」，用於回應他人的請求，禮貌地表達樂意為他人做事。<br>
+                        • <em>例句：</em> A: Could you tell me about your trip to Australia?<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B: With pleasure.（我很樂意。）
+                    </p>
+                </div>
+
+                <!-- Point 3, 4, 5 Combined Passive Voice Explanation -->
+                <div id="grammar-3" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3 hover:border-sky-400 transition md:col-span-2">
+                    <span class="bg-amber-600 text-white font-bold text-xs px-2.5 py-1 rounded-md">3, 4, 5. 被動語態 (Passive Voice)</span>
+                    <div class="bg-amber-50 p-3 rounded-lg border border-amber-200 font-semibold text-slate-800 text-sm md:text-base space-y-1">
+                        <p>3. It was hurt during an attack one night.</p>
+                        <p>4. You were saved by a dog!</p>
+                        <p>5. The story was even reported in a newspaper.</p>
+                    </div>
+                    <div class="text-slate-600 text-xs md:text-sm leading-relaxed space-y-2">
+                        <p>• 這三句皆使用了<strong>被動語態</strong>，句型為「<strong class="text-sky-700">主詞 ＋ be動詞 ＋ 過去分詞（＋ by ＋ 動作執行者）</strong>」，用以強調「主詞被...了」。</p>
+                        <p>• <em>例句：</em> The man was seriously hurt. Luckily, he was saved by doctors.（那名男子受了重傷。幸運的是，他被醫生救活了。）</p>
+                        <p>• <strong>省略 by：</strong> 當動作執行者未知或不需要特別指出時，可以省略 by ＋ 動作執行者，如 3 和 5。<br>
+                        &nbsp;&nbsp;<em>例句：</em> A young woman was killed on the street last night.（一名年輕的女子昨晚在街上遇害。）</p>
+                        <p>• <strong>介系詞 in：</strong> 5 句尾的 <strong class="text-sky-700">in a newspaper</strong> 表「報紙上」的內容，介系詞須用 in。同理，「在書本、雜誌上」也使用 in。</p>
+                    </div>
+                </div>
+
+                <!-- Invisible placeholders for scroll targeting -->
+                <div id="grammar-4" class="hidden"></div>
+                <div id="grammar-5" class="hidden"></div>
+
+                <!-- Point 6 -->
+                <div id="grammar-6" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2 hover:border-sky-400 transition">
+                    <span class="bg-sky-600 text-white font-bold text-xs px-2.5 py-1 rounded-md">6. What 感嘆句</span>
+                    <h3 class="font-bold text-slate-800 text-sm md:text-base">What a great story!</h3>
+                    <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+                        • 此為 what 的感嘆句，句型為：<strong class="text-sky-700">What ＋ a(n) ＋ 形容詞 ＋ 單數可數名詞!</strong>，用來表達驚訝、讚美或喜悅。<br>
+                        • <em>例句：</em> What a beautiful morning!（真是個美麗的早晨！）
+                    </p>
+                </div>
+
+                <!-- Point 7 -->
+                <div id="grammar-7" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2 hover:border-sky-400 transition">
+                    <span class="bg-sky-600 text-white font-bold text-xs px-2.5 py-1 rounded-md">7. 交通與位置片語</span>
+                    <h3 class="font-bold text-slate-800 text-sm md:text-base">Mr. Barr suddenly walked into traffic and stood in the middle of the road.</h3>
+                    <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+                        • <strong class="text-sky-700">walk into traffic</strong>：指「走入車陣中」。<br>
+                        • <strong class="text-sky-700">in the middle of...</strong>：指「在⋯中間/中央」。<br>
+                        • <em>例句：</em> We heard someone crying in the middle of the night.（我們聽到有人半夜在哭。）
+                    </p>
+                </div>
+
+                <!-- Point 8 -->
+                <div id="grammar-8" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2 hover:border-sky-400 transition">
+                    <span class="bg-sky-600 text-white font-bold text-xs px-2.5 py-1 rounded-md">8. guess + 名詞子句</span>
+                    <h3 class="font-bold text-slate-800 text-sm md:text-base">I guess he forgot the way to our center and got scared.</h3>
+                    <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+                        • <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-800">he forgot the way to our center and got scared</code> 為省略 that 的名詞子句，作動詞 guess 的受詞。<br>
+                        • <strong class="text-sky-700">guess</strong> 表「猜想；認為」。與 think 相比，guess 較沒有把握、不那麼肯定。<br>
+                        • <em>例句：</em> Ian didn't talk to Henry this morning. I guess they had a fight.（伊恩今天早上都沒有和亨利說話。我猜他們是吵架了。）
+                    </p>
+                </div>
+
+                <!-- Point 9 -->
+                <div id="grammar-9" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2 hover:border-sky-400 transition md:col-span-2">
+                    <span class="bg-sky-600 text-white font-bold text-xs px-2.5 py-1 rounded-md">9. have a problem / problems + V-ing</span>
+                    <h3 class="font-bold text-slate-800 text-sm md:text-base">He has problems remembering things, so he gets lost often.</h3>
+                    <p class="text-slate-600 text-xs md:text-sm leading-relaxed space-y-1">
+                        • <strong class="text-sky-700">have a problem / problems ＋ V-ing</strong> 表「做某事有困難」。類似的用法還有 <strong class="text-sky-700">have fun ＋ V-ing</strong> 和 <strong class="text-sky-700">have trouble ＋ V-ing</strong>。<br>
+                        • <em>例句 1：</em> I have a problem turning on my computer. Could I use yours?（我電腦開機有問題。我可以用你的嗎？）<br>
+                        • <em>例句 2：</em> They had a lot of fun playing video games all night.（他們整晚打電動打得超開心。）<br>
+                        • <em>例句 3：</em> We had trouble finding the restaurant, so we were late.（我們在找那家餐廳時遇到困難，所以我們遲到了。）
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= VOCABULARY & CULTURE ================= -->
+        <section id="tab-vocab" class="tab-content space-y-6 hidden">
+            <!-- Teaching Supply Station: Senior Center Culture Note -->
+            <div class="bg-amber-50 rounded-2xl border border-amber-200 p-6 space-y-3 shadow-sm">
+                <div class="flex items-center space-x-2 text-amber-900 font-bold text-base md:text-lg">
+                    <i class="fa-solid fa-graduation-cap text-amber-600 text-xl"></i>
+                    <span>教學補給站：樂齡學習 (Senior Center)</span>
+                </div>
+                <p class="text-amber-900 text-xs md:text-sm leading-relaxed">
+                    教育部為提升高齡者學習動機，增進其身心健康，故結合各級學校、機關、民間團體，合力建置「樂齡學習中心」，此外也結合大學院校開設「樂齡大學」，以 55 歲以上國民為主要族群。「樂齡」取義「快樂學習，樂而忘齡」，亦與孔子「發憤忘食，樂以忘憂，不知老之將至」的人生態度相符。經過數年的推動，「樂齡」已成為我國推動高齡教育系統的通稱，並作為推動高齡教育相關政策之標誌。「樂齡」讀音亦為英文字 <strong>learning</strong> 的諧音，可藉此鼓勵長輩能培養活到老、學到老的終身學習精神。
+                </p>
+            </div>
+
+            <!-- Vocabulary Section -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">Unit 3 Dialogue 應用字彙 & 認識字彙 (CD2: 5)</h2>
+                        <p class="text-slate-500 text-xs md:text-sm mt-0.5">點擊單字即可播放發音。</p>
+                    </div>
+                </div>
+
+                <!-- Applied Vocab -->
+                <div class="space-y-3 pt-2">
+                    <h3 class="font-bold text-sky-800 text-base flex items-center">
+                        <span class="w-3 h-3 rounded-full bg-sky-500 mr-2"></span> 應用字彙 (Applied Vocabulary)
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="applied-vocab-grid">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <!-- Recognized Vocab -->
+                <div class="space-y-3 pt-4 border-t border-slate-100">
+                    <h3 class="font-bold text-slate-700 text-base flex items-center">
+                        <span class="w-3 h-3 rounded-full bg-slate-400 mr-2"></span> 認識字彙 (Recognized Vocabulary)
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="recognized-vocab-grid">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 58 T/F QUIZ ================= -->
+        <section id="tab-tf-quiz" class="tab-content space-y-6 hidden">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center space-x-2 text-emerald-600 font-bold text-sm mb-1">
+                        <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-xs font-bold">p.58</span>
+                        <span>C. Listen and write T or F (CD2: 6)</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-800">課本 p.58 聽力是非題測驗</h2>
+                    <p class="text-slate-500 text-sm mt-1">根據對話內容，聽到的描述為正確的寫 T，不正確的寫 F。</p>
+                </div>
+                <button onclick="playAudioCD2_6()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-xl transition shadow flex items-center space-x-2 self-start md:self-auto">
+                    <i class="fa-solid fa-volume-high"></i>
+                    <span>播放 1~4 題錄音檔 (CD2: 6)</span>
+                </button>
+            </div>
+
+            <!-- Quiz Questions List -->
+            <div class="space-y-4">
+                <!-- Q1 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3" id="tf-card-1">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="flex items-start space-x-3">
+                            <span class="w-8 h-8 rounded-full bg-slate-100 text-slate-700 font-bold flex items-center justify-center flex-shrink-0 text-sm">1</span>
+                            <div>
+                                <p class="font-semibold text-slate-800 text-base md:text-lg">
+                                    Mr. Barr was hurt during an attack one night.
+                                </p>
+                                <p class="text-xs text-slate-400 mt-0.5">（巴爾先生在某個晚上的襲擊中受傷。）</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 self-end sm:self-auto flex-shrink-0">
+                            <button onclick="checkTF(1, true, true)" id="btn-1-t" class="px-5 py-2 border-2 border-slate-200 hover:border-emerald-500 text-slate-700 font-bold rounded-xl transition text-sm">
+                                T (True)
+                            </button>
+                            <button onclick="checkTF(1, false, true)" id="btn-1-f" class="px-5 py-2 border-2 border-slate-200 hover:border-rose-500 text-slate-700 font-bold rounded-xl transition text-sm">
+                                F (False)
+                            </button>
+                        </div>
+                    </div>
+                    <div id="tf-ans-1" class="hidden p-4 rounded-xl text-sm space-y-1"></div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3" id="tf-card-2">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="flex items-start space-x-3">
+                            <span class="w-8 h-8 rounded-full bg-slate-100 text-slate-700 font-bold flex items-center justify-center flex-shrink-0 text-sm">2</span>
+                            <div>
+                                <p class="font-semibold text-slate-800 text-base md:text-lg">
+                                    Mr. Barr was saved by a puppy during the war.
+                                </p>
+                                <p class="text-xs text-slate-400 mt-0.5">（戰爭期間巴爾先生被一隻小狗拯救。）</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 self-end sm:self-auto flex-shrink-0">
+                            <button onclick="checkTF(2, true, true)" id="btn-2-t" class="px-5 py-2 border-2 border-slate-200 hover:border-emerald-500 text-slate-700 font-bold rounded-xl transition text-sm">
+                                T (True)
+                            </button>
+                            <button onclick="checkTF(2, false, true)" id="btn-2-f" class="px-5 py-2 border-2 border-slate-200 hover:border-rose-500 text-slate-700 font-bold rounded-xl transition text-sm">
+                                F (False)
+                            </button>
+                        </div>
+                    </div>
+                    <div id="tf-ans-2" class="hidden p-4 rounded-xl text-sm space-y-1"></div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3" id="tf-card-3">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="flex items-start space-x-3">
+                            <span class="w-8 h-8 rounded-full bg-slate-100 text-slate-700 font-bold flex items-center justify-center flex-shrink-0 text-sm">3</span>
+                            <div>
+                                <p class="font-semibold text-slate-800 text-base md:text-lg">
+                                    Mr. Barr was hit by a car while he was crossing a bridge.
+                                </p>
+                                <p class="text-xs text-slate-400 mt-0.5">（巴爾先生過橋時被車撞到。）</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 self-end sm:self-auto flex-shrink-0">
+                            <button onclick="checkTF(3, true, false)" id="btn-3-t" class="px-5 py-2 border-2 border-slate-200 hover:border-emerald-500 text-slate-700 font-bold rounded-xl transition text-sm">
+                                T (True)
+                            </button>
+                            <button onclick="checkTF(3, false, false)" id="btn-3-f" class="px-5 py-2 border-2 border-slate-200 hover:border-rose-500 text-slate-700 font-bold rounded-xl transition text-sm">
+                                F (False)
+                            </button>
+                        </div>
+                    </div>
+                    <div id="tf-ans-3" class="hidden p-4 rounded-xl text-sm space-y-1"></div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3" id="tf-card-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="flex items-start space-x-3">
+                            <span class="w-8 h-8 rounded-full bg-slate-100 text-slate-700 font-bold flex items-center justify-center flex-shrink-0 text-sm">4</span>
+                            <div>
+                                <p class="font-semibold text-slate-800 text-base md:text-lg">
+                                    Mr. Barr got lost because he forgot the address on his note.
+                                </p>
+                                <p class="text-xs text-slate-400 mt-0.5">（巴爾先生迷路是因為忘了紙條上的地址。）</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 self-end sm:self-auto flex-shrink-0">
+                            <button onclick="checkTF(4, true, false)" id="btn-4-t" class="px-5 py-2 border-2 border-slate-200 hover:border-emerald-500 text-slate-700 font-bold rounded-xl transition text-sm">
+                                T (True)
+                            </button>
+                            <button onclick="checkTF(4, false, false)" id="btn-4-f" class="px-5 py-2 border-2 border-slate-200 hover:border-rose-500 text-slate-700 font-bold rounded-xl transition text-sm">
+                                F (False)
+                            </button>
+                        </div>
+                    </div>
+                    <div id="tf-ans-4" class="hidden p-4 rounded-xl text-sm space-y-1"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= GOALS & CONTEXT ================= -->
+        <section id="tab-goals" class="tab-content space-y-6 hidden">
+            <!-- Header Banner -->
+            <div class="bg-gradient-to-r from-slate-900 via-sky-900 to-slate-900 rounded-3xl p-6 md:p-8 text-white shadow-xl">
+                <div class="max-w-3xl">
+                    <span class="inline-block px-3 py-1 bg-sky-500/30 text-sky-300 rounded-full text-xs font-semibold tracking-wider uppercase mb-3 border border-sky-500/30">
+                        Unit 3 Scene Context
+                    </span>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-3">情境介紹 (Context)</h2>
+                    <p class="text-slate-300 text-base leading-relaxed mb-4">
+                        Zac and Jamie are volunteering at a senior center. They listen to Mr. Barr's war stories. The next day, they can't find him because he's in the hospital.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Teaching Goals Card -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <h3 class="font-bold text-slate-800 text-lg flex items-center border-b pb-3 border-slate-100">
+                    <i class="fa-solid fa-bullseye text-sky-600 mr-2 text-xl"></i> 教學目標 (Teaching Goals)
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                    <div class="p-4 bg-sky-50/50 rounded-xl flex items-start space-x-3 border border-sky-100">
+                        <span class="w-6 h-6 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">1</span>
+                        <p class="text-slate-700 font-medium">學生能聽懂對話內容，並重述重點。</p>
+                    </div>
+                    <div class="p-4 bg-sky-50/50 rounded-xl flex items-start space-x-3 border border-sky-100">
+                        <span class="w-6 h-6 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">2</span>
+                        <p class="text-slate-700 font-medium">學生能聽懂被動語態的句子。</p>
+                    </div>
+                    <div class="p-4 bg-sky-50/50 rounded-xl flex items-start space-x-3 border border-sky-100">
+                        <span class="w-6 h-6 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">3</span>
+                        <p class="text-slate-700 font-medium">學生能認識老人照護的問題。</p>
+                    </div>
+                    <div class="p-4 bg-sky-50/50 rounded-xl flex items-start space-x-3 border border-sky-100">
+                        <span class="w-6 h-6 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">4</span>
+                        <p class="text-slate-700 font-medium">學生能認同志工服務的意義。</p>
+                    </div>
+                    <div class="p-4 bg-sky-50/50 rounded-xl flex items-start space-x-3 border border-sky-100 md:col-span-2">
+                        <span class="w-6 h-6 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">5</span>
+                        <p class="text-slate-700 font-medium">學生能透過口說練習，認識描述人物的方法。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Vocabulary Arrays
+        const appliedVocab = [
+            { word: "senior center", pos: "n.", trans: "樂齡中心" },
+            { word: "pleasure", pos: "n.", trans: "愉快；榮幸" },
+            { word: "attack", pos: "n.", trans: "攻擊" },
+            { word: "toe", pos: "n.", trans: "腳趾" },
+            { word: "bridge", pos: "n.", trans: "橋" },
+            { word: "drop", pos: "v.", trans: "（使）落下；丟下" },
+            { word: "smoke", pos: "n.", trans: "煙霧；抽菸" },
+            { word: "puppy", pos: "n.", trans: "幼犬" },
+            { word: "middle", pos: "n.", trans: "中間" },
+            { word: "carry", pos: "v.", trans: "攜帶" },
+            { word: "note", pos: "n.", trans: "紙條" },
+            { word: "wallet", pos: "n.", trans: "錢包" },
+            { word: "pocket", pos: "n.", trans: "口袋" },
+            { word: "pray", pos: "v.", trans: "祈求；祈禱" },
+            { word: "blow up", pos: "phr.", trans: "爆炸" },
+            { word: "lie", pos: "v.", trans: "躺；臥 (現在分詞為 lying)" },
+            { word: "in time", pos: "phr.", trans: "及時" }
+        ];
+
+        const recognizedVocab = [
+            { word: "volunteer", pos: "n. / v.", trans: "志工；自願參加" },
+            { word: "war", pos: "n.", trans: "戰爭" },
+            { word: "bomb", pos: "n.", trans: "炸彈" },
+            { word: "bark", pos: "v.", trans: "狗吠" },
+            { word: "address", pos: "n.", trans: "地址" }
+        ];
+
+        // T/F Explanations Data
+        const tfData = {
+            1: {
+                correct: true,
+                explanation: "正確 (T)。巴爾先生在對話中說到: 'It was hurt during an attack one night.'（它是在一次夜襲中受傷的。）"
+            },
+            2: {
+                correct: true,
+                explanation: "正確 (T)。巴爾先生說: 'A puppy... The sound led other soldiers to me.'（一隻小狗。牠的吠聲將其他士兵引到了我這裡。）"
+            },
+            3: {
+                correct: false,
+                explanation: "錯誤 (F)。巴爾先生過橋時是遇上炸彈爆炸受傷，而被車撞是昨天的意外：'walked into traffic and stood in the middle of the road'。"
+            },
+            4: {
+                correct: false,
+                explanation: "錯誤 (F)。巴爾先生迷路是因為忘了去中心的路線 (forgot the way to our center)，身上當時還沒有攜帶紙條（攜帶紙條是柴克提出的建議）。"
+            }
+        };
+
+        window.onload = function() {
+            renderVocabGrid('applied-vocab-grid', appliedVocab, 'sky');
+            renderVocabGrid('recognized-vocab-grid', recognizedVocab, 'slate');
+
+            // Mobile menu event listener
+            document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+                const sidebar = document.getElementById('sidebar');
+                sidebar.classList.toggle('hidden');
+            });
+        };
+
+        // Tab Switching Function
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            const targetTab = document.getElementById('tab-' + tabId);
+            if (targetTab) targetTab.classList.remove('hidden');
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const activeBtn = document.getElementById('nav-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+
+            if (window.innerWidth < 768) {
+                document.getElementById('sidebar').classList.add('hidden');
+            }
+        }
+
+        // Toggle Pre-listening & Comprehension Answers
+        function toggleAnswer(id) {
+            const ans = document.getElementById(id + '-ans');
+            const icon = document.getElementById(id + '-icon');
+            if (ans.classList.contains('hidden')) {
+                ans.classList.remove('hidden');
+                icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
+            } else {
+                ans.classList.add('hidden');
+                icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
+            }
+        }
+
+        // Toggle Chinese Translations
+        function toggleChineseTranslation() {
+            const transElements = document.querySelectorAll('.zh-trans');
+            transElements.forEach(el => el.classList.toggle('hidden'));
+        }
+
+        // Scroll directly to Grammar Point Card
+        function scrollToGrammar(pointNum) {
+            switchTab('grammar');
+            setTimeout(() => {
+                let targetId = 'grammar-' + pointNum;
+                if (pointNum === 4 || pointNum === 5) targetId = 'grammar-3';
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    target.classList.add('ring-4', 'ring-sky-400');
+                    setTimeout(() => target.classList.remove('ring-4', 'ring-sky-400'), 2000);
+                }
+            }, 100);
+        }
+
+        // Check T/F Quiz Answers
+        function checkTF(qNum, userChoice, correctChoice) {
+            const ansDiv = document.getElementById('tf-ans-' + qNum);
+            const btnT = document.getElementById(`btn-${qNum}-t`);
+            const btnF = document.getElementById(`btn-${qNum}-f`);
+            const info = tfData[qNum];
+
+            // Reset buttons styling
+            btnT.className = "px-5 py-2 border-2 border-slate-200 text-slate-700 font-bold rounded-xl transition text-sm";
+            btnF.className = "px-5 py-2 border-2 border-slate-200 text-slate-700 font-bold rounded-xl transition text-sm";
+
+            if (userChoice === true) {
+                btnT.classList.add(correctChoice ? 'bg-emerald-600' : 'bg-rose-600', 'text-white', 'border-transparent');
+            } else {
+                btnF.classList.add(!correctChoice ? 'bg-emerald-600' : 'bg-rose-600', 'text-white', 'border-transparent');
+            }
+
+            ansDiv.classList.remove('hidden');
+            if (userChoice === correctChoice) {
+                ansDiv.className = "p-4 rounded-xl text-sm bg-emerald-50 text-emerald-900 border border-emerald-200";
+                ansDiv.innerHTML = `<p class="font-bold"><i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i> 答對了！ (答案是 ${correctChoice ? 'T' : 'F'})</p><p class="mt-1.5 leading-relaxed">${info.explanation}</p>`;
+            } else {
+                ansDiv.className = "p-4 rounded-xl text-sm bg-rose-50 text-rose-900 border border-rose-200";
+                ansDiv.innerHTML = `<p class="font-bold"><i class="fa-solid fa-circle-xmark text-rose-600 mr-1.5"></i> 答錯囉！ (正確答案是 ${correctChoice ? 'T' : 'F'})</p><p class="mt-1.5 leading-relaxed">${info.explanation}</p>`;
+            }
+        }
+
+        // Render Vocabulary Grid Items
+        function renderVocabGrid(containerId, list, themeColor) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = list.map(v => `
+                <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm flex justify-between items-center hover:shadow-md transition">
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <span class="font-bold text-slate-800 text-base">${v.word}</span>
+                            <span class="text-xs text-slate-400 font-medium">${v.pos}</span>
+                        </div>
+                        <p class="text-${themeColor}-700 font-medium text-xs mt-0.5">${v.trans}</p>
+                    </div>
+                    <button onclick="speakText('${v.word.replace(/'/g, "\\'")}')" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-${themeColor}-100 hover:text-${themeColor}-600 text-slate-600 flex items-center justify-center transition flex-shrink-0">
+                        <i class="fa-solid fa-volume-high text-xs"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Speech Synthesis TTS Functions
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.88;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function playPart1Audio() {
+            const text = "Hi, Mr. Barr. Zac and I had a good time listening to your war stories last week. Could you tell us more? With pleasure. See my right leg? It was hurt during an attack one night. I also lost three toes on my left foot that night. How did you get hurt? I was crossing a bridge when a plane dropped a bomb nearby. It blew up, and the smoke filled the air. I was badly hurt and couldn't move. Oh no! Who saved you? A puppy. It saw me lying on the ground and began to bark. The sound led other soldiers to me. You were saved by a dog! The story was even reported in a newspaper. What a great story!";
+            speakText(text);
+        }
+
+        function playPart2Audio() {
+            const text = "Excuse me, Ms. Lee. Where's Mr. Barr? He's in the hospital. He was hit by a car yesterday. How did it happen? Mr. Barr suddenly walked into traffic and stood in the middle of the road. The driver couldn't stop the car in time. Why did he do that? I guess he forgot the way to our center and got scared. He has problems remembering things, so he gets lost often. I'm worried about him. Maybe he should carry a note with the center's address in his wallet or pocket. Good idea. That way, people can help him find his way home. I pray it won't happen again.";
+            speakText(text);
+        }
+
+        function playAudioCD2_6() {
+            const text = "Number 1. Mr. Barr was hurt during an attack one night. Number 2. Mr. Barr was saved by a puppy during the war. Number 3. Mr. Barr was hit by a car while he was crossing a bridge. Number 4. Mr. Barr got lost because he forgot the address on his note.";
+            speakText(text);
+        }
+    </script>
+</body>
+</html>

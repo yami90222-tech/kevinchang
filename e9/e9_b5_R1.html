@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國中英語 B5 L1-2 會考題與素養題 - 互動解析系統</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '"Noto Sans TC"', 'sans-serif'],
+          },
+          colors: {
+            primary: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0284c7',
+              600: '#0284c7',
+              700: '#0369a1',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col selection:bg-sky-500 selection:text-white">
+
+  <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <a href="../index.html" title="回首頁" class="bg-slate-900 hover:bg-sky-600 text-white px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl shadow-xs transition flex items-center gap-1.5 text-xs sm:text-sm font-bold border border-slate-700 flex-shrink-0">
+          <i class="fa-solid fa-house text-sky-400"></i>
+          <span>回首頁</span>
+        </a>
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-sky-500/20 shrink-0">
+          <i class="fa-solid fa-graduation-cap text-lg"></i>
+        </div>
+        <div>
+          <h1 class="text-base sm:text-lg font-bold text-slate-900 leading-tight">國中英語 B5 L1-2 會考題與素養題</h1>
+          <p class="text-xs text-slate-500 hidden sm:block">互動式試題解析與考題演練系統</p>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="hidden md:flex items-center space-x-1 bg-slate-100 p-1 rounded-xl text-sm font-medium">
+        <button onclick="switchTab('study')" id="tab-btn-study" class="px-4 py-1.5 rounded-lg text-sky-700 bg-white shadow-sm transition-all flex items-center gap-2">
+          <i class="fa-solid fa-book-open"></i> 解析研讀
+        </button>
+        <button onclick="switchTab('quiz')" id="tab-btn-quiz" class="px-4 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all flex items-center gap-2">
+          <i class="fa-solid fa-pen-to-square"></i> 即時測驗
+        </button>
+        <button onclick="switchTab('bookmarks')" id="tab-btn-bookmarks" class="px-4 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all flex items-center gap-2">
+          <i class="fa-solid fa-bookmark"></i> 錯題與收藏 (<span id="bookmark-count">0</span>)
+        </button>
+      </nav>
+
+      <!-- Mobile Menu Toggle -->
+      <div class="flex items-center gap-2 md:hidden">
+        <button onclick="toggleMobileMenu()" class="p-2 rounded-lg text-slate-600 hover:bg-slate-100">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 py-3 space-y-2">
+      <a href="../index.html" class="w-full text-left px-3 py-2 rounded-lg font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 flex items-center gap-2">
+        <i class="fa-solid fa-house text-sky-600"></i> 回首頁
+      </a>
+      <button onclick="switchTab('study'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg font-medium text-slate-700 hover:bg-slate-100 flex items-center gap-2">
+        <i class="fa-solid fa-book-open"></i> 解析研讀
+      </button>
+      <button onclick="switchTab('quiz'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg font-medium text-slate-700 hover:bg-slate-100 flex items-center gap-2">
+        <i class="fa-solid fa-pen-to-square"></i> 即時測驗
+      </button>
+      <button onclick="switchTab('bookmarks'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg font-medium text-slate-700 hover:bg-slate-100 flex items-center gap-2">
+        <i class="fa-solid fa-bookmark"></i> 錯題與收藏
+      </button>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+    <!-- Overview & Stats Bar -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm flex items-center space-x-4">
+        <div class="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center text-xl font-bold">
+          40
+        </div>
+        <div>
+          <div class="text-xs text-slate-500 font-medium">總題數</div>
+          <div class="text-base font-bold text-slate-800">100 分總分</div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm flex items-center space-x-4">
+        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl">
+          <i class="fa-solid fa-star"></i>
+        </div>
+        <div>
+          <div class="text-xs text-slate-500 font-medium">考題範疇</div>
+          <div class="text-base font-bold text-slate-800">歷屆會考 + 素養題</div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm flex items-center space-x-4">
+        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div>
+          <div class="text-xs text-slate-500 font-medium">練習進度</div>
+          <div class="text-base font-bold text-slate-800" id="progress-text">0 / 40 題</div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm flex items-center space-x-4">
+        <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-xl">
+          <i class="fa-solid fa-trophy"></i>
+        </div>
+        <div>
+          <div class="text-xs text-slate-500 font-medium">測驗正確率</div>
+          <div class="text-base font-bold text-slate-800" id="accuracy-text">-- %</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter & Search Controls -->
+    <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm mb-6 flex flex-col md:flex-row gap-4 items-center justify-between">
+      <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+        <button onclick="filterCategory('all')" class="cat-btn active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white transition-all" data-cat="all">全部 (40)</button>
+        <button onclick="filterCategory('vocab')" class="cat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-cat="vocab">字彙選擇 (16)</button>
+        <button onclick="filterCategory('grammar')" class="cat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-cat="grammar">文法選擇 (11)</button>
+        <button onclick="filterCategory('cloze')" class="cat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-cat="cloze">克漏字 (5)</button>
+        <button onclick="filterCategory('reading')" class="cat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" data-cat="reading">閱讀測驗 (8)</button>
+      </div>
+
+      <div class="relative w-full md:w-72">
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+        <input type="text" id="search-input" oninput="handleSearch()" placeholder="搜尋關鍵字或題號..." class="w-full pl-9 pr-4 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all">
+      </div>
+    </div>
+
+    <!-- TAB 1: STUDY MODE -->
+    <div id="view-study" class="space-y-6">
+      <div id="study-list-container" class="space-y-6"></div>
+    </div>
+
+    <!-- TAB 2: INTERACTIVE QUIZ MODE -->
+    <div id="view-quiz" class="hidden space-y-6">
+      <div class="bg-gradient-to-r from-sky-600 to-indigo-700 text-white rounded-2xl p-6 shadow-md relative overflow-hidden">
+        <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div>
+            <span class="bg-white/20 text-white text-xs px-2.5 py-1 rounded-full font-medium inline-block mb-2">測驗演練模式</span>
+            <h2 class="text-2xl font-bold">國中英語 B5 L1-2 會考與素養模擬測驗</h2>
+            <p class="text-sky-100 text-xs mt-1">選取答案後點擊核對，或完成全份測驗後點擊交卷結算分數！</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <button onclick="resetQuiz()" class="px-4 py-2 bg-white/10 hover:bg-white/20 backdrop-blur rounded-xl text-xs font-semibold border border-white/20 transition">
+              <i class="fa-solid fa-rotate-left mr-1"></i> 重設答案
+            </button>
+            <button onclick="submitQuiz()" class="px-5 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl text-xs shadow-lg transition">
+              <i class="fa-solid fa-paper-plane mr-1"></i> 送出交卷
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="quiz-list-container" class="space-y-6"></div>
+    </div>
+
+    <!-- TAB 3: BOOKMARKS -->
+    <div id="view-bookmarks" class="hidden space-y-6">
+      <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold">
+            <i class="fa-solid fa-bookmark"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-800 text-sm">重點筆記與錯題集</h3>
+            <p class="text-xs text-slate-600">這裡會自動收集您點選星號標籤或在測驗中做錯的考題。</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="bookmark-list-container" class="space-y-6"></div>
+    </div>
+
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 py-6 mt-12">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left text-xs text-slate-500">
+      <div>
+        <p class="font-bold text-slate-700">國中英語 B5 L1-2 會考題與素養題 - 互動式教學解析系統</p>
+        <p class="mt-0.5">設計用於國中英語複習、素養閱讀訓練與會考模擬演練</p>
+      </div>
+      <a href="../index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-sky-50 text-slate-700 hover:text-sky-700 font-bold border border-slate-200 transition">
+        <i class="fa-solid fa-house text-sky-600"></i>
+        <span>回首頁</span>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    const examData = [
+      // Vocabulary
+      { id: 1, cat: 'vocab', catTitle: '字彙選擇', score: 2.5, question: 'Lisa loves eating fast food, but her doctor told her to be careful with her health. Now, she is trying to change her eating habits and follow a healthy ____.', options: ['(A) choice', '(B) diet', '(C) wish', '(D) letter'], answer: 1, explanation: '句子提到 Lisa 需要改變飲食習慣，並注意健康，這與 diet（飲食、節食）最符合。', tags: ['字彙分析', '生活實用'], translation: 'Lisa 喜歡吃快餐，但她的醫生告訴她要注意健康。現在，她正試圖改變飲食習慣，並遵循健康的飲食 (diet)。' },
+      { id: 2, cat: 'vocab', catTitle: '字彙選擇', score: 2.5, question: 'Ela didn’t understand what skip meant in the sentence below:\n"Tim is always busy with schoolwork. To save time in the morning, he often skips breakfast and just drinks a cup of coffee."\nShe looked it up in the dictionary and found more than one meaning. What does skip mean here?', options: ['(A) To jump over a rope.', '(B) To leave out or not do something.', '(C) To move in a happy and light way.', '(D) To move quickly with small jumps.'], answer: 1, explanation: '句中的 Tim 為了省時間而不吃早餐，與 leave out or not do something（省略、不做某事）的意思相符，故選 (B)。', tags: ['字義推論', '會考閱讀素養'], translation: '句中 Tim 為了省時間而不吃早餐，這裡 skip 意思是「省略、不做某事」。' },
+      { id: 3, cat: 'vocab', catTitle: '字彙選擇', score: 2.5, svgType: 'angry_boy', question: 'Look at the picture. How does the boy feel about the garbage? He feels ____.', options: ['(A) happy', '(B) angry', '(C) worried', '(D) different'], answer: 1, explanation: '看圖得知，男孩握緊拳頭且頭上帶有生氣符號，感受應該是「生氣的」，故選 (B)。', tags: ['看圖理解', '會考題型'], translation: '看圖：男孩對垃圾感到怎麼樣？他感到生氣 (angry)。' },
+      { id: 4, cat: 'vocab', catTitle: '字彙選擇', score: 2.5, svgType: 'buying_envelope', question: 'Look at the picture. What is the girl doing now? She is ____.', options: ['(A) writing a letter', '(B) copying the answers on a test', '(C) drinking a glass of water', '(D) buying an envelope'], answer: 3, explanation: '看圖得知，女孩正在櫃檯前向店員「購買信封」，故選 (D)。', tags: ['看圖理解', '生活字彙'], translation: '女孩現在正在做什麼？她正在購買信封 (buying an envelope)。' },
+      { id: 5, cat: 'vocab', catTitle: '字彙選擇', score: 2.5, question: 'My cousin and I have ____ for a month, so we both look slim in the photo.', options: ['(A) gone abroad', '(B) been on a diet', '(C) washed our hands very often', '(D) talked on the phone'], answer: 1, explanation: '我的堂妹和我已經「節食 (been on a diet)」一個月了，所以我們兩個在照片裡看起來很瘦，故選 (B)。', tags: ['片語搭配', '現在完成式'], translation: '我和我堂妹已經節食一個月了，所以我們在照片裡看起來都很苗條。' },
+      { id: 6, cat: 'vocab', catTitle: '字彙選擇', score: 2.5, question: 'Lisa can ____ very fast on the computer, so she always helps the teacher write emails and finish reports in class.', options: ['(A) type', '(B) copy', '(C) skip', '(D) wish'], answer: 0, explanation: '句子提到 Lisa 在電腦上動作很快，能幫助老師寫電子郵件和完成報告，type（打字）最符合，故選 (A)。', tags: ['資訊字彙', '上下文理解'], translation: 'Lisa 在電腦上打字 (type) 很快，所以她總是能在課堂上幫老師寫電子郵件和完成報告。' },
+      { id: 7, cat: 'vocab', catTitle: '字彙選擇', score: 2.5, question: 'Last night, the writer felt unhappy about his new book; he went crazy, tore it angrily and stamped on it. He has to start all over again.\nWhat does stamped on it mean here?', options: ['(A) Put his feet on it and stood on it.', '(B) Sent it to the store or sold it.', '(C) Bought it and cooked it.', '(D) Made a choice or a decision.'], answer: 0, explanation: 'stamp 當動詞有踐踏、腳踩的意思，對應 (A) Put his feet on it and stood on it。', tags: ['動詞推論', '文章情節'], translation: '作家生氣地撕爛作品並用腳踐踏它 (stamped on it)。' },
+      { id: 8, cat: 'vocab', catTitle: '字彙選擇', score: 2.5, badge: '109.會考', question: 'Can you ____ your feet a little off the floor? I want to see if my keys are under the sofa.〔109.會考〕', options: ['(A) check', '(B) kick', '(C) raise', '(D) show'], answer: 2, explanation: '把腳「抬起 (raise)」離地，才能看到沙發底下的鑰匙，答案選 (C)。', tags: ['歷屆會考題', '核心動詞'], translation: '你可以把你的腳抬離地面一點嗎？我想看看我的鑰匙是不是在沙發下面。' },
+      { id: 9, cat: 'vocab', catTitle: '字彙選擇', score: 2.5, svgType: 'scared_ghost', question: 'Last night, I thought I saw a ____ beside my bed, so I cried out and ran out of my room.', options: ['(A) heart', '(B) somebody', '(C) ghost', '(D) ticket'], answer: 2, explanation: '看圖可知，床邊有一隻「鬼 (ghost)」，故選 (C)。注意 (B) somebody 前不加冠詞 a。', tags: ['看圖選擇', '情境字彙'], translation: '昨晚我以為我在床邊看到一隻鬼 (ghost)，所以我大叫並衝出了房間。' },
+      { id: 10, cat: 'vocab', catTitle: '字彙選擇', score: 2.5, svgType: 'castle_tour', question: 'Look at the picture. What are these people doing?', options: ['(A) Downloading something online.', '(B) Going to the movie theater.', '(C) Watching the full moon.', '(D) Walking to an old castle.'], answer: 3, explanation: '看圖可知，人們正走近城堡，選 (D) Walking to an old castle。', tags: ['看圖理解', '情境動作'], translation: '照片中的人們正在做什麼？正在走向一座古堡。' },
+      { id: 11, cat: 'vocab', catTitle: '字彙選擇', score: 2.5, question: 'We need to ____ a hotel before our trip to make sure we have a place to stay.', options: ['(A) book', '(B) read', '(C) write', '(D) check'], answer: 0, explanation: '「book」做動詞表示「預訂」，最符合預訂飯店之句意。', tags: ['多義字演練', '旅遊字彙'], translation: '我們需要在旅行前預訂 (book) 飯店，以確保有地方住。' },
+      { id: 12, cat: 'vocab', catTitle: '字彙選擇', score: 2.5, question: 'Before the movie started, the workers set the chairs and tables in the outdoor theater so people could sit comfortably.\nWhat does set mean here?', options: ['(A) A group of things that go together.', '(B) To put things in the right place.', '(C) To become hard after some time.', '(D) A place where movies are made.'], answer: 1, explanation: '「擺放」戶外劇場的座位和桌子，set 表示「擺放、安排 (To put things in the right place)」，故選 (B)。', tags: ['字義推論', '一詞多義'], translation: '工作人員將椅子和桌子擺放妥當 (set)。' },
+      { id: 13, cat: 'vocab', catTitle: '字彙選擇', score: 2.5, badge: '113.會考', question: 'Our school basketball team won the national game last night. We are so ____ them.〔113.會考〕', options: ['(A) popular with', '(B) proud of', '(C) sorry for', '(D) worried about'], answer: 1, explanation: '籃球隊贏得了全國比賽，可推論我們「以…為榮 (be proud of)」，答案為 (B)。', tags: ['歷屆會考題', '常用形容詞片語'], translation: '我們學校的籃球隊昨晚贏得了全國比賽。我們真為他們感到驕傲 (proud of)。' },
+      { id: 14, cat: 'vocab', catTitle: '字彙選擇', score: 2.5, question: 'Emma understands that not all the news is true, so she always checks the ____ of the information before believing it.', options: ['(A) sentence', '(B) piece', '(C) source', '(D) ticket'], answer: 2, explanation: '在相信新聞前需確認資訊的「來源 (source)」，故選 (C)。', tags: ['媒體素養', '核心字彙'], translation: 'Emma 在相信新聞之前總是會確認資訊的來源 (source)。' },
+      { id: 15, cat: 'vocab', catTitle: '字彙選擇', score: 2.5, question: 'The new movie was a big hit. Many people went to see it, and everyone was talking about it.\nWhat does hit mean here?', options: ['(A) To touch something hard.', '(B) Something that is very popular and successful.', '(C) To push a door.', '(D) To get to a place.'], answer: 1, explanation: '名詞 a big hit 表示「非常受歡迎且成功的事物」，選 (B)。', tags: ['字義推論', '閱讀素養'], translation: '這部新電影大受歡迎 (a big hit)。' },
+      { id: 16, cat: 'vocab', catTitle: '字彙選擇', score: 2.5, question: 'These poor people didn’t eat for weeks. That is the reason why they dug in when they saw so much food in front of them.\nWhat does dug in here mean?', options: ['(A) Helped themselves and started to eat.', '(B) Checked something out carefully.', '(C) Looked for something in a hurry.', '(D) Put something into the earth.'], answer: 0, explanation: 'dig in 在這裡是指「大吃特吃、開動」，答案選 (A)。', tags: ['成語片語', '文意推論'], translation: 'dig in 在這裡是指開動、大吃特吃。' },
+
+      // Grammar
+      { id: 17, cat: 'grammar', catTitle: '文法選擇', score: 2.5, badge: '112.大陸會考', question: 'Henry said he would be home by five o’clock. But it’s already eight now and he ____.〔112.大陸會考〕', options: ['(A) hasn’t come back', '(B) doesn’t come back', '(C) didn’t come back', '(D) wouldn’t come back'], answer: 0, explanation: '從過去持續到現在仍未回家的狀態，用「現在完成式」，選 (A) hasn’t come back。', tags: ['現在完成式', '歷屆會考題'], translation: 'Henry 說他五點前會到家。但現在已經八點了，他還沒有回來 (hasn’t come back)。' },
+      { id: 18, cat: 'grammar', catTitle: '文法選擇', score: 2.5, badge: '113.會考', question: 'I can’t tell you what I think of the movie because I ____ it. I’ll probably watch it this Saturday.〔113.會考〕', options: ['(A) am not seeing', '(B) don’t see', '(C) haven’t seen', '(D) won’t see'], answer: 2, explanation: '到「目前為止」尚未看過該電影，表示經驗否定需用現在完成式 (haven’t seen)，選 (C)。', tags: ['現在完成式', '歷屆會考題'], translation: '我無法告訴你我對這部電影的看法，因為我還沒看過 (haven’t seen)。' },
+      { id: 19, cat: 'grammar', catTitle: '文法選擇', score: 2.5, badge: '110.會考', question: 'Paul misses his parents a lot. He ____ them since he came to work in Taiwan a year ago.〔110.會考〕', options: ['(A) didn’t see', '(B) doesn’t see', '(C) hasn’t seen', '(D) won’t see'], answer: 2, explanation: '句中有關鍵字 since（自從...以來），主要子句需用現在完成式，故選 (C)。', tags: ['現在完成式', 'since關鍵字'], translation: '自從他一年前來台灣工作以來，他就沒有看過他們了 (hasn’t seen)。' },
+      { id: 20, cat: 'grammar', catTitle: '文法選擇', score: 2.5, question: 'Jenny hasn’t finished her homework ____; that is why her mom is quite unhappy about that.', options: ['(A) already', '(B) too', '(C) yet', '(D) since'], answer: 2, explanation: 'yet 用於現在完成式的否定句或疑問句句尾，表示「還（沒）」，選 (C)。', tags: ['完成式副詞', 'yet/already辨析'], translation: 'Jenny 還沒 (yet) 完成她的作業。' },
+      { id: 21, cat: 'grammar', catTitle: '文法選擇', score: 2.5, question: 'Emma walked into the café, looked around, and smiled. "Wow, this place ____ so much! It feels so different from before."', options: ['(A) changes', '(B) changed', '(C) has changed', '(D) is changing'], answer: 2, explanation: '強調過去發生的改變持續影響目前的感受，使用現在完成式 (has changed)。', tags: ['現在完成式', '時態影響'], translation: '哇，這個地方改變 (has changed) 好多！' },
+      { id: 22, cat: 'grammar', catTitle: '文法選擇', score: 2.5, question: 'The small coffee shop opened two years ago. Over time, it ____ a lot of new guests. Now, the shop is always full.', options: ['(A) gets', '(B) got', '(C) has gotten', '(D) is getting'], answer: 2, explanation: '表現從過去到現在累積經營的成果，用現在完成式 (has gotten)。', tags: ['現在完成式', '累積狀態'], translation: '隨著時間過去，它已經吸引 (has gotten) 了許多新客人。' },
+      { id: 23, cat: 'grammar', catTitle: '文法選擇', score: 2.5, badge: '109.會考', question: 'For the past twenty years, my father ____ in a school library. But he’ll leave the job next month.〔109.會考〕', options: ['(A) worked', '(B) has worked', '(C) is working', '(D) works'], answer: 1, explanation: '「For the past + 時間」配合現在持續進行的狀態，用現在完成式 (has worked)，選 (B)。', tags: ['現在完成式', '歷屆會考題'], translation: '在過去的二十年裡，我父親一直在學校圖書館工作 (has worked)。' },
+      { id: 24, cat: 'grammar', catTitle: '文法選擇', score: 2.5, badge: '111.會考', question: 'Have you found a summer job yet? Mr. Firth ____ someone to take care of his kids during the vacation.〔111.會考〕', options: ['(A) has looked for', '(B) is looking for', '(C) looks for', '(D) was looking for'], answer: 1, explanation: '表達 Firth 先生「目前正在尋找」幫手，用現在進行式 (is looking for)。', tags: ['進行式', '情境時態'], translation: 'Firth 先生目前正尋找 (is looking for) 人在假期照顧孩子。' },
+      { id: 25, cat: 'grammar', catTitle: '文法選擇', score: 2.5, question: 'My dad isn’t ____ in horror movies, so he felt bored when watching the movie.', options: ['(A) interesting', '(B) interested', '(C) surprising', '(D) surprised'], answer: 1, explanation: '情緒形容詞：V-ed 用於人的感受，搭配 in 構成 be interested in（對...感興趣），選 (B)。', tags: ['情緒形容詞', 'ed/ing辨析'], translation: '我爸爸對恐怖電影不感興趣 (interested)。' },
+      { id: 26, cat: 'grammar', catTitle: '文法選擇', score: 2.5, question: 'When Jane found that the diamond on her ring was fake, she was ____ angry ____ say anything.', options: ['(A) enough; to', '(B) so; that', '(C) not; enough to', '(D) too; to'], answer: 3, explanation: '句型 "too + Adj + to + V"（太...以致於不能...），故選 (D) too; to。', tags: ['too...to句型', '重要句法'], translation: '她太生氣而說不出任何話來 (too angry to say anything)。' },
+      { id: 27, cat: 'grammar', catTitle: '文法選擇', score: 2.5, question: 'Emma was very ____ when she got to the water park. The new water slide looked ____ that she couldn’t wait to try it.', options: ['(A) exciting; so exciting', '(B) excited; so excited', '(C) excited; so exciting', '(D) exciting; too excited'], answer: 2, explanation: '修飾人的感受用 excited；修飾事物特質用 exciting，配合 so...that... 句型，選 (C)。', tags: ['情緒形容詞', 'so...that句型'], translation: 'Emma 感到非常興奮 (excited)。新滑水道看起來如此刺激 (so exciting)。' },
+
+      // Cloze
+      { id: 28, cat: 'cloze', catTitle: '克漏字測驗', score: 2.5, passageId: 'p_maggie', passageTitle: '給 Maggie 的信', passageText: '<strong>Dear Maggie,</strong><br>I know you won’t be happy but I still have to say this again. It hurts me to think that you’re going to <u>(1)</u>. I know you’ve always wanted to be like those actresses with big eyes and slim legs...', question: '（ 1 ）', options: ['(A) change the way you are', '(B) give up being an actress', '(C) travel with a theater group', '(D) run away from your friends'], answer: 0, explanation: '後文提及想要大眼睛與瘦腿，代表她想「改變她現在的樣子 (change the way you are)」，選 (A)。', tags: ['克漏字', '文章上下文推論'] },
+      { id: 29, cat: 'cloze', catTitle: '克漏字測驗', score: 2.5, passageId: 'p_maggie', passageTitle: '給 Maggie 的信', question: '（ 2 ）', options: ['(A) you’re too shy to talk with people', '(B) you just don’t want to be like others', '(C) you don’t think you’re good enough', '(D) you don’t know what you’ve missed'], answer: 2, explanation: '由文中「如果你不先嘗試喜歡自己」可知，更擔心的是她「覺得自己不夠好」，選 (C)。', tags: ['克漏字', '情感文意理解'] },
+      { id: 30, cat: 'cloze', catTitle: '克漏字測驗', score: 2.5, passageId: 'p_copyright', passageTitle: 'Betty 與版權意識', passageText: 'Betty loves music very much... At first, she felt <u>(1)</u> excited that she quickly started saving as many songs as she could. However, when she played the music, it was terrible. There was a lot of noise, and <u>(2)</u>... Now, <u>(3)</u>. She knows that protecting copyright is the best way to keep the music world going!', question: '（ 1 ）', options: ['(A) very', '(B) too', '(C) so', '(D) much'], answer: 2, explanation: '搭配句型 so... that...，故選 (C) so。', tags: ['克漏字', 'so...that句型'] },
+      { id: 31, cat: 'cloze', catTitle: '克漏字測驗', score: 2.5, passageId: 'p_copyright', passageTitle: 'Betty 與版權意識', question: '（ 2 ）', options: ['(A) the singers’ voices sounded strange', '(B) the singers could dance beautifully', '(C) the singers were angry about it', '(D) the singers worked hard on it'], answer: 0, explanation: '承接音質很差、有雜音，補充說明「歌手的聲音聽起來也很奇怪」，選 (A)。', tags: ['克漏字', '語意連貫'] },
+      { id: 32, cat: 'cloze', catTitle: '克漏字測驗', score: 2.5, passageId: 'p_copyright', passageTitle: 'Betty 與版權意識', question: '（ 3 ）', options: ['(A) she feels bored with it', '(B) she feels proud of herself', '(C) she is surprised at it', '(D) she is interested in music'], answer: 1, explanation: '改用正版 APP 支持喜愛的歌手，「她為自己感到自豪 (feels proud of herself)」，選 (B)。', tags: ['克漏字', '情境結語'] },
+
+      // Reading
+      { id: 33, cat: 'reading', catTitle: '閱讀測驗', score: 2.5, passageId: 'p_news', passageTitle: '兩則新聞報導（節食與過量咖啡因）', passageText: 'Isabelle Caro died at 28 due to anorexia. Thomas Mansfield died because of caffeine toxicity from high-dose pre-workout caffeine.', question: 'What is mainly talked about in both pieces of news?', options: ['(A) More people need to care about their looks.', '(B) People’s ways of being strong change with time.', '(C) Staying healthy is more important than losing weight.', '(D) Drinking coffee or eating less will make people sick.'], answer: 2, explanation: '兩則新聞皆點出「保持健康比減重瘦身更重要」，選 (C)。', tags: ['閱讀主旨', '素養比較'] },
+      { id: 34, cat: 'reading', catTitle: '閱讀測驗', score: 2.5, passageId: 'p_news', passageTitle: '兩則新聞報導（節食與過量咖啡因）', question: 'What does it mean when someone is noted?', options: ['(A) Famous.', '(B) Strange.', '(C) Forgettable.', '(D) Successful.'], answer: 0, explanation: '文中提到全球都知道她的事蹟，可知 noted 為著名的 (Famous)，選 (A)。', tags: ['字義推論', '上下文脈絡'] },
+      { id: 35, cat: 'reading', catTitle: '閱讀測驗', score: 2.5, passageId: 'p_news', passageTitle: '兩則新聞報導（節食與過量咖啡因）', question: 'What do we know from the news?', options: ['(A) Isabelle Caro was popular because of her pretty look.', '(B) Isabelle Caro stood out to tell people the trouble of eating problem.', '(C) Thomas Mansfield always drank coffee after doing exercise.', '(D) Thomas Mansfield died because he got anorexia.'], answer: 1, explanation: 'Isabelle Caro 挺身而出告誡大眾厭食症的痛苦，選 (B)。', tags: ['細節理解', '文章推論'] },
+      { id: 36, cat: 'reading', catTitle: '閱讀測驗', score: 2.5, passageId: 'p_scam', passageTitle: '網路詐騙與二次詐騙', passageText: 'Every one out of three has been tricked online. Mr. Ripley lost $1,000,000 to a scam, then paid another $20,000 to a fake lawyer (the second-time scam).', question: 'From the reading, which is true?', options: ['(A) About 33% of people got scammed.', '(B) Mr. Ripley got his twenty thousand dollars back because of Tom Gibson’s help.', '(C) Mr. Ripley’s daughter works at a police station.', '(D) The second-time scam is about falling in love with a stranger online.'], answer: 0, explanation: 'every one out of three 代表 1/3 ≈ 33%，故 (A) 正確。', tags: ['數據理解', '素養社會議題'] },
+      { id: 37, cat: 'reading', catTitle: '閱讀測驗', score: 2.5, passageId: 'p_scam', passageTitle: '網路詐騙與二次詐騙', question: 'What is the main idea of the reading?', options: ['(A) To ask the police to catch the bad guys.', '(B) To help the victims get the money back.', '(C) To tell people a new kind of scam trick.', '(D) To give people some tips about stopping scams.'], answer: 2, explanation: '文章重點在告知大眾新型態的「二次詐騙 (second-time scam)」，選 (C)。', tags: ['文章主旨', '社會素養'] },
+      { id: 38, cat: 'reading', catTitle: '閱讀測驗', score: 2.5, passageId: 'p_movie', passageTitle: '電影時刻表與觀影對話', svgType: 'movie_schedule', passageText: 'Joe: Free 12:30 - 16:00. Katy, Zoe, and Joe choose Batman Begins (2 hrs long).', question: 'If the movie Batman Begins is 2 hours long, which time may they choose?', options: ['(A) 12:00.', '(B) 13:30.', '(C) 14:00.', '(D) 15:10.'], answer: 1, explanation: '13:30 看至 15:30，完全落在 Joe 的空閒時間 (12:30~16:00) 內，故選 (B)。', tags: ['生活素養', '時間邏輯推論'] },
+      { id: 39, cat: 'reading', catTitle: '閱讀測驗', score: 2.5, passageId: 'p_movie', passageTitle: '電影時刻表與觀影對話', question: 'How much will they pay for the movie?', options: ['(A) NT$150.', '(B) NT$180.', '(C) NT$450.', '(D) NT$540.'], answer: 2, explanation: '三人均為學生，購買學生票 NT$150 × 3 = 450 元，選 (C)。', tags: ['圖表票價計算', '素養計算'] },
+      { id: 40, cat: 'reading', catTitle: '閱讀測驗', score: 2.5, passageId: 'p_movie', passageTitle: '電影時刻表與觀影對話', question: 'What is right?', options: ['(A) Joe sees Zoe every day during the summer vacation.', '(B) Katy lives with Zoe.', '(C) The theater doesn’t open until 11:00 a.m.', '(D) There are three movies in the theater.'], answer: 3, explanation: '對照時刻表可知戲院播放 3 部電影，故選 (D)。', tags: ['綜合圖表判讀', '會考閱讀題'] }
+    ];
+
+    let currentTab = 'study';
+    let currentCategory = 'all';
+    let searchQuery = '';
+    let userAnswers = {};
+    let bookmarkedIds = new Set();
+    let checkedQuizIds = new Set();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderAll();
+    });
+
+    function switchTab(tab) {
+      currentTab = tab;
+      ['study', 'quiz', 'bookmarks'].forEach(t => {
+        const btn = document.getElementById(`tab-btn-${t}`);
+        const view = document.getElementById(`view-${t}`);
+        if (t === tab) {
+          btn.className = 'px-4 py-1.5 rounded-lg text-sky-700 bg-white shadow-sm font-semibold transition-all flex items-center gap-2';
+          view.classList.remove('hidden');
+        } else {
+          btn.className = 'px-4 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all flex items-center gap-2';
+          view.classList.add('hidden');
+        }
+      });
+      renderAll();
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+
+    function filterCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.className = (btn.dataset.cat === cat)
+          ? 'cat-btn active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white transition-all'
+          : 'cat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all';
+      });
+      renderAll();
+    }
+
+    function handleSearch() {
+      searchQuery = document.getElementById('search-input').value.trim().toLowerCase();
+      renderAll();
+    }
+
+    function toggleBookmark(qId) {
+      if (bookmarkedIds.has(qId)) bookmarkedIds.delete(qId);
+      else bookmarkedIds.add(qId);
+      document.getElementById('bookmark-count').innerText = bookmarkedIds.size;
+      renderAll();
+    }
+
+    function getFilteredData() {
+      return examData.filter(q => {
+        if (currentCategory !== 'all' && q.cat !== currentCategory) return false;
+        if (searchQuery) {
+          const inNum = q.id.toString() === searchQuery;
+          const inQ = q.question.toLowerCase().includes(searchQuery);
+          const inExp = q.explanation.toLowerCase().includes(searchQuery);
+          const inTag = q.tags && q.tags.some(t => t.toLowerCase().includes(searchQuery));
+          if (!inNum && !inQ && !inExp && !inTag) return false;
+        }
+        return true;
+      });
+    }
+
+    function getSvgMarkup(type) {
+      if (type === 'angry_boy') {
+        return `<div class="my-3 p-3 bg-slate-100 rounded-xl flex justify-center items-center">
+          <svg width="200" height="150" viewBox="0 0 200 160" class="max-w-full"><rect width="200" height="160" fill="#f8fafc" rx="8"/><path d="M40 140 C30 110, 60 100, 70 120 C80 100, 110 110, 100 140 Z" fill="#475569"/><path d="M70 140 C60 120, 90 90, 110 110 C130 90, 140 120, 130 140 Z" fill="#334155"/><circle cx="150" cy="50" r="18" fill="#fde047" stroke="#0284c7" stroke-width="2"/><path d="M142 45 L147 48" stroke="#000" stroke-width="2"/><path d="M158 45 L153 48" stroke="#000" stroke-width="2"/><path d="M150 68 L150 105 M150 80 L135 95 M150 80 L165 95" stroke="#0284c7" stroke-width="4"/><path d="M125 35 L132 30 M130 25 L130 35" stroke="#ef4444" stroke-width="2"/></svg>
+        </div>`;
+      }
+      if (type === 'buying_envelope') {
+        return `<div class="my-3 p-3 bg-slate-100 rounded-xl flex justify-center items-center">
+          <svg width="200" height="150" viewBox="0 0 200 160" class="max-w-full"><rect width="200" height="160" fill="#f8fafc" rx="8"/><rect x="80" y="90" width="100" height="50" fill="#cbd5e1" stroke="#475569" stroke-width="2"/><circle cx="150" cy="35" r="14" fill="#fed7aa"/><circle cx="45" cy="65" r="12" fill="#fbcfe8"/><rect x="70" y="88" width="22" height="14" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5"/></svg>
+        </div>`;
+      }
+      if (type === 'scared_ghost') {
+        return `<div class="my-3 p-3 bg-slate-100 rounded-xl flex justify-center items-center">
+          <svg width="200" height="150" viewBox="0 0 200 160" class="max-w-full"><rect width="200" height="160" fill="#0f172a" rx="8"/><rect x="20" y="100" width="90" height="40" fill="#1e293b"/><circle cx="45" cy="85" r="10" fill="#fed7aa"/><path d="M130 110 C120 70, 130 40, 150 40 C170 40, 180 70, 170 110 Z" fill="#f8fafc" opacity="0.9"/><circle cx="143" cy="55" r="3" fill="#0f172a"/><circle cx="157" cy="55" r="3" fill="#0f172a"/></svg>
+        </div>`;
+      }
+      if (type === 'castle_tour') {
+        return `<div class="my-3 p-3 bg-slate-100 rounded-xl flex justify-center items-center">
+          <svg width="200" height="150" viewBox="0 0 200 160" class="max-w-full"><rect width="200" height="160" fill="#e0f2fe" rx="8"/><path d="M60 110 L60 60 L80 60 L80 40 L100 40 L100 60 L120 60 L120 110 Z" fill="#94a3b8"/><circle cx="30" cy="93" r="6" fill="#fde047"/><circle cx="150" cy="93" r="6" fill="#fde047"/></svg>
+        </div>`;
+      }
+      if (type === 'movie_schedule') {
+        return `<div class="my-3 p-4 bg-slate-900 text-white rounded-xl shadow-inner text-xs">
+          <div class="font-bold text-amber-400 text-center text-sm mb-2 border-b border-slate-700 pb-1">STAR CINEMA - SHOWTIMES</div>
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-slate-800 p-2 rounded border border-slate-700"><div class="font-bold text-sky-300">Batman Begins</div><div class="text-emerald-400 mt-1">13:30 / 16:30</div></div>
+            <div class="bg-slate-800 p-2 rounded border border-slate-700"><div class="font-bold text-rose-300">Train to Busan</div><div class="text-emerald-400 mt-1">10:00 / 14:10</div></div>
+            <div class="bg-slate-800 p-2 rounded border border-slate-700"><div class="font-bold text-amber-300">Inside Out 2</div><div class="text-emerald-400 mt-1">11:00 / 15:00</div></div>
+          </div>
+        </div>`;
+      }
+      return '';
+    }
+
+    function renderAll() {
+      if (currentTab === 'study') renderStudyMode();
+      else if (currentTab === 'quiz') renderQuizMode();
+      else if (currentTab === 'bookmarks') renderBookmarkMode();
+      updateStats();
+    }
+
+    function updateStats() {
+      const answeredCount = Object.keys(userAnswers).length;
+      document.getElementById('progress-text').innerText = `${answeredCount} / 40 題`;
+      if (answeredCount > 0) {
+        let correctCount = 0;
+        Object.keys(userAnswers).forEach(qId => {
+          const item = examData.find(x => x.id == qId);
+          if (item && userAnswers[qId] === item.answer) correctCount++;
+        });
+        document.getElementById('accuracy-text').innerText = `${Math.round((correctCount / answeredCount) * 100)} %`;
+      } else {
+        document.getElementById('accuracy-text').innerText = `-- %`;
+      }
+    }
+
+    function renderStudyMode() {
+      const container = document.getElementById('study-list-container');
+      const list = getFilteredData();
+      if (list.length === 0) {
+        container.innerHTML = `<div class="bg-white rounded-2xl p-8 text-center text-slate-500 border border-slate-200">未找到符合條件的題目。</div>`;
+        return;
+      }
+      let html = '';
+      let currentPassageId = null;
+      list.forEach((q) => {
+        const isBookmarked = bookmarkedIds.has(q.id);
+        if (q.passageText && q.passageId !== currentPassageId) {
+          currentPassageId = q.passageId;
+          html += `<div class="bg-sky-50/80 border border-sky-200 rounded-2xl p-6 shadow-sm mb-4"><div class="flex items-center gap-2 mb-3"><span class="bg-sky-600 text-white text-xs px-2.5 py-1 rounded-full font-bold">閱讀文章 / 題組</span><h3 class="font-bold text-slate-800 text-base">${q.passageTitle || ''}</h3></div><div class="prose text-sm text-slate-700 leading-relaxed bg-white p-4 rounded-xl border border-sky-100 shadow-inner">${q.passageText}</div></div>`;
+        }
+        html += `<div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm relative"><div class="flex items-center justify-between gap-2 mb-4"><div class="flex items-center gap-2 flex-wrap"><span class="bg-slate-900 text-white text-xs font-bold px-2.5 py-1 rounded-lg">第 ${q.id} 題</span><span class="bg-slate-100 text-slate-700 text-xs font-medium px-2.5 py-1 rounded-lg">${q.catTitle}</span>${q.badge ? `<span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded-lg">${q.badge}</span>` : ''}</div><button onclick="toggleBookmark(${q.id})" class="p-2 text-slate-400 hover:text-amber-500"><i class="${isBookmarked ? 'fa-solid fa-star text-amber-500 text-lg' : 'fa-regular fa-star text-lg'}"></i></button></div><div class="text-sm md:text-base font-semibold text-slate-800 leading-relaxed mb-3 whitespace-pre-line">${q.question}</div>${q.svgType ? getSvgMarkup(q.svgType) : ''}<div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 my-4">${q.options.map((opt, idx) => `<div class="p-3 rounded-xl border ${idx === q.answer ? 'bg-emerald-50/80 border-emerald-300 text-emerald-900 font-medium' : 'bg-slate-50/60 border-slate-200 text-slate-700'} text-xs md:text-sm flex items-center justify-between"><span>${opt}</span>${idx === q.answer ? '<span class="text-emerald-600 font-bold text-xs"><i class="fa-solid fa-circle-check"></i> 正確答案</span>' : ''}</div>`).join('')}</div>${q.translation ? `<div class="my-3 p-3 bg-slate-50 border-l-4 border-slate-400 text-xs text-slate-600 rounded-r-lg"><span class="font-bold text-slate-700">【中文翻譯】</span> ${q.translation}</div>` : ''}<div class="mt-4 pt-4 border-t border-slate-100 bg-sky-50/40 p-4 rounded-xl border border-sky-100/80"><div class="flex items-center gap-2 text-sky-800 font-bold text-xs mb-1"><i class="fa-solid fa-lightbulb"></i> 觀念解析與考點說明：</div><p class="text-xs md:text-sm text-slate-700 leading-relaxed">${q.explanation}</p></div></div>`;
+      });
+      container.innerHTML = html;
+    }
+
+    function renderQuizMode() {
+      const container = document.getElementById('quiz-list-container');
+      const list = getFilteredData();
+      if (list.length === 0) {
+        container.innerHTML = `<div class="bg-white rounded-2xl p-8 text-center text-slate-500 border border-slate-200">未找到符合條件的題目。</div>`;
+        return;
+      }
+      let html = '';
+      let currentPassageId = null;
+      list.forEach((q) => {
+        const userSel = userAnswers[q.id];
+        const isChecked = checkedQuizIds.has(q.id);
+        if (q.passageText && q.passageId !== currentPassageId) {
+          currentPassageId = q.passageId;
+          html += `<div class="bg-sky-50/80 border border-sky-200 rounded-2xl p-6 shadow-sm mb-4"><div class="flex items-center gap-2 mb-3"><span class="bg-sky-600 text-white text-xs px-2.5 py-1 rounded-full font-bold">閱讀文章 / 題組</span><h3 class="font-bold text-slate-800 text-base">${q.passageTitle || ''}</h3></div><div class="prose text-sm text-slate-700 leading-relaxed bg-white p-4 rounded-xl border border-sky-100 shadow-inner">${q.passageText}</div></div>`;
+        }
+        html += `<div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm relative"><div class="flex items-center justify-between gap-2 mb-4"><div class="flex items-center gap-2"><span class="bg-slate-900 text-white text-xs font-bold px-2.5 py-1 rounded-lg">第 ${q.id} 題</span><span class="bg-slate-100 text-slate-700 text-xs font-medium px-2.5 py-1 rounded-lg">${q.catTitle}</span></div>${isChecked ? (userSel === q.answer ? '<span class="text-emerald-600 font-bold text-xs bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200"><i class="fa-solid fa-circle-check"></i> 答對了！</span>' : '<span class="text-rose-600 font-bold text-xs bg-rose-50 px-2.5 py-1 rounded-lg border border-rose-200"><i class="fa-solid fa-circle-xmark"></i> 答錯了</span>') : ''}</div><div class="text-sm md:text-base font-semibold text-slate-800 leading-relaxed mb-3 whitespace-pre-line">${q.question}</div>${q.svgType ? getSvgMarkup(q.svgType) : ''}<div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 my-4">${q.options.map((opt, idx) => {
+          const isSelected = userSel === idx;
+          let btnStyle = 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100';
+          if (isChecked) {
+            if (idx === q.answer) btnStyle = 'bg-emerald-100 border-emerald-400 text-emerald-900 font-bold';
+            else if (isSelected) btnStyle = 'bg-rose-100 border-rose-400 text-rose-900 font-bold';
+          } else if (isSelected) btnStyle = 'bg-sky-100 border-sky-400 text-sky-900 font-bold shadow-sm';
+          return `<button onclick="selectOption(${q.id}, ${idx})" class="p-3 rounded-xl border text-left text-xs md:text-sm transition-all flex items-center justify-between ${btnStyle}"><span>${opt}</span>${isSelected ? '<i class="fa-solid fa-circle-dot text-sky-600"></i>' : '<i class="fa-regular fa-circle text-slate-300"></i>'}</button>`;
+        }).join('')}</div><div class="flex items-center justify-between pt-3 border-t border-slate-100"><button onclick="checkAnswer(${q.id})" class="px-4 py-1.5 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-xs font-semibold"><i class="fa-solid fa-magnifying-glass mr-1"></i> 即時核對解析</button></div>${isChecked ? `<div class="mt-4 pt-4 border-t border-slate-100 bg-sky-50/50 p-4 rounded-xl border border-sky-100"><div class="font-bold text-sky-800 text-xs mb-1">【解析與考點】</div><p class="text-xs md:text-sm text-slate-700 leading-relaxed">${q.explanation}</p></div>` : ''}</div>`;
+      });
+      container.innerHTML = html;
+    }
+
+    function selectOption(qId, optIdx) { userAnswers[qId] = optIdx; renderQuizMode(); updateStats(); }
+    function checkAnswer(qId) { if (userAnswers[qId] === undefined) { alert('請先點選答案再點擊核對！'); return; } checkedQuizIds.add(qId); renderQuizMode(); }
+    function resetQuiz() { if (confirm('確定要重設所有作答嗎？')) { userAnswers = {}; checkedQuizIds.clear(); renderQuizMode(); updateStats(); } }
+    function submitQuiz() {
+      let totalScore = 0;
+      examData.forEach(q => {
+        checkedQuizIds.add(q.id);
+        if (userAnswers[q.id] === q.answer) totalScore += q.score;
+        else if (userAnswers[q.id] !== undefined) bookmarkedIds.add(q.id);
+      });
+      document.getElementById('bookmark-count').innerText = bookmarkedIds.size;
+      renderQuizMode();
+      updateStats();
+      alert(`🎉 測驗完成！\n\n您的得分為：${totalScore} / 100 分`);
+    }
+
+    function renderBookmarkMode() {
+      const container = document.getElementById('bookmark-list-container');
+      const list = examData.filter(q => bookmarkedIds.has(q.id));
+      if (list.length === 0) {
+        container.innerHTML = `<div class="bg-white rounded-2xl p-12 text-center text-slate-500 border border-slate-200"><i class="fa-regular fa-star text-4xl text-slate-300 mb-3 block"></i><p class="font-bold text-slate-700">目前尚無錯題或收藏題目</p></div>`;
+        return;
+      }
+      let html = '';
+      list.forEach(q => {
+        html += `<div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm relative"><div class="flex items-center justify-between gap-2 mb-4"><div class="flex items-center gap-2"><span class="bg-amber-500 text-white text-xs font-bold px-2.5 py-1 rounded-lg">第 ${q.id} 題</span><span class="bg-slate-100 text-slate-700 text-xs font-medium px-2.5 py-1 rounded-lg">${q.catTitle}</span></div><button onclick="toggleBookmark(${q.id})" class="text-xs text-rose-500 font-semibold hover:underline"><i class="fa-solid fa-trash-can mr-1"></i> 移除收藏</button></div><div class="text-sm md:text-base font-semibold text-slate-800 leading-relaxed mb-3">${q.question}</div>${q.svgType ? getSvgMarkup(q.svgType) : ''}<div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl my-3 text-xs md:text-sm text-emerald-900 font-medium"><span class="font-bold">【正確答案】</span> ${q.options[q.answer]}</div><div class="p-4 bg-sky-50 rounded-xl border border-sky-100 text-xs md:text-sm text-slate-700 leading-relaxed"><div class="font-bold text-sky-800 mb-1">【重點解析】</div>${q.explanation}</div></div>`;
+      });
+      container.innerHTML = html;
+    }
+  </script>
+</body>
+</html>

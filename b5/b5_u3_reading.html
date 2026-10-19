@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 3 Reading: Animal Heroes 動物英雄 - 互動式閱讀學習</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', '"Noto Sans TC"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                        },
+                        amber: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .tooltip-box {
+            display: none;
+        }
+        .has-tooltip:hover .tooltip-box {
+            display: block;
+        }
+        @keyframes pulse-subtle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.75; }
+        }
+        .animate-pulse-subtle {
+            animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans h-full flex flex-col antialiased selection:bg-brand-200 selection:text-brand-800">
+
+    <!-- Top Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Title & Home Link -->
+                <div class="flex items-center space-x-3">
+                    <a href="../index.html" class="p-2 sm:px-3 sm:py-1.5 bg-slate-100 hover:bg-amber-500 hover:text-slate-950 text-slate-700 rounded-xl transition flex items-center gap-1.5 font-bold text-xs sm:text-sm border border-slate-200 shadow-sm" title="返回學習首頁">
+                        <i class="fa-solid fa-house text-amber-500"></i>
+                        <span class="hidden sm:inline">學習首頁</span>
+                    </a>
+                    <div class="bg-brand-600 text-white p-2.5 rounded-xl shadow-md flex items-center justify-center">
+                        <i class="fa-solid fa-paw text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold px-2 py-0.5 rounded bg-brand-100 text-brand-800">翰林 3上 B5U3</span>
+                            <span class="text-xs text-slate-500 hidden sm:inline">Reading Component</span>
+                        </div>
+                        <h1 class="text-base sm:text-lg font-bold text-slate-900 tracking-tight">Animal Heroes 動物英雄</h1>
+                    </div>
+                </div>
+
+                <!-- Main Navigation Tabs -->
+                <nav class="hidden md:flex space-x-1 bg-slate-100 p-1.5 rounded-xl text-sm font-semibold text-slate-600">
+                    <button onclick="switchTab('before')" id="tab-before" class="px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 bg-white text-slate-900 shadow-sm">
+                        <i class="fa-regular fa-compass text-amber-500"></i>
+                        <span>Before You Read</span>
+                    </button>
+                    <button onclick="switchTab('reading')" id="tab-reading" class="px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 hover:text-slate-900">
+                        <i class="fa-solid fa-book-open text-brand-600"></i>
+                        <span>課文與朗讀</span>
+                    </button>
+                    <button onclick="switchTab('organizer')" id="tab-organizer" class="px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 hover:text-slate-900">
+                        <i class="fa-solid fa-sitemap text-indigo-500"></i>
+                        <span>組織圖與策略</span>
+                    </button>
+                    <button onclick="switchTab('grammar')" id="tab-grammar" class="px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 hover:text-slate-900">
+                        <i class="fa-solid fa-feather text-rose-500"></i>
+                        <span>重點語法</span>
+                    </button>
+                    <button onclick="switchTab('quiz')" id="tab-quiz" class="px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 hover:text-slate-900">
+                        <i class="fa-solid fa-circle-check text-emerald-500"></i>
+                        <span>隨堂測驗</span>
+                    </button>
+                </nav>
+
+                <!-- Sister Modules & Mobile Menu -->
+                <div class="flex items-center space-x-2">
+                    <div class="hidden lg:flex items-center space-x-1 bg-slate-100 p-1 rounded-xl text-xs font-semibold text-slate-600">
+                        <a href="b5_u3_dialogue.html" class="px-2 py-1 rounded-lg hover:text-slate-900 transition">💬 對話</a>
+                        <a href="b5_u3_pattern.html" class="px-2 py-1 rounded-lg hover:text-slate-900 transition">⚡ 句型</a>
+                        <span class="px-2 py-1 rounded-lg bg-emerald-600 text-white shadow-sm">📚 閱讀</span>
+                        <a href="b5_u3_review.html" class="px-2 py-1 rounded-lg hover:text-slate-900 transition">🏆 複習</a>
+                    </div>
+                    <div class="md:hidden flex items-center">
+                        <button onclick="toggleMobileMenu()" class="p-2 text-slate-600 hover:text-slate-900 rounded-lg bg-slate-100">
+                            <i class="fa-solid fa-bars text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-4 space-y-2">
+            <a href="../index.html" class="block px-3 py-2 rounded-lg text-sm font-bold bg-amber-50 text-amber-900 border border-amber-200">
+                <i class="fa-solid fa-house mr-2 text-amber-600"></i> 返回學習基地首頁
+            </a>
+            <div class="grid grid-cols-4 gap-1 text-xs text-center font-bold py-1">
+                <a href="b5_u3_dialogue.html" class="py-1.5 bg-slate-100 text-slate-700 rounded-lg">💬 對話</a>
+                <a href="b5_u3_pattern.html" class="py-1.5 bg-slate-100 text-slate-700 rounded-lg">⚡ 句型</a>
+                <span class="py-1.5 bg-emerald-600 text-white rounded-lg">📚 閱讀</span>
+                <a href="b5_u3_review.html" class="py-1.5 bg-slate-100 text-slate-700 rounded-lg">🏆 複習</a>
+            </div>
+            <div class="border-t border-slate-100 pt-2 space-y-1">
+                <button onclick="switchTab('before'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2 bg-slate-100 text-slate-900">
+                    <i class="fa-regular fa-compass text-amber-500"></i> Before You Read 閱讀前
+                </button>
+                <button onclick="switchTab('reading'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:bg-slate-50 text-slate-700">
+                    <i class="fa-solid fa-book-open text-brand-600"></i> 課文與聽力朗讀
+                </button>
+                <button onclick="switchTab('organizer'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:bg-slate-50 text-slate-700">
+                    <i class="fa-solid fa-sitemap text-indigo-500"></i> 閱讀策略與組織圖
+                </button>
+                <button onclick="switchTab('grammar'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:bg-slate-50 text-slate-700">
+                    <i class="fa-solid fa-feather text-rose-500"></i> 課文解析與補充
+                </button>
+                <button onclick="switchTab('quiz'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:bg-slate-50 text-slate-700">
+                    <i class="fa-solid fa-circle-check text-emerald-500"></i> 互動隨堂測驗
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+
+        <!-- ================= SECTION 1: BEFORE YOU READ ================= -->
+        <section id="sec-before" class="space-y-6">
+            <!-- Learning Objectives Banner -->
+            <div class="bg-gradient-to-r from-brand-600 to-emerald-700 rounded-2xl p-6 text-white shadow-lg">
+                <div class="flex items-start gap-4">
+                    <div class="p-3 bg-white/10 rounded-xl backdrop-blur-sm hidden sm:block">
+                        <i class="fa-solid fa-bullseye text-3xl text-brand-200"></i>
+                    </div>
+                    <div>
+                        <span class="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-semibold uppercase tracking-wider mb-2">Lesson Learning Objectives 教學目標</span>
+                        <h2 class="text-2xl font-extrabold mb-2">本課閱讀重點與策略指南</h2>
+                        <ul class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm text-brand-50 font-medium">
+                            <li class="flex items-center gap-2 bg-white/10 p-2.5 rounded-lg">
+                                <i class="fa-solid fa-check-circle text-brand-200"></i>
+                                讀懂文章內容並能簡述文章大意
+                            </li>
+                            <li class="flex items-center gap-2 bg-white/10 p-2.5 rounded-lg">
+                                <i class="fa-solid fa-check-circle text-brand-200"></i>
+                                利用「預測與主題辨識」等閱讀策略
+                            </li>
+                            <li class="flex items-center gap-2 bg-white/10 p-2.5 rounded-lg">
+                                <i class="fa-solid fa-check-circle text-brand-200"></i>
+                                認識過去與現在動物如何成為英雄
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Warm-up Predicting Section -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4 mb-6">
+                    <span class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">1</span>
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900">Predicting (閱讀前預測)</h3>
+                        <p class="text-xs text-slate-500">看看插圖與文章標題，試著思考與回答下列問題。</p>
+                    </div>
+                </div>
+
+                <!-- Interactive Question Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Q1 -->
+                    <div class="p-5 rounded-xl border border-slate-200 hover:border-amber-400 transition-all bg-slate-50/50">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded">Question 1</span>
+                            <i class="fa-solid fa-medal text-amber-500"></i>
+                        </div>
+                        <p class="font-semibold text-slate-800 mb-3">Look at the picture on page 64. Why is the dog wearing medals?</p>
+                        <button onclick="toggleAnswer('ans-1')" class="text-xs font-semibold text-brand-600 hover:text-brand-700 flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> 顯示參考答案 (Reference Answer)
+                        </button>
+                        <div id="ans-1" class="hidden mt-3 p-3 bg-emerald-50 rounded-lg text-sm text-emerald-900 border border-emerald-100">
+                            <strong>Answer:</strong> I think maybe it is a war hero. (我想牠可能是一位戰爭英雄。)
+                        </div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="p-5 rounded-xl border border-slate-200 hover:border-amber-400 transition-all bg-slate-50/50">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded">Question 2</span>
+                            <i class="fa-solid fa-heading text-amber-500"></i>
+                        </div>
+                        <p class="font-semibold text-slate-800 mb-3">What can we learn from the title of the reading ("Animal Heroes")?</p>
+                        <button onclick="toggleAnswer('ans-2')" class="text-xs font-semibold text-brand-600 hover:text-brand-700 flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> 顯示參考答案 (Reference Answer)
+                        </button>
+                        <div id="ans-2" class="hidden mt-3 p-3 bg-emerald-50 rounded-lg text-sm text-emerald-900 border border-emerald-100">
+                            <strong>Answer:</strong> The reading is about animal heroes. (這篇文章是有關於動物英雄的故事。)
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="p-5 rounded-xl border border-slate-200 hover:border-amber-400 transition-all bg-slate-50/50">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded">Question 3</span>
+                            <i class="fa-solid fa-hands-holding-child text-amber-500"></i>
+                        </div>
+                        <p class="font-semibold text-slate-800 mb-3">Look at the pictures on pages 65 and 66. What might animal heroes do for people?</p>
+                        <button onclick="toggleAnswer('ans-3')" class="text-xs font-semibold text-brand-600 hover:text-brand-700 flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> 顯示參考答案 (Reference Answer)
+                        </button>
+                        <div id="ans-3" class="hidden mt-3 p-3 bg-emerald-50 rounded-lg text-sm text-emerald-900 border border-emerald-100">
+                            <strong>Answer:</strong> They might help the police, help people in a war, or play with their owners. (牠們可能會協助警察、在戰爭中幫助人們，或是陪主人玩耍。)
+                        </div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="p-5 rounded-xl border border-slate-200 hover:border-amber-400 transition-all bg-slate-50/50">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded">Question 4</span>
+                            <i class="fa-solid fa-heart text-amber-500"></i>
+                        </div>
+                        <p class="font-semibold text-slate-800 mb-3">How can animals be heroes?</p>
+                        <button onclick="toggleAnswer('ans-4')" class="text-xs font-semibold text-brand-600 hover:text-brand-700 flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> 顯示參考答案 (Reference Answer)
+                        </button>
+                        <div id="ans-4" class="hidden mt-3 p-3 bg-emerald-50 rounded-lg text-sm text-emerald-900 border border-emerald-100">
+                            <strong>Answer:</strong> They can be heroes by saving lives, helping people in need, or bringing joy to people. (牠們可以透過拯救生命、幫助有需要的人或帶來歡樂來成為英雄。)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Historical Hero Cards (Cher Ami & Sergeant Stubby) -->
+            <div class="bg-slate-900 text-white rounded-2xl p-6 shadow-xl">
+                <div class="flex items-center gap-2 mb-4">
+                    <i class="fa-solid fa-shield-halved text-amber-400 text-xl"></i>
+                    <h3 class="text-xl font-bold">教學補給站：課文歷史動物英雄故事 (Hero Spotlight)</h3>
+                </div>
+                <p class="text-slate-300 text-sm mb-6">了解課文中提過的兩個真實發生在第一次世界大戰中的英雄狗狗與鴿子的故事。</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Cher Ami -->
+                    <div class="bg-slate-800 rounded-xl p-5 border border-slate-700 space-y-3">
+                        <div class="flex justify-between items-center">
+                            <h4 class="text-lg font-bold text-emerald-400 flex items-center gap-2">
+                                <i class="fa-solid fa-dove"></i> 雪兒阿米 (Cher Ami)
+                            </h4>
+                            <span class="text-xs px-2 py-0.5 rounded bg-slate-700 text-amber-300">信鴿 Carrier Pigeon</span>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            第一次世界大戰（1918年）期間，美軍部隊在戰場遭到圍困且遭遇友軍誤擊。指揮官派雪兒阿米傳遞求救訊號。牠冒著猛烈砲火，即使胸部中彈、隻眼失明、腿部重傷，依然飛行了 <strong>40公里</strong> 將訊息送到，拯救了近 <strong>200名士兵</strong> 的生命！
+                        </p>
+                        <div class="pt-2 border-t border-slate-700 flex items-center justify-between text-xs text-slate-400">
+                            <span>榮獲獎章：法國「英勇十字勳章」</span>
+                            <span class="text-amber-400 font-semibold">Saved ~200 lives</span>
+                        </div>
+                    </div>
+
+                    <!-- Sergeant Stubby -->
+                    <div class="bg-slate-800 rounded-xl p-5 border border-slate-700 space-y-3">
+                        <div class="flex justify-between items-center">
+                            <h4 class="text-lg font-bold text-emerald-400 flex items-center gap-2">
+                                <i class="fa-solid fa-dog"></i> 史都比中士 (Sergeant Stubby)
+                            </h4>
+                            <span class="text-xs px-2 py-0.5 rounded bg-slate-700 text-amber-300">軍犬 Hero Dog</span>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            美軍著名的英雄犬，原為流浪狗，後參與17場戰鬥。史都比最偉大的貢獻是利用靈敏嗅覺<strong>預警毒氣攻擊 (gas attacks)</strong>，吠叫叫醒士兵及時戴上防毒面具。牠還能安慰傷兵，甚至親手（爪）活捉一名德軍間諜！
+                        </p>
+                        <div class="pt-2 border-t border-slate-700 flex items-center justify-between text-xs text-slate-400">
+                            <span>特殊榮譽：美國史上唯一獲授中士軍銜軍犬</span>
+                            <span class="text-amber-400 font-semibold">17 Battles Served</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 2: READING PASSAGE ================= -->
+        <section id="sec-reading" class="hidden space-y-6">
+            <!-- Audio Bar & Control Bar -->
+            <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-4 sticky top-16 z-20">
+                <div class="flex items-center gap-3">
+                    <button id="btn-play-all" onclick="toggleAudio()" class="w-12 h-12 rounded-full bg-brand-600 text-white flex items-center justify-center shadow-md hover:bg-brand-700 transition">
+                        <i id="play-icon" class="fa-solid fa-play text-lg ml-0.5"></i>
+                    </button>
+                    <div>
+                        <div class="text-sm font-bold text-slate-900">課文全文語音朗讀 (Text-to-Speech)</div>
+                        <div class="text-xs text-slate-500">點擊播放聽英語朗讀，或點擊單句聽單句發音</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 text-sm">
+                    <!-- Translate Toggle Switch -->
+                    <label class="inline-flex items-center cursor-pointer select-none">
+                        <input type="checkbox" id="toggle-translate" onchange="toggleTranslation()" class="sr-only peer" checked>
+                        <div class="relative w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-600"></div>
+                        <span class="ms-2 font-medium text-slate-700 text-xs">顯示中文翻譯</span>
+                    </label>
+
+                    <!-- Speed Selector -->
+                    <select id="speech-rate" class="bg-slate-100 border border-slate-300 text-slate-700 text-xs rounded-lg p-2 focus:ring-brand-500">
+                        <option value="0.8">0.8x 慢速</option>
+                        <option value="1.0" selected>1.0x 標準</option>
+                        <option value="1.2">1.2x 快速</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Reading Content Display (Pages 65 & 66) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Left Main Article -->
+                <div class="lg:col-span-8 space-y-6">
+                    
+                    <!-- Paragraph 1 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 relative group transition hover:border-brand-300">
+                        <div class="flex items-center justify-between mb-3 border-b border-slate-100 pb-2">
+                            <span class="text-xs font-bold text-brand-700 bg-brand-50 px-2.5 py-1 rounded-full">Paragraph 1 (引言)</span>
+                            <button onclick="speakText('When people think of heroes, they probably don\'t think of animals. However, some animals do a lot for people. They are heroes, too.')" class="text-slate-400 hover:text-brand-600">
+                                <i class="fa-solid fa-volume-high text-sm"></i>
+                            </button>
+                        </div>
+                        <p class="text-lg leading-relaxed font-serif text-slate-800 tracking-wide">
+                            When people think of <span class="bg-amber-100 text-amber-900 px-1 rounded font-sans text-base font-semibold cursor-help" title="heroes [ˈhɪəroʊz] 英雄 (複數)">heroes</span>, they probably don't think of animals. However, some animals do a lot for people. They are heroes, too.
+                        </p>
+                        <div class="trans-text mt-3 pt-3 border-t border-slate-100 text-sm text-slate-600 font-sans">
+                            當人們想到英雄時，他們可能不會想到動物。然而，有些動物為人類做了很多事。牠們也是英雄。
+                        </div>
+                    </div>
+
+                    <!-- Paragraph 2 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 relative group transition hover:border-brand-300">
+                        <div class="flex items-center justify-between mb-3 border-b border-slate-100 pb-2">
+                            <span class="text-xs font-bold text-brand-700 bg-brand-50 px-2.5 py-1 rounded-full">Paragraph 2 (歷史例子 Historical Examples)</span>
+                            <button onclick="speakText('History is full of animal heroes. Cher Ami, a bird, is one example. During a war, the soldiers were in trouble and sent a note for help. Cher Ami flew across a dangerous area to deliver it and successfully saved the soldiers. Another hero was a dog, Stubby. He noticed gas attacks during a war and barked to warn the soldiers. Thanks to him, they had time to put on their masks and stay safe.')" class="text-slate-400 hover:text-brand-600">
+                                <i class="fa-solid fa-volume-high text-sm"></i>
+                            </button>
+                        </div>
+                        <p class="text-lg leading-relaxed font-serif text-slate-800 tracking-wide space-y-2">
+                            History is full of animal heroes. 
+                            <span class="bg-blue-50 text-blue-800 px-1 rounded font-sans text-base">Cher Ami</span>, a bird, is one example. During a war, the soldiers were in trouble and sent a note for help. Cher Ami flew across a dangerous area to deliver it and successfully saved the soldiers. 
+                            Another hero was a dog, <span class="bg-blue-50 text-blue-800 px-1 rounded font-sans text-base">Stubby</span>. He <span class="border-b-2 border-brand-500 font-semibold" title="notice 注意到">noticed</span> <span class="border-b-2 border-brand-500 font-semibold" title="gas 毒氣">gas</span> attacks during a war and barked to <span class="border-b-2 border-brand-500 font-semibold" title="warn 警告">warn</span> the soldiers. <span class="bg-emerald-100 text-emerald-800 px-1 rounded font-sans text-base">Thanks to</span> him, they had time to put on their masks and stay safe.
+                        </p>
+                        <div class="trans-text mt-3 pt-3 border-t border-slate-100 text-sm text-slate-600 font-sans">
+                            歷史上充滿了動物英雄。雪兒阿米，一隻鳥，就是一個例子。在一場戰爭期間，士兵們身陷險境，並寄送一張紙條求救。雪兒阿米飛越危險的區域傳遞紙條，並成功拯救這些士兵。另一位英雄是一隻狗，史都比。他在一場戰爭中察覺到毒氣攻擊，就吠叫來警告士兵。多虧了他，他們有時間戴上面罩並保持安全。
+                        </div>
+                    </div>
+
+                    <!-- Paragraph 3 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 relative group transition hover:border-brand-300">
+                        <div class="flex items-center justify-between mb-3 border-b border-slate-100 pb-2">
+                            <span class="text-xs font-bold text-brand-700 bg-brand-50 px-2.5 py-1 rounded-full">Paragraph 3 (現代例子 Modern Examples)</span>
+                            <button onclick="speakText('Modern animal heroes help people in many ways. Some are trained to catch bad guys or look for missing people. Others join hospital programs to visit the sick and cheer them up. Even pets at home can help their owners by staying by their side and making them smile during difficult times.')" class="text-slate-400 hover:text-brand-600">
+                                <i class="fa-solid fa-volume-high text-sm"></i>
+                            </button>
+                        </div>
+                        <p class="text-lg leading-relaxed font-serif text-slate-800 tracking-wide">
+                            <span class="border-b-2 border-brand-500 font-semibold">Modern</span> animal heroes help people in many ways. 
+                            <span class="bg-amber-100 text-amber-900 px-1 rounded">Some</span> are trained to catch bad guys or look for <span class="border-b-2 border-brand-500 font-semibold">missing</span> people. 
+                            <span class="bg-amber-100 text-amber-900 px-1 rounded">Others</span> join hospital <span class="border-b-2 border-brand-500 font-semibold">programs</span> to visit the sick and <span class="border-b-2 border-brand-500 font-semibold">cheer</span> them <span class="border-b-2 border-brand-500 font-semibold">up</span>. 
+                            Even pets at home can help their owners by staying by their <span class="border-b-2 border-brand-500 font-semibold">side</span> and making them smile during difficult times.
+                        </p>
+                        <div class="trans-text mt-3 pt-3 border-t border-slate-100 text-sm text-slate-600 font-sans">
+                            現代的動物英雄以許多方式幫助人們。有些被訓練來抓壞人或尋找失蹤的人。另一些則參加醫院的計畫，探望病人並使他們振作起來。就連家裡的寵物也能幫助牠們的主人，在牠們主人歷經困難時，陪伴在他們身旁，讓他們露出微笑。
+                        </div>
+                    </div>
+
+                    <!-- Paragraph 4 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 relative group transition hover:border-brand-300">
+                        <div class="flex items-center justify-between mb-3 border-b border-slate-100 pb-2">
+                            <span class="text-xs font-bold text-brand-700 bg-brand-50 px-2.5 py-1 rounded-full">Paragraph 4 (結論 Conclusion)</span>
+                            <button onclick="speakText('Animal heroes save lives, help people in need, and bring joy to people. Because of them, we know that heroes can come in different shapes and sizes, and they can even be found somewhere nearby.')" class="text-slate-400 hover:text-brand-600">
+                                <i class="fa-solid fa-volume-high text-sm"></i>
+                            </button>
+                        </div>
+                        <p class="text-lg leading-relaxed font-serif text-slate-800 tracking-wide">
+                            Animal heroes save lives, help people in need, and bring joy to people. Because of them, we know that heroes can come in different shapes and sizes, and they can even be found <span class="border-b-2 border-brand-500 font-semibold">somewhere</span> nearby.
+                        </p>
+                        <div class="trans-text mt-3 pt-3 border-t border-slate-100 text-sm text-slate-600 font-sans">
+                            動物英雄拯救生命、幫助困頓的人們，並帶給人們歡樂。因為牠們，我們知道英雄可以是形形色色的，甚至也能在身邊的某處發現他們的蹤影。
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Sidebar: Interactive Word Bank -->
+                <div class="lg:col-span-4 space-y-4">
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 sticky top-36">
+                        <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+                            <h3 class="font-bold text-slate-900 flex items-center gap-2">
+                                <i class="fa-solid fa-spell-check text-brand-600"></i>
+                                本課重點單字 Vocabulary
+                            </h3>
+                            <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono">10 Words</span>
+                        </div>
+
+                        <!-- Vocabulary List Cards -->
+                        <div class="space-y-2.5 max-h-[600px] overflow-y-auto pr-1 custom-scrollbar text-sm">
+                            <!-- Word Item -->
+                            <div class="p-3 bg-slate-50 hover:bg-brand-50 rounded-xl transition cursor-pointer border border-slate-100 hover:border-brand-200" onclick="speakText('notice')">
+                                <div class="flex justify-between items-baseline">
+                                    <span class="font-bold text-slate-900">notice</span>
+                                    <span class="text-xs text-slate-400">[v.] 注意到</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1">He noticed gas attacks during a war.</p>
+                            </div>
+
+                            <div class="p-3 bg-slate-50 hover:bg-brand-50 rounded-xl transition cursor-pointer border border-slate-100 hover:border-brand-200" onclick="speakText('gas')">
+                                <div class="flex justify-between items-baseline">
+                                    <span class="font-bold text-slate-900">gas</span>
+                                    <span class="text-xs text-slate-400">[n.] 氣體；瓦斯</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1">They put on gas masks to stay safe.</p>
+                            </div>
+
+                            <div class="p-3 bg-slate-50 hover:bg-brand-50 rounded-xl transition cursor-pointer border border-slate-100 hover:border-brand-200" onclick="speakText('warn')">
+                                <div class="flex justify-between items-baseline">
+                                    <span class="font-bold text-slate-900">warn</span>
+                                    <span class="text-xs text-slate-400">[v.] 警告</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1">He barked to warn the soldiers.</p>
+                            </div>
+
+                            <div class="p-3 bg-slate-50 hover:bg-brand-50 rounded-xl transition cursor-pointer border border-slate-100 hover:border-brand-200" onclick="speakText('modern')">
+                                <div class="flex justify-between items-baseline">
+                                    <span class="font-bold text-slate-900">modern</span>
+                                    <span class="text-xs text-slate-400">[adj.] 現代的</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1">Modern animal heroes help in many ways.</p>
+                            </div>
+
+                            <div class="p-3 bg-slate-50 hover:bg-brand-50 rounded-xl transition cursor-pointer border border-slate-100 hover:border-brand-200" onclick="speakText('missing')">
+                                <div class="flex justify-between items-baseline">
+                                    <span class="font-bold text-slate-900">missing</span>
+                                    <span class="text-xs text-slate-400">[adj.] 失蹤的</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1">Trained to look for missing people.</p>
+                            </div>
+
+                            <div class="p-3 bg-slate-50 hover:bg-brand-50 rounded-xl transition cursor-pointer border border-slate-100 hover:border-brand-200" onclick="speakText('program')">
+                                <div class="flex justify-between items-baseline">
+                                    <span class="font-bold text-slate-900">program</span>
+                                    <span class="text-xs text-slate-400">[n.] 計畫；活動</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1">Join hospital programs to visit the sick.</p>
+                            </div>
+
+                            <div class="p-3 bg-slate-50 hover:bg-brand-50 rounded-xl transition cursor-pointer border border-slate-100 hover:border-brand-200" onclick="speakText('cheer up')">
+                                <div class="flex justify-between items-baseline">
+                                    <span class="font-bold text-slate-900">cheer up</span>
+                                    <span class="text-xs text-slate-400">[phr.] 使...振作</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1">Visit the sick and cheer them up.</p>
+                            </div>
+
+                            <div class="p-3 bg-slate-50 hover:bg-brand-50 rounded-xl transition cursor-pointer border border-slate-100 hover:border-brand-200" onclick="speakText('side')">
+                                <div class="flex justify-between items-baseline">
+                                    <span class="font-bold text-slate-900">side</span>
+                                    <span class="text-xs text-slate-400">[n.] 身邊；側邊</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1">Stay by their side during hard times.</p>
+                            </div>
+
+                            <div class="p-3 bg-slate-50 hover:bg-brand-50 rounded-xl transition cursor-pointer border border-slate-100 hover:border-brand-200" onclick="speakText('somewhere')">
+                                <div class="flex justify-between items-baseline">
+                                    <span class="font-bold text-slate-900">somewhere</span>
+                                    <span class="text-xs text-slate-400">[adv.] 在某處</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1">They can be found somewhere nearby.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 3: GRAPHIC ORGANIZER & STRATEGY ================= -->
+        <section id="sec-organizer" class="hidden space-y-6">
+            <!-- While You Read Topic Identification Tasks -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <span class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold">2</span>
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900">While You Read (閱讀中主題辨識 Task)</h3>
+                        <p class="text-xs text-slate-500">搭配課本 p.64 的 While You Read，點選正確選項以完成分析。</p>
+                    </div>
+                </div>
+
+                <!-- Interactive Question 1 -->
+                <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 space-y-3">
+                    <p class="font-bold text-slate-800">1. What is the reading about? (這篇文章主要是在描述什麼主題？)</p>
+                    <div id="q1-options" class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <button onclick="checkTopicQ(1, 'A', true)" class="p-3.5 bg-white border border-slate-200 rounded-xl hover:border-indigo-400 text-left text-sm font-medium transition flex items-center justify-between">
+                            <span>(A) Animal heroes (動物英雄)</span>
+                            <i class="fa-regular fa-circle text-slate-300"></i>
+                        </button>
+                        <button onclick="checkTopicQ(1, 'B', false)" class="p-3.5 bg-white border border-slate-200 rounded-xl hover:border-indigo-400 text-left text-sm font-medium transition flex items-center justify-between">
+                            <span>(B) Ways to train animals</span>
+                            <i class="fa-regular fa-circle text-slate-300"></i>
+                        </button>
+                        <button onclick="checkTopicQ(1, 'C', false)" class="p-3.5 bg-white border border-slate-200 rounded-xl hover:border-indigo-400 text-left text-sm font-medium transition flex items-center justify-between">
+                            <span>(C) The history of wars</span>
+                            <i class="fa-regular fa-circle text-slate-300"></i>
+                        </button>
+                    </div>
+                    <div id="q1-feedback" class="hidden text-xs p-3 rounded-lg font-semibold"></div>
+                </div>
+
+                <!-- Interactive Question 2 -->
+                <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 space-y-3">
+                    <p class="font-bold text-slate-800">2. How do the second and third paragraphs support the topic? (第二與第三段如何支持主題？)</p>
+                    <div id="q2-options" class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <button onclick="checkTopicQ(2, 'A', true)" class="p-3.5 bg-white border border-slate-200 rounded-xl hover:border-indigo-400 text-left text-sm font-medium transition flex items-center justify-between">
+                            <span>(A) They give examples of animal heroes.</span>
+                            <i class="fa-regular fa-circle text-slate-300"></i>
+                        </button>
+                        <button onclick="checkTopicQ(2, 'B', false)" class="p-3.5 bg-white border border-slate-200 rounded-xl hover:border-indigo-400 text-left text-sm font-medium transition flex items-center justify-between">
+                            <span>(B) They show that animals can be useful.</span>
+                            <i class="fa-regular fa-circle text-slate-300"></i>
+                        </button>
+                        <button onclick="checkTopicQ(2, 'C', false)" class="p-3.5 bg-white border border-slate-200 rounded-xl hover:border-indigo-400 text-left text-sm font-medium transition flex items-center justify-between">
+                            <span>(C) They teach a lesson about world history.</span>
+                            <i class="fa-regular fa-circle text-slate-300"></i>
+                        </button>
+                    </div>
+                    <div id="q2-feedback" class="hidden text-xs p-3 rounded-lg font-semibold"></div>
+                </div>
+
+                <!-- Reading Clue Analysis Box -->
+                <div class="p-5 bg-indigo-50/80 rounded-xl border border-indigo-100 space-y-3">
+                    <div class="flex items-center gap-2 text-indigo-900 font-bold">
+                        <i class="fa-solid fa-lightbulb text-indigo-600"></i>
+                        <span>Reading Clue 閱讀線索思考：為什麼分成兩段？</span>
+                    </div>
+                    <p class="text-xs text-indigo-950 leading-relaxed">
+                        雖然第二、三段的功能都是「舉例支持主題 (Give Examples)」，但作者採用了<strong>時間線索 (Time Clues)</strong> 來區分：<br>
+                        • <strong>第二段開頭：</strong><code class="bg-white px-1 py-0.5 rounded text-indigo-800 font-mono">History is full of animal heroes...</code> (強調<strong>過去/歷史上</strong>的動物英雄)<br>
+                        • <strong>第三段開頭：</strong><code class="bg-white px-1 py-0.5 rounded text-indigo-800 font-mono">Modern animal heroes help people...</code> (強調<strong>現代</strong>的動物英雄)<br>
+                        👉 這樣劃分能讓讀者清楚看到：<strong>「從過去到現在，動物一直都是人類的英雄！」</strong>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Graphic Organizer Diagram -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900">Graphic Organizer (文章架構組織圖)</h3>
+                        <p class="text-xs text-slate-500">點擊各區塊以預覽細節與關鍵句子</p>
+                    </div>
+                    <span class="text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-medium">Text Structure</span>
+                </div>
+
+                <!-- Mind Map Visual Tree -->
+                <div class="space-y-4">
+                    <!-- Central Topic -->
+                    <div class="p-4 bg-brand-600 text-white rounded-xl text-center shadow-md max-w-md mx-auto">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-brand-200">Main Topic 文章主題</span>
+                        <h4 class="text-xl font-black">Animal Heroes (動物英雄)</h4>
+                        <p class="text-xs text-brand-100 mt-1">Animals do a lot for people and can be heroes, too.</p>
+                    </div>
+
+                    <!-- Connect Lines -->
+                    <div class="w-0.5 h-6 bg-slate-300 mx-auto"></div>
+
+                    <!-- Two Pillars: Historical vs Modern -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Pillar 1: History -->
+                        <div class="border-2 border-amber-200 bg-amber-50/50 rounded-2xl p-5 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold px-2.5 py-1 rounded bg-amber-200 text-amber-900">Paragraph 2: Past (過去)</span>
+                                <i class="fa-solid fa-clock-rotate-left text-amber-600"></i>
+                            </div>
+                            <h5 class="font-bold text-slate-900">History is full of animal heroes</h5>
+                            <div class="space-y-2 text-xs">
+                                <div class="bg-white p-3 rounded-lg border border-amber-100 shadow-sm">
+                                    <strong class="text-slate-800">1. Cher Ami (Bird):</strong> Flew across dangerous area to deliver a note and saved soldiers.
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-amber-100 shadow-sm">
+                                    <strong class="text-slate-800">2. Stubby (Dog):</strong> Barked to warn soldiers about gas attacks, saving lives.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pillar 2: Modern -->
+                        <div class="border-2 border-emerald-200 bg-emerald-50/50 rounded-2xl p-5 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold px-2.5 py-1 rounded bg-emerald-200 text-emerald-900">Paragraph 3: Present (現在)</span>
+                                <i class="fa-solid fa-bolt text-emerald-600"></i>
+                            </div>
+                            <h5 class="font-bold text-slate-900">Modern animal heroes help in many ways</h5>
+                            <div class="space-y-2 text-xs">
+                                <div class="bg-white p-3 rounded-lg border border-emerald-100 shadow-sm">
+                                    <strong class="text-slate-800">1. Trained Dogs:</strong> Catch bad guys or look for missing people.
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-emerald-100 shadow-sm">
+                                    <strong class="text-slate-800">2. Therapy Animals:</strong> Visit hospitals to cheer up the sick.
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-emerald-100 shadow-sm">
+                                    <strong class="text-slate-800">3. Pets at Home:</strong> Stay by owners' side and make them smile.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Connect Lines -->
+                    <div class="w-0.5 h-6 bg-slate-300 mx-auto"></div>
+
+                    <!-- Conclusion Box -->
+                    <div class="p-4 bg-slate-800 text-slate-100 rounded-xl text-center shadow max-w-lg mx-auto text-xs">
+                        <span class="text-amber-400 font-bold uppercase">Conclusion 結論</span>
+                        <p class="mt-1">Heroes can come in different shapes and sizes, and they can be found somewhere nearby!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 4: GRAMMAR & LANGUAGE NOTES ================= -->
+        <section id="sec-grammar" class="hidden space-y-6">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4 mb-6">
+                    <div class="p-2.5 bg-rose-100 text-rose-600 rounded-xl">
+                        <i class="fa-solid fa-graduation-cap text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900">課文句型與重點語法解析 (Grammar & Focus)</h3>
+                        <p class="text-xs text-slate-500">掌握關鍵句型，輕鬆讀懂考點。</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Note 1 -->
+                    <div class="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                        <div class="flex items-center gap-2 text-rose-600 font-bold text-sm">
+                            <span class="w-5 h-5 rounded-full bg-rose-100 flex items-center justify-center text-xs">1</span>
+                            <span>擬人化代名詞 (He/She for Animals)</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            動物通常用 <code class="bg-slate-200 px-1 rounded text-slate-800 font-mono">it</code> 稱呼，但有名字或表達情感時，常擬人化用 <code class="bg-slate-200 px-1 rounded text-slate-800 font-mono">he / she</code>。
+                        </p>
+                        <div class="bg-white p-2.5 rounded border border-slate-200 text-xs font-mono text-slate-700">
+                            He noticed gas attacks during a war... (句中的He指的是Stubby)
+                        </div>
+                    </div>
+
+                    <!-- Note 2 -->
+                    <div class="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                        <div class="flex items-center gap-2 text-rose-600 font-bold text-sm">
+                            <span class="w-5 h-5 rounded-full bg-rose-100 flex items-center justify-center text-xs">2</span>
+                            <span>感官與動詞: notice (注意到)</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            <code class="bg-slate-200 px-1 rounded text-slate-800 font-mono">notice</code> 表瞬間察覺到訊息，非持續進行動作，通常<strong>不使用進行式</strong>。
+                        </p>
+                        <div class="bg-white p-2.5 rounded border border-slate-200 text-xs font-mono text-slate-700">
+                            He noticed a noise from the kitchen.
+                        </div>
+                    </div>
+
+                    <!-- Note 3 -->
+                    <div class="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                        <div class="flex items-center gap-2 text-rose-600 font-bold text-sm">
+                            <span class="w-5 h-5 rounded-full bg-rose-100 flex items-center justify-center text-xs">3</span>
+                            <span>不定代名詞: Some... Others...</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            用來表示大群體中的「有些… 另一些…」。若有範圍限制則用 <code class="bg-slate-200 px-1 rounded text-slate-800 font-mono">The others</code>。
+                        </p>
+                        <div class="bg-white p-2.5 rounded border border-slate-200 text-xs font-mono text-slate-700">
+                            Some are trained to... Others join hospital programs...
+                        </div>
+                    </div>
+
+                    <!-- Note 4 -->
+                    <div class="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                        <div class="flex items-center gap-2 text-rose-600 font-bold text-sm">
+                            <span class="w-5 h-5 rounded-full bg-rose-100 flex items-center justify-center text-xs">4</span>
+                            <span>the + 形容詞 = 複數名詞</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            <code class="bg-slate-200 px-1 rounded text-slate-800 font-mono">the + adj.</code> 可指「具有某特徵的一群人」，視為複數。如：the sick (病人)、the young (年輕人)。
+                        </p>
+                        <div class="bg-white p-2.5 rounded border border-slate-200 text-xs font-mono text-slate-700">
+                            ...to visit the sick and cheer them up.
+                        </div>
+                    </div>
+
+                    <!-- Note 5 -->
+                    <div class="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                        <div class="flex items-center gap-2 text-rose-600 font-bold text-sm">
+                            <span class="w-5 h-5 rounded-full bg-rose-100 flex items-center justify-center text-xs">5</span>
+                            <span>介系詞片語: by V-ing (透過...方式)</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            <code class="bg-slate-200 px-1 rounded text-slate-800 font-mono">by + V-ing</code> 表示「藉由…方式」達到某目的。
+                        </p>
+                        <div class="bg-white p-2.5 rounded border border-slate-200 text-xs font-mono text-slate-700">
+                            Pets help owners by staying by their side.
+                        </div>
+                    </div>
+
+                    <!-- Note 6 -->
+                    <div class="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                        <div class="flex items-center gap-2 text-rose-600 font-bold text-sm">
+                            <span class="w-5 h-5 rounded-full bg-rose-100 flex items-center justify-center text-xs">6</span>
+                            <span>被動語態: N + be trained to V</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            表示「…被訓練去做某事」。主動為 <code class="bg-slate-200 px-1 rounded text-slate-800 font-mono">train N to V</code>。
+                        </p>
+                        <div class="bg-white p-2.5 rounded border border-slate-200 text-xs font-mono text-slate-700">
+                            Some are trained to catch bad guys.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 5: INTERACTIVE QUIZ ================= -->
+        <section id="sec-quiz" class="hidden space-y-6">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2.5 bg-emerald-100 text-emerald-600 rounded-xl">
+                            <i class="fa-solid fa-list-check text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900">After You Read 課後閱讀理解測驗</h3>
+                            <p class="text-xs text-slate-500">測試你對課文細節與內容的掌握程度！</p>
+                        </div>
+                    </div>
+                    <span id="quiz-score" class="text-xs font-bold bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg">Score: 0 / 4</span>
+                </div>
+
+                <!-- Quiz Form Container -->
+                <div class="space-y-6" id="quiz-container">
+                    <!-- Q1 -->
+                    <div class="p-5 rounded-xl border border-slate-200 space-y-3 bg-slate-50/50" id="q-box-1">
+                        <p class="font-bold text-slate-800 text-sm">1. What did Cher Ami do for the soldiers during a war?</p>
+                        <div class="space-y-2 text-xs">
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50">
+                                <input type="radio" name="q1" value="A" class="text-brand-600 focus:ring-brand-500">
+                                <span class="ms-2">A. It caught bad guys in a dangerous area.</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50">
+                                <input type="radio" name="q1" value="B" class="text-brand-600 focus:ring-brand-500">
+                                <span class="ms-2">B. It flew across a dangerous area to deliver a lifesaving note.</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50">
+                                <input type="radio" name="q1" value="C" class="text-brand-600 focus:ring-brand-500">
+                                <span class="ms-2">C. It barked to warn the soldiers of gas attacks.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="p-5 rounded-xl border border-slate-200 space-y-3 bg-slate-50/50" id="q-box-2">
+                        <p class="font-bold text-slate-800 text-sm">2. Why did Stubby bark, and what did the soldiers do when they heard him?</p>
+                        <div class="space-y-2 text-xs">
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50">
+                                <input type="radio" name="q2" value="A" class="text-brand-600 focus:ring-brand-500">
+                                <span class="ms-2">A. He noticed gas; soldiers put on gas masks to stay safe.</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50">
+                                <input type="radio" name="q2" value="B" class="text-brand-600 focus:ring-brand-500">
+                                <span class="ms-2">B. He saw an enemy pigeon; soldiers chased it away.</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50">
+                                <input type="radio" name="q2" value="C" class="text-brand-600 focus:ring-brand-500">
+                                <span class="ms-2">C. He was hungry; soldiers gave him food.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="p-5 rounded-xl border border-slate-200 space-y-3 bg-slate-50/50" id="q-box-3">
+                        <p class="font-bold text-slate-800 text-sm">3. What do today's modern animal heroes do for people?</p>
+                        <div class="space-y-2 text-xs">
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50">
+                                <input type="radio" name="q3" value="A" class="text-brand-600 focus:ring-brand-500">
+                                <span class="ms-2">A. They deliver notes in world wars.</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50">
+                                <input type="radio" name="q3" value="B" class="text-brand-600 focus:ring-brand-500">
+                                <span class="ms-2">B. They catch bad guys, visit sick people, and cheer up their owners.</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50">
+                                <input type="radio" name="q3" value="C" class="text-brand-600 focus:ring-brand-500">
+                                <span class="ms-2">C. They make their own gas masks.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="p-5 rounded-xl border border-slate-200 space-y-3 bg-slate-50/50" id="q-box-4">
+                        <p class="font-bold text-slate-800 text-sm">4. What is the main message at the end of the reading?</p>
+                        <div class="space-y-2 text-xs">
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50">
+                                <input type="radio" name="q4" value="A" class="text-brand-600 focus:ring-brand-500">
+                                <span class="ms-2">A. Only military dogs can be real heroes.</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50">
+                                <input type="radio" name="q4" value="B" class="text-brand-600 focus:ring-brand-500">
+                                <span class="ms-2">B. Heroes come in different shapes and sizes, even nearby.</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50">
+                                <input type="radio" name="q4" value="C" class="text-brand-600 focus:ring-brand-500">
+                                <span class="ms-2">C. All animals must be trained in hospitals.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="pt-4 flex justify-end">
+                        <button onclick="submitQuiz()" class="px-6 py-3 bg-brand-600 text-white font-bold rounded-xl shadow-md hover:bg-brand-700 transition flex items-center gap-2 text-sm">
+                            <i class="fa-solid fa-paper-plane"></i> 提交測驗答案
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Unit Flow Navigation -->
+        <div class="mt-12 pt-6 border-t border-slate-200">
+            <div class="bg-gradient-to-r from-slate-900 via-emerald-950 to-slate-900 text-white rounded-2xl p-6 shadow-lg flex flex-col md:flex-row items-center justify-between gap-4">
+                <div>
+                    <span class="text-xs text-emerald-400 font-bold uppercase tracking-wider"><i class="fa-solid fa-route mr-1"></i> 單元學習路線導航</span>
+                    <h3 class="text-lg font-bold text-white mt-1">讀完 Animal Heroes 了？前往綜合總複習驗收實力！</h3>
+                    <p class="text-xs text-slate-300 mt-0.5">挑戰單字翻牌、被動語態文法與閱讀綜合評量，或重溫對話與句型重點</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-2">
+                    <a href="b5_u3_pattern.html" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl text-xs sm:text-sm transition flex items-center gap-1.5 border border-slate-700">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>句型篇 ⚡</span>
+                    </a>
+                    <a href="b5_u3_review.html" class="px-4 py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black rounded-xl text-xs sm:text-sm transition flex items-center gap-1.5 shadow-lg">
+                        <span>下一步：進入綜合總複習 🏆</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="../index.html" class="px-4 py-2.5 bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-amber-300 font-bold rounded-xl text-xs sm:text-sm transition flex items-center gap-1.5 border border-slate-700">
+                        <i class="fa-solid fa-house"></i>
+                        <span>學習首頁</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 space-y-1">
+            <p> Junior High School English - Unit 3: Animal Heroes Interactive Learning Tool</p>
+            <p class="text-slate-400">設計輔助閱讀策略、聽力朗讀、心智架構圖與課後測驗</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Tab switching logic
+        function switchTab(tabId) {
+            const tabs = ['before', 'reading', 'organizer', 'grammar', 'quiz'];
+            tabs.forEach(t => {
+                const sec = document.getElementById(`sec-${t}`);
+                const btn = document.getElementById(`tab-${t}`);
+                if (t === tabId) {
+                    sec.classList.remove('hidden');
+                    if (btn) {
+                        btn.classList.add('bg-white', 'text-slate-900', 'shadow-sm');
+                        btn.classList.remove('hover:text-slate-900');
+                    }
+                } else {
+                    sec.classList.add('hidden');
+                    if (btn) {
+                        btn.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
+                        btn.classList.add('hover:text-slate-900');
+                    }
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle Mobile Navigation Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Toggle reference answers in Before You Read
+        function toggleAnswer(id) {
+            const elem = document.getElementById(id);
+            elem.classList.toggle('hidden');
+        }
+
+        // Toggle text translation display
+        function toggleTranslation() {
+            const check = document.getElementById('toggle-translate').checked;
+            const transTexts = document.querySelectorAll('.trans-text');
+            transTexts.forEach(el => {
+                if (check) {
+                    el.style.display = 'block';
+                } else {
+                    el.style.display = 'none';
+                }
+            });
+        }
+
+        // Speech Synthesis Player
+        let isPlaying = false;
+        let speechSynth = window.speechSynthesis;
+        let currentUtterance = null;
+
+        function speakText(text) {
+            if (speechSynth.speaking) {
+                speechSynth.cancel();
+            }
+            const utterThis = new SpeechSynthesisUtterance(text);
+            utterThis.lang = 'en-US';
+            const rate = parseFloat(document.getElementById('speech-rate').value) || 1.0;
+            utterThis.rate = rate;
+
+            utterThis.onend = function () {
+                isPlaying = false;
+                updatePlayIcon();
+            };
+
+            speechSynth.speak(utterThis);
+        }
+
+        function toggleAudio() {
+            if (isPlaying) {
+                speechSynth.cancel();
+                isPlaying = false;
+                updatePlayIcon();
+            } else {
+                const fullText = `
+                When people think of heroes, they probably don't think of animals. However, some animals do a lot for people. They are heroes, too.
+                History is full of animal heroes. Cher Ami, a bird, is one example. During a war, the soldiers were in trouble and sent a note for help. Cher Ami flew across a dangerous area to deliver it and successfully saved the soldiers. Another hero was a dog, Stubby. He noticed gas attacks during a war and barked to warn the soldiers. Thanks to him, they had time to put on their masks and stay safe.
+                Modern animal heroes help people in many ways. Some are trained to catch bad guys or look for missing people. Others join hospital programs to visit the sick and cheer them up. Even pets at home can help their owners by staying by their side and making them smile during difficult times.
+                Animal heroes save lives, help people in need, and bring joy to people. Because of them, we know that heroes can come in different shapes and sizes, and they can even be found somewhere nearby.
+                `;
+                speakText(fullText);
+                isPlaying = true;
+                updatePlayIcon();
+            }
+        }
+
+        function updatePlayIcon() {
+            const icon = document.getElementById('play-icon');
+            if (isPlaying) {
+                icon.className = 'fa-solid fa-pause text-lg';
+            } else {
+                icon.className = 'fa-solid fa-play text-lg ml-0.5';
+            }
+        }
+
+        // Check Topic Strategy Questions (While You Read)
+        function checkTopicQ(qNum, choice, isCorrect) {
+            const feedback = document.getElementById(`q${qNum}-feedback`);
+            feedback.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-rose-100', 'text-rose-800');
+
+            if (isCorrect) {
+                feedback.classList.add('bg-emerald-100', 'text-emerald-800');
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> 正確！這正符合課文標題與段落發展的重點。`;
+            } else {
+                feedback.classList.add('bg-rose-100', 'text-rose-800');
+                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> 不太對喔，再參考一下標題與段落主題句想想看！`;
+            }
+        }
+
+        // Quiz Submission & Auto-Grading
+        function submitQuiz() {
+            const answers = {
+                q1: 'B',
+                q2: 'A',
+                q3: 'B',
+                q4: 'B'
+            };
+
+            let score = 0;
+            let total = 4;
+
+            for (let i = 1; i <= total; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                const box = document.getElementById(`q-box-${i}`);
+                box.classList.remove('border-emerald-500', 'border-rose-500', 'bg-emerald-50/30', 'bg-rose-50/30');
+
+                if (selected && selected.value === answers[`q${i}`]) {
+                    score++;
+                    box.classList.add('border-emerald-500', 'bg-emerald-50/30');
+                } else {
+                    box.classList.add('border-rose-500', 'bg-rose-50/30');
+                }
+            }
+
+            const scoreDisplay = document.getElementById('quiz-score');
+            scoreDisplay.textContent = `Score: ${score} / ${total}`;
+            scoreDisplay.className = score === total ? 
+                'text-xs font-bold bg-emerald-600 text-white px-3 py-1.5 rounded-lg shadow-sm' : 
+                'text-xs font-bold bg-amber-500 text-white px-3 py-1.5 rounded-lg shadow-sm';
+
+            alert(`測驗完成！您獲得 ${score} / ${total} 分！`);
+        }
+    </script>
+</body>
+</html>

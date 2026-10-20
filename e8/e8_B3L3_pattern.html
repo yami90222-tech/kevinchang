@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英語 8 上 L3 互動大師班 | All Animals Were Going to the Party</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            transition: font-size 0.2s ease, background-color 0.3s ease;
+        }
+
+        /* Responsive Dynamic Font Classes */
+        .font-size-sm { font-size: 18px; }
+        .font-size-md { font-size: 20px; } /* Default */
+        .font-size-lg { font-size: 24px; }
+        .font-size-xl { font-size: 28px; }
+
+        .font-size-sm h1 { font-size: 2.25rem; }
+        .font-size-md h1 { font-size: 2.75rem; }
+        .font-size-lg h1 { font-size: 3.25rem; }
+        .font-size-xl h1 { font-size: 3.75rem; }
+
+        .font-size-sm h2 { font-size: 1.75rem; }
+        .font-size-md h2 { font-size: 2.1rem; }
+        .font-size-lg h2 { font-size: 2.5rem; }
+        .font-size-xl h2 { font-size: 2.9rem; }
+
+        .font-size-sm h3 { font-size: 1.4rem; }
+        .font-size-md h3 { font-size: 1.65rem; }
+        .font-size-lg h3 { font-size: 1.9rem; }
+        .font-size-xl h3 { font-size: 2.2rem; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-size-md min-h-screen flex flex-col antialiased">
+
+    <!-- Navigation / Top Header -->
+    <header class="bg-indigo-900 text-white sticky top-0 z-50 shadow-md border-b border-indigo-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-amber-400 text-indigo-950 p-2.5 rounded-2xl font-black text-xl flex items-center justify-center shadow">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold tracking-tight text-white leading-tight">八年級英語拔尖專班</h1>
+                    <p class="text-xs sm:text-sm text-indigo-200 font-medium">Lesson 3 All Animals Were Going to the Party</p>
+                </div>
+            </div>
+
+            <!-- Font Resizer Toolbar -->
+            <div class="flex items-center gap-2 bg-indigo-950/80 p-1.5 rounded-2xl border border-indigo-700/60 shadow-inner">
+                <span class="text-xs font-bold text-indigo-200 px-2 flex items-center gap-1">
+                    <i class="fa-solid fa-text-height"></i> 字體大小:
+                </span>
+                <button onclick="setFontSize('sm')" id="btn-font-sm" class="px-3 py-1 rounded-xl text-xs sm:text-sm font-bold transition text-slate-300 hover:bg-indigo-800">18pt</button>
+                <button onclick="setFontSize('md')" id="btn-font-md" class="px-3 py-1 rounded-xl text-xs sm:text-sm font-bold transition bg-indigo-600 text-white shadow">20pt</button>
+                <button onclick="setFontSize('lg')" id="btn-font-lg" class="px-3 py-1 rounded-xl text-xs sm:text-sm font-bold transition text-slate-300 hover:bg-indigo-800">24pt</button>
+                <button onclick="setFontSize('xl')" id="btn-font-xl" class="px-3 py-1 rounded-xl text-xs sm:text-sm font-bold transition text-slate-300 hover:bg-indigo-800">28pt</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="bg-indigo-950 border-b border-indigo-800 px-4 py-2">
+        <div class="max-w-7xl mx-auto"><a href="../index.html" class="inline-flex items-center gap-2 rounded-xl bg-amber-400 px-4 py-2 text-sm font-extrabold text-indigo-950 shadow transition hover:bg-amber-300"><i class="fa-solid fa-house"></i> 回英語學習首頁</a></div>
+    </div>
+    <div class="bg-white border-b border-slate-200 sticky top-[68px] z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex gap-2 sm:gap-6 overflow-x-auto py-3 no-scrollbar" id="nav-tabs">
+                <button onclick="switchTab('focus')" id="tab-btn-focus" class="tab-btn active font-bold text-indigo-600 border-b-4 border-indigo-600 pb-2 px-3 whitespace-nowrap flex items-center gap-2">
+                    <i class="fa-solid fa-book-open"></i> 核心文法大師課
+                </button>
+                <button onclick="switchTab('clock')" id="tab-btn-clock" class="tab-btn font-semibold text-slate-500 hover:text-indigo-600 pb-2 px-3 whitespace-nowrap flex items-center gap-2">
+                    <i class="fa-solid fa-clock"></i> 時間逆讀特訓器
+                </button>
+                <button onclick="switchTab('builder')" id="tab-btn-builder" class="tab-btn font-semibold text-slate-500 hover:text-indigo-600 pb-2 px-3 whitespace-nowrap flex items-center gap-2">
+                    <i class="fa-solid fa-cubes"></i> 句型組裝鍛鍊
+                </button>
+                <button onclick="switchTab('game')" id="tab-btn-game" class="tab-btn font-semibold text-slate-500 hover:text-indigo-600 pb-2 px-3 whitespace-nowrap flex items-center gap-2">
+                    <i class="fa-solid fa-gamepad text-amber-500"></i> 時空偵探闖關遊戲
+                </button>
+                <button onclick="switchTab('quiz')" id="tab-btn-quiz" class="tab-btn font-semibold text-slate-500 hover:text-indigo-600 pb-2 px-3 whitespace-nowrap flex items-center gap-2">
+                    <i class="fa-solid fa-pen-to-square"></i> 會考題庫與克漏字
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+
+        <!-- ================= TAB 1: 核心文法 (GRAMMAR FOCUS) ================= -->
+        <section id="tab-focus" class="tab-content space-y-10">
+            <!-- Hero Header -->
+            <div class="bg-gradient-to-r from-indigo-900 via-indigo-800 to-purple-900 rounded-3xl p-6 sm:p-10 text-white shadow-xl relative overflow-hidden">
+                <div class="relative z-10 space-y-4">
+                    <span class="bg-amber-400 text-indigo-950 font-black text-xs sm:text-sm px-4 py-1.5 rounded-full uppercase tracking-wider inline-block shadow">南一版八年級 (上) Lesson 3</span>
+                    <h2 class="font-extrabold tracking-tight text-amber-300">八上 Lesson 3 拔尖重點統整</h2>
+                    <p class="text-indigo-100 text-lg sm:text-xl max-w-3xl leading-relaxed">
+                        本章節精通重點：<strong>過去進行式 (Past Continuous)</strong>、<strong>時間從屬連接詞 (When / While / Before / After)</strong>、以及<strong>英語傳統時間逆讀法 (Reading Clock Time)</strong>。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Topic 1: Past Continuous -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-200 pb-4">
+                    <span class="w-10 h-10 rounded-2xl bg-indigo-100 text-indigo-700 font-extrabold flex items-center justify-center text-xl">1</span>
+                    <h2 class="font-bold text-slate-900">過去進行式 (Past Continuous Tense)</h2>
+                </div>
+
+                <div class="bg-indigo-50/70 p-5 rounded-2xl border border-indigo-100 text-indigo-950 space-y-2">
+                    <p class="font-bold text-indigo-900"><i class="fa-solid fa-circle-info mr-1.5"></i>核心定義：</p>
+                    <p class="leading-relaxed">表示在「過去某一特定時間點」或「過去某段期間」正在持續進行的動作。</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
+                        <div class="bg-white p-3.5 rounded-xl border border-indigo-200 shadow-sm">
+                            <span class="text-xs font-bold text-slate-500 block">現在進行式 (Right now)</span>
+                            <span class="font-bold text-slate-800">Tom <span class="text-indigo-600">is singing</span> now.</span>
+                        </div>
+                        <div class="bg-white p-3.5 rounded-xl border border-indigo-200 shadow-sm">
+                            <span class="text-xs font-bold text-slate-500 block">過去進行式 (Specific past time)</span>
+                            <span class="font-bold text-slate-800">Tom <span class="text-indigo-600">was singing</span> at six yesterday morning.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-indigo-600"></i> 句型結構表
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse bg-slate-50 rounded-2xl overflow-hidden border border-slate-200">
+                            <thead>
+                                <tr class="bg-slate-200/80 text-slate-800 font-bold border-b border-slate-300">
+                                    <th class="p-4">句型</th>
+                                    <th class="p-4">主詞 (Subject)</th>
+                                    <th class="p-4">過去式 be 動詞</th>
+                                    <th class="p-4">V-ing</th>
+                                    <th class="p-4">過去時間副詞</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 text-base">
+                                <tr class="bg-white">
+                                    <td class="p-4 font-bold text-indigo-700">肯定句</td>
+                                    <td class="p-4">I / He / She / It<br>We / You / They</td>
+                                    <td class="p-4 font-bold">was<br>were</td>
+                                    <td class="p-4">singing<br>dancing</td>
+                                    <td class="p-4 text-slate-600">then.<br>at 9 last night.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-4 font-bold text-rose-600">否定句</td>
+                                    <td class="p-4">I / He / She / It<br>We / You / They</td>
+                                    <td class="p-4 font-bold">was not (wasn't)<br>were not (weren't)</td>
+                                    <td class="p-4">eating<br>sleeping</td>
+                                    <td class="p-4 text-slate-600">at 7 yesterday morning.<br>at that time.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Topic 2: Subordinate Conjunctions -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-200 pb-4">
+                    <span class="w-10 h-10 rounded-2xl bg-indigo-100 text-indigo-700 font-extrabold flex items-center justify-center text-xl">2</span>
+                    <h2 class="font-bold text-slate-900">時間從屬連接詞 (When / While / Before / After)</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Rule A: Long vs Short action -->
+                    <div class="bg-amber-50/70 p-6 rounded-2xl border border-amber-200 space-y-3">
+                        <h3 class="font-bold text-amber-900 flex items-center gap-2">
+                            <i class="fa-solid fa-bolt text-amber-600"></i> 長持續動作 vs 短瞬間動作
+                        </h3>
+                        <p class="text-amber-950 leading-relaxed">
+                            當一個「長持續動作」進行時，插入了一個「短瞬間動作」：
+                        </p>
+                        <ul class="space-y-2 text-base font-medium">
+                            <li class="bg-white p-3 rounded-xl border border-amber-200 shadow-sm">
+                                <span class="text-amber-700 font-bold">When + 過去簡單式 (短動作),</span> 過去進行式 (長動作).<br>
+                                <span class="text-slate-600 text-sm">例：When Tom woke up, his mom was cooking.</span>
+                            </li>
+                            <li class="bg-white p-3 rounded-xl border border-amber-200 shadow-sm">
+                                <span class="text-amber-700 font-bold">While / When + 過去進行式 (長動作),</span> 過去簡單式 (短動作).<br>
+                                <span class="text-slate-600 text-sm">例：While she was sleeping, someone knocked.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Rule B: Order of time -->
+                    <div class="bg-emerald-50/70 p-6 rounded-2xl border border-emerald-200 space-y-3">
+                        <h3 class="font-bold text-emerald-900 flex items-center gap-2">
+                            <i class="fa-solid fa-timeline text-emerald-600"></i> 先後順序 (Before & After)
+                        </h3>
+                        <p class="text-emerald-950 leading-relaxed">
+                            用來明確指出事件發生的先後順序：
+                        </p>
+                        <ul class="space-y-2 text-base font-medium">
+                            <li class="bg-white p-3 rounded-xl border border-emerald-200 shadow-sm">
+                                <span class="text-emerald-700 font-bold">After + 先發生的動作,</span> 後發生的動作.<br>
+                                <span class="text-slate-600 text-sm">例：After Dad got home, he ate lunch.</span>
+                            </li>
+                            <li class="bg-white p-3 rounded-xl border border-emerald-200 shadow-sm">
+                                <span class="text-emerald-700 font-bold">Before + 後發生的動作,</span> 先發生的动作.<br>
+                                <span class="text-slate-600 text-sm">例：Before she went to school, she ate breakfast.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Topic 3: Clock Time Reading -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-200 pb-4">
+                    <span class="w-10 h-10 rounded-2xl bg-indigo-100 text-indigo-700 font-extrabold flex items-center justify-center text-xl">3</span>
+                    <h2 class="font-bold text-slate-900">時間逆讀法速查 (Reading Clock Time)</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-base">
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-start gap-3">
+                        <span class="bg-indigo-600 text-white font-bold px-3 py-1 rounded-xl text-sm whitespace-nowrap">整點</span>
+                        <div>
+                            <p class="font-bold text-slate-800">數字 + o'clock</p>
+                            <p class="text-slate-500 text-sm">It's five o'clock. (5:00)</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-start gap-3">
+                        <span class="bg-indigo-600 text-white font-bold px-3 py-1 rounded-xl text-sm whitespace-nowrap">幾點半</span>
+                        <div>
+                            <p class="font-bold text-slate-800">half past + 當前小時</p>
+                            <p class="text-slate-500 text-sm">It's half past two. (2:30)</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-start gap-3">
+                        <span class="bg-indigo-600 text-white font-bold px-3 py-1 rounded-xl text-sm whitespace-nowrap">1 ~ 30 分</span>
+                        <div>
+                            <p class="font-bold text-slate-800">分鐘 + past / after + 當前小時</p>
+                            <p class="text-slate-500 text-sm">It's ten past six. (6:10)</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-start gap-3">
+                        <span class="bg-indigo-600 text-white font-bold px-3 py-1 rounded-xl text-sm whitespace-nowrap">31 ~ 59 分</span>
+                        <div>
+                            <p class="font-bold text-slate-800">(60-分鐘) + to + 下一個小時</p>
+                            <p class="text-slate-500 text-sm">It's ten to eight. (7:50 → 差10分8點)</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-indigo-50/80 md:col-span-2 rounded-2xl border border-indigo-200 flex items-start gap-3">
+                        <span class="bg-amber-500 text-white font-bold px-3 py-1 rounded-xl text-sm whitespace-nowrap">15 分鐘</span>
+                        <div>
+                            <p class="font-bold text-indigo-950">a quarter (刻)</p>
+                            <p class="text-indigo-800 text-sm">3:15 → a quarter past three | 7:45 → a quarter to eight</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 2: 時間逆讀特訓器 (CLOCK TRAINER) ================= -->
+        <section id="tab-clock" class="tab-content hidden space-y-8">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+                <div>
+                    <h2 class="font-bold text-slate-900 flex items-center gap-3">
+                        <i class="fa-solid fa-clock text-indigo-600"></i> 時間逆讀指針互動練習
+                    </h2>
+                    <p class="text-slate-600 mt-1">拖動下方滑桿，動態對照傳統順讀法與英語逆讀法（past / to / a quarter / half）。</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <!-- SVG Interactive Clock Canvas -->
+                    <div class="flex flex-col items-center justify-center p-6 bg-slate-50 rounded-3xl border border-slate-200">
+                        <div class="relative w-64 h-64 sm:w-72 sm:h-72">
+                            <svg id="analog-clock" viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                                <circle cx="100" cy="100" r="95" fill="#ffffff" stroke="#334155" stroke-width="6"/>
+                                <!-- Clock numbers -->
+                                <text x="100" y="30" text-anchor="middle" font-weight="bold" font-size="16" fill="#1e293b">12</text>
+                                <text x="170" y="105" text-anchor="middle" font-weight="bold" font-size="16" fill="#1e293b">3</text>
+                                <text x="100" y="180" text-anchor="middle" font-weight="bold" font-size="16" fill="#1e293b">6</text>
+                                <text x="30" y="105" text-anchor="middle" font-weight="bold" font-size="16" fill="#1e293b">9</text>
+
+                                <!-- Hands -->
+                                <line id="hour-hand" x1="100" y1="100" x2="100" y2="55" stroke="#4f46e5" stroke-width="7" stroke-linecap="round"/>
+                                <line id="minute-hand" x1="100" y1="100" x2="100" y2="35" stroke="#f59e0b" stroke-width="5" stroke-linecap="round"/>
+                                <circle cx="100" cy="100" r="6" fill="#1e293b"/>
+                            </svg>
+                        </div>
+                        <div id="digital-clock-display" class="mt-4 font-black text-3xl text-indigo-900 bg-white px-6 py-2 rounded-2xl border border-slate-300 shadow-sm">
+                            07:45
+                        </div>
+                    </div>
+
+                    <!-- Interactive Controls & Output -->
+                    <div class="space-y-6">
+                        <div class="space-y-4 bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                            <div>
+                                <label class="font-bold text-slate-700 flex justify-between">
+                                    <span>小時 (Hour): <span id="hour-val" class="text-indigo-600 font-extrabold">7</span></span>
+                                </label>
+                                <input type="range" id="hour-slider" min="1" max="12" value="7" class="w-full h-2.5 bg-slate-300 rounded-lg appearance-none cursor-pointer accent-indigo-600 mt-2">
+                            </div>
+                            <div>
+                                <label class="font-bold text-slate-700 flex justify-between">
+                                    <span>分鐘 (Minute): <span id="minute-val" class="text-indigo-600 font-extrabold">45</span></span>
+                                </label>
+                                <input type="range" id="minute-slider" min="0" max="59" value="45" class="w-full h-2.5 bg-slate-300 rounded-lg appearance-none cursor-pointer accent-indigo-600 mt-2">
+                            </div>
+                        </div>
+
+                        <!-- Readout cards -->
+                        <div class="space-y-3">
+                            <div class="p-4 bg-indigo-50 rounded-2xl border border-indigo-200">
+                                <span class="text-xs font-bold text-indigo-700 uppercase block tracking-wider">Direct Read (直讀法)</span>
+                                <p id="direct-read-display" class="text-xl font-bold text-indigo-950 mt-1">Seven forty-five</p>
+                            </div>
+                            <div class="p-4 bg-amber-50 rounded-2xl border border-amber-200">
+                                <span class="text-xs font-bold text-amber-800 uppercase block tracking-wider">Reverse Read (逆讀法)</span>
+                                <p id="reverse-read-display" class="text-xl sm:text-2xl font-black text-amber-950 mt-1">It's a quarter to eight.</p>
+                                <p id="reverse-explanation" class="text-sm font-medium text-amber-800 mt-2">解析：31~59 分鐘使用 to + 下一個小時，表示還差 15 分鐘到 8 點。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 3: 句型組裝鍛鍊 (SENTENCE BUILDER) ================= -->
+        <section id="tab-builder" class="tab-content hidden space-y-8">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+                    <div>
+                        <h2 class="font-bold text-slate-900 flex items-center gap-3">
+                            <i class="fa-solid fa-cubes text-indigo-600"></i> 時間從屬句型組裝挑戰
+                        </h2>
+                        <p class="text-slate-600 mt-1">點擊字塊組裝正確語序的英文句子，鍛鍊對時態與連接詞的敏銳度。</p>
+                    </div>
+                    <span id="builder-level-text" class="bg-indigo-100 text-indigo-800 font-extrabold text-sm px-4 py-1.5 rounded-full">
+                        題目 1 / 4
+                    </span>
+                </div>
+
+                <!-- Sentence Prompt -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-2">
+                    <span class="text-xs font-bold text-slate-500 uppercase">中文目標句：</span>
+                    <p id="builder-chinese-prompt" class="text-xl sm:text-2xl font-bold text-slate-800">
+                        當我的朋友到達我家時，我正在種花。
+                    </p>
+                </div>
+
+                <!-- Answer Drop Zone -->
+                <div class="space-y-2">
+                    <span class="text-xs font-bold text-slate-500 uppercase">您的答案區域 (點擊字塊移除)：</span>
+                    <div id="builder-answer-zone" class="min-h-[70px] p-4 bg-indigo-50/50 border-2 border-dashed border-indigo-300 rounded-2xl flex flex-wrap gap-2 items-center">
+                        <!-- Dynamic Selected Badges -->
+                    </div>
+                </div>
+
+                <!-- Word Bank Zone -->
+                <div class="space-y-2">
+                    <span class="text-xs font-bold text-slate-500 uppercase">字詞庫 (點擊字塊加入答案)：</span>
+                    <div id="builder-word-bank" class="p-4 bg-slate-50 border border-slate-200 rounded-2xl flex flex-wrap gap-2.5">
+                        <!-- Dynamic Word Badges -->
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex items-center justify-between pt-2">
+                    <button onclick="resetCurrentBuilder()" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-bold hover:bg-slate-100 transition">
+                        <i class="fa-solid fa-rotate-left mr-1"></i> 重設
+                    </button>
+                    <button onclick="checkBuilderAnswer()" class="px-7 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold rounded-xl shadow-md transition">
+                        檢查答案 <i class="fa-solid fa-check ml-1"></i>
+                    </button>
+                </div>
+
+                <!-- Feedback -->
+                <div id="builder-feedback" class="hidden p-4 rounded-xl text-base font-bold"></div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 4: 時空偵探闖關遊戲 (TIME DETECTIVE GAME) ================= -->
+        <section id="tab-game" class="tab-content hidden space-y-8">
+            <div class="bg-slate-900 rounded-3xl p-6 sm:p-10 text-white shadow-2xl space-y-8 relative overflow-hidden border border-slate-800">
+                <!-- Game Header Status -->
+                <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-400 text-slate-950 flex items-center justify-center text-2xl font-black">
+                            <i class="fa-solid fa-user-secret"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-extrabold text-amber-400">時空偵探：破案大作戰</h2>
+                            <p class="text-sm text-slate-400">Time Detective: The Mystery Cases</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-6 bg-slate-800/90 px-5 py-2.5 rounded-2xl border border-slate-700">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs text-slate-400 font-bold uppercase">生命值:</span>
+                            <div id="game-lives-container" class="flex gap-1">
+                                <i class="fa-solid fa-heart text-rose-500"></i>
+                                <i class="fa-solid fa-heart text-rose-500"></i>
+                                <i class="fa-solid fa-heart text-rose-500"></i>
+                            </div>
+                        </div>
+                        <div class="border-l border-slate-700 h-6"></div>
+                        <div>
+                            <span class="text-xs text-slate-400 font-bold uppercase">總得分:</span>
+                            <span id="game-score-val" class="text-xl font-extrabold text-amber-400 ml-1">0</span>
+                        </div>
+                        <div class="border-l border-slate-700 h-6"></div>
+                        <div>
+                            <span id="game-stage-badge" class="bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+                                關卡 1 / 3
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Play Stage Area -->
+                <div id="game-play-area">
+                    <!-- Dynamic Game Stage content rendered by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 5: 會考題庫與克漏字 (MASTERY QUIZ) ================= -->
+        <section id="tab-quiz" class="tab-content hidden space-y-10">
+            <!-- Header Banner -->
+            <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <h2 class="font-extrabold text-slate-900 flex items-center gap-3">
+                        <i class="fa-solid fa-pen-to-square text-indigo-600"></i> 綜合演練與會考歷屆經典題
+                    </h2>
+                    <p class="text-slate-600 mt-1">完整收錄講義單選題與 Cloze Test 克漏字篇章閱讀測驗。</p>
+                </div>
+                <div id="score-badge" class="hidden bg-emerald-100 border border-emerald-300 text-emerald-800 font-extrabold px-5 py-2.5 rounded-2xl flex items-center gap-2">
+                    <i class="fa-solid fa-award text-xl"></i>
+                    <span>測驗得分：<span id="current-score" class="text-2xl">0</span> 分</span>
+                </div>
+            </div>
+
+            <!-- Quiz Questions Grid -->
+            <div id="quiz-container" class="space-y-6">
+                <!-- Dynamically generated single questions -->
+            </div>
+
+            <!-- Cloze Test Reading Section -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+                <div class="border-b border-slate-200 pb-4">
+                    <span class="bg-amber-100 text-amber-900 font-extrabold text-xs px-3 py-1 rounded-full uppercase">Cloze Test</span>
+                    <h3 class="font-bold text-slate-900 mt-2">克漏字篇章測驗 (Lily's Birthday Party)</h3>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 leading-relaxed text-slate-800 space-y-4">
+                    <p class="text-lg">
+                        Yesterday, I went to my friend Lily's house for her birthday. I left home at seven.
+                        <span class="font-bold text-indigo-600 underline px-1">[ 1 ]</span>
+                        I walked in, Lily was putting candles on the cake, and her little brother was running around the room. Everyone was busy getting ready.
+                    </p>
+                    <p class="text-lg">
+                        While some guests
+                        <span class="font-bold text-indigo-600 underline px-1">[ 2 ]</span>
+                        in the living room, Lily's sisters were helping decorate the walls with colorful paper. The party started at
+                        <span class="font-bold text-indigo-600 underline px-1">[ 3 ]</span>.
+                        Before all the guests
+                        <span class="font-bold text-indigo-600 underline px-1">[ 4 ]</span>,
+                        we played games, sang songs, and ate delicious food.
+                    </p>
+                    <p class="text-lg">
+                        Then, Lily made a wish and blew out the candles. After eating cake, we danced to music and took lots of pictures. I gave Lily a card and a small gift, and she said thanks to me.
+                        <span class="font-bold text-indigo-600 underline px-1">[ 5 ]</span>
+                        we were taking a group photo, Lily's brother made a funny face and everyone laughed.
+                    </p>
+                </div>
+
+                <div id="cloze-questions-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Cloze Questions dynamic render -->
+                </div>
+            </div>
+
+            <!-- Submit Quiz Button -->
+            <div class="flex justify-center pt-4">
+                <button onclick="submitFullQuiz()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xl px-10 py-4 rounded-2xl shadow-xl transition transform hover:-translate-y-0.5">
+                    提交整份試卷並核對答案 <i class="fa-solid fa-paper-plane ml-2"></i>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Result Modal -->
+    <div id="result-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-8 shadow-2xl border border-slate-200 text-center space-y-6">
+            <div class="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-3xl flex items-center justify-center text-4xl mx-auto shadow-inner">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <div>
+                <h3 class="text-2xl font-extrabold text-slate-900">測驗完成！</h3>
+                <p class="text-slate-500 mt-1">恭喜您完成了全單元評量題庫</p>
+            </div>
+
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                <span class="text-sm font-bold text-slate-500 block">總得分</span>
+                <span id="modal-score" class="text-6xl font-black text-indigo-600 my-1 block">95</span>
+                <span class="text-xs font-bold text-slate-400 block">答對 <span id="modal-correct-count" class="text-slate-700">19</span> 題 <span id="modal-total-count">/ 20</span></span>
+            </div>
+
+            <p id="modal-feedback-text" class="text-base text-slate-700 font-medium leading-relaxed">
+                表現優異！對於觀念與會考題型已有高度掌握，對照下方解析修正錯題即可達標卓越！
+            </p>
+
+            <button onclick="closeModal()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl shadow-md transition">
+                查看詳細答題解析
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Comprehensive Question Bank (Including Exam Questions)
+        const quizData = [
+            { id: 1, question: "Hank _____ basketball at ten o'clock this morning.", options: ["plays", "playing", "was playing", "is playing"], answer: 2, tag: "基礎核心" },
+            { id: 2, question: "When Mr. White _____ in, we were eating lunch.", options: ["walk", "walks", "walked", "walking"], answer: 2, tag: "文法觀念" },
+            { id: 3, question: "What _____ Anna doing in the living room at ten last night?", options: ["is; do", "is; doing", "was; do", "was; doing"], answer: 3, tag: "問句句型" },
+            { id: 4, question: "_____ Dad got home, he washed his hands and then ate lunch with us.", options: ["After", "Because", "Before", "And"], answer: 0, tag: "連接詞" },
+            { id: 5, question: "I drink a cup of milk _____ I sleep every day.", options: ["when", "before", "after", "because"], answer: 1, tag: "時間順序" },
+            { id: 6, question: "I was cooking dinner _____ my brother was watching TV.", options: ["while", "before", "so", "after"], answer: 0, tag: "長動作對照" },
+            { id: 7, question: "Diana _____ with her friends at seven yesterday morning.", options: ["jogs", "jogged", "was jogging", "is jogging"], answer: 2, tag: "過去進行式" },
+            { id: 8, question: "When Judy picked up her cellphone, her baby _____.", options: ["cry", "cries", "is crying", "was crying"], answer: 3, tag: "長短動作" },
+            { id: 9, question: "Grace bought some gifts for her family before she _____ back home.", options: ["buy; goes", "buys; went", "is buying; was going", "went"], answer: 3, tag: "時態一致" },
+            { id: 10, question: "_____ I was doing my homework, the lights went out.", options: ["So", "Because", "But", "While"], answer: 3, tag: "長動作" },
+            { id: 11, question: "He tried over and over again before he _____.", options: ["was giving up", "gives up", "gave up", "is giving up"], answer: 2, tag: "時態" },
+            { id: 12, question: "Alice went to bed _____ she read a book.", options: ["when", "so", "but", "after"], answer: 3, tag: "時間順序" },
+            { id: 13, question: "What was _____ doing at that time?", options: ["they", "Frank", "you", "Mom and Dad"], answer: 1, tag: "主詞一致" },
+            { id: 14, question: "I hurt my leg _____ I was running in the park.", options: ["and", "before", "after", "while"], answer: 3, tag: "連接詞" },
+            { id: 15, question: "When my husband came home, I _____.", options: ["am cooking", "don't cook", "not cooking", "was cooking"], answer: 3, tag: "長短動作" },
+            { id: 16, question: "The baby cried when he _____ hungry.", options: ["is", "was", "did", "were"], answer: 1, tag: "時態一致" },
+            { id: 17, question: "Don't be late! The train leaves at ten _____ six.", options: ["in", "on", "at", "past"], answer: 3, tag: "時間逆讀" },
+            { id: 18, question: "A: _____ was Ryan doing at ten last night? B: He was studying English.", options: ["Why", "Where", "When", "What"], answer: 3, tag: "疑問詞" },
+            { id: 19, question: "A: What was your mom doing then? B: She _____.", options: ["was dancing", "watched TV", "didn't go with us", "is walking"], answer: 0, tag: "答句時態" },
+            { id: 20, question: "A: What did he do when he saw the fox? B: He _____.", options: ["ran away", "was running away", "runs away", "doesn't run away"], answer: 0, tag: "簡單式回答" },
+            // Exam Questions
+            { id: 21, question: "【107會考】 Yesterday when I got home from work, my brother _____ out for dinner, so he invited me to join him.", options: ["goes out", "went out", "has gone out", "was going out"], answer: 3, tag: "107 會考" },
+            { id: 22, question: "【111會考】 Rex did not feel the earthquake this morning. He _____ in the park at the time.", options: ["jogged", "was jogging", "has jogged", "would jog"], answer: 1, tag: "111 會考" },
+            { id: 23, question: "【112會考】 Before she _____ about it, you should tell Daphne you broke her favorite cup.", options: ["asks", "asked", "was asking", "will ask"], answer: 0, tag: "112 會考" }
+        ];
+
+        const clozeData = [
+            { num: 1, options: ["So", "When", "Because", "But"], answer: 1, explanation: "後接瞬間進入房間的動作 (walked in)，用 When。" },
+            { num: 2, options: ["talk", "talked", "are talking", "were talking"], answer: 3, explanation: "While 開頭引導長持續動作，過去時間點用 were talking。" },
+            { num: 3, options: ["five o'clock", "half past twelve", "a quarter to seven", "a quarter to eight"], answer: 3, explanation: "前文提點 left home at seven，Party 於 a quarter to eight (7:45) 開始最適當。" },
+            { num: 4, options: ["arrive", "arrived", "are arriving", "were arriving"], answer: 1, explanation: "Before 後接過去時間動作，用簡單過去式 arrived。" },
+            { num: 5, options: ["Before", "But", "After", "While"], answer: 3, explanation: "後接正在拍合照的持續進行動作 (were taking photo)，使用 While。" }
+        ];
+
+        const builderLevels = [
+            {
+                chinese: "當我的朋友到達我家時，我正在種花。",
+                words: ["When", "my", "friends", "arrived", "at", "my", "house,", "I", "was", "planting", "flowers."],
+                correct: ["When", "my", "friends", "arrived", "at", "my", "house,", "I", "was", "planting", "flowers."]
+            },
+            {
+                chinese: "當 Peter 關門時，他的小孩們正在看電視。",
+                words: ["When", "Peter", "closed", "the", "door,", "his", "children", "were", "watching", "TV."],
+                correct: ["When", "Peter", "closed", "the", "door,", "his", "children", "were", "watching", "TV."]
+            },
+            {
+                chinese: "當 Angel 打電話來時，Frank 正在聽音樂。",
+                words: ["Frank", "was", "listening", "to", "music", "when", "Angel", "called."],
+                correct: ["Frank", "was", "listening", "to", "music", "when", "Angel", "called."]
+            },
+            {
+                chinese: "Eva 上星期日吃完午餐後洗碗。",
+                words: ["Eva", "did", "the", "dishes", "after", "she", "ate", "lunch", "last", "Sunday."],
+                correct: ["Eva", "did", "the", "dishes", "after", "she", "ate", "lunch", "last", "Sunday."]
+            }
+        ];
+
+        let selectedWords = [];
+        let currentBuilderIndex = 0;
+
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active', 'text-indigo-600', 'border-b-4', 'border-indigo-600');
+                btn.classList.add('text-slate-500');
+            });
+
+            // Show target
+            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-btn-${tabName}`);
+            activeBtn.classList.add('active', 'text-indigo-600', 'border-b-4', 'border-indigo-600');
+            activeBtn.classList.remove('text-slate-500');
+        }
+
+        // Clock Interactive Renderer
+        function updateClockFromInputs() {
+            const h = parseInt(document.getElementById('hour-slider').value);
+            const m = parseInt(document.getElementById('minute-slider').value);
+
+            document.getElementById('hour-val').textContent = h;
+            document.getElementById('minute-val').textContent = m < 10 ? `0${m}` : m;
+            document.getElementById('digital-clock-display').textContent = `${h < 10 ? '0' + h : h}:${m < 10 ? '0' + m : m}`;
+
+            // Rotate Hands
+            const minuteAngle = m * 6; // 360 / 60
+            const hourAngle = (h % 12) * 30 + (m / 60) * 30; // 360 / 12 = 30 deg per hour
+
+            document.getElementById('minute-hand').setAttribute('transform', `rotate(${minuteAngle} 100 100)`);
+            document.getElementById('hour-hand').setAttribute('transform', `rotate(${hourAngle} 100 100)`);
+
+            // Direct Read
+            const numberWords = ["twelve", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
+            const directStr = `${numberWords[h].charAt(0).toUpperCase() + numberWords[h].slice(1)} ${m === 0 ? "o'clock" : m}`;
+            document.getElementById('direct-read-display').textContent = directStr;
+
+            // Reverse Read Logic
+            let reverseStr = "";
+            let explanationStr = "";
+
+            if (m === 0) {
+                reverseStr = `It's ${numberWords[h]} o'clock.`;
+                explanationStr = "整點直接以數字 + o'clock 表示。";
+            } else if (m === 30) {
+                reverseStr = `It's half past ${numberWords[h]}.`;
+                explanationStr = "30分鐘使用 half past + 當前小時。";
+            } else if (m < 30) {
+                let minWord = m === 15 ? "a quarter" : `${m}`;
+                reverseStr = `It's ${minWord} past ${numberWords[h]}.`;
+                explanationStr = `1~29 分鐘使用 <strong>past / after</strong> + 當前小時 (${numberWords[h]})。`;
+            } else {
+                let minTo = 60 - m;
+                let nextH = h % 12 + 1;
+                let minWord = minTo === 15 ? "a quarter" : `${minTo}`;
+                reverseStr = `It's ${minWord} to ${numberWords[nextH]}.`;
+                explanationStr = `31~59 分鐘使用 <strong>to</strong> + 下一個小時 (${numberWords[nextH]})，表示還差 ${minTo} 分鐘。`;
+            }
+
+            document.getElementById('reverse-read-display').innerHTML = reverseStr;
+            document.getElementById('reverse-explanation').innerHTML = `解析：${explanationStr}`;
+        }
+
+        // Sentence Builder
+        function loadBuilderLevel(index) {
+            currentBuilderIndex = index;
+            selectedWords = [];
+            const data = builderLevels[index];
+
+            document.getElementById('builder-level-text').textContent = `題目 ${index + 1} / ${builderLevels.length}`;
+            document.getElementById('builder-chinese-prompt').textContent = data.chinese;
+
+            const feedback = document.getElementById('builder-feedback');
+            feedback.classList.add('hidden');
+
+            renderBuilderZones();
+        }
+
+        function renderBuilderZones() {
+            const data = builderLevels[currentBuilderIndex];
+            const answerZone = document.getElementById('builder-answer-zone');
+            const wordBank = document.getElementById('builder-word-bank');
+
+            answerZone.innerHTML = '';
+            wordBank.innerHTML = '';
+
+            selectedWords.forEach((word, idx) => {
+                const badge = document.createElement('button');
+                badge.className = "bg-indigo-600 text-white font-medium text-xs sm:text-sm px-3.5 py-2 rounded-xl shadow flex items-center gap-2 hover:bg-indigo-700 transition";
+                badge.innerHTML = `${word} <i class="fa-solid fa-xmark text-xs"></i>`;
+                badge.onclick = () => removeWordFromAnswer(idx);
+                answerZone.appendChild(badge);
+            });
+
+            data.words.forEach((word) => {
+                const isSelected = selectedWords.includes(word);
+                const btn = document.createElement('button');
+                btn.className = `px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold border transition ${
+                    isSelected ? 'bg-slate-200 text-slate-400 border-slate-300 cursor-not-allowed' : 'bg-white text-slate-800 border-slate-300 hover:border-indigo-500 hover:text-indigo-600 shadow-sm'
+                }`;
+                btn.textContent = word;
+                btn.disabled = isSelected;
+                btn.onclick = () => selectWord(word);
+                wordBank.appendChild(btn);
+            });
+        }
+
+        function selectWord(word) {
+            selectedWords.push(word);
+            renderBuilderZones();
+        }
+
+        function removeWordFromAnswer(index) {
+            selectedWords.splice(index, 1);
+            renderBuilderZones();
+        }
+
+        function resetCurrentBuilder() {
+            selectedWords = [];
+            renderBuilderZones();
+        }
+
+        function checkBuilderAnswer() {
+            const data = builderLevels[currentBuilderIndex];
+            const feedback = document.getElementById('builder-feedback');
+            feedback.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-rose-100', 'text-rose-800');
+
+            const isCorrect = JSON.stringify(selectedWords) === JSON.stringify(data.correct);
+
+            if (isCorrect) {
+                feedback.classList.add('bg-emerald-100', 'text-emerald-800');
+                feedback.innerHTML = '<i class="fa-solid fa-circle-check mr-1.5"></i> 完全正確！恭喜通關！';
+                setTimeout(() => {
+                    if (currentBuilderIndex + 1 < builderLevels.length) {
+                        loadBuilderLevel(currentBuilderIndex + 1);
+                    }
+                }, 1500);
+            } else {
+                feedback.classList.add('bg-rose-100', 'text-rose-800');
+                feedback.innerHTML = '<i class="fa-solid fa-circle-xmark mr-1.5"></i> 順序有點問題，檢查一下時態或連接詞位置喔！';
+            }
+        }
+
+        // Quiz Renderer
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            quizData.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4";
+
+                let tagBadge = `<span class="bg-indigo-100 text-indigo-700 font-bold text-xs px-3 py-1 rounded-full">${q.tag}</span>`;
+                if (q.tag.includes("會考")) {
+                    tagBadge = `<span class="bg-amber-100 text-amber-900 font-extrabold text-xs px-3 py-1 rounded-full"><i class="fa-solid fa-fire mr-1"></i>${q.tag}</span>`;
+                }
+
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-3">
+                        <h4 class="font-bold text-slate-900 text-lg leading-snug">
+                            <span class="text-indigo-600 font-extrabold mr-1">Q${idx + 1}.</span> ${q.question}
+                        </h4>
+                        ${tagBadge}
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-base pt-1">
+                        ${q.options.map((opt, oIdx) => `
+                            <label class="p-4 border rounded-2xl hover:bg-slate-50 cursor-pointer flex items-center gap-3 transition border-slate-200">
+                                <input type="radio" name="quiz-q-${q.id}" value="${oIdx}" class="accent-indigo-600 w-5 h-5">
+                                <span class="text-slate-800 font-medium">${opt}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div id="quiz-explanation-${q.id}" class="hidden p-4 rounded-2xl text-base bg-slate-50 border border-slate-200 text-slate-700 mt-2 leading-relaxed"></div>
+                `;
+                container.appendChild(card);
+            });
+
+            const clozeGrid = document.getElementById('cloze-questions-grid');
+            clozeGrid.innerHTML = '';
+
+            clozeData.forEach((c) => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3 text-base";
+                card.innerHTML = `
+                    <div class="font-bold text-slate-800 text-lg">題號 [ ${c.num} ]</div>
+                    <div class="grid grid-cols-2 gap-2">
+                        ${c.options.map((opt, oIdx) => `
+                            <label class="p-3 bg-white border border-slate-200 rounded-xl flex items-center gap-2 cursor-pointer hover:bg-indigo-50 transition">
+                                <input type="radio" name="cloze-q-${c.num}" value="${oIdx}" class="accent-indigo-600 w-4 h-4">
+                                <span class="text-slate-800 font-medium">${opt}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div id="cloze-explanation-${c.num}" class="hidden p-3 rounded-xl text-sm bg-white border text-slate-700 leading-relaxed"></div>
+                `;
+                clozeGrid.appendChild(card);
+            });
+        }
+
+        function submitFullQuiz() {
+            let correctCount = 0;
+            const totalQuestions = quizData.length + clozeData.length;
+
+            quizData.forEach((q) => {
+                const selected = document.querySelector(`input[name="quiz-q-${q.id}"]:checked`);
+                const expBox = document.getElementById(`quiz-explanation-${q.id}`);
+                expBox.classList.remove('hidden', 'bg-emerald-50', 'bg-rose-50', 'text-emerald-900', 'text-rose-900');
+
+                if (selected && parseInt(selected.value) === q.answer) {
+                    correctCount++;
+                    expBox.classList.add('bg-emerald-50', 'text-emerald-900');
+                    expBox.innerHTML = `<strong class="text-emerald-700"><i class="fa-solid fa-circle-check"></i> 答對！</strong>`;
+                } else {
+                    expBox.classList.add('bg-rose-50', 'text-rose-900');
+                    expBox.innerHTML = `<strong class="text-rose-700"><i class="fa-solid fa-circle-xmark"></i> 正確答案：${q.options[q.answer]}</strong>`;
+                }
+            });
+
+            clozeData.forEach((c) => {
+                const selected = document.querySelector(`input[name="cloze-q-${c.num}"]:checked`);
+                const expBox = document.getElementById(`cloze-explanation-${c.num}`);
+                expBox.classList.remove('hidden', 'bg-emerald-50', 'bg-rose-50');
+
+                if (selected && parseInt(selected.value) === c.answer) {
+                    correctCount++;
+                    expBox.classList.add('bg-emerald-50');
+                    expBox.innerHTML = `<span class="text-emerald-700 font-bold">✓ 正確</span> - ${c.explanation}`;
+                } else {
+                    expBox.classList.add('bg-rose-50');
+                    expBox.innerHTML = `<span class="text-rose-700 font-bold">✕ 答案是 (${c.options[c.answer]})</span> - ${c.explanation}`;
+                }
+            });
+
+            const finalScore = Math.round((correctCount / totalQuestions) * 100);
+
+            document.getElementById('current-score').textContent = `${finalScore}`;
+            document.getElementById('score-badge').classList.remove('hidden');
+
+            document.getElementById('modal-score').textContent = finalScore;
+            document.getElementById('modal-correct-count').textContent = correctCount;
+            document.getElementById('modal-total-count').textContent = `/ ${totalQuestions}`;
+
+            document.getElementById('result-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('result-modal').classList.add('hidden');
+        }
+
+        function setFontSize(size) {
+            const body = document.body;
+            body.classList.remove('font-size-sm', 'font-size-md', 'font-size-lg', 'font-size-xl');
+            body.classList.add(`font-size-${size}`);
+
+            ['sm', 'md', 'lg', 'xl'].forEach(s => {
+                const btn = document.getElementById(`btn-font-${s}`);
+                if (btn) {
+                    btn.classList.remove('bg-indigo-600', 'text-white', 'shadow');
+                    btn.classList.add('hover:bg-indigo-800', 'text-slate-300');
+                }
+            });
+
+            const activeBtn = document.getElementById(`btn-font-${size}`);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-indigo-600', 'text-white', 'shadow');
+                activeBtn.classList.remove('hover:bg-indigo-800', 'text-slate-300');
+            }
+        }
+
+        let gameState = {
+            score: 0,
+            lives: 3,
+            currentStage: 0,
+            stageStep: 0,
+        };
+
+        const gameQuestions = {
+            stage1: [
+                { prompt: "鎖頭上的暗號寫著：『It's a quarter to eight.』請問對應的數位時間是什麼？", options: ["07:45", "08:15", "07:15", "08:45"], answer: 0, hint: "a quarter to eight 代表「差 15 分鐘到 8 點」。" },
+                { prompt: "鎖頭上的暗號寫著：『It's twenty past six.』請問對應的數位時間是什麼？", options: ["05:40", "06:20", "06:40", "07:20"], answer: 1, hint: "twenty past six 代表「6點過後 20 分鐘」。" },
+                { prompt: "鎖頭上的暗號寫著：『It's half past ten.』請問對應的數位時間是什麼？", options: ["10:15", "09:30", "10:30", "11:30"], answer: 2, hint: "half past 代表「幾點半」。" }
+            ],
+            stage2: [
+                { prompt: "證人表示：『昨晚九點警方抵達現場時，主謀 (The suspect) _____ 在客廳看電視。』", options: ["was watching TV", "watched TV", "is watching TV", "were watching TV"], answer: 0, hint: "主詞 The suspect 是單數，過去特定時間點用 was + V-ing。" },
+                { prompt: "監視器畫面顯示：『昨天早上七點，嫌犯們 (The thieves) _____ 珠寶。』", options: ["was stealing", "were stealing", "stole", "steal"], answer: 1, hint: "主詞 The thieves 為複數，用 were + V-ing。" },
+                { prompt: "偵探問：『What _____ you _____ at 8:00 last night?』(你昨晚八點正在做什麼？)", options: ["are; doing", "were; doing", "was; doing", "did; do"], answer: 1, hint: "主詞為 you，過去進行式搭配 were。" }
+            ],
+            stage3: [
+                { prompt: "偵探還原事件順序：『_____ I walked into the room, the suspect was hiding the bag.』", options: ["While", "When", "Before", "After"], answer: 1, hint: "後接瞬間動作 (walked in)，表示「當...的時候」用 When。" },
+                { prompt: "線索整合：『The lights went out _____ the suspect was running away.』", options: ["while", "before", "after", "so"], answer: 0, hint: "後接持續進行的長動作 (was running away)，用 while。" },
+                { prompt: "時間前後還原：『The thief stole the diamonds _____ the security guard arrived.』(保全到達之前，賊就偷走鑽石了)", options: ["after", "before", "while", "when"], answer: 1, hint: "表示「在...之前」使用 before。" }
+            ]
+        };
+
+        function initDetectiveGame() {
+            gameState.score = 0;
+            gameState.lives = 3;
+            gameState.currentStage = 0;
+            gameState.stageStep = 0;
+            updateGameHeader();
+            renderGameStage();
+        }
+
+        function updateGameHeader() {
+            document.getElementById('game-score-val').textContent = gameState.score;
+            document.getElementById('game-stage-badge').textContent = `關卡 ${gameState.currentStage + 1} / 3`;
+
+            const livesContainer = document.getElementById('game-lives-container');
+            livesContainer.innerHTML = '';
+            for (let i = 0; i < 3; i++) {
+                if (i < gameState.lives) {
+                    livesContainer.innerHTML += `<i class="fa-solid fa-heart text-rose-500"></i>`;
+                } else {
+                    livesContainer.innerHTML += `<i class="fa-regular fa-heart text-slate-600"></i>`;
+                }
+            }
+        }
+
+        function renderGameStage() {
+            const playArea = document.getElementById('game-play-area');
+            playArea.innerHTML = '';
+
+            if (gameState.lives <= 0) {
+                renderGameOver(false);
+                return;
+            }
+
+            if (gameState.currentStage >= 3) {
+                renderGameOver(true);
+                return;
+            }
+
+            let stageTitle = "";
+            let currentData = null;
+
+            if (gameState.currentStage === 0) {
+                stageTitle = "第一關：時間逆讀解碼器 (Clock Time Cipher)";
+                currentData = gameQuestions.stage1[gameState.stageStep];
+            } else if (gameState.currentStage === 1) {
+                stageTitle = "第二關：案發現場時態重建 (Past Continuous Scene)";
+                currentData = gameQuestions.stage2[gameState.stageStep];
+            } else if (gameState.currentStage === 2) {
+                stageTitle = "第三關：時間邏輯鎖 (Conjunction Chain)";
+                currentData = gameQuestions.stage3[gameState.stageStep];
+            }
+
+            const card = document.createElement('div');
+            card.className = "bg-slate-800/90 rounded-2xl p-6 sm:p-8 border border-indigo-500/30 space-y-6";
+            card.innerHTML = `
+                <div class="flex items-center justify-between border-b border-slate-700 pb-4">
+                    <h3 class="text-xl sm:text-2xl font-bold text-amber-400">
+                        <i class="fa-solid fa-magnifying-glass mr-2"></i> ${stageTitle}
+                    </h3>
+                    <span class="text-xs bg-slate-700 text-slate-300 font-bold px-3 py-1 rounded-full">
+                        任務 ${gameState.stageStep + 1} / 3
+                    </span>
+                </div>
+
+                <div class="bg-slate-900/80 p-5 sm:p-6 rounded-2xl border border-slate-700">
+                    <p class="text-lg sm:text-xl font-bold text-slate-100 leading-relaxed">
+                        ${currentData.prompt}
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    ${currentData.options.map((opt, idx) => `
+                        <button onclick="handleGameAnswer(${idx})" class="p-4 rounded-xl bg-slate-700/80 hover:bg-indigo-600 text-slate-100 font-bold text-lg border border-slate-600 hover:border-indigo-400 transition text-left flex items-center justify-between group">
+                            <span>${opt}</span>
+                            <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-white transition"></i>
+                        </button>
+                    `).join('')}
+                </div>
+
+                <div id="game-feedback" class="hidden p-4 rounded-xl text-base font-bold"></div>
+            `;
+
+            playArea.appendChild(card);
+        }
+
+        function handleGameAnswer(selectedIdx) {
+            let currentData = null;
+            if (gameState.currentStage === 0) currentData = gameQuestions.stage1[gameState.stageStep];
+            else if (gameState.currentStage === 1) currentData = gameQuestions.stage2[gameState.stageStep];
+            else if (gameState.currentStage === 2) currentData = gameQuestions.stage3[gameState.stageStep];
+
+            const feedback = document.getElementById('game-feedback');
+            feedback.classList.remove('hidden', 'bg-emerald-500/20', 'text-emerald-300', 'border-emerald-500/50', 'bg-rose-500/20', 'text-rose-300', 'border-rose-500/50');
+
+            if (selectedIdx === currentData.answer) {
+                gameState.score += 100;
+                feedback.classList.add('bg-emerald-500/20', 'text-emerald-300', 'border', 'border-emerald-500/50');
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> 答對了！偵探線索解開！(+100分)`;
+
+                setTimeout(() => {
+                    gameState.stageStep++;
+                    if (gameState.stageStep >= 3) {
+                        gameState.stageStep = 0;
+                        gameState.currentStage++;
+                    }
+                    updateGameHeader();
+                    renderGameStage();
+                }, 1200);
+            } else {
+                gameState.lives--;
+                feedback.classList.add('bg-rose-500/20', 'text-rose-300', 'border', 'border-rose-500/50');
+                feedback.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-2"></i> 答案不正確！提示：${currentData.hint}`;
+
+                updateGameHeader();
+                if (gameState.lives <= 0) {
+                    setTimeout(() => {
+                        renderGameOver(false);
+                    }, 1500);
+                }
+            }
+        }
+
+        function renderGameOver(isWin) {
+            const playArea = document.getElementById('game-play-area');
+            playArea.innerHTML = '';
+
+            const card = document.createElement('div');
+            card.className = "text-center space-y-6 py-8";
+
+            if (isWin) {
+                card.innerHTML = `
+                    <div class="w-20 h-20 bg-amber-500/20 text-amber-400 rounded-3xl flex items-center justify-center text-4xl mx-auto border border-amber-400/40 shadow-lg">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-extrabold text-white">破案成功！你是頂尖時空偵探！</h3>
+                        <p class="text-indigo-200 mt-2 text-lg">你順利解開所有時間鎖與時態語證！</p>
+                    </div>
+                    <div class="bg-slate-800/80 p-6 rounded-2xl max-w-sm mx-auto border border-slate-700">
+                        <span class="text-sm text-slate-400 block font-bold">總遊戲得分</span>
+                        <span class="text-5xl font-extrabold text-amber-400">${gameState.score}</span>
+                    </div>
+                    <button onclick="initDetectiveGame()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-lg px-8 py-3.5 rounded-xl shadow-lg transition">
+                        重新挑戰破案
+                    </button>
+                `;
+            } else {
+                card.innerHTML = `
+                    <div class="w-20 h-20 bg-rose-500/20 text-rose-400 rounded-3xl flex items-center justify-center text-4xl mx-auto border border-rose-400/40">
+                        <i class="fa-solid fa-user-ninja"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-extrabold text-white">任務失敗... 嫌犯趁亂逃走了！</h3>
+                        <p class="text-slate-300 mt-2 text-lg">再複習一下時間逆讀與文法句型後重新開始吧！</p>
+                    </div>
+                    <button onclick="initDetectiveGame()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-lg px-8 py-3.5 rounded-xl shadow-lg transition">
+                        重試偵探任務
+                    </button>
+                `;
+            }
+
+            playArea.appendChild(card);
+        }
+
+        window.onload = function() {
+            document.getElementById('hour-slider').addEventListener('input', updateClockFromInputs);
+            document.getElementById('minute-slider').addEventListener('input', updateClockFromInputs);
+
+            updateClockFromInputs();
+            loadBuilderLevel(0);
+            renderQuiz();
+            initDetectiveGame();
+        };
+    </script>
+</body>
+</html>

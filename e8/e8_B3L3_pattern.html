@@ -354,9 +354,17 @@
                         </h2>
                         <p class="text-slate-600 mt-1">點擊字塊組裝正確語序的英文句子，鍛鍊對時態與連接詞的敏銳度。</p>
                     </div>
-                    <span id="builder-level-text" class="bg-indigo-100 text-indigo-800 font-extrabold text-sm px-4 py-1.5 rounded-full">
-                        題目 1 / 4
-                    </span>
+                    <div class="flex items-center gap-2">
+                        <button onclick="prevBuilderLevel()" class="w-8 h-8 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-100 flex items-center justify-center transition disabled:opacity-30 disabled:cursor-not-allowed" id="btn-prev-builder" title="上一題">
+                            <i class="fa-solid fa-chevron-left text-xs"></i>
+                        </button>
+                        <span id="builder-level-text" class="bg-indigo-100 text-indigo-800 font-extrabold text-sm px-4 py-1.5 rounded-full">
+                            題目 1 / 4
+                        </span>
+                        <button onclick="nextBuilderLevel()" class="w-8 h-8 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-100 flex items-center justify-center transition disabled:opacity-30 disabled:cursor-not-allowed" id="btn-next-builder" title="下一題">
+                            <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Sentence Prompt -->
@@ -508,6 +516,19 @@
 
     </main>
 
+    <!-- Page Footer -->
+    <footer class="mt-16 bg-slate-900 text-slate-400 py-10 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div>
+                <p class="font-bold text-white text-base">壽豐國中 英語教學互動平台</p>
+                <p class="text-xs text-slate-500 mt-1">八年級英語上學期 Lesson 3：All Animals Were Going to the Party (過去進行式與時間連接詞)</p>
+            </div>
+            <a href="../index.html" class="inline-flex items-center gap-2 rounded-xl bg-amber-400 px-5 py-2.5 text-sm font-extrabold text-indigo-950 shadow hover:bg-amber-300 transition">
+                <i class="fa-solid fa-house"></i> 回英語學習首頁
+            </a>
+        </div>
+    </footer>
+
     <!-- Result Modal -->
     <div id="result-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-lg w-full p-8 shadow-2xl border border-slate-200 text-center space-y-6">
@@ -546,7 +567,7 @@
             { id: 6, question: "I was cooking dinner _____ my brother was watching TV.", options: ["while", "before", "so", "after"], answer: 0, tag: "長動作對照" },
             { id: 7, question: "Diana _____ with her friends at seven yesterday morning.", options: ["jogs", "jogged", "was jogging", "is jogging"], answer: 2, tag: "過去進行式" },
             { id: 8, question: "When Judy picked up her cellphone, her baby _____.", options: ["cry", "cries", "is crying", "was crying"], answer: 3, tag: "長短動作" },
-            { id: 9, question: "Grace bought some gifts for her family before she _____ back home.", options: ["buy; goes", "buys; went", "is buying; was going", "went"], answer: 3, tag: "時態一致" },
+            { id: 9, question: "Grace bought some gifts for her family before she _____ back home.", options: ["goes", "is going", "was going", "went"], answer: 3, tag: "時態一致" },
             { id: 10, question: "_____ I was doing my homework, the lights went out.", options: ["So", "Because", "But", "While"], answer: 3, tag: "長動作" },
             { id: 11, question: "He tried over and over again before he _____.", options: ["was giving up", "gives up", "gave up", "is giving up"], answer: 2, tag: "時態" },
             { id: 12, question: "Alice went to bed _____ she read a book.", options: ["when", "so", "but", "after"], answer: 3, tag: "時間順序" },
@@ -595,7 +616,8 @@
             }
         ];
 
-        let selectedWords = [];
+        let currentBankTokens = [];
+        let selectedTokens = [];
         let currentBuilderIndex = 0;
 
         function switchTab(tabName) {
@@ -614,6 +636,19 @@
         }
 
         // Clock Interactive Renderer
+        const numberWords = ["twelve", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
+        const minuteTens = ["", "", "twenty", "thirty", "forty", "fifty"];
+        const minuteUnits = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+
+        function getMinuteWords(m) {
+            if (m === 0) return "o'clock";
+            if (m < 10) return `oh-${minuteUnits[m]}`;
+            if (m < 20) return minuteUnits[m];
+            const ten = Math.floor(m / 10);
+            const unit = m % 10;
+            return unit === 0 ? minuteTens[ten] : `${minuteTens[ten]}-${minuteUnits[unit]}`;
+        }
+
         function updateClockFromInputs() {
             const h = parseInt(document.getElementById('hour-slider').value);
             const m = parseInt(document.getElementById('minute-slider').value);
@@ -629,9 +664,8 @@
             document.getElementById('minute-hand').setAttribute('transform', `rotate(${minuteAngle} 100 100)`);
             document.getElementById('hour-hand').setAttribute('transform', `rotate(${hourAngle} 100 100)`);
 
-            // Direct Read
-            const numberWords = ["twelve", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
-            const directStr = `${numberWords[h].charAt(0).toUpperCase() + numberWords[h].slice(1)} ${m === 0 ? "o'clock" : m}`;
+            // Direct Read with authentic English words
+            const directStr = `${numberWords[h].charAt(0).toUpperCase() + numberWords[h].slice(1)} ${getMinuteWords(m)} (${h < 10 ? '0' + h : h}:${m < 10 ? '0' + m : m})`;
             document.getElementById('direct-read-display').textContent = directStr;
 
             // Reverse Read Logic
@@ -660,14 +694,34 @@
             document.getElementById('reverse-explanation').innerHTML = `解析：${explanationStr}`;
         }
 
+        // Helper: Shuffle Array
+        function shuffleTokens(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
         // Sentence Builder
         function loadBuilderLevel(index) {
+            if (index < 0 || index >= builderLevels.length) return;
             currentBuilderIndex = index;
-            selectedWords = [];
+            selectedTokens = [];
             const data = builderLevels[index];
+
+            // Give each word token a distinct ID so identical words (e.g. two "my") are tracked individually
+            const rawTokens = data.words.map((w, idx) => ({ id: idx, text: w }));
+            currentBankTokens = shuffleTokens(rawTokens);
 
             document.getElementById('builder-level-text').textContent = `題目 ${index + 1} / ${builderLevels.length}`;
             document.getElementById('builder-chinese-prompt').textContent = data.chinese;
+
+            const prevBtn = document.getElementById('btn-prev-builder');
+            const nextBtn = document.getElementById('btn-next-builder');
+            if (prevBtn) prevBtn.disabled = (index === 0);
+            if (nextBtn) nextBtn.disabled = (index === builderLevels.length - 1);
 
             const feedback = document.getElementById('builder-feedback');
             feedback.classList.add('hidden');
@@ -675,48 +729,65 @@
             renderBuilderZones();
         }
 
+        function prevBuilderLevel() {
+            if (currentBuilderIndex > 0) {
+                loadBuilderLevel(currentBuilderIndex - 1);
+            }
+        }
+
+        function nextBuilderLevel() {
+            if (currentBuilderIndex < builderLevels.length - 1) {
+                loadBuilderLevel(currentBuilderIndex + 1);
+            }
+        }
+
         function renderBuilderZones() {
-            const data = builderLevels[currentBuilderIndex];
             const answerZone = document.getElementById('builder-answer-zone');
             const wordBank = document.getElementById('builder-word-bank');
 
             answerZone.innerHTML = '';
             wordBank.innerHTML = '';
 
-            selectedWords.forEach((word, idx) => {
-                const badge = document.createElement('button');
-                badge.className = "bg-indigo-600 text-white font-medium text-xs sm:text-sm px-3.5 py-2 rounded-xl shadow flex items-center gap-2 hover:bg-indigo-700 transition";
-                badge.innerHTML = `${word} <i class="fa-solid fa-xmark text-xs"></i>`;
-                badge.onclick = () => removeWordFromAnswer(idx);
-                answerZone.appendChild(badge);
-            });
+            if (selectedTokens.length === 0) {
+                answerZone.innerHTML = '<span class="text-xs sm:text-sm text-indigo-400 font-medium italic select-none">點擊下方字詞庫字塊開始組裝句子...</span>';
+            } else {
+                selectedTokens.forEach((token, idx) => {
+                    const badge = document.createElement('button');
+                    badge.className = "bg-indigo-600 text-white font-medium text-xs sm:text-sm px-3.5 py-2 rounded-xl shadow flex items-center gap-2 hover:bg-indigo-700 transition cursor-pointer";
+                    badge.innerHTML = `${token.text} <i class="fa-solid fa-xmark text-xs opacity-80"></i>`;
+                    badge.onclick = () => removeTokenFromAnswer(idx);
+                    answerZone.appendChild(badge);
+                });
+            }
 
-            data.words.forEach((word) => {
-                const isSelected = selectedWords.includes(word);
+            currentBankTokens.forEach((token) => {
+                const isSelected = selectedTokens.some(t => t.id === token.id);
                 const btn = document.createElement('button');
                 btn.className = `px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold border transition ${
-                    isSelected ? 'bg-slate-200 text-slate-400 border-slate-300 cursor-not-allowed' : 'bg-white text-slate-800 border-slate-300 hover:border-indigo-500 hover:text-indigo-600 shadow-sm'
+                    isSelected ? 'bg-slate-200 text-slate-400 border-slate-300 cursor-not-allowed' : 'bg-white text-slate-800 border-slate-300 hover:border-indigo-500 hover:text-indigo-600 shadow-sm cursor-pointer'
                 }`;
-                btn.textContent = word;
+                btn.textContent = token.text;
                 btn.disabled = isSelected;
-                btn.onclick = () => selectWord(word);
+                btn.onclick = () => selectToken(token);
                 wordBank.appendChild(btn);
             });
         }
 
-        function selectWord(word) {
-            selectedWords.push(word);
+        function selectToken(token) {
+            selectedTokens.push(token);
             renderBuilderZones();
         }
 
-        function removeWordFromAnswer(index) {
-            selectedWords.splice(index, 1);
+        function removeTokenFromAnswer(index) {
+            selectedTokens.splice(index, 1);
             renderBuilderZones();
         }
 
         function resetCurrentBuilder() {
-            selectedWords = [];
+            selectedTokens = [];
             renderBuilderZones();
+            const feedback = document.getElementById('builder-feedback');
+            feedback.classList.add('hidden');
         }
 
         function checkBuilderAnswer() {
@@ -724,19 +795,22 @@
             const feedback = document.getElementById('builder-feedback');
             feedback.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-rose-100', 'text-rose-800');
 
-            const isCorrect = JSON.stringify(selectedWords) === JSON.stringify(data.correct);
+            const assembledWords = selectedTokens.map(t => t.text);
+            const isCorrect = JSON.stringify(assembledWords) === JSON.stringify(data.correct);
 
             if (isCorrect) {
                 feedback.classList.add('bg-emerald-100', 'text-emerald-800');
-                feedback.innerHTML = '<i class="fa-solid fa-circle-check mr-1.5"></i> 完全正確！恭喜通關！';
-                setTimeout(() => {
-                    if (currentBuilderIndex + 1 < builderLevels.length) {
+                if (currentBuilderIndex + 1 < builderLevels.length) {
+                    feedback.innerHTML = '<i class="fa-solid fa-circle-check mr-1.5"></i> 完全正確！恭喜通關！即將載入下一題...';
+                    setTimeout(() => {
                         loadBuilderLevel(currentBuilderIndex + 1);
-                    }
-                }, 1500);
+                    }, 1300);
+                } else {
+                    feedback.innerHTML = '<div class="flex flex-wrap items-center justify-between gap-3"><span><i class="fa-solid fa-trophy text-amber-500 mr-1.5"></i> 恭喜！已通關全部 4 題組裝挑戰！時態與連接詞語序完全掌握！</span><button onclick="loadBuilderLevel(0)" class="px-3.5 py-1.5 bg-emerald-700 text-white text-xs sm:text-sm font-bold rounded-lg hover:bg-emerald-800 transition">從第 1 題重新挑戰</button></div>';
+                }
             } else {
                 feedback.classList.add('bg-rose-100', 'text-rose-800');
-                feedback.innerHTML = '<i class="fa-solid fa-circle-xmark mr-1.5"></i> 順序有點問題，檢查一下時態或連接詞位置喔！';
+                feedback.innerHTML = '<i class="fa-solid fa-circle-xmark mr-1.5"></i> 順序有點問題，檢查一下時態或連接詞（when / after 等）的位置喔！';
             }
         }
 
@@ -891,7 +965,10 @@
             ]
         };
 
+        let isGameAnswering = false;
+
         function initDetectiveGame() {
+            isGameAnswering = false;
             gameState.score = 0;
             gameState.lives = 3;
             gameState.currentStage = 0;
@@ -977,6 +1054,8 @@
         }
 
         function handleGameAnswer(selectedIdx) {
+            if (isGameAnswering) return;
+
             let currentData = null;
             if (gameState.currentStage === 0) currentData = gameQuestions.stage1[gameState.stageStep];
             else if (gameState.currentStage === 1) currentData = gameQuestions.stage2[gameState.stageStep];
@@ -986,6 +1065,7 @@
             feedback.classList.remove('hidden', 'bg-emerald-500/20', 'text-emerald-300', 'border-emerald-500/50', 'bg-rose-500/20', 'text-rose-300', 'border-rose-500/50');
 
             if (selectedIdx === currentData.answer) {
+                isGameAnswering = true;
                 gameState.score += 100;
                 feedback.classList.add('bg-emerald-500/20', 'text-emerald-300', 'border', 'border-emerald-500/50');
                 feedback.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> 答對了！偵探線索解開！(+100分)`;
@@ -997,6 +1077,7 @@
                         gameState.currentStage++;
                     }
                     updateGameHeader();
+                    isGameAnswering = false;
                     renderGameStage();
                 }, 1200);
             } else {
@@ -1006,6 +1087,7 @@
 
                 updateGameHeader();
                 if (gameState.lives <= 0) {
+                    isGameAnswering = true;
                     setTimeout(() => {
                         renderGameOver(false);
                     }, 1500);
